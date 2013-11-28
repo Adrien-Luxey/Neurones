@@ -1,0 +1,23 @@
+fast-forward => need
+conserver les meilleurs adn (les derniers)
+en fait il faudrait un putain de menu (avec chargement des cerveaux sauvegardés...)
+
+
+Admettons qu'on enregistre un fichier par jeu
+	l'ADN de la dernière génération
+	des données relatives à chaque mort ou fin de partie (a quelle seconde c'est arrivé et qui l'a tué) 
+
+système avec PV : vie qui diminue en fonction du temps, on en regagne en bouffant du ppl
+on pourrait donner des pv à d'autres gens
+et pour que ca tende pas vers tout le monde qui meurt, on peut rajouter des plantes (qui rendent moins de PV)
+
+terrains : 
+-sable : ralenti
+-marais : brouillard
+-marais profond : ralenti + brouillard
+-champ ou nature : bouffe
+-eau partiel
+
+creer un type de donnees pour la liste d'entites
+une seule variable (au lieu de life et score), il faut juste récupérer elapsedTime de game pour avoir le meme resultat
+action frapper : fillcolor de 'animal en rouge ou gris, ne peut pas bouger
