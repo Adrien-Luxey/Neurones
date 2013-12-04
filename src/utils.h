@@ -12,6 +12,7 @@
 #include "configParser.h"
 #define CFG		ConfigParser::get()
 
+static int worldSize = CFG->getInt("WorldSize");
 
 static std::default_random_engine generator;
 

@@ -6,14 +6,12 @@ Animal::Animal()
 : Entity(), size(CFG->readInt("AnimalWidth"), CFG->readInt("AnimalHeight")) {}
 
 void Animal::init() {
-	int ws = CFG->readInt("WorldSize");
-	
 	attacking = false;
 	score = 0;
 	life = CFG->readInt("AnimalsLife");
 	
-	pos.x = rand() % ws;
-	pos.y = rand() % ws;
+	pos.x = rand() % worldSize;
+	pos.y = rand() % worldSize;
 	angle = rand() % 360;
 }
 
@@ -31,12 +29,20 @@ std::vector<float> Animal::update(const std::vector<float> inputs, const float d
 		updatePosition(outputs[0], outputs[1], dt);
 }
 
+void Animal::incrementScore() {
+	score++;
+	life++;
+}
+
+void Animal::die() {
+	alive = false;
+}
+
 // TODO : essayer d'autres moyens
 // Comme une différence sur la vitesse, stockée en Vect2f
 // qui pourrait parler de différence vitesse/angle séparément plutôt que des roues...
 // A voir.
 void Animal::updatePosition(const float left, const float right, const float dt) {
-	int ws = CFG->ReadInt("WorldSize");
 	int as = CFG->readInt("AnimalSpeed");
 
 	// composante angulaire et linéaire du déplacement
@@ -45,8 +51,8 @@ void Animal::updatePosition(const float left, const float right, const float dt)
 
 	// Application aux données du mobile
 	angle = fmod(angle + da * dt, 360.f);
-	pos.x = (pos.x + dp * cosf(angle/180.f*PI) * dt) % ws;
-	pos.y = (pos.y + dp * sinf(angle/180.f*PI) * dt) % ws;
+	pos.x = (pos.x + dp * cosf(angle/180.f*PI) * dt) % worldSize;
+	pos.y = (pos.y + dp * sinf(angle/180.f*PI) * dt) % worldSize;
 }
 
 bool Animal::isAlive() {
