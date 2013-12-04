@@ -14,7 +14,7 @@ class Animal : public Entity {
 
 	virtual void init();
 
-	std::vector<float> update(const std::vector<float> inputs, const float dt);
+	void update(const std::vector<float> inputs, const float dt);
 	
 	void incrementScore();
 	
@@ -25,10 +25,12 @@ class Animal : public Entity {
 	bool isAlive(const float dt);
 	const bool isAttacking() { return attacking; }
 	const int getScore() { return score; }
+	const int getClosestPrayAngle() { return closestPrayAngle; }
+	const int getClosestPredatorAngle() { return closestPredatorAngle; }
 
   protected :		
 	bool attacking;
-	int score;
+	int score, closestPrayAngle, closestPredatorAngle;
 	float life;
 
 	NeuralNetwork network;

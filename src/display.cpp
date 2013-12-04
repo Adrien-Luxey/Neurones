@@ -4,14 +4,14 @@
 
 Display::Display(Game* _game)
 : game(_game), window(sf::VideoMode(CFG->readInt("WindowWidth"), CFG->readInt("WindowHeight")), CFG->readString("WindowTitle")) {
-	sf::IntRect rect;
-	
-	window.setVerticalSyncEnabled(false);
+	window.setVerticalSyncEnabled(true);
 	
 	animal.setSize(sf::Vector2f(CFG->readInt("AnimalWidth"), CFG->readInt("AnimalHeight")));
 	animal.setOrigin(CFG->readInt("AnimalWidth")/2, CFG->readInt("AnimalHeight")/2);
 	animal.setFillColor(sf::Color::Black);
 	animal.setOutlineThickness(-2);
+	
+	
 	
 	line.setSize(sf::Vector2f(15, 1));
 	line.setFillColor(sf::Color(150, 150, 150));
@@ -24,7 +24,7 @@ Display::Display(Game* _game)
 	clock.restart();
 }
 
-void Display::update(std::vector<Entity*> entities) {
+void Display::update(const EntityManager &manager) {
 	// window clear
 	window.clear();
 	

@@ -3,20 +3,29 @@
 #define SEUIL_ATTACKING	0.8f
 
 Animal::Animal()
-: Entity(), size(CFG->readInt("AnimalWidth"), CFG->readInt("AnimalHeight")) {}
+: Entity(), network(7, 3) {
+	 size = Vect2i(CFG->readInt("AnimalWidth"), CFG->readInt("AnimalHeight"));
+}
 
 void Animal::init() {
 	attacking = false;
 	score = 0;
 	life = CFG->readInt("AnimalsLife");
+	closestPrayAngle = 0;
+	closestPredatorAngle = 0;
 	
 	pos.x = rand() % worldSize;
 	pos.y = rand() % worldSize;
 	angle = rand() % 360;
 }
 
-std::vector<float> Animal::update(const std::vector<float> inputs, const float dt) {
+void Animal::update(const std::vector<float> inputs, const float dt) {
 	std::vector<float> outputs;
+	
+	// Calcul des closestAngles à partir des inputs
+	// ... codé en dur...
+	closestPrayAngle = inputs[1] * 360;
+	closestPredatorAngle = inputs[3] * 360;
 	
 	// Récupération des sorties du nn
 	outputs = network.run(inputs);
@@ -35,7 +44,7 @@ void Animal::incrementScore() {
 }
 
 void Animal::die() {
-	alive = false;
+	life = 0;
 }
 
 // TODO : essayer d'autres moyens
@@ -51,12 +60,12 @@ void Animal::updatePosition(const float left, const float right, const float dt)
 
 	// Application aux données du mobile
 	angle = fmod(angle + da * dt, 360.f);
-	pos.x = (pos.x + dp * cosf(angle/180.f*PI) * dt) % worldSize;
-	pos.y = (pos.y + dp * sinf(angle/180.f*PI) * dt) % worldSize;
+	pos.x = (int) (pos.x + dp * cosf(angle/180.f*PI) * dt) % worldSize;
+	pos.y = (int) (pos.y + dp * sinf(angle/180.f*PI) * dt) % worldSize;
 }
 
 bool Animal::isAlive() {
-	return life >= 0.f;
+	return life > 0.f;
 }
 bool Animal::isAlive(const float dt) {
 	life -= dt;

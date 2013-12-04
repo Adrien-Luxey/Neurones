@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include <sstream>
 
+#include "entityManager.h"
 #include "utils.h"
 #include "entity.h"
 #include "stats.h"
@@ -17,7 +18,7 @@ class Display {
 		Display(Game* _game);
 		~Display() {}
 		
-		void update(std::vector<Entity*> entities);
+		void update(const EntityManager &manager);
 		void events();
 		
 		float getElapsedTime();
@@ -25,7 +26,7 @@ class Display {
 		Game *game;
 		sf::RenderWindow window;
 		sf::RectangleShape animal;
-		sf::CircleShape plant;
+		sf::CircleShape fruit;
 		sf::RectangleShape line;
 		sf::Text text;
 		sf::Font font;
