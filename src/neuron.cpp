@@ -2,17 +2,22 @@
 
 Neuron::Neuron(unsigned int _inputsNumber)
 : inputsNumber(_inputsNumber) {
+	// + 1 pour le bias
+	weights = new float[inputsNumber + 1];
 	initWeights();
+}
+
+Neuron::~Neuron() {
+	delete[] weights;
 }
 
 // Initialisation des poids random [-1; 1] en fonction de inputsNumber
 void Neuron::initWeights() {
 	std::uniform_real_distribution<float> random(-1, 1);
-	weights.clear();
 	
 	// !!! i <= inputs !!! (le premier weight est le bias)
 	for (unsigned int i = 0; i <= inputsNumber; i++)
-		weights.push_back(random(generator));
+		weights[i] = random(generator);
 }
 
 // Execution du calcul du neurone en fonction de inputs
@@ -35,6 +40,12 @@ const float Neuron::run(const std::vector<float> inputs) {
 
 // Changement de l'ADN après passage de l'algo génétique
 void Neuron::setDNA(const std::vector<float> &DNA) {
-	for (unsigned int i = 0; i < DNA.size() && i < weights.size(); i++)
+	for (unsigned int i = 0; i < inputsNumber && i < DNA.size(); i++)
 		weights[i] = DNA[i];
+}
+
+const std::vector<float> getDNA() {
+    std::vector<float> v(weights, weights + (inputsNumber+1) * sizeof(float));
+    
+    return v;
 }

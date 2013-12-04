@@ -15,6 +15,7 @@
 class Neuron {
 	public :
 		Neuron(unsigned int _inputsNumber);
+		~Neuron();
 		
 		// Initialisation des poids random [-1; 1] en fonction de inputsNumber
 		void initWeights();
@@ -26,12 +27,12 @@ class Neuron {
 		void setDNA(const std::vector<float> &DNA);
 		
 		// Fonctions servant à récupérer tout l'ADN du NN
-		const std::vector<float> getDNA() { return weights; }
-		const unsigned int getDNASize() { return weights.size(); }
+		const std::vector<float> getDNA();
+		const unsigned int getDNASize() { return inputsNumber + 1; }
 		
 	private :
 		unsigned int inputsNumber;
-		std::vector<float> weights;
+		float weights[];
 };
 
 #endif // NEURON_H

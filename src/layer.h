@@ -11,6 +11,7 @@
 class Layer {
 	public :
 		Layer(unsigned int _inputsNumber, unsigned int _neuronsNumber);
+		~Layer();
 		
 		// Initialisation des neurones de la couche
 		void initNeurons();
@@ -28,7 +29,7 @@ class Layer {
 		
 	private :
 		unsigned int inputsNumber, neuronsNumber;
-		std::vector<Neuron> neurons;
+		Neuron neurons[];
 		std::vector<float> outputs;
 };
 

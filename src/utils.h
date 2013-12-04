@@ -8,16 +8,22 @@
 
 #include <cmath>
 #include <random>
-static std::default_random_engine generator;
 
 #include "configParser.h"
 #define CFG		ConfigParser::get()
+
+
+static std::default_random_engine generator;
 
 enum { ENTITY, CHICKEN, FOX, SNAKE, LYNX, MONKEY, TYPES_CNT };
 
 typedef struct Vect2i {
 	int x;
 	int y;
+
+	// Constructeurs
+	Vect2i() : x(0), y(0) {}
+	Vect2i(int _x, int _y) : x(_x), y(_y) {}
 }Vect2i;
 
 #endif // UTILS_H

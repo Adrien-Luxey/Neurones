@@ -46,7 +46,6 @@ debug: compile
 # linking all dependencies and binary
 compile: $(OBJECTS)
 	$(CXX) -o $(TARGET) $(OBJECTS) $(LDFLAGS)
-	./$(TARGET)
 
 # compiling dependencies
 $(addprefix $(OBJ_DIR), %.o): $(addprefix $(SRC_DIR), %.cpp)
