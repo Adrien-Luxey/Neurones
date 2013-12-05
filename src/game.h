@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "display.h"
-#include "entity.h"
+#include "entityManager.h"
 #include "genetics.h"
 #include "stats.h"
 
@@ -22,18 +22,24 @@ class Game {
 		const float getElapsedTime() { return elapsedTime; }
 		const int getFps() { return fps; }
 		void togglePause();
-	private :
+		
+	private :		
+		Display display;
+		EntityManager manager;
+		Genetics genetics;
+		
+		bool continuer, pause;
+		int generation, epocDuration;
+		
+		//fps
+		float dt, elapsedTime, dtSum, frames;
+		int fps;
+		
 		void update();
 		
 		bool gameover();
 		
-		Display display;
-		Genetics genetics;
-		std::vector<Entity*> entities;
-		bool continuer, pause;
-		int generation;
-		float dt, elapsedTime, dtSum, frames;
-		int fps;
+		void updateFps();
 };
 
 #endif // GAME_H

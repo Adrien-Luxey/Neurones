@@ -6,15 +6,15 @@ Display::Display(Game* _game)
 : game(_game), window(sf::VideoMode(CFG->readInt("WindowWidth"), CFG->readInt("WindowHeight")), CFG->readString("WindowTitle")) {
 	window.setVerticalSyncEnabled(true);
 	
-	animal.setSize(sf::Vector2f(CFG->readInt("AnimalWidth"), CFG->readInt("AnimalHeight")));
-	animal.setOrigin(CFG->readInt("AnimalWidth")/2, CFG->readInt("AnimalHeight")/2);
-	animal.setFillColor(sf::Color::Black);
-	animal.setOutlineThickness(-2);
+	animalShape.setSize(sf::Vector2f(CFG->readInt("AnimalWidth"), CFG->readInt("AnimalHeight")));
+	animalShape.setOrigin(CFG->readInt("AnimalWidth")/2, CFG->readInt("AnimalHeight")/2);
+	animalShape.setOutlineThickness(-2);
 	
+	fruitShape.setRadius(CFG->readInt("PlantRadius"));
+	fruitShape.setOrigin(CFG->readInt("PlantRadius"), CFG->readInt("PlantRadius"));
+	fruitShape.setFillColor(sf::Color::Green);
 	
-	
-	line.setSize(sf::Vector2f(15, 1));
-	line.setFillColor(sf::Color(150, 150, 150));
+	lineShape.setSize(sf::Vector2f(15, 1));
 	
 	font.loadFromFile("files/DroidSans.ttf");
 	text.setFont(font);
@@ -28,46 +28,62 @@ void Display::update(const EntityManager &manager) {
 	// window clear
 	window.clear();
 	
+	std::vector<Species> &entities = manager.getEntities();
+	
+	for (unsigned int i = 0; i < entities.size(); i++) {
+		
+		if (i == manager.getFruitsIndex()) {
+			drawFruits(entities[i].tab);
+			
+		} else if (i >= manager.getAnimalsIndex() &&
+		  i < manager.getAnimalsIndex() + manager.getSpeciesNumber()) {
+			speciesColor(i - manager.getAnimalsIndex());
+			drawAnimals(entities[i].tab);
+		}
+	}
+	
+	window.display();
+	
 	// Pour chaque eneité vivante
 	for (unsigned int i = 0; i < entities.size(); i++) {
 		if (((Animal*) entities[i])->isDead())
 			continue;
 			
-		// set la bonne position à l'animal
-		animal.setPosition(entities[i]->getPos().x, entities[i]->getPos().y);
-		animal.setRotation(entities[i]->getAngle());
+		// set la bonne position à l'animalShape
+		animalShape.setPosition(entities[i]->getPos().x, entities[i]->getPos().y);
+		animalShape.setRotation(entities[i]->getAngle());
 		
 		// couleur
 		switch(entities[i]->type()) {
 			case FOX :
-				animal.setOutlineColor(sf::Color(245, 150, 0));
+				animalShape.setOutlineColor(sf::Color(245, 150, 0));
 				break;
 			case SNAKE :
-				animal.setOutlineColor(sf::Color(12, 216, 49));
+				animalShape.setOutlineColor(sf::Color(12, 216, 49));
 				break;
 			case CHICKEN :
-				animal.setOutlineColor(sf::Color(150, 150, 150));
+				animalShape.setOutlineColor(sf::Color(150, 150, 150));
 				break;
 			case LYNX :
-				animal.setOutlineColor(sf::Color(255, 245, 169));
+				animalShape.setOutlineColor(sf::Color(255, 245, 169));
 				break;
 			case MONKEY :
-				animal.setOutlineColor(sf::Color(160, 90, 69));
+				animalShape.setOutlineColor(sf::Color(160, 90, 69));
 				break;
 		}
 		
-		// dessin de l'animal
-		window.draw(animal);
+		// dessin de l'animalShape
+		window.draw(animalShape);
 		
 		// vecteurs vers le plus proche ennemi et la bouffe
-		line.setFillColor(sf::Color::Green);
-		line.setPosition(entities[i]->getPos().x, entities[i]->getPos().y);
-		line.setRotation(((Animal*) entities[i])->getClosestFoodAngle());
-		window.draw(line);
-		line.setFillColor(sf::Color::Red);
-		line.setPosition(entities[i]->getPos().x, entities[i]->getPos().y);
-		line.setRotation(((Animal*) entities[i])->getClosestEnemyAngle());
-		window.draw(line);
+		lineShape.setFillColor(sf::Color::Green);
+		lineShape.setPosition(entities[i]->getPos().x, entities[i]->getPos().y);
+		lineShape.setRotation(((Animal*) entities[i])->getClosestFoodAngle());
+		window.draw(lineShape);
+		lineShape.setFillColor(sf::Color::Red);
+		lineShape.setPosition(entities[i]->getPos().x, entities[i]->getPos().y);
+		lineShape.setRotation(((Animal*) entities[i])->getClosestEnemyAngle());
+		window.draw(lineShape);
 		
 		// score
 		std::stringstream ss;
@@ -78,13 +94,14 @@ void Display::update(const EntityManager &manager) {
 	}
 	
 	std::stringstream ss;
-	ss << "Generation #" << game->getGeneration() << std::endl << Stats::highScore(entities) << std::endl <<  Stats::averageScore(entities) << std::endl << Stats::totalScore(entities) << std::endl << Stats::printDetailledScore(entities) << std::endl << "Timer :\t" << (int) game->getElapsedTime() << "/" << CFG->readInt("EpocDuration") << std::endl << "FPS :\t\t" << game->getFps();
+	ss << "Generation #" << game->getGeneration() << std::endl;
+	ss << "Timer :\t" << (int) game->getElapsedTime() << "/" << CFG->readInt("EpocDuration") << std::endl;
+	ss << "FPS :\t\t" << game->getFps();
+	
 	text.setString(ss.str());
 	text.setPosition(10, 10);
 	
 	window.draw(text);
-	
-	window.display();
 }
 
 void Display::events() {
@@ -101,4 +118,72 @@ void Display::events() {
 
 float Display::getElapsedTime() {
 	return clock.restart().asSeconds();
+}
+
+void Display::speciesColor(int index) {
+	switch(index) {
+		case FOX :
+			animalShape.setOutlineColor(sf::Color(245, 150, 0));
+			break;
+		case SNAKE :
+			animalShape.setOutlineColor(sf::Color(12, 216, 49));
+			break;
+		case CHICKEN :
+			animalShape.setOutlineColor(sf::Color(150, 150, 150));
+			break;
+		case LYNX :
+			animalShape.setOutlineColor(sf::Color(255, 245, 169));
+			break;
+		case MONKEY :
+			animalShape.setOutlineColor(sf::Color(160, 90, 69));
+			break;
+		case FISH :
+			animalShape.setOutlineColor(sf::Color(177, 175, 249));
+			break;
+		default :
+			animalShape.setOutlineColor(sf::Color::(150, 150, 150));
+			break;
+	}
+}
+
+void Display::drawFruits(const std::vector<Entity*> &fruits) {
+	for (unsigned int i = 0; i < fruits.size(); i++) {
+		fruitShape.setPosition(fruits[i]->getPos().x, fruits[i]->getPos().y);
+		window.draw(fruitShape);
+	}
+}
+
+void Display::drawAnimals(const std::vector<Entity*> &animals) {
+	Animal *animal;
+	
+	for (unsigned int i = 0; i < animals.size(); i++) {
+		animal = (Animal*) animals[i];
+		
+		if (!animal->isAlive())
+			continue;
+		
+		// set la bonne position à l'animalShape
+		animalShape.setPosition(animal->getPos().x, animal->getPos().y);
+		animalShape.setRotation(animal->getAngle());
+		
+		// dessin de l'animalShape
+		window.draw(animalShape);
+		
+		// vecteurs vers le plus proche ennemi et la bouffe
+		lineShape.setFillColor(sf::Color::Green);
+		lineShape.setPosition(animal->getPos().x, animal->getPos().y);
+		lineShape.setRotation(animal->getClosestPrayAngle());
+		window.draw(lineShape);
+		lineShape.setFillColor(sf::Color::Red);
+		lineShape.setPosition(animal->getPos().x, animal->getPos().y);
+		lineShape.setRotation(animal->getClosestPredatorAngle());
+		window.draw(lineShape);
+		
+		// score
+		std::stringstream ss;
+		ss << animal->getScore();
+		text.setString(ss.str());
+		text.setPosition(entities[i]->getPos().x, entities[i]->getPos().y - 4 * CFG->readInt("TileSize") / 3);
+		window.draw(text);
+	}
 }

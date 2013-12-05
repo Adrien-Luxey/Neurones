@@ -4,6 +4,10 @@
 
 
 // TODO : la couleuuur des animaux
+/* TODO : cette histoire de Species c'est stupide : considérer que tout le monde est un animal 
+ *		  alors qu'on s'est emmerdé à faire une classe Entity and co.
+ *		  Il faut un vector contenant prays et predators dont les indices correspondent à ceux des animaux.
+ */
 
 EntityManager::EntityManager()
   : speciesNumber(CFG->readInt("SpeciesNumber")), praysNumber(speciesNumber/2), 
@@ -42,8 +46,8 @@ EntityManager::EntityManager()
 
 EntityManager::~EntityManager() {
 	// Destruction de toutes les entities
-	for (int i = 0; i < entities.size(); i++) {
-		for (int j = 0; j < entities[i].tab.size(); j++)
+	for (unsigned int i = 0; i < entities.size(); i++) {
+		for (unsigned int j = 0; j < entities[i].tab.size(); j++)
 			delete entities[i].tab[j];
 			
 		entities[i].clear();
@@ -56,7 +60,7 @@ void EntityManager::update(const float dt) {
 	// Parcours de toutes les espèces
 	for (int i = animalsIndex; i < animalsIndex + speciesNumber; i++) {
 		// Parcours de tous les animaux de l'espece
-		for (int j = 0; j < entities[i].tab.size(); j++) {
+		for (unsigned int j = 0; j < entities[i].tab.size(); j++) {
 			Animal *animal = (Animal*) entities[i].tab[j];
 			
 			if (!animal->isAlive(dt))
@@ -93,7 +97,7 @@ void EntityManager::addClosest(Animal *animal, const std::vector<int> &speciesIn
 	Position closest(worldSize * worldSize);
 	
 	// find closest in all tabs
-	for (int i = 0; i < speciesIndexes.size(); i++) {
+	for (unsigned int i = 0; i < speciesIndexes.size(); i++) {
 		getClosestFromTab(animal->getPos(), entities[ speciesIndexes[i] ].tab, closest, isAnimal);
 	}
 	
@@ -104,7 +108,7 @@ void EntityManager::addClosest(Animal *animal, const std::vector<int> &speciesIn
 void EntityManager::getClosestFromTab(const Vect2i pos, const std::vector<Entity*> &tab, Position &closest, const bool isAnimal) {
 	Position tmp;
 	
-	for (int i = 0; i < tab.size(); i++) {
+	for (unsigned int i = 0; i < tab.size(); i++) {
 		
 		if (isAnimal && !((Animal*) tab[i])->isAlive())
 			continue;
@@ -145,7 +149,7 @@ const void EntityManager::addNormalizedPosition(const Position p, std::vector<fl
 
 void EntityManager::collisionCheck(Animal *animal, const int index) {
 	// Si l'animal marche sur un fruit, il le mange et on break
-	for (int i = 0; i < entities[fruitsIndex].tab.size(); i++) {
+	for (unsigned int i = 0; i < entities[fruitsIndex].tab.size(); i++) {
 		Fruit *fruit = (Fruit*) entities[fruitsIndex].tab[i];
 		
 		if (isColliding(animal->getPos(), fruit->getPos())) {
@@ -161,11 +165,11 @@ void EntityManager::collisionCheck(Animal *animal, const int index) {
 	// Si l'animal attaque lorsqu'il est dans la hitbox d'une proie, il la mange et on break
 	if (animal->isAttacking()) {
 		// Parcours de toutes les proies
-		for (int i = 0; i < entities[index].prays.size(); i++) {
+		for (unsigned int i = 0; i < entities[index].prays.size(); i++) {
 			prayIndex = entities[index].prays[i];
 			
 			// Parcours de tous les animaux de l'espèce proie
-			for (int j = 0; j < entities[prayIndex].tab.size(); j++) {
+			for (unsigned int j = 0; j < entities[prayIndex].tab.size(); j++) {
 				pray = (Animal*) entities[prayIndex].tab[j];
 				
 				if (!pray->isAlive())

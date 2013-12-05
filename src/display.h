@@ -9,29 +9,32 @@
 #include "entityManager.h"
 #include "utils.h"
 #include "entity.h"
-#include "stats.h"
-
 class Game;
 
 class Display {
-	public :
-		Display(Game* _game);
-		~Display() {}
-		
-		void update(const EntityManager &manager);
-		void events();
-		
-		float getElapsedTime();
-	private :
-		Game *game;
-		sf::RenderWindow window;
-		sf::RectangleShape animal;
-		sf::CircleShape fruit;
-		sf::RectangleShape line;
-		sf::Text text;
-		sf::Font font;
-		sf::Clock clock;
-		
+  public:
+	Display(Game* _game);
+
+	~Display() {}
+
+	void update(const EntityManager &manager);
+	void events();
+
+	float getElapsedTime();
+  private:
+	Game *game;
+	sf::RenderWindow window;
+	sf::RectangleShape animalShape;
+	sf::CircleShape fruitShape;
+	sf::RectangleShape lineShape;
+	sf::Text text;
+	sf::Font font;
+	sf::Clock clock;
+	
+	void speciesColor(int index);
+	
+	void drawFruits(const std::vector<Entity*> &fruits);
+	void drawAnimals(const std::vector<Entity*> &animals);
 };
 
 #endif // DISPLAY_H

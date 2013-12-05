@@ -20,6 +20,8 @@ class EntityManager {
 
 	const std::vector<Species> getEntities() { return entities; }
 	const int getFruitsIndex() { return fruitsIndex; }
+	const int getAnimalsIndex() { return animalsIndex; }
+	const int getSpeciesNumber() { return speciesNumber; }
 
   private:
 	std::vector<Species> entities;

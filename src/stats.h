@@ -10,7 +10,7 @@
 
 class Stats {
 	public :
-		const static std::string averageScore(const std::vector<Entity*> entities) {
+		/*const static std::string averageScore(const std::vector<Entity*> entities) {
 			std::stringstream ss;
 			float score = 0;
 			int cnt = 0;
@@ -127,7 +127,7 @@ class Stats {
 					ss << i << "(" << stats[i] << ")\t";
 			
 			return ss.str();	
-		}
+		}*/
 };
 
 #endif // STATS_H
