@@ -18,6 +18,8 @@ class Entity {
 	protected :
 		Vect2i pos, size;
 		float angle; // [0°; 360°]
+		
+		const int worldSize;
 };
 
 

@@ -28,80 +28,27 @@ void Display::update(const EntityManager &manager) {
 	// window clear
 	window.clear();
 	
-	std::vector<Species> &entities = manager.getEntities();
-	
-	for (unsigned int i = 0; i < entities.size(); i++) {
+	for (int i = 0; i < (int) manager.getEntities().size(); i++) {
 		
 		if (i == manager.getFruitsIndex()) {
-			drawFruits(entities[i].tab);
+			drawFruits(manager.getEntities()[i].tab);
 			
 		} else if (i >= manager.getAnimalsIndex() &&
 		  i < manager.getAnimalsIndex() + manager.getSpeciesNumber()) {
 			speciesColor(i - manager.getAnimalsIndex());
-			drawAnimals(entities[i].tab);
+			drawAnimals(manager.getEntities()[i].tab);
 		}
-	}
-	
-	window.display();
-	
-	// Pour chaque eneité vivante
-	for (unsigned int i = 0; i < entities.size(); i++) {
-		if (((Animal*) entities[i])->isDead())
-			continue;
-			
-		// set la bonne position à l'animalShape
-		animalShape.setPosition(entities[i]->getPos().x, entities[i]->getPos().y);
-		animalShape.setRotation(entities[i]->getAngle());
-		
-		// couleur
-		switch(entities[i]->type()) {
-			case FOX :
-				animalShape.setOutlineColor(sf::Color(245, 150, 0));
-				break;
-			case SNAKE :
-				animalShape.setOutlineColor(sf::Color(12, 216, 49));
-				break;
-			case CHICKEN :
-				animalShape.setOutlineColor(sf::Color(150, 150, 150));
-				break;
-			case LYNX :
-				animalShape.setOutlineColor(sf::Color(255, 245, 169));
-				break;
-			case MONKEY :
-				animalShape.setOutlineColor(sf::Color(160, 90, 69));
-				break;
-		}
-		
-		// dessin de l'animalShape
-		window.draw(animalShape);
-		
-		// vecteurs vers le plus proche ennemi et la bouffe
-		lineShape.setFillColor(sf::Color::Green);
-		lineShape.setPosition(entities[i]->getPos().x, entities[i]->getPos().y);
-		lineShape.setRotation(((Animal*) entities[i])->getClosestFoodAngle());
-		window.draw(lineShape);
-		lineShape.setFillColor(sf::Color::Red);
-		lineShape.setPosition(entities[i]->getPos().x, entities[i]->getPos().y);
-		lineShape.setRotation(((Animal*) entities[i])->getClosestEnemyAngle());
-		window.draw(lineShape);
-		
-		// score
-		std::stringstream ss;
-		ss << ((Animal*) entities[i])->getScore();
-		text.setString(ss.str());
-		text.setPosition(entities[i]->getPos().x, entities[i]->getPos().y - 4 * CFG->readInt("TileSize") / 3);
-		window.draw(text);
 	}
 	
 	std::stringstream ss;
 	ss << "Generation #" << game->getGeneration() << std::endl;
-	ss << "Timer :\t" << (int) game->getElapsedTime() << "/" << CFG->readInt("EpocDuration") << std::endl;
-	ss << "FPS :\t\t" << game->getFps();
-	
+	ss << "Timer : " << (int) game->getElapsedTime() << "/" << game->getEpocDuration() << std::endl;
+	ss << "FPS : " << game->getFps();
 	text.setString(ss.str());
 	text.setPosition(10, 10);
-	
 	window.draw(text);
+	
+	window.display();
 }
 
 void Display::events() {
@@ -141,7 +88,7 @@ void Display::speciesColor(int index) {
 			animalShape.setOutlineColor(sf::Color(177, 175, 249));
 			break;
 		default :
-			animalShape.setOutlineColor(sf::Color::(150, 150, 150));
+			animalShape.setOutlineColor(sf::Color(150, 150, 150));
 			break;
 	}
 }
@@ -166,6 +113,11 @@ void Display::drawAnimals(const std::vector<Entity*> &animals) {
 		animalShape.setPosition(animal->getPos().x, animal->getPos().y);
 		animalShape.setRotation(animal->getAngle());
 		
+		if (animal->isAttacking())
+			animalShape.setFillColor(sf::Color(100, 100, 100));
+		else
+			animalShape.setFillColor(sf::Color::Black);
+		
 		// dessin de l'animalShape
 		window.draw(animalShape);
 		
@@ -183,7 +135,7 @@ void Display::drawAnimals(const std::vector<Entity*> &animals) {
 		std::stringstream ss;
 		ss << animal->getScore();
 		text.setString(ss.str());
-		text.setPosition(entities[i]->getPos().x, entities[i]->getPos().y - 4 * CFG->readInt("TileSize") / 3);
+		text.setPosition(animal->getPos().x, animal->getPos().y - 4 * animal->getSize().x / 3);
 		window.draw(text);
 	}
 }

@@ -2,21 +2,18 @@
 
 Layer::Layer(unsigned int _inputsNumber, unsigned int _neuronsNumber)
 : inputsNumber(_inputsNumber), neuronsNumber(_neuronsNumber) {
-	neurons = new Neuron[neuronsNumber];
+	
 	initNeurons();
 }
 
-Layer::~Layer() {
-	delete[] neurons;
-}
+Layer::~Layer() {}
 
 // Initialisation des neurones de la couche
-void Layer::initNeurons() {
+void Layer::initNeurons() {	
 	neurons.clear();
 	
-	for (unsigned int i = 0; i < neuronsNumber; i++) {
-		neurons[i] = Neuron(inputsNumber));
-	}
+	for (unsigned int i = 0; i < neuronsNumber; i++)
+		neurons.push_back(Neuron(inputsNumber));
 	
 	outputs.clear();
 	outputs.resize(neuronsNumber);
@@ -32,7 +29,7 @@ std::vector<float> Layer::run(const std::vector<float> inputs) {
 }
 
 // Fonctions servant à reconstituer l'ADN complet du NN
-const std::vector<float> Layer::getDNA() {
+std::vector<float> Layer::getDNA() const {
 	std::vector<float> DNA;
 	
 	for (unsigned int i = 0; i < neuronsNumber; i++) {
@@ -42,7 +39,7 @@ const std::vector<float> Layer::getDNA() {
 	
 	return DNA;
 }
-const unsigned int Layer::getDNASize() {
+unsigned int Layer::getDNASize() const {
 	unsigned int DNASize = 0;
 
 	for (unsigned int i = 0; i < neuronsNumber; i++)

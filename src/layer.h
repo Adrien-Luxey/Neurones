@@ -20,16 +20,16 @@ class Layer {
 		std::vector<float> run(const std::vector<float> inputs);
 		
 		// Fonctions servant à reconstituer l'ADN complet du NN
-		const std::vector<float> getDNA();
+		std::vector<float> getDNA() const;
 		
-		const unsigned int getDNASize();
+		unsigned int getDNASize() const;
 		
 		// MaJ de l'ADN du NN après passage de l'algo génétique
 		void setDNA(const std::vector<float> &DNA);
 		
 	private :
 		unsigned int inputsNumber, neuronsNumber;
-		Neuron neurons[];
+		std::vector<Neuron> neurons;
 		std::vector<float> outputs;
 };
 

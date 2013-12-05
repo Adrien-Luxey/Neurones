@@ -8,7 +8,9 @@
 
 #include "entityManager.h"
 #include "utils.h"
-#include "entity.h"
+#include "animal.h"
+#include "fruit.h"
+
 class Game;
 
 class Display {

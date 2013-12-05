@@ -7,7 +7,6 @@
 #include "display.h"
 #include "entityManager.h"
 #include "genetics.h"
-#include "stats.h"
 
 class Game {
 	public :
@@ -18,8 +17,9 @@ class Game {
 		void quit() { continuer = false; }
 		
 		void newGeneration();
-		const int getGeneration() { return generation; }
-		const float getElapsedTime() { return elapsedTime; }
+		int getGeneration() const { return generation; }
+		float getElapsedTime() const { return elapsedTime; }
+		int getEpocDuration() const { return epocDuration; }
 		const int getFps() { return fps; }
 		void togglePause();
 		
@@ -29,7 +29,9 @@ class Game {
 		Genetics genetics;
 		
 		bool continuer, pause;
-		int generation, epocDuration;
+		int generation;
+		
+		const int epocDuration;
 		
 		//fps
 		float dt, elapsedTime, dtSum, frames;

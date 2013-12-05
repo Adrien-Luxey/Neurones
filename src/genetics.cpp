@@ -1,56 +1,42 @@
 #include "genetics.h"
 
-void Genetics::evolve(std::vector<Entity*> entities) {
-	int type = CHICKEN;
+Genetics::Genetics()
+  : crossoverRate(CFG->readInt("CrossoverRate")), mutationGaussDeviation(CFG->readFloat("MutationGaussDeviation")) {}
+
+void Genetics::evolve(EntityManager &manager) {
 	AnimalData tmp;
 	
 	animalsData.clear();
 	
-	while (type < TYPES_CNT) {
-		// Selection de tous les parents du même type
-		parents.clear();
-		for (unsigned int i = 0; i < entities.size(); i++) {
-			if (entities[i]->type() == type) {
-				/*
-				// On rajoute des points si on a survécu
-				if (!((Animal *) entities[i])->isDead())
-					tmp.score = ((Animal*) entities[i])->getScore() + 1;
-				else//*/
-					tmp.score = ((Animal*) entities[i])->getScore();
-				
-				tmp.DNA = ((Animal*) entities[i])->getDNA();
-				tmp.cumulatedScore = 0;
-				tmp.type = type;					
+	for (int i = manager.getAnimalsIndex(); i < manager.getAnimalsIndex() + manager.getSpeciesNumber(); i++) {
+		std::vector<Entity*> &entities = manager.getEntities()[i].tab;
+		
+		for (unsigned int j = 0; j < entities.size(); j++) {
+			Animal *animal = (Animal*) entities[j];
 			
-				parents.push_back(tmp);
-			}
+			tmp.score = animal->getScore();
+			tmp.DNA = animal->getDNA();
+			tmp.cumulatedScore = 0;	
+
+			parents.push_back(tmp);
 		}
 		
 		// tri descendant du tableau parents par score
 		sortData(parents, 0);
 		
 		// Roulette pour les parents sélectionnés
-		roulette(type);
-		
-		// Remplissage de la liste totale des enfants
-		animalsData.insert(animalsData.end(), children.begin(), children.end());
-		
-		type++;
-	}
+		roulette();
 	
-	if (animalsData.size() != entities.size()) 
-		std::cout << "On a un problème de taille négro !\n";
-	else {
-		// Attribution des nouveau ADN aux animaux
-		for (unsigned int i = 0; i < animalsData.size(); i++) {
-			((Animal*) entities[i])->reinit(animalsData[i].DNA, animalsData[i].type);
+		// maj de l'ADN des animaux de l'espece
+		for (unsigned int j = 0; j < animalsData.size(); j++) {
+			((Animal*) entities[j])->init(animalsData[j].DNA);
 		}
 	}
 }
 
 // Algorithme génétique utilisant roulette wheel, crossover et mutation
 // TODO : Une fonction de 160 lignes c'est mal
-void Genetics::roulette(const int type) {
+void Genetics::roulette() {
 	children.clear();
 	
 	// Récupération du nombre d'animaux
@@ -70,8 +56,6 @@ void Genetics::roulette(const int type) {
 	while (children.size() < parentsNumber) {
 		unsigned int r1, r2, p1, p2;
 		AnimalData tmp1, tmp2;
-		tmp1.type = type;
-		tmp2.type = type;
 		
 		// A moins que tous nos animaux soient VRAIMENT mauvais, on peut faire une roulette wheel
 		if (cumulated != 0) {
@@ -99,12 +83,12 @@ void Genetics::roulette(const int type) {
 			while ((p2 = prob(generator)) == p1);
 		}
 		
-		std::uniform_int_distribution<int> crossoverRate(0, 100);
+		std::uniform_int_distribution<int> randRate(0, 100);
 		std::uniform_int_distribution<int> randomParent(0, 1);
 		tmp1.DNA.clear();
 		tmp2.DNA.clear();
 		// On n'applique l'algorithme de dans crossoverRate% des cas, sinon on copie simplement l'ADN des parents dans les enfants
-		if (crossoverRate(generator) >= CFG->readInt("CrossoverRate")) {
+		if (randRate(generator) >= crossoverRate) {
 			// Création de l'ADN de l'enfant en piochant aléatoirement dans l'ADN de l'un ou l'autre des parents
 			// On utilise un random uniforme, donc normalement on devrait avoir 50% d'ADN de chaque
 			
@@ -174,7 +158,7 @@ void Genetics::mutation(std::vector<float> &DNA) {
 	for (unsigned int i = 0; i < DNA.size(); i++) {
 		if (prob(generator) == 0) {
 			float tmpf = DNA[i];
-			std::normal_distribution<float> gauss(DNA[i], CFG->readFloat("MutationGaussDeviation"));
+			std::normal_distribution<float> gauss(DNA[i], mutationGaussDeviation);
 			
 			DNA[i] = gauss(generator);
 			

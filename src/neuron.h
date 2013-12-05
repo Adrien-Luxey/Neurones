@@ -13,26 +13,32 @@
 #define OUT_1	1
 
 class Neuron {
-	public :
-		Neuron(unsigned int _inputsNumber);
-		~Neuron();
-		
-		// Initialisation des poids random [-1; 1] en fonction de inputsNumber
-		void initWeights();
-		
-		// Execution du calcul du neurone en fonction de inputs
-		const float run(const std::vector<float> inputs);
-		
-		// Changement de l'ADN après passage de l'algo génétique
-		void setDNA(const std::vector<float> &DNA);
-		
-		// Fonctions servant à récupérer tout l'ADN du NN
-		const std::vector<float> getDNA();
-		const unsigned int getDNASize() { return inputsNumber + 1; }
-		
-	private :
-		unsigned int inputsNumber;
-		float weights[];
+  public:	
+	Neuron(unsigned int _inputsNumber);
+	~Neuron();
+
+	// Initialisation des poids random [-1; 1] en fonction de inputsNumber
+	void initWeights();
+
+	// Execution du calcul du neurone en fonction de inputs
+	const float run(const std::vector<float> inputs);
+
+	// Changement de l'ADN après passage de l'algo génétique
+	void setDNA(const std::vector<float> &DNA);
+
+	// Fonctions servant à récupérer tout l'ADN du NN
+	std::vector<float> getDNA() const;
+
+	unsigned int getDNASize() const {
+		return inputsNumber + 1;
+	}
+
+  private:
+	unsigned int inputsNumber;
+	std::vector<float> weights;
+
+	const float neuronSigmoid;
+	const bool useNeuronSigmoid;
 };
 
 #endif // NEURON_H

@@ -13,6 +13,7 @@ class Animal : public Entity {
 	virtual ~Animal() {}
 
 	virtual void init();
+	void init(const std::vector<float> &DNA);
 
 	void update(const std::vector<float> inputs, const float dt);
 	
@@ -21,17 +22,21 @@ class Animal : public Entity {
 	void die();
 
 	// getters
-	bool isAlive();
+	bool isAlive() const;
 	bool isAlive(const float dt);
-	const bool isAttacking() { return attacking; }
-	const int getScore() { return score; }
-	const int getClosestPrayAngle() { return closestPrayAngle; }
-	const int getClosestPredatorAngle() { return closestPredatorAngle; }
+	bool isAttacking() const { return attacking; }
+	int getScore() const { return score; }
+	int getClosestPrayAngle() const { return closestPrayAngle; }
+	int getClosestPredatorAngle() const { return closestPredatorAngle; }
+	std::vector<float> getDNA() const { return network.getDNA(); }
 
   protected :		
 	bool attacking;
 	int score, closestPrayAngle, closestPredatorAngle;
 	float life;
+	
+	const int animalSpeed;
+	const int animalLife;
 
 	NeuralNetwork network;
 

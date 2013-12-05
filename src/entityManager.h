@@ -4,6 +4,8 @@
 #include <vector>
 
 #include "utils.h"
+#include "fruit.h"
+#include "animal.h"
 
 typedef struct Species {
 	std::vector<Entity*> tab;
@@ -18,19 +20,32 @@ class EntityManager {
 
 	void update(const float dt);
 
-	const std::vector<Species> getEntities() { return entities; }
-	const int getFruitsIndex() { return fruitsIndex; }
-	const int getAnimalsIndex() { return animalsIndex; }
-	const int getSpeciesNumber() { return speciesNumber; }
-
+	std::vector<Species> getEntities() const  { return entities; }
+	int getFruitsIndex() const { return fruitsIndex; }
+	int getAnimalsIndex() const { return animalsIndex; }
+	int getSpeciesNumber() const { return speciesNumber; }	
+	
   private:
+	typedef struct Position {
+		int dist;
+		Vect2i pos;
+
+		Position() : dist(0) {}
+		Position(int _dist) : dist(_dist) {}
+	} Position;
+	
 	std::vector<Species> entities;
 	int fruitsIndex, animalsIndex;
-	const int speciesNumber, praysNumber, distanceSigmoid, hitbox;
-
+	
+	const unsigned int speciesNumber;
+	const unsigned int praysNumber;
+	const unsigned int distanceSigmoid;
+	const int hitbox;
+	const int worldSize;
+	
 	void update(Animal *animal, const int index, const float dt);
 	
-	void addClosest(const Animal *animal, const std::vector<int> &speciesIndexes, std::vector<float> &inputs, const bool isAnimal);
+	void addClosest(Animal *animal, const std::vector<int> &speciesIndexes, std::vector<float> &inputs, const bool isAnimal);
 	
 	void getClosestFromTab(const Vect2i pos, const std::vector<Entity*> &tab, Position &closest, const bool isAnimal);
 	
@@ -41,13 +56,6 @@ class EntityManager {
 	void collisionCheck(Animal *animal, const int index);
 	
 	const bool isColliding(const Vect2i a, const Vect2i b);
-	
-	typedef struct Position {
-		int dist;
-		Vect2i pos;
-
-		Position() : dist(worldSize * worldSize) {}
-	} Position;
 };
 
 #endif // ENTITY_MANAGER_H

@@ -5,33 +5,37 @@
 #include <iostream>
 
 #include "utils.h"
+#include "entityManager.h"
 #include "entity.h"
 
 class Game;
 
-// Structure contenant l'ADN, le score et le score cumulé (pour la roulette wheel) de chaque animal
-typedef struct AnimalData {
-	std::vector<float> DNA;
-	unsigned int score;
-	unsigned int cumulatedScore;
-	unsigned int type;
-} AnimalData;
-
 class Genetics {
-	public :	
-		Genetics() {}
-		void evolve(std::vector<Entity*> entities);
-		
-	private :
-		void roulette(const int type);
-		void truncation(std::vector<Entity*> entities);
-		void elitism();
-		void crossover();
-		void mutation(std::vector<float> &DNA);
-		
-		void sortData(std::vector<AnimalData> &data, const int asc);
-		
-		std::vector<AnimalData> children, parents, animalsData;
+  public:
+
+	Genetics();
+	void evolve(EntityManager &manager);
+
+  private:
+	// Structure contenant l'ADN, le score et le score cumulé (pour la roulette wheel) de chaque animal
+	typedef struct AnimalData {
+		std::vector<float> DNA;
+		unsigned int score;
+		unsigned int cumulatedScore;
+	} AnimalData;
+	
+	void roulette();
+	void truncation(std::vector<Entity*> entities);
+	void elitism();
+	void crossover();
+	void mutation(std::vector<float> &DNA);
+
+	void sortData(std::vector<AnimalData> &data, const int asc);
+
+	std::vector<AnimalData> children, parents, animalsData;
+	
+	const int crossoverRate;
+	const float mutationGaussDeviation;
 };
 
 #endif // GENETICS_H

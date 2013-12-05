@@ -3,20 +3,27 @@
 #define SEUIL_ATTACKING	0.8f
 
 Animal::Animal()
-: Entity(), network(7, 3) {
+: Entity(), animalSpeed(CFG->readInt("AnimalSpeed")), animalLife(CFG->readInt("AnimalLife")), network(NETWORK_INPUTS, NETWORK_OUTPUTS) {
 	 size = Vect2i(CFG->readInt("AnimalWidth"), CFG->readInt("AnimalHeight"));
+	 init();
 }
 
 void Animal::init() {
 	attacking = false;
 	score = 0;
-	life = CFG->readInt("AnimalsLife");
+	life = animalLife;
 	closestPrayAngle = 0;
 	closestPredatorAngle = 0;
 	
 	pos.x = rand() % worldSize;
 	pos.y = rand() % worldSize;
 	angle = rand() % 360;
+}
+
+void Animal::init(const std::vector<float> &DNA) {
+	network.setDNA(DNA);
+	
+	init();
 }
 
 void Animal::update(const std::vector<float> inputs, const float dt) {
@@ -52,11 +59,9 @@ void Animal::die() {
 // qui pourrait parler de différence vitesse/angle séparément plutôt que des roues...
 // A voir.
 void Animal::updatePosition(const float left, const float right, const float dt) {
-	int as = CFG->readInt("AnimalSpeed");
-
 	// composante angulaire et linéaire du déplacement
-	float dp = (left + right) * as;
-	float da = (left - right) * as;
+	float dp = (left + right) * animalSpeed;
+	float da = (left - right) * animalSpeed;
 
 	// Application aux données du mobile
 	angle = fmod(angle + da * dt, 360.f);
@@ -64,7 +69,7 @@ void Animal::updatePosition(const float left, const float right, const float dt)
 	pos.y = (int) (pos.y + dp * sinf(angle/180.f*PI) * dt) % worldSize;
 }
 
-bool Animal::isAlive() {
+bool Animal::isAlive() const {
 	return life > 0.f;
 }
 bool Animal::isAlive(const float dt) {

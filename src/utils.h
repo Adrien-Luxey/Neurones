@@ -10,24 +10,30 @@
 
 #define PI				3.14159f
 
-#define NETWORK_INPUTS	8
-#define NETWORK_OUTPUTS	2
+#define NETWORK_INPUTS	7
+#define NETWORK_OUTPUTS	3
 
 #include <cmath>
 #include <random>
+#include <iostream>
 static std::default_random_engine generator;
 
 #include "configParser.h"
 #define CFG		ConfigParser::get()
-const static int worldSize = CFG->readInt("WorldSize");
 
 enum { ENTITY, CHICKEN, FOX, SNAKE, LYNX, MONKEY, FISH, TYPES_CNT };
 
 typedef struct Vect2i {
 	int x;
 	int y;
+	
+	Vect2i() : x(0), y(0) {}
+	Vect2i(int _x, int _y) : x(_x), y(_y) {}
 }Vect2i;
 
+template <typename T> static int sgn(T val) {
+    return (T(0) < val) - (val < T(0));
+}
 
 #endif	/* UTILS_H */
 

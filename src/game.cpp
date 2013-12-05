@@ -1,7 +1,8 @@
 #include "game.h"
 
+
 Game::Game() 
-  : display(this), continuer(true), pause(false), generation(1), dt(0), elapsedTime(0), dtSum(0), frames(0), fps(0), epocDuration(CFG->readInt("EpocDuration")) {	
+  : display(this), continuer(true), pause(false), generation(1), epocDuration(CFG->readInt("EpocDuration")), dt(0), elapsedTime(0), dtSum(0), frames(0), fps(0) {	
 	
 }
 
@@ -19,7 +20,9 @@ void Game::exec() {
 	}
 }
 
-void Game::update() {	
+void Game::update() {
+	updateFps();
+	
 	if (gameover())
 		newGeneration();
 	
@@ -27,13 +30,13 @@ void Game::update() {
 }
 
 void Game::newGeneration() {
-	genetics.evolve(entities);
+	genetics.evolve(manager);
 	elapsedTime = 0;
 	
 	// Reinitialise le timer de display
 	display.getElapsedTime();
 	
-	std::cout << "Génération #" << generation++; << std::endl;
+	std::cout << "Génération #" << generation++ << std::endl;
 }
 
 bool Game::gameover() {

@@ -9,12 +9,13 @@
  *		  Il faut un vector contenant prays et predators dont les indices correspondent à ceux des animaux.
  */
 
+
 EntityManager::EntityManager()
-  : speciesNumber(CFG->readInt("SpeciesNumber")), praysNumber(speciesNumber/2), 
-	distanceSigmoid(CFG->readFloat("DistanceSigmoid")), hitbox(CFG->readInt("Hitbox")) {
+  : speciesNumber(CFG->readInt("SpeciesNumber")), praysNumber(speciesNumber/2), distanceSigmoid(CFG->readInt("DistanceSigmoid")),
+  hitbox(CFG->readInt("Hitbox")), worldSize(CFG->readInt("WorldSize")) {
 	
 	Species tmp;
-
+	
 	// fruits
 	fruitsIndex = entities.size();
 	for (int j = 0; j < CFG->readInt("FruitsNumber"); j++)
@@ -24,7 +25,7 @@ EntityManager::EntityManager()
 	
 	// animaux
 	animalsIndex = entities.size();
-	for (int i = 0; i < speciesNumber; i++) {
+	for (unsigned int i = 0; i < speciesNumber; i++) {
 		tmp.tab.clear();
 		tmp.prays.clear();
 		tmp.predators.clear();
@@ -35,7 +36,7 @@ EntityManager::EntityManager()
 		
 		// Ajout des index des prédateurs/proies
 		// Une espèce mange praysNumber espèces après elle dans le tableau, et se fait manger par praysNumber avant elle
-		for (int j = 0; j < praysNumber; j++) {
+		for (unsigned int j = 0; j < praysNumber; j++) {
 			tmp.prays.push_back(animalsIndex + (i + j + 1 - animalsIndex) % speciesNumber);
 			tmp.predators.push_back(animalsIndex + (i - j - 1 - animalsIndex) % speciesNumber);
 		}
@@ -50,7 +51,7 @@ EntityManager::~EntityManager() {
 		for (unsigned int j = 0; j < entities[i].tab.size(); j++)
 			delete entities[i].tab[j];
 			
-		entities[i].clear();
+		entities[i].tab.clear();
 	}
 	
 	entities.clear();
@@ -58,7 +59,7 @@ EntityManager::~EntityManager() {
 
 void EntityManager::update(const float dt) {
 	// Parcours de toutes les espèces
-	for (int i = animalsIndex; i < animalsIndex + speciesNumber; i++) {
+	for (unsigned int i = animalsIndex; i < animalsIndex + speciesNumber; i++) {
 		// Parcours de tous les animaux de l'espece
 		for (unsigned int j = 0; j < entities[i].tab.size(); j++) {
 			Animal *animal = (Animal*) entities[i].tab[j];
@@ -75,7 +76,7 @@ void EntityManager::update(const float dt) {
 
 void EntityManager::update(Animal *animal, const int index, const float dt) {
 	std::vector<float> inputs;
-	Position closestFruit;
+	Position closestFruit(worldSize * worldSize);
 	
 	// Angle de l'animal [0; 1[
 	inputs.push_back(animal->getAngle() / 360.f);
@@ -106,7 +107,7 @@ void EntityManager::addClosest(Animal *animal, const std::vector<int> &speciesIn
 }
 
 void EntityManager::getClosestFromTab(const Vect2i pos, const std::vector<Entity*> &tab, Position &closest, const bool isAnimal) {
-	Position tmp;
+	Position tmp(worldSize * worldSize);
 	
 	for (unsigned int i = 0; i < tab.size(); i++) {
 		
@@ -114,7 +115,7 @@ void EntityManager::getClosestFromTab(const Vect2i pos, const std::vector<Entity
 			continue;
 		
 		tmp.pos = wrapPositionDifference(pos, tab[i]->getPos());
-		tmp.dist = sqrt(tmp.x * tmp.x + tmp.y * tmp.y);
+		tmp.dist = sqrt(tmp.pos.x * tmp.pos.x + tmp.pos.y * tmp.pos.y);
 		
 		if (tmp.dist < closest.dist)
 			closest = tmp;
@@ -136,7 +137,7 @@ const void EntityManager::addNormalizedPosition(const Position p, std::vector<fl
 	
 	// Si p.pos.x, cette position ne représente rien de réel (aucun closest n'a été trouvé par les autres fonctions)
 	// Si p est invalide, on donne à l'animal es valeurs limites
-	if (p.pos.x == worldSize * worldSize) {
+	if (p.pos.x == worldSize * worldSize || p.dist == 0) {
 		inputs.push_back(0.f);
 		inputs.push_back(1.f);
 	// Sinon
