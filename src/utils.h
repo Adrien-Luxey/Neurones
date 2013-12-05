@@ -21,7 +21,7 @@ static std::default_random_engine generator;
 #include "configParser.h"
 #define CFG		ConfigParser::get()
 
-enum { ENTITY, CHICKEN, FOX, SNAKE, LYNX, MONKEY, FISH, TYPES_CNT };
+enum { CHICKEN, FOX, SNAKE, LYNX, MONKEY, FISH, TYPES_CNT };
 
 typedef struct Vect2i {
 	int x;

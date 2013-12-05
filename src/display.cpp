@@ -10,8 +10,8 @@ Display::Display(Game* _game)
 	animalShape.setOrigin(CFG->readInt("AnimalWidth")/2, CFG->readInt("AnimalHeight")/2);
 	animalShape.setOutlineThickness(-2);
 	
-	fruitShape.setRadius(CFG->readInt("PlantRadius"));
-	fruitShape.setOrigin(CFG->readInt("PlantRadius"), CFG->readInt("PlantRadius"));
+	fruitShape.setRadius(CFG->readInt("FruitRadius"));
+	fruitShape.setOrigin(CFG->readInt("FruitRadius"), CFG->readInt("FruitRadius"));
 	fruitShape.setFillColor(sf::Color::Green);
 	
 	lineShape.setSize(sf::Vector2f(15, 1));

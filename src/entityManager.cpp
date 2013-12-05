@@ -34,12 +34,16 @@ EntityManager::EntityManager()
 		for (int j = 0; j < CFG->readInt("AnimalsNumber"); j++)
 			tmp.tab.push_back(new Animal());
 		
+		std::cout << "Animal #" << i << "\t";
 		// Ajout des index des prédateurs/proies
 		// Une espèce mange praysNumber espèces après elle dans le tableau, et se fait manger par praysNumber avant elle
 		for (unsigned int j = 0; j < praysNumber; j++) {
-			tmp.prays.push_back(animalsIndex + (i + j + 1 - animalsIndex) % speciesNumber);
-			tmp.predators.push_back(animalsIndex + (i - j - 1 - animalsIndex) % speciesNumber);
+			std::cout << "pray:" << (animalsIndex + (i + j - animalsIndex) % speciesNumber) << " ";
+			std::cout << "pred:" << (animalsIndex + (i - j - animalsIndex) % speciesNumber) << " ";
+			tmp.prays.push_back(animalsIndex + (i + j - animalsIndex) % speciesNumber);
+			tmp.predators.push_back(animalsIndex + (i - j - animalsIndex) % speciesNumber);
 		}
+		std::cout << std::endl;
 		
 		entities.push_back(tmp);
 	}
@@ -189,5 +193,5 @@ void EntityManager::collisionCheck(Animal *animal, const int index) {
 
 // Test de collision des bois : hitbox prédéfinie, carrée : simple, rapide, efficace (ou presque)
 const bool EntityManager::isColliding(const Vect2i a, const Vect2i b) {
-	return abs(a.x - b.x) < hitbox && abs(a.y - b.y) < hitbox;
+	return (abs(a.x - b.x) < hitbox) && (abs(a.y - b.y) < hitbox);
 }
