@@ -38,11 +38,10 @@ const float Neuron::run(const std::vector<float> inputs) {
 
 // Changement de l'ADN après passage de l'algo génétique
 void Neuron::setDNA(const std::vector<float> &DNA) {
-	weights = DNA;
-	/*for (unsigned int i = 0; i < inputsNumber && i < DNA.size(); i++)
-		weights[i] = DNA[i];*/
+	for (unsigned int i = 0; i < DNA.size() && i < weights.size(); i++)
+		weights[i] = DNA[i];
 }
 
-std::vector<float> Neuron::getDNA() const {
+std::vector<float> Neuron::getDNA() {
     return weights;
 }

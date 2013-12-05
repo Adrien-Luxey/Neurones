@@ -34,16 +34,17 @@ EntityManager::EntityManager()
 		for (int j = 0; j < CFG->readInt("AnimalsNumber"); j++)
 			tmp.tab.push_back(new Animal());
 		
-		std::cout << "Animal #" << i << "\t";
+		std::cout << "Animal #" << i + 1 << std::endl;
 		// Ajout des index des prédateurs/proies
 		// Une espèce mange praysNumber espèces après elle dans le tableau, et se fait manger par praysNumber avant elle
 		for (unsigned int j = 0; j < praysNumber; j++) {
-			std::cout << "pray:" << (animalsIndex + (i + j - animalsIndex) % speciesNumber) << " ";
-			std::cout << "pred:" << (animalsIndex + (i - j - animalsIndex) % speciesNumber) << " ";
-			tmp.prays.push_back(animalsIndex + (i + j - animalsIndex) % speciesNumber);
-			tmp.predators.push_back(animalsIndex + (i - j - animalsIndex) % speciesNumber);
+			std::cout << "\tpray:" << (animalsIndex + (i + j + 1) % speciesNumber) << " ";
+			std::cout << "\tpred:" << (animalsIndex + (i - j - 1) % speciesNumber) << " ";
+			tmp.prays.push_back(animalsIndex + (i + j + 1) % speciesNumber);
+			tmp.predators.push_back(animalsIndex + (i - j - 1) % speciesNumber);
+			std::cout << std::endl;
 		}
-		std::cout << std::endl;
+		;
 		
 		entities.push_back(tmp);
 	}

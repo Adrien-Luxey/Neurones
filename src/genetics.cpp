@@ -8,11 +8,11 @@ void Genetics::evolve(EntityManager &manager) {
 	
 	animalsData.clear();
 	
-	for (int i = manager.getAnimalsIndex(); i < manager.getAnimalsIndex() + manager.getSpeciesNumber(); i++) {
-		std::vector<Entity*> &entities = manager.getEntities()[i].tab;
+	for (int i = manager.getAnimalsIndex(); i < manager.getAnimalsIndex() + manager.getSpeciesNumber(); i++) {	
+		parents.clear();
 		
-		for (unsigned int j = 0; j < entities.size(); j++) {
-			Animal *animal = (Animal*) entities[j];
+		for (unsigned int j = 0; j < manager.getEntities()[i].tab.size(); j++) {
+			Animal *animal = (Animal*) manager.getEntities()[i].tab[j];
 			
 			tmp.score = animal->getScore();
 			tmp.DNA = animal->getDNA();
@@ -28,8 +28,9 @@ void Genetics::evolve(EntityManager &manager) {
 		roulette();
 	
 		// maj de l'ADN des animaux de l'espece
-		for (unsigned int j = 0; j < animalsData.size(); j++) {
-			((Animal*) entities[j])->init(animalsData[j].DNA);
+		std::cout << manager.getEntities()[i].tab.size() << " <-> " << children.size() << std::endl;
+		for (unsigned int j = 0; j < children.size(); j++) {
+			((Animal*) manager.getEntities()[i].tab[j])->init(children[j].DNA);
 		}
 	}
 }

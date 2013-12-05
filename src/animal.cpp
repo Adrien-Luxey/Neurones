@@ -1,9 +1,10 @@
 #include "animal.h"
 
-#define SEUIL_ATTACKING	0.8f
+#define SEUIL_ATTACKING	0.9f
 
 Animal::Animal()
-: Entity(), animalSpeed(CFG->readInt("AnimalSpeed")), animalLife(CFG->readInt("AnimalLife")), network(NETWORK_INPUTS, NETWORK_OUTPUTS) {
+: Entity(), animalSpeed(CFG->readInt("AnimalSpeed")), animalLife(CFG->readInt("AnimalLife")),
+	thresholdForTrue(CFG->readFloat("ThresholdForTrue")), network(NETWORK_INPUTS, NETWORK_OUTPUTS) {
 	 size = Vect2i(CFG->readInt("AnimalWidth"), CFG->readInt("AnimalHeight"));
 	 init();
 }
@@ -21,9 +22,9 @@ void Animal::init() {
 }
 
 void Animal::init(const std::vector<float> &DNA) {
-	network.setDNA(DNA);
-	
 	init();
+	
+	network.setDNA(DNA);
 }
 
 void Animal::update(const std::vector<float> inputs, const float dt) {
@@ -38,7 +39,7 @@ void Animal::update(const std::vector<float> inputs, const float dt) {
 	outputs = network.run(inputs);
 	
 	// attacking si output > seuil
-	attacking = (outputs[2] >= SEUIL_ATTACKING);
+	attacking = (outputs[2] >= thresholdForTrue);
 	
 	// Mise à jour de la position si on est pas en train d'attaquer
 	if (!attacking)
@@ -75,4 +76,8 @@ bool Animal::isAlive() const {
 bool Animal::isAlive(const float dt) {
 	life -= dt;
 	return isAlive();
+}
+
+std::vector<float> Animal::getDNA() {
+	return network.getDNA();
 }

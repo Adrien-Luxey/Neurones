@@ -24,7 +24,7 @@ Display::Display(Game* _game)
 	clock.restart();
 }
 
-void Display::update(const EntityManager &manager) {
+void Display::update(EntityManager &manager) {
 	// window clear
 	window.clear();
 	

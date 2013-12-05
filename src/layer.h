@@ -20,7 +20,7 @@ class Layer {
 		std::vector<float> run(const std::vector<float> inputs);
 		
 		// Fonctions servant à reconstituer l'ADN complet du NN
-		std::vector<float> getDNA() const;
+		std::vector<float> getDNA();
 		
 		unsigned int getDNASize() const;
 		

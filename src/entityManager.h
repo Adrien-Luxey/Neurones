@@ -20,7 +20,7 @@ class EntityManager {
 
 	void update(const float dt);
 
-	std::vector<Species> getEntities() const  { return entities; }
+	std::vector<Species> getEntities()   { return entities; }
 	int getFruitsIndex() const { return fruitsIndex; }
 	int getAnimalsIndex() const { return animalsIndex; }
 	int getSpeciesNumber() const { return speciesNumber; }	

@@ -29,7 +29,7 @@ std::vector<float> Layer::run(const std::vector<float> inputs) {
 }
 
 // Fonctions servant à reconstituer l'ADN complet du NN
-std::vector<float> Layer::getDNA() const {
+std::vector<float> Layer::getDNA() {
 	std::vector<float> DNA;
 	
 	for (unsigned int i = 0; i < neuronsNumber; i++) {

@@ -19,7 +19,7 @@ class Display {
 
 	~Display() {}
 
-	void update(const EntityManager &manager);
+	void update(EntityManager &manager);
 	void events();
 
 	float getElapsedTime();

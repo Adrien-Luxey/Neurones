@@ -27,11 +27,9 @@ class Neuron {
 	void setDNA(const std::vector<float> &DNA);
 
 	// Fonctions servant à récupérer tout l'ADN du NN
-	std::vector<float> getDNA() const;
+	std::vector<float> getDNA();
 
-	unsigned int getDNASize() const {
-		return inputsNumber + 1;
-	}
+	unsigned int getDNASize() const { return weights.size(); }
 
   private:
 	unsigned int inputsNumber;

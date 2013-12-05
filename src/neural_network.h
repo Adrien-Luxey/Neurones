@@ -22,7 +22,7 @@ class NeuralNetwork {
 		const std::vector<float> run(const std::vector<float> inputs);
 		
 		// Fonction servant à collecter l'ADN pour l'algo génétique
-		const std::vector<float> getDNA() const;
+		std::vector<float> getDNA();
 		
 		// Et mise à jour de l'ADN après passage de l'algo génétique
 		void setDNA(const std::vector<float> &DNA);

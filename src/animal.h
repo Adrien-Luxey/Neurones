@@ -28,7 +28,7 @@ class Animal : public Entity {
 	int getScore() const { return score; }
 	int getClosestPrayAngle() const { return closestPrayAngle; }
 	int getClosestPredatorAngle() const { return closestPredatorAngle; }
-	std::vector<float> getDNA() const { return network.getDNA(); }
+	std::vector<float> getDNA();
 
   protected :		
 	bool attacking;
@@ -37,6 +37,7 @@ class Animal : public Entity {
 	
 	const int animalSpeed;
 	const int animalLife;
+	const float thresholdForTrue;
 
 	NeuralNetwork network;
 

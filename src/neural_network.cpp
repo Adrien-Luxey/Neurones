@@ -41,7 +41,7 @@ const std::vector<float> NeuralNetwork::run(const std::vector<float> inputs) {
 }
 
 // Fonction servant à collecter l'ADN pour l'algo génétique
-const std::vector<float> NeuralNetwork::getDNA() const {
+std::vector<float> NeuralNetwork::getDNA() {
 	std::vector<float> DNA, layerDNA;
 	
 	for (unsigned int i = 0; i < layers.size(); i++) {
