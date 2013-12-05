@@ -20,18 +20,19 @@ void Game::exec() {
 }
 
 void Game::update() {	
-	if (gameover()) {
+	if (gameover())
 		newGeneration();
-		genetics.evolve(entities);
-		elapsedTime = 0;
-		// Reinitialise le timer de display
-		display.getElapsedTime();
-	}
 	
 	manager.update(dt);
 }
 
 void Game::newGeneration() {
+	genetics.evolve(entities);
+	elapsedTime = 0;
+	
+	// Reinitialise le timer de display
+	display.getElapsedTime();
+	
 	std::cout << "Génération #" << generation++; << std::endl;
 }
 
