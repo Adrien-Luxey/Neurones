@@ -43,6 +43,9 @@ bool Game::gameover() {
 	if (elapsedTime > epocDuration)
 		return true;
 	
+	if (manager.gameover())
+		return true;
+	
 	return false;
 }
 

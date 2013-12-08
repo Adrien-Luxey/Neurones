@@ -34,17 +34,15 @@ EntityManager::EntityManager()
 		for (int j = 0; j < CFG->readInt("AnimalsNumber"); j++)
 			tmp.tab.push_back(new Animal());
 		
-		std::cout << "Animal #" << i + 1 << std::endl;
+		tmp.aliveAnimals = tmp.tab.size();
+		
 		// Ajout des index des prédateurs/proies
 		// Une espèce mange praysNumber espèces après elle dans le tableau, et se fait manger par praysNumber avant elle
 		for (unsigned int j = 0; j < praysNumber; j++) {
-			std::cout << "\tpray:" << (animalsIndex + (i + j + 1) % speciesNumber) << " ";
-			std::cout << "\tpred:" << (animalsIndex + (i - j - 1) % speciesNumber) << " ";
 			tmp.prays.push_back(animalsIndex + (i + j + 1) % speciesNumber);
 			tmp.predators.push_back(animalsIndex + (i - j - 1) % speciesNumber);
 			std::cout << std::endl;
 		}
-		;
 		
 		entities.push_back(tmp);
 	}
@@ -65,18 +63,33 @@ EntityManager::~EntityManager() {
 void EntityManager::update(const float dt) {
 	// Parcours de toutes les espèces
 	for (unsigned int i = animalsIndex; i < animalsIndex + speciesNumber; i++) {
-		// Parcours de tous les animaux de l'espece
+		entities[i].aliveAnimals = 0;
+		
+		// Parcours de tous les animaux de l'espece		
 		for (unsigned int j = 0; j < entities[i].tab.size(); j++) {
 			Animal *animal = (Animal*) entities[i].tab[j];
 			
 			if (!animal->isAlive(dt))
 				continue;
 			
+			entities[i].aliveAnimals++;
+			
 			update(animal, i, dt);
 			
 			collisionCheck(animal, i);
 		}
 	}
+}
+
+bool EntityManager::gameover() const {
+	unsigned int aliveSpecies = 0;
+	
+	for (unsigned int i = animalsIndex; i < animalsIndex + speciesNumber; i++) {
+		if (entities[i].aliveAnimals > 0)
+			aliveSpecies++;
+	}
+	
+	return (aliveSpecies < 2);
 }
 
 void EntityManager::update(Animal *animal, const int index, const float dt) {
@@ -142,7 +155,7 @@ const void EntityManager::addNormalizedPosition(const Position p, std::vector<fl
 	
 	// Si p.pos.x, cette position ne représente rien de réel (aucun closest n'a été trouvé par les autres fonctions)
 	// Si p est invalide, on donne à l'animal es valeurs limites
-	if (p.pos.x == worldSize * worldSize || p.dist == 0) {
+	if (p.pos.x == worldSize * worldSize) {
 		inputs.push_back(0.f);
 		inputs.push_back(1.f);
 	// Sinon
@@ -184,6 +197,8 @@ void EntityManager::collisionCheck(Animal *animal, const int index) {
 				if (isColliding(animal->getPos(), pray->getPos())) {
 					pray->die();
 					animal->incrementScore();
+					
+					entities[index].aliveAnimals--;
 					
 					break;
 				}

@@ -68,6 +68,12 @@ void Animal::updatePosition(const float left, const float right, const float dt)
 	angle = fmod(angle + da * dt, 360.f);
 	pos.x = (int) (pos.x + dp * cosf(angle/180.f*PI) * dt) % worldSize;
 	pos.y = (int) (pos.y + dp * sinf(angle/180.f*PI) * dt) % worldSize;
+	
+	// Le module sort parfois des résultats négatifs, on doit corriger ca :
+	if (pos.x < 0)
+		pos.x += worldSize;
+	if (pos.y < 0)
+		pos.y += worldSize;
 }
 
 bool Animal::isAlive() const {

@@ -11,6 +11,8 @@ typedef struct Species {
 	std::vector<Entity*> tab;
 
 	std::vector<int> prays, predators;
+	
+	unsigned int aliveAnimals;
 } Species;
 
 class EntityManager {
@@ -19,6 +21,8 @@ class EntityManager {
 	~EntityManager();
 
 	void update(const float dt);
+	
+	bool gameover() const;
 
 	std::vector<Species> getEntities()   { return entities; }
 	int getFruitsIndex() const { return fruitsIndex; }

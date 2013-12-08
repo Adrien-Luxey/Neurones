@@ -28,7 +28,6 @@ void Genetics::evolve(EntityManager &manager) {
 		roulette();
 	
 		// maj de l'ADN des animaux de l'espece
-		std::cout << manager.getEntities()[i].tab.size() << " <-> " << children.size() << std::endl;
 		for (unsigned int j = 0; j < children.size(); j++) {
 			((Animal*) manager.getEntities()[i].tab[j])->init(children[j].DNA);
 		}
