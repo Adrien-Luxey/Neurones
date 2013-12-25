@@ -32,8 +32,17 @@ void Animal::update(const std::vector<float> inputs, const float dt) {
 	
 	// Calcul des closestAngles à partir des inputs
 	// ... codé en dur...
-	closestPrayAngle = inputs[1] * 360;
-	closestPredatorAngle = inputs[3] * 360;
+	if (inputs[0] != 0.f)
+		closestPrayAngle = inputs[0] * 360 + angle;
+	else if (inputs[4] != 0.f)
+		closestPrayAngle = inputs[4] * 360 + angle;
+	else
+		closestPrayAngle = 0.f;
+	
+	if (inputs[2] != 0.f)
+		closestPredatorAngle = inputs[2] * 360 + angle;
+	else
+		closestPredatorAngle = 0.f;
 	
 	// Récupération des sorties du nn
 	outputs = network.run(inputs);

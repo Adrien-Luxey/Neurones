@@ -122,14 +122,21 @@ void Display::drawAnimals(const std::vector<Entity*> &animals) {
 		window.draw(animalShape);
 		
 		// vecteurs vers le plus proche ennemi et la bouffe
-		lineShape.setFillColor(sf::Color::Green);
-		lineShape.setPosition(animal->getPos().x, animal->getPos().y);
-		lineShape.setRotation(animal->getClosestPrayAngle());
-		window.draw(lineShape);
-		lineShape.setFillColor(sf::Color::Red);
-		lineShape.setPosition(animal->getPos().x, animal->getPos().y);
-		lineShape.setRotation(animal->getClosestPredatorAngle());
-		window.draw(lineShape);
+		float angle = animal->getClosestPrayAngle();
+		if (angle != 0.f) {
+			lineShape.setFillColor(sf::Color::Green);
+			lineShape.setPosition(animal->getPos().x, animal->getPos().y);
+			lineShape.setRotation(angle);
+			window.draw(lineShape);
+		}
+		
+		angle = animal->getClosestPredatorAngle();
+		if (angle != 0.f) {
+			lineShape.setFillColor(sf::Color::Red);
+			lineShape.setPosition(animal->getPos().x, animal->getPos().y);
+			lineShape.setRotation(angle);
+			window.draw(lineShape);
+		}
 		
 		// score
 		std::stringstream ss;

@@ -41,8 +41,8 @@ class EntityManager {
 	std::vector<Species> entities;
 	int fruitsIndex, animalsIndex;
 	
-	const unsigned int speciesNumber;
-	const unsigned int praysNumber;
+	const int speciesNumber;
+	const int praysNumber;
 	const unsigned int distanceSigmoid;
 	const int hitbox;
 	const int worldSize;
@@ -55,7 +55,7 @@ class EntityManager {
 	
 	const Vect2i wrapPositionDifference(const Vect2i a, const Vect2i b);
 	
-	const void addNormalizedPosition(const Position p, std::vector<float> &inputs);
+	const void addNormalizedPosition(const Position &p, std::vector<float> &inputs, const float &angle);
 	
 	void collisionCheck(Animal *animal, const int index);
 	

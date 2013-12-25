@@ -11,7 +11,7 @@
 
 
 EntityManager::EntityManager()
-  : speciesNumber(CFG->readInt("SpeciesNumber")), praysNumber(speciesNumber/2), distanceSigmoid(CFG->readInt("DistanceSigmoid")),
+  : speciesNumber((int) CFG->readInt("SpeciesNumber")), praysNumber(speciesNumber/2), distanceSigmoid(CFG->readInt("DistanceSigmoid")),
   hitbox(CFG->readInt("Hitbox")), worldSize(CFG->readInt("WorldSize")) {
 	
 	Species tmp;
@@ -25,7 +25,8 @@ EntityManager::EntityManager()
 	
 	// animaux
 	animalsIndex = entities.size();
-	for (unsigned int i = 0; i < speciesNumber; i++) {
+	for (int i = 0; i < speciesNumber; i++) {
+		std::cout << "animal n°" << i + animalsIndex << " : ";
 		tmp.tab.clear();
 		tmp.prays.clear();
 		tmp.predators.clear();
@@ -38,13 +39,23 @@ EntityManager::EntityManager()
 		
 		// Ajout des index des prédateurs/proies
 		// Une espèce mange praysNumber espèces après elle dans le tableau, et se fait manger par praysNumber avant elle
-		for (unsigned int j = 0; j < praysNumber; j++) {
-			tmp.prays.push_back(animalsIndex + (i + j + 1) % speciesNumber);
-			tmp.predators.push_back(animalsIndex + (i - j - 1) % speciesNumber);
-			std::cout << std::endl;
+		for (int j = 1; j <= praysNumber; j++) {
+			tmp.prays.push_back(animalsIndex + (i + j) % speciesNumber);
+			std::cout << "pray : " << animalsIndex + (i + j) % speciesNumber << ", ";
+			
+			// résolution d'un bug lié au mod en c++
+			// -1 % 3 = -1, merci la stl
+			if (i - j >= 0) {
+				tmp.predators.push_back(animalsIndex + i - j);
+				std::cout << "pred : " << animalsIndex + i - j << ", ";
+			} else {
+				tmp.predators.push_back(animalsIndex + i - j + speciesNumber);
+				std::cout << "pred : " << animalsIndex + i - j + speciesNumber << ", ";
+			}
 		}
 		
 		entities.push_back(tmp);
+		std::cout << std::endl;
 	}
 }
 
@@ -62,7 +73,7 @@ EntityManager::~EntityManager() {
 
 void EntityManager::update(const float dt) {
 	// Parcours de toutes les espèces
-	for (unsigned int i = animalsIndex; i < animalsIndex + speciesNumber; i++) {
+	for (int i = animalsIndex; i < animalsIndex + speciesNumber; i++) {
 		entities[i].aliveAnimals = 0;
 		
 		// Parcours de tous les animaux de l'espece		
@@ -84,20 +95,22 @@ void EntityManager::update(const float dt) {
 bool EntityManager::gameover() const {
 	unsigned int aliveSpecies = 0;
 	
-	for (unsigned int i = animalsIndex; i < animalsIndex + speciesNumber; i++) {
+	for (int i = animalsIndex; i < animalsIndex + speciesNumber; i++) {
 		if (entities[i].aliveAnimals > 0)
 			aliveSpecies++;
 	}
 	
-	return (aliveSpecies < 2);
+	return (speciesNumber == 1 && aliveSpecies == 0) ||
+		(speciesNumber > 1 && aliveSpecies < 2);
 }
 
 void EntityManager::update(Animal *animal, const int index, const float dt) {
 	std::vector<float> inputs;
 	Position closestFruit(worldSize * worldSize);
 	
-	// Angle de l'animal [0; 1[
+	/*/ Angle de l'animal [0; 1[
 	inputs.push_back(animal->getAngle() / 360.f);
+	//*/
 	
 	// Plus proche proie
 	addClosest(animal, entities[index].prays, inputs, true);
@@ -107,7 +120,7 @@ void EntityManager::update(Animal *animal, const int index, const float dt) {
 	
 	// Plus proche fruit
 	getClosestFromTab(animal->getPos(), entities[ fruitsIndex ].tab, closestFruit, false);
-	addNormalizedPosition(closestFruit, inputs);
+	addNormalizedPosition(closestFruit, inputs, animal->getAngle());
 	
 	animal->update(inputs, dt);
 }
@@ -121,7 +134,7 @@ void EntityManager::addClosest(Animal *animal, const std::vector<int> &speciesIn
 	}
 	
 	// Give closest's angle/dist to network 
-	addNormalizedPosition(closest, inputs);
+	addNormalizedPosition(closest, inputs, animal->getAngle());
 }
 
 void EntityManager::getClosestFromTab(const Vect2i pos, const std::vector<Entity*> &tab, Position &closest, const bool isAnimal) {
@@ -151,18 +164,18 @@ const Vect2i EntityManager::wrapPositionDifference(const Vect2i a, const Vect2i 
 	return tmp;
 }
 
-const void EntityManager::addNormalizedPosition(const Position p, std::vector<float> &inputs) {
-	
-	// Si p.pos.x, cette position ne représente rien de réel (aucun closest n'a été trouvé par les autres fonctions)
-	// Si p est invalide, on donne à l'animal es valeurs limites
-	if (p.pos.x == worldSize * worldSize) {
+const void EntityManager::addNormalizedPosition(const Position &p, std::vector<float> &inputs, const float &angle) {
+	// Si p.dist = worldsize², cette position ne représente rien de réel (aucun closest n'a été trouvé par les autres fonctions)
+	// Si p est invalide, on donne à l'animal des valeurs limites
+	if (p.dist == worldSize * worldSize) {
 		inputs.push_back(0.f);
 		inputs.push_back(1.f);
 	// Sinon
 	} else {
-		// angle as radians/2*PI and distance as sigmoid so both [0; 1[
-		inputs.push_back(atan2f(p.pos.y, p.pos.x) / (2 * PI));
-		inputs.push_back(1.f / (1.f + expf(-p.dist/distanceSigmoid)) * 2.f - 1.f);
+		// angle [0; 1[ ( [0; 360°[ ) relatif : angle du mobile - mon angle
+		inputs.push_back(atan2f(p.pos.y, p.pos.x) / (2 * PI) - angle / 360.f);
+		// distance as sigmoid so both [0; 1[
+		inputs.push_back(1.f / (1.f + expf(-p.dist / (float) distanceSigmoid)) * 2.f - 1.f);
 	}
 }
 
