@@ -57,31 +57,23 @@ void Genetics::roulette() {
 		unsigned int r1, r2, p1, p2;
 		AnimalData tmp1, tmp2;
 		
-		// A moins que tous nos animaux soient VRAIMENT mauvais, on peut faire une roulette wheel
-		if (cumulated != 0) {
-			std::uniform_int_distribution<int> prob(0, cumulated);
-			
-			// Selection d'un premier parent (d'indice p1)
-			// Le système roulette wheel permet de favoriser la selection de parents ayant un bon score tout en laissant une grande part d'aléatoire
-			r1 = prob(generator);
-			p1 = 0;
-			while (p1 != (parentsNumber - 1) && r1 > parents[p1].cumulatedScore)
-				p1++;
-			
-			// On fait la même sélection pour le 2e parent en s'assurant qu'on ne tombe pas 2x sur le même
-			do {	
-				r2 = prob(generator);
-				p2 = 0;
-			
-				while (p2 != (parentsNumber - 1) && r2 > parents[p2].cumulatedScore)
-					p2++;
-			} while (p1 == p2);
-		} else {
-			// Sinon, selection random des parents
-			std::uniform_int_distribution<int> prob(0, parentsNumber - 1);
-			p1 = prob(generator);
-			while ((p2 = prob(generator)) == p1);
-		}
+		std::uniform_int_distribution<int> prob(0, cumulated);
+	
+		// Selection d'un premier parent (d'indice p1)
+		// Le système roulette wheel permet de favoriser la selection de parents ayant un bon score tout en laissant une grande part d'aléatoire
+		r1 = prob(generator);
+		p1 = 0;
+		while (p1 != (parentsNumber - 1) && r1 > parents[p1].cumulatedScore)
+			p1++;
+	
+		// On fait la même sélection pour le 2e parent en s'assurant qu'on ne tombe pas 2x sur le même
+		do {	
+			r2 = prob(generator);
+			p2 = 0;
+	
+			while (p2 != (parentsNumber - 1) && r2 > parents[p2].cumulatedScore)
+				p2++;
+		} while (p1 == p2);
 		
 		std::uniform_int_distribution<int> randRate(0, 100);
 		std::uniform_int_distribution<int> randomParent(0, 1);
