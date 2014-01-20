@@ -46,7 +46,7 @@ void Display::update(EntityManager &manager) {
 	ss << "Generation #" << game->getGeneration() << std::endl;
 	ss << "Timer : " << (int) game->getElapsedTime() << "/" << game->getEpocDuration() << std::endl;
 	ss << "GameSpeed : " << game->getGameSpeed() << std::endl;
-	ss << "FPS : " << game->getFps();
+	ss << "FPS : " << game->getFps() / game->getGameSpeed() << std::endl;
 	text.setString(ss.str());
 	text.setPosition(10, 10);
 	window.draw(text);

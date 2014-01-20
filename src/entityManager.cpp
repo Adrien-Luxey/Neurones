@@ -17,11 +17,10 @@ EntityManager::EntityManager()
 	Species tmp;
 	
 	// fruits
-	fruitsIndex = entities.size();
+	fruits.clear();
 	for (int j = 0; j < CFG->readInt("FruitsNumber"); j++)
-		tmp.tab.push_back(new Fruit());
-		
-	entities.push_back(tmp);
+		fruits.push_back(new Fruit());
+	
 	
 	// animaux
 	animalsIndex = entities.size();
@@ -64,6 +63,10 @@ EntityManager::~EntityManager() {
 	}
 	
 	entities.clear();
+	
+	for (unsigned int i; i < fruits.size(); i++)
+		delete fruits[i];
+	fruits.clear();
 }
 
 void EntityManager::update(const float dt) {
@@ -71,7 +74,7 @@ void EntityManager::update(const float dt) {
 	for (int i = animalsIndex; i < animalsIndex + speciesNumber; i++) {
 		entities[i].aliveAnimals = 0;
 		
-		// Parcours de tous les animaux de l'espece		
+		// Parcours de tous les animaux de l'espece
 		for (unsigned int j = 0; j < entities[i].tab.size(); j++) {
 			Animal *animal = (Animal*) entities[i].tab[j];
 			
@@ -102,38 +105,75 @@ bool EntityManager::gameover() const {
 void EntityManager::update(Animal *animal, const int index, const float dt) {
 	std::vector<float> inputs;
 	Position closestFruit(worldSize * worldSize);
+	Animal *closest = NULL;
 	
 	// Plus proche fruit
 	getClosestFromTab(animal->getPos(), entities[ fruitsIndex ].tab, closestFruit, false);
 	addNormalizedPosition(closestFruit, inputs, animal->getAngle());
 	
 	// Plus proche proie
-	addClosest(animal, entities[index].prays, inputs, true);
+	closest = (Animal*) addClosest(animal, entities[index].prays, inputs, true);
+	// Ajout de la valeur att/def de l'animal en question aux inputs
+	if (closest != NULL)
+		inputs.push_back(closest->getCombatOutput());
+	else
+		inputs.push_back(0.f);
 	
 	// Plus proche prédateur
-	addClosest(animal, entities[index].predators, inputs, true);
+	closest = NULL;
+	closest = (Animal*) addClosest(animal, entities[index].predators, inputs, true);
+	// Ajout de la valeur att/def de l'animal en question aux inputs
+	if (closest != NULL)
+		inputs.push_back(closest->getCombatOutput());
+	else
+		inputs.push_back(0.f);
 	
 	// Plus proche allié
+	/*
 	std::vector<int> vecAllies = { index };
-	addClosest(animal, vecAllies, inputs, true);
+	closest = NULL;
+	closest = (Animal*) addClosest(animal, vecAllies, inputs, true);
+	// Ajout de la valeur att/def de l'animal en question aux inputs
+	if (closest != NULL)
+		inputs.push_back(closest->getCombatOutput());
+	else
+		inputs.push_back(0.f);
+	//*/
 	
 	animal->update(inputs, dt);
 }
 
-void EntityManager::addClosest(Animal *animal, const std::vector<int> &speciesIndexes, std::vector<float> &inputs, const bool isAnimal) {
+Entity* EntityManager::addClosest(Animal *animal, const std::vector<int> &speciesIndexes, std::vector<float> &inputs, const bool isAnimal) {
 	Position closest(worldSize * worldSize);
+	Entity *entity = NULL;
 	
 	// find closest in all tabs
 	for (unsigned int i = 0; i < speciesIndexes.size(); i++) {
-		getClosestFromTab(animal->getPos(), entities[ speciesIndexes[i] ].tab, closest, isAnimal);
+		entity = getClosestFromTab(animal->getPos(), entities[ speciesIndexes[i] ].tab, closest, isAnimal);
 	}
 	
 	// Give closest's angle/dist to network 
 	addNormalizedPosition(closest, inputs, animal->getAngle());
+	
+	return entity;
 }
 
-void EntityManager::getClosestFromTab(const Vect2i pos, const std::vector<Entity*> &tab, Position &closest, const bool isAnimal) {
+Entity* EntityManager::addClosestFruit(Animal* animal, std::vector<float> &inputs) {
+	Position closest(worldSize * worldSize);
+	Entity *entity = NULL;
+	
+	// find closest fruit
+	entity = getClosestFromTab(animal->getPos(), fruits, closest, false);
+	
+	// Give closest's angle/dist to network 
+	addNormalizedPosition(closest, inputs, animal->getAngle());
+	
+	return entity;
+}
+
+Entity* EntityManager::getClosestFromTab(const Vect2i pos, const std::vector<Entity*> &tab, Position &closest, const bool isAnimal) {
 	Position tmp(worldSize * worldSize);
+	Entity* entity = NULL;
 	
 	for (unsigned int i = 0; i < tab.size(); i++) {
 		
@@ -143,9 +183,13 @@ void EntityManager::getClosestFromTab(const Vect2i pos, const std::vector<Entity
 		tmp.pos = wrapPositionDifference(pos, tab[i]->getPos());
 		tmp.dist = sqrt(tmp.pos.x * tmp.pos.x + tmp.pos.y * tmp.pos.y);
 		
-		if (tmp.dist < closest.dist)
+		if (tmp.dist < closest.dist) {
 			closest = tmp;
+			entity = tab[i];
+		}
 	}
+	
+	return entity;
 }
 
 const Vect2i EntityManager::wrapPositionDifference(const Vect2i a, const Vect2i b) {

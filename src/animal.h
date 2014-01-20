@@ -30,11 +30,12 @@ class Animal : public Entity {
 	int getClosestFruitAngle() const { return closestFruitAngle; }
 	float getAttackRate() const { return attackRate; }
 	float getDefenseRate() const { return defenseRate; }
+	float getCombatOutput() const { return combatOutput; }
 	std::vector<float> getDNA();
 
   protected :		
 	int score, closestPrayAngle, closestPredatorAngle, closestFruitAngle;
-	float life, attackRate, defenseRate; // attackRate : [0; 1]
+	float life, attackRate, defenseRate, combatOutput; // attackRate : [0; 1]
 	
 	const int animalSpeed;
 	const int animalLife;

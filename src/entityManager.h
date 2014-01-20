@@ -38,6 +38,7 @@ class EntityManager {
 		Position(float _dist = 0) : dist(_dist) {}
 	} Position;
 	
+	std::vector<Entity*> fruits;
 	std::vector<Species> entities;
 	int fruitsIndex, animalsIndex;
 	
@@ -49,9 +50,11 @@ class EntityManager {
 	
 	void update(Animal *animal, const int index, const float dt);
 	
-	void addClosest(Animal *animal, const std::vector<int> &speciesIndexes, std::vector<float> &inputs, const bool isAnimal);
+	Entity* addClosest(Animal *animal, const std::vector<int> &speciesIndexes, std::vector<float> &inputs, const bool isAnimal);
 	
-	void getClosestFromTab(const Vect2i pos, const std::vector<Entity*> &tab, Position &closest, const bool isAnimal);
+	Entity* addClosestFruit(Animal* animal, std::vector<float> &inputs);
+	
+	Entity* getClosestFromTab(const Vect2i pos, const std::vector<Entity*> &tab, Position &closest, const bool isAnimal);
 	
 	const Vect2i wrapPositionDifference(const Vect2i a, const Vect2i b);
 	
