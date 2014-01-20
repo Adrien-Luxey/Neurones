@@ -4,12 +4,6 @@ using namespace std;
 
 #define DEBUG	0
 
-string ConfigParser::typeString[] = { "[int]", "[float]", "[string]" };
-string ConfigParser::commentString = "#";
-string ConfigParser::extensionString = ".cfg";
-char ConfigParser::assignChar = '=';
-string ConfigParser::defaultFile = "files/config.cfg";
-
 ConfigParser* ConfigParser::singleton = NULL;
 void ConfigParser::create(const string &fileName) {
 	if (singleton != NULL)
@@ -25,8 +19,12 @@ ConfigParser* ConfigParser::get() {
 	return singleton;
 }
 
-ConfigParser::ConfigParser(const std::string &fileName) {
-	if (fileName.compare(fileName.size()-extensionString.size(), extensionString.size(), extensionString) == 0) {
+ConfigParser::ConfigParser(const std::string &fileName) 
+  : typeString{ "[int]", "[float]", "[string]" }, commentString("#"), extensionString(".cfg"), assignChar('='), defaultFile("files/config.cfg") {
+	
+	if (fileName.empty())
+		mFileName = defaultFile;
+	else if (fileName.compare(fileName.size()-extensionString.size(), extensionString.size(), extensionString) == 0) {
 		mFileName = fileName;
 	} else {
 		mFileName = fileName + extensionString;
@@ -35,21 +33,21 @@ ConfigParser::ConfigParser(const std::string &fileName) {
 	initMaps();
 }
 
-const int ConfigParser::readInt(const string &key, const int &defaultValue) {
+int ConfigParser::readInt(const string &key, const int &defaultValue) const {
 	if (!mIntMap.count(key))
 		return defaultValue;
 	else
 		return mIntMap.find(key)->second;
 }
 
-const float ConfigParser::readFloat(const string &key, const float &defaultValue) {
+float ConfigParser::readFloat(const string &key, const float &defaultValue) const {
 	if (!mFloatMap.count(key))
 		return defaultValue;
 	else
 		return mFloatMap.find(key)->second;
 }
 
-const string ConfigParser::readString(const string &key, const string &defaultValue) {
+string ConfigParser::readString(const string &key, const string &defaultValue) const {
 	if (!mStringMap.count(key)) {
 		return defaultValue;
 	} else {

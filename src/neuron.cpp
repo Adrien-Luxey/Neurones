@@ -1,13 +1,16 @@
 #include "neuron.h"
 
 Neuron::Neuron(unsigned int _inputsNumber)
-: inputsNumber(_inputsNumber) {
+: inputsNumber(_inputsNumber), neuronSigmoid(CFG->readFloat("NeuronSigmoid")), useNeuronSigmoid(CFG->readInt("UseNeuronSigmoid")) {
 	initWeights();
 }
+
+Neuron::~Neuron() {}
 
 // Initialisation des poids random [-1; 1] en fonction de inputsNumber
 void Neuron::initWeights() {
 	std::uniform_real_distribution<float> random(-1, 1);
+	
 	weights.clear();
 	
 	// !!! i <= inputs !!! (le premier weight est le bias)
@@ -24,9 +27,9 @@ const float Neuron::run(const std::vector<float> inputs) {
 	for (unsigned int i = 0; i < inputsNumber && i < inputs.size(); i++)
 		sum += weights[i+1]*inputs[i];
 	
-	if (CFG->readInt("UseNeuronSigmoid")) {
+	if (useNeuronSigmoid) {
 		// La sigmoide de sum renvoie un float ]-1;1[
-		return 1/(1 + expf(-sum/CFG->readFloat("NeuronSigmoid"))) * 2.f - 1.f;
+		return 1/(1 + expf(-sum/neuronSigmoid)) * 2.f - 1.f;
 	} else {
 		// Sinon on effectue une fonction scale
 		return (sum > SEUIL) ? OUT_1 : OUT_0;
@@ -37,4 +40,8 @@ const float Neuron::run(const std::vector<float> inputs) {
 void Neuron::setDNA(const std::vector<float> &DNA) {
 	for (unsigned int i = 0; i < DNA.size() && i < weights.size(); i++)
 		weights[i] = DNA[i];
+}
+
+std::vector<float> Neuron::getDNA() {
+    return weights;
 }
