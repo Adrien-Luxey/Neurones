@@ -21,7 +21,10 @@ class Game {
 		float getElapsedTime() const { return elapsedTime; }
 		int getEpocDuration() const { return epocDuration; }
 		const int getFps() { return fps; }
+		int getGameSpeed() const { return gameSpeed; }
 		void togglePause();
+		void increaseGameSpeed();
+		void decreaseGameSpeed();
 		
 	private :		
 		Display display;
@@ -35,7 +38,7 @@ class Game {
 		
 		//fps
 		float dt, elapsedTime, dtSum, frames;
-		int fps;
+		int fps, gameSpeed, loopsSinceLastDisplay;
 		
 		void update();
 		

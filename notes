@@ -1,3 +1,6 @@
+TODO vite
+statistiques par especeen haut à gauche
+
 fast-forward => need
 conserver les meilleurs adn (les derniers)
 en fait il faudrait un putain de menu (avec chargement des cerveaux sauvegardés...)
@@ -11,6 +14,8 @@ Admettons qu'on enregistre un fichier par jeu
 système avec PV : vie qui diminue en fonction du temps, on en regagne en bouffant du ppl
 on pourrait donner des pv à d'autres gens
 et pour que ca tende pas vers tout le monde qui meurt, on peut rajouter des plantes (qui rendent moins de PV)
+DONE
+Mais désactivé (vie = epocDuraction), en effet cela n'a aucun interet avant d'avoir une reproduction réelle des animaux.
 
 terrains : 
 -sable : ralenti
@@ -19,6 +24,37 @@ terrains :
 -champ ou nature : bouffe
 -eau partiel
 
-creer un type de donnees pour la liste d'entites
-une seule variable (au lieu de life et score), il faut juste récupérer elapsedTime de game pour avoir le meme resultat
-action frapper : fillcolor de 'animal en rouge ou gris, ne peut pas bouger
+réseau réparé (oubli de outputs = inputs dans le run), suppression de la couche input (en fait inexistante sur les modeles)
+
+Vitesse du jeu :
+QUand on multiplie la vitesse de gs, on multiplie le dt par gs, et on ne lance la boucle d'affichage qu'une fois sur gs tours de la boucle de jeu.
+Par exemple, si on multiplie la vitesse par 2, dt vaudra dtreel*2, et on n'appelle l'affichage qu'une fois sur 2. De la sorte, on garde 60 affichages par seconde, mais on fait 120 tours de boucle par seconde.
+
+
+Attaque :
+Nous avos besoin d'un système de "combat", qui permette d'avoir un semblant d'égalité des chances quand deux animaux se rencontrent pour se battre.
+En effet, avec un système comme "si ton adversaire est dans ta zone de hitbox, tu le tues", c'est toujours l'espèce traitée en première par la boucle qui remporte la victoire.
+Tentative du jour :
+    sortie "attackRate" du NN, de 0 : je n'attaque pas du tout mais je vais à vitesse max, à 1 => j'attaque à fond mais je suis immobilisé.
+    Lors d'un affrontement, c'est donc celui qui a le plus haut attackRate qui l'emporte
+    J'aimerais bien introduire un peu de random quand même, genre ue déviation gaussienne de cette valeur pour les deux combattants, ca devrait suffire.
+
+Où en est-on ?
+Attack ne suffisit pas, se terminant toujours par un face à face interminable où personne ne bougeait.
+On a donc voulu rajouter une deuxieme valeur "defense", ajoutant de la complexité au combat et donc du random. on se retrouvait avec 2 sortis du NN à évaluer.
+Le rendu n'était pas mauvais. On a quand même du se poser la question de quelle méthode utiliser pour déterminer le taux de ralentissement des animaux en fonction de ces deux critères, MAX ou MOY ?
+MAX s'est avérée rendre mieux, la moyennne permettant encore aux animaux de se déplacer s'ils avaient leur barre de défense à fond, ce qu'ils faisaient.
+Enfin, il est apparu qu'on pourrait se contenter d'une variable x au lieu de deux :
+    x c[-1; 0[ <- défense ; x c ]0; 1] <- attaque. Naturellement, slowdownRate=abs(x).
+    En effet, on n'est pas censé pouvoir à la fois se défendre et attaquer. De plus, ce système a l'air très bien assimilé par le NN.
+    Et au final, on se passe donc de la fonction gaussienne lors de l'affrontement, qui ne semble pas utile quand on a déjà un choix à faire.
+PAR CONTRE ! Ca ramène le problème de la prédictivité de l'issue de la bataille ! Si 2 espèces se battent et qu'elles attaquent toutes les deux, c'est la première qui sera traitée ar la boucle qui gagnera...
+PAS BON ! Ca remet en cause le système à une seule variable.
+
+IDÉEE ! Fournir en entrée du NN la valeur de la variable attaque/défense des animaux les plus prêts. Plus de visibilité = plus de strategie !
+Ya un probleme structurel dans EntityManager, la solution serait que getClosestFromTab renvoie un pointeur vers l'entité la plus proche.
+Mais il est 4:10 et on est dimanche et je commence à 10h.
+Et donc l'allié le plus proche.
+
+La question MAX VS MOY revient à se demander si on utilise qu'une variable (ce qui est pareil que de faire un MAX sur les 2), ou MOY. 
+Dommage que MOY fournisse des résultats aussi peu intéressants, la piste semblair plus sympa à explorer. A retenter.

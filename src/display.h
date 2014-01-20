@@ -33,10 +33,14 @@ class Display {
 	sf::Font font;
 	sf::Clock clock;
 	
+	int statusBarWidth;
+	
 	void speciesColor(int index);
 	
 	void drawFruits(const std::vector<Entity*> &fruits);
 	void drawAnimals(const std::vector<Entity*> &animals);
+	
+	void drawVector(const Vect2i &pos, const float &angle, const sf::Color &color, const sf::Vector2f &size);
 };
 
 #endif // DISPLAY_H

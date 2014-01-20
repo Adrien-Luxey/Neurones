@@ -2,7 +2,8 @@
 
 
 Game::Game() 
-  : display(this), continuer(true), pause(false), generation(1), epocDuration(CFG->readInt("EpocDuration")), dt(0), elapsedTime(0), dtSum(0), frames(0), fps(0) {	
+  : display(this), continuer(true), pause(false), generation(1), epocDuration(CFG->readInt("EpocDuration")),
+	dt(0), elapsedTime(0), dtSum(0), frames(0), fps(0), gameSpeed(1), loopsSinceLastDisplay(0) {	
 	
 }
 
@@ -10,12 +11,18 @@ Game::~Game() {}
 
 void Game::exec() {
 	while (continuer) {
-		dt = display.getElapsedTime();
+		dt = gameSpeed * display.getElapsedTime();
 		display.events();
 		
 		if (!pause) {
+			loopsSinceLastDisplay++;
+			
 			update();
-			display.update(manager);
+			
+			if (loopsSinceLastDisplay >=  gameSpeed) {
+				display.update(manager);
+				loopsSinceLastDisplay = 0;
+			}
 		}
 	}
 }
@@ -55,7 +62,7 @@ void Game::togglePause() {
 
 void Game::updateFps() {
 	elapsedTime += dt;	
-	dtSum += dt;
+	dtSum += dt / gameSpeed;
 	frames++;
 	
 	if (dtSum > 1) {
@@ -63,4 +70,11 @@ void Game::updateFps() {
 		frames = 0;
 		dtSum = 0;
 	}
+}
+
+void Game::increaseGameSpeed() {
+	gameSpeed++;
+}
+void Game::decreaseGameSpeed() {
+	gameSpeed = (gameSpeed > 1) ? gameSpeed - 1 : 1;
 }

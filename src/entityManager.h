@@ -31,11 +31,11 @@ class EntityManager {
 	
   private:
 	typedef struct Position {
-		int dist;
+		float dist;
 		Vect2i pos;
 
-		Position() : dist(0) {}
-		Position(int _dist) : dist(_dist) {}
+		Position() {}
+		Position(float _dist = 0) : dist(_dist) {}
 	} Position;
 	
 	std::vector<Species> entities;

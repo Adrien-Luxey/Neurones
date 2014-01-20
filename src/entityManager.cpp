@@ -26,7 +26,6 @@ EntityManager::EntityManager()
 	// animaux
 	animalsIndex = entities.size();
 	for (int i = 0; i < speciesNumber; i++) {
-		std::cout << "animal n°" << i + animalsIndex << " : ";
 		tmp.tab.clear();
 		tmp.prays.clear();
 		tmp.predators.clear();
@@ -41,21 +40,17 @@ EntityManager::EntityManager()
 		// Une espèce mange praysNumber espèces après elle dans le tableau, et se fait manger par praysNumber avant elle
 		for (int j = 1; j <= praysNumber; j++) {
 			tmp.prays.push_back(animalsIndex + (i + j) % speciesNumber);
-			std::cout << "pray : " << animalsIndex + (i + j) % speciesNumber << ", ";
 			
 			// résolution d'un bug lié au mod en c++
 			// -1 % 3 = -1, merci la stl
 			if (i - j >= 0) {
 				tmp.predators.push_back(animalsIndex + i - j);
-				std::cout << "pred : " << animalsIndex + i - j << ", ";
 			} else {
 				tmp.predators.push_back(animalsIndex + i - j + speciesNumber);
-				std::cout << "pred : " << animalsIndex + i - j + speciesNumber << ", ";
 			}
 		}
 		
 		entities.push_back(tmp);
-		std::cout << std::endl;
 	}
 }
 
@@ -108,9 +103,9 @@ void EntityManager::update(Animal *animal, const int index, const float dt) {
 	std::vector<float> inputs;
 	Position closestFruit(worldSize * worldSize);
 	
-	/*/ Angle de l'animal [0; 1[
-	inputs.push_back(animal->getAngle() / 360.f);
-	//*/
+	// Plus proche fruit
+	getClosestFromTab(animal->getPos(), entities[ fruitsIndex ].tab, closestFruit, false);
+	addNormalizedPosition(closestFruit, inputs, animal->getAngle());
 	
 	// Plus proche proie
 	addClosest(animal, entities[index].prays, inputs, true);
@@ -118,9 +113,9 @@ void EntityManager::update(Animal *animal, const int index, const float dt) {
 	// Plus proche prédateur
 	addClosest(animal, entities[index].predators, inputs, true);
 	
-	// Plus proche fruit
-	getClosestFromTab(animal->getPos(), entities[ fruitsIndex ].tab, closestFruit, false);
-	addNormalizedPosition(closestFruit, inputs, animal->getAngle());
+	// Plus proche allié
+	std::vector<int> vecAllies = { index };
+	addClosest(animal, vecAllies, inputs, true);
 	
 	animal->update(inputs, dt);
 }
@@ -172,10 +167,15 @@ const void EntityManager::addNormalizedPosition(const Position &p, std::vector<f
 		inputs.push_back(1.f);
 	// Sinon
 	} else {
+		/*
+		inputs.push_back(p.pos.x / p.dist);
+		inputs.push_back(p.pos.y / p.dist);
+		//*/
 		// angle [0; 1[ ( [0; 360°[ ) relatif : angle du mobile - mon angle
 		inputs.push_back(atan2f(p.pos.y, p.pos.x) / (2 * PI) - angle / 360.f);
 		// distance as sigmoid so both [0; 1[
-		inputs.push_back(1.f / (1.f + expf(-p.dist / (float) distanceSigmoid)) * 2.f - 1.f);
+		inputs.push_back(1.f / (1.f + expf(-p.dist / distanceSigmoid)) * 2.f - 1.f);
+		//*/
 	}
 }
 
@@ -195,26 +195,24 @@ void EntityManager::collisionCheck(Animal *animal, const int index) {
 	int prayIndex;
 	Animal *pray;
 	// Si l'animal attaque lorsqu'il est dans la hitbox d'une proie, il la mange et on break
-	if (animal->isAttacking()) {
-		// Parcours de toutes les proies
-		for (unsigned int i = 0; i < entities[index].prays.size(); i++) {
-			prayIndex = entities[index].prays[i];
-			
-			// Parcours de tous les animaux de l'espèce proie
-			for (unsigned int j = 0; j < entities[prayIndex].tab.size(); j++) {
-				pray = (Animal*) entities[prayIndex].tab[j];
-				
-				if (!pray->isAlive())
-					continue;
-				
-				if (isColliding(animal->getPos(), pray->getPos())) {
-					pray->die();
-					animal->incrementScore();
-					
-					entities[index].aliveAnimals--;
-					
-					break;
-				}
+	// Parcours de toutes les proies
+	for (unsigned int i = 0; i < entities[index].prays.size(); i++) {
+		prayIndex = entities[index].prays[i];
+
+		// Parcours de tous les animaux de l'espèce proie
+		for (unsigned int j = 0; j < entities[prayIndex].tab.size(); j++) {
+			pray = (Animal*) entities[prayIndex].tab[j];
+
+			if (!pray->isAlive())
+				continue;
+
+			if (isColliding(animal->getPos(), pray->getPos()) && animal->getAttackRate() > pray->getDefenseRate()) {
+				pray->die();
+				animal->incrementScore();
+
+				entities[prayIndex].aliveAnimals--;
+
+				break;
 			}
 		}
 	}

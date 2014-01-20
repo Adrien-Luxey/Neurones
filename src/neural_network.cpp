@@ -13,9 +13,10 @@ void NeuralNetwork::initLayers() {
 	layers.clear();
 	outputs.clear();
 	
+	// La couche d'input semble en fait inutile, je la retire
 	// Couche input : inputsNumber neurones à inputsNumber entrées
 	// (utiliser le même nombre de neurones que d'entrées pour cette couche est une convention reconnue)
-	layers.push_back(Layer(inputsNumber, inputsNumber));
+	//layers.push_back(Layer(inputsNumber, inputsNumber));
 	
 	// Création des couches cachées suivant les données de config
 	unsigned int inputs = inputsNumber;
@@ -32,6 +33,7 @@ void NeuralNetwork::initLayers() {
 const std::vector<float> NeuralNetwork::run(const std::vector<float> inputs) {
 	// backprop
 	//outputs.insert(outputs.end(), inputs.begin(), inputs.end());
+	outputs = inputs;
 	
 	for (unsigned int i = 0; i < layers.size(); i++) {
 		outputs = layers[i].run(outputs);
