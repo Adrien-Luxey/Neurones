@@ -38,6 +38,7 @@ void Game::update() {
 
 void Game::newGeneration() {
 	genetics.evolve(manager);
+	manager.init();
 	elapsedTime = 0;
 	
 	// Reinitialise le timer de display

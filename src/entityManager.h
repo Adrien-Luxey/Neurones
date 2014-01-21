@@ -8,9 +8,7 @@
 #include "animal.h"
 
 typedef struct Species {
-	std::vector<Entity*> tab;
-
-	std::vector<int> prays, predators;
+	std::vector<Animal*> tab;
 	
 	unsigned int aliveAnimals;
 } Species;
@@ -19,15 +17,15 @@ class EntityManager {
   public:
 	EntityManager();
 	~EntityManager();
+	
+	void init();
 
 	void update(const float dt);
 	
 	bool gameover() const;
 
-	std::vector<Species> getEntities()   { return entities; }
-	int getFruitsIndex() const { return fruitsIndex; }
-	int getAnimalsIndex() const { return animalsIndex; }
-	int getSpeciesNumber() const { return speciesNumber; }	
+	std::vector<Species> getSpecies() { return species; }
+	std::vector<Entity*> getFruits() { return fruits; }
 	
   private:
 	typedef struct Position {
@@ -39,28 +37,26 @@ class EntityManager {
 	} Position;
 	
 	std::vector<Entity*> fruits;
-	std::vector<Species> entities;
-	int fruitsIndex, animalsIndex;
+	std::vector<Species> species;
 	
-	const int speciesNumber;
-	const int praysNumber;
 	const unsigned int distanceSigmoid;
 	const int hitbox;
 	const int worldSize;
 	
-	void update(Animal *animal, const int index, const float dt);
+	void update(Animal *animal, const unsigned int index, const float dt);
 	
-	Entity* addClosest(Animal *animal, const std::vector<int> &speciesIndexes, std::vector<float> &inputs, const bool isAnimal);
+	void addClosestEnemy(Animal *animal, const unsigned int index, std::vector<float> &inputs);
 	
-	Entity* addClosestFruit(Animal* animal, std::vector<float> &inputs);
+	void addClosestFruit(Animal* animal, std::vector<float> &inputs);
 	
-	Entity* getClosestFromTab(const Vect2i pos, const std::vector<Entity*> &tab, Position &closest, const bool isAnimal);
+	Entity* getClosestEntityFromTab(const Vect2i pos, const std::vector<Entity*> &tab, Position &closest);
+	Animal* getClosestAnimalFromTab(const Vect2i pos, const std::vector<Animal*> &tab, Position &closest);
 	
 	const Vect2i wrapPositionDifference(const Vect2i a, const Vect2i b);
 	
 	const void addNormalizedPosition(const Position &p, std::vector<float> &inputs, const float &angle);
 	
-	void collisionCheck(Animal *animal, const int index);
+	void collisionCheck(Animal *animal, const unsigned int index);
 	
 	const bool isColliding(const Vect2i a, const Vect2i b);
 };
