@@ -1,6 +1,6 @@
 #include "entityManager.h"
 
-// AnimalsNumber = entities[1].size() (idem pour les fruits)
+// AnimalsNumber = species[1].size() (idem pour les fruits)
 
 
 // TODO : la couleuuur des animaux
@@ -11,24 +11,19 @@
 
 
 EntityManager::EntityManager()
-  : speciesNumber((int) CFG->readInt("SpeciesNumber")), praysNumber(speciesNumber/2), distanceSigmoid(CFG->readInt("DistanceSigmoid")),
-  hitbox(CFG->readInt("Hitbox")), worldSize(CFG->readInt("WorldSize")) {
+  : distanceSigmoid(CFG->readInt("DistanceSigmoid")), hitbox(CFG->readInt("Hitbox")), worldSize(CFG->readInt("WorldSize")) {
 	
 	Species tmp;
 	
 	// fruits
-	fruitsIndex = entities.size();
+	fruits.clear();
 	for (int j = 0; j < CFG->readInt("FruitsNumber"); j++)
-		tmp.tab.push_back(new Fruit());
-		
-	entities.push_back(tmp);
+		fruits.push_back(new Fruit());
+	
 	
 	// animaux
-	animalsIndex = entities.size();
-	for (int i = 0; i < speciesNumber; i++) {
+	for (int i = 0; i < CFG->readInt("SpeciesNumber"); i++) {
 		tmp.tab.clear();
-		tmp.prays.clear();
-		tmp.predators.clear();
 		
 		// Ajout des animaux
 		for (int j = 0; j < CFG->readInt("AnimalsNumber"); j++)
@@ -36,49 +31,40 @@ EntityManager::EntityManager()
 		
 		tmp.aliveAnimals = tmp.tab.size();
 		
-		// Ajout des index des prédateurs/proies
-		// Une espèce mange praysNumber espèces après elle dans le tableau, et se fait manger par praysNumber avant elle
-		for (int j = 1; j <= praysNumber; j++) {
-			tmp.prays.push_back(animalsIndex + (i + j) % speciesNumber);
-			
-			// résolution d'un bug lié au mod en c++
-			// -1 % 3 = -1, merci la stl
-			if (i - j >= 0) {
-				tmp.predators.push_back(animalsIndex + i - j);
-			} else {
-				tmp.predators.push_back(animalsIndex + i - j + speciesNumber);
-			}
-		}
-		
-		entities.push_back(tmp);
+		species.push_back(tmp);
 	}
 }
 
 EntityManager::~EntityManager() {
-	// Destruction de toutes les entities
-	for (unsigned int i = 0; i < entities.size(); i++) {
-		for (unsigned int j = 0; j < entities[i].tab.size(); j++)
-			delete entities[i].tab[j];
+	// Destruction de toutes les species
+	for (unsigned int i = 0; i < species.size(); i++) {
+		for (unsigned int j = 0; j < species[i].tab.size(); j++)
+			delete species[i].tab[j];
 			
-		entities[i].tab.clear();
+		species[i].tab.clear();
 	}
 	
-	entities.clear();
+	species.clear();
+	
+	for (unsigned int i; i < fruits.size(); i++)
+		delete fruits[i];
+	fruits.clear();
+}
+
+void EntityManager::init() {
+	for (unsigned int i = 0; i < species.size(); i++)
+		species[i].aliveAnimals = species[i].tab.size();
 }
 
 void EntityManager::update(const float dt) {
 	// Parcours de toutes les espèces
-	for (int i = animalsIndex; i < animalsIndex + speciesNumber; i++) {
-		entities[i].aliveAnimals = 0;
-		
-		// Parcours de tous les animaux de l'espece		
-		for (unsigned int j = 0; j < entities[i].tab.size(); j++) {
-			Animal *animal = (Animal*) entities[i].tab[j];
+	for (unsigned int i = 0; i < species.size(); i++) {		
+		// Parcours de tous les animaux de l'espece
+		for (unsigned int j = 0; j < species[i].tab.size(); j++) {
+			Animal *animal = species[i].tab[j];
 			
 			if (!animal->isAlive(dt))
 				continue;
-			
-			entities[i].aliveAnimals++;
 			
 			update(animal, i, dt);
 			
@@ -90,62 +76,115 @@ void EntityManager::update(const float dt) {
 bool EntityManager::gameover() const {
 	unsigned int aliveSpecies = 0;
 	
-	for (int i = animalsIndex; i < animalsIndex + speciesNumber; i++) {
-		if (entities[i].aliveAnimals > 0)
+	for (unsigned int i = 0; i < species.size(); i++) {
+		if (species[i].aliveAnimals > 0)
 			aliveSpecies++;
 	}
 	
-	return (speciesNumber == 1 && aliveSpecies == 0) ||
-		(speciesNumber > 1 && aliveSpecies < 2);
+	return (species.size() == 1 && aliveSpecies == 0) ||
+		(species.size() > 1 && aliveSpecies < 2);
 }
 
-void EntityManager::update(Animal *animal, const int index, const float dt) {
+void EntityManager::update(Animal *animal, const unsigned int index, const float dt) {
 	std::vector<float> inputs;
-	Position closestFruit(worldSize * worldSize);
 	
 	// Plus proche fruit
-	getClosestFromTab(animal->getPos(), entities[ fruitsIndex ].tab, closestFruit, false);
-	addNormalizedPosition(closestFruit, inputs, animal->getAngle());
+	addClosestFruit(animal, inputs);
 	
-	// Plus proche proie
-	addClosest(animal, entities[index].prays, inputs, true);
-	
-	// Plus proche prédateur
-	addClosest(animal, entities[index].predators, inputs, true);
+	// Plus proche ennemi
+	addClosestEnemy(animal, index, inputs);
+//	// Ajout de la valeur att/def de l'animal en question aux inputs
+//	if (closest != NULL)
+//		inputs.push_back(closest->getCombatOutput());
+//	else
+//		inputs.push_back(0.f);
 	
 	// Plus proche allié
+	/*
 	std::vector<int> vecAllies = { index };
-	addClosest(animal, vecAllies, inputs, true);
+	closest = NULL;
+	closest = (Animal*) addClosest(animal, vecAllies, inputs, true);
+	// Ajout de la valeur att/def de l'animal en question aux inputs
+	if (closest != NULL)
+		inputs.push_back(closest->getCombatOutput());
+	else
+		inputs.push_back(0.f);
+	//*/
 	
 	animal->update(inputs, dt);
 }
 
-void EntityManager::addClosest(Animal *animal, const std::vector<int> &speciesIndexes, std::vector<float> &inputs, const bool isAnimal) {
+void EntityManager::addClosestEnemy(Animal *animal, const unsigned int index, std::vector<float> &inputs) {
 	Position closest(worldSize * worldSize);
+	Animal *enemy = NULL;
 	
 	// find closest in all tabs
-	for (unsigned int i = 0; i < speciesIndexes.size(); i++) {
-		getClosestFromTab(animal->getPos(), entities[ speciesIndexes[i] ].tab, closest, isAnimal);
+	for (unsigned int i = 0; i < species.size(); i++) {
+		if (i == index)
+			continue;
+		
+		Animal *tmp = NULL;
+		tmp = (Animal*) getClosestAnimalFromTab(animal->getPos(), species[i].tab, closest);
+		
+		if (tmp != NULL)
+			enemy = tmp;
 	}
+	
+	// Give closest's angle/dist to network 
+	addNormalizedPosition(closest, inputs, animal->getAngle());
+	
+	// variable de combat de l'ennemi
+	if (enemy != NULL)
+		inputs.push_back(enemy->getCombatOutput());
+	else
+		inputs.push_back(0.f);
+}
+
+void EntityManager::addClosestFruit(Animal* animal, std::vector<float> &inputs) {
+	Position closest(worldSize * worldSize);
+	
+	// find closest fruit
+	getClosestEntityFromTab(animal->getPos(), fruits, closest);
 	
 	// Give closest's angle/dist to network 
 	addNormalizedPosition(closest, inputs, animal->getAngle());
 }
 
-void EntityManager::getClosestFromTab(const Vect2i pos, const std::vector<Entity*> &tab, Position &closest, const bool isAnimal) {
+Entity* EntityManager::getClosestEntityFromTab(const Vect2i pos, const std::vector<Entity*> &tab, Position &closest) {
 	Position tmp(worldSize * worldSize);
+	Entity* entity = NULL;
 	
-	for (unsigned int i = 0; i < tab.size(); i++) {
+	for (unsigned int i = 0; i < tab.size(); i++) {		
+		tmp.pos = wrapPositionDifference(pos, tab[i]->getPos());
+		tmp.dist = sqrt(tmp.pos.x * tmp.pos.x + tmp.pos.y * tmp.pos.y);
 		
-		if (isAnimal && !((Animal*) tab[i])->isAlive())
+		if (tmp.dist < closest.dist) {
+			closest = tmp;
+			entity = tab[i];
+		}
+	}
+	
+	return entity;
+}
+
+Animal* EntityManager::getClosestAnimalFromTab(const Vect2i pos, const std::vector<Animal*> &tab, Position &closest) {
+	Position tmp(worldSize * worldSize);
+	Animal* entity = NULL;
+	
+	for (unsigned int i = 0; i < tab.size(); i++) {		
+		if (!tab[i]->isAlive())
 			continue;
 		
 		tmp.pos = wrapPositionDifference(pos, tab[i]->getPos());
 		tmp.dist = sqrt(tmp.pos.x * tmp.pos.x + tmp.pos.y * tmp.pos.y);
 		
-		if (tmp.dist < closest.dist)
+		if (tmp.dist < closest.dist) {
 			closest = tmp;
+			entity = tab[i];
+		}
 	}
+	
+	return entity;
 }
 
 const Vect2i EntityManager::wrapPositionDifference(const Vect2i a, const Vect2i b) {
@@ -179,38 +218,36 @@ const void EntityManager::addNormalizedPosition(const Position &p, std::vector<f
 	}
 }
 
-void EntityManager::collisionCheck(Animal *animal, const int index) {
+void EntityManager::collisionCheck(Animal *animal, const unsigned int index) {
 	// Si l'animal marche sur un fruit, il le mange et on break
-	for (unsigned int i = 0; i < entities[fruitsIndex].tab.size(); i++) {
-		Fruit *fruit = (Fruit*) entities[fruitsIndex].tab[i];
-		
-		if (isColliding(animal->getPos(), fruit->getPos())) {
+	for (unsigned int i = 0; i < fruits.size(); i++) {
+		if (isColliding(animal->getPos(), fruits[i]->getPos())) {
 			animal->incrementScore();
-			fruit->init();
+			fruits[i]->init();
 			
 			break;
 		}
 	}
 	
-	int prayIndex;
-	Animal *pray;
+	Animal *enemy;
 	// Si l'animal attaque lorsqu'il est dans la hitbox d'une proie, il la mange et on break
 	// Parcours de toutes les proies
-	for (unsigned int i = 0; i < entities[index].prays.size(); i++) {
-		prayIndex = entities[index].prays[i];
-
+	for (unsigned int i = 0; i < species.size(); i++) {
+		if (i == index)
+			continue;
+		
 		// Parcours de tous les animaux de l'espèce proie
-		for (unsigned int j = 0; j < entities[prayIndex].tab.size(); j++) {
-			pray = (Animal*) entities[prayIndex].tab[j];
+		for (unsigned int j = 0; j < species[i].tab.size(); j++) {
+			enemy = species[i].tab[j];
 
-			if (!pray->isAlive())
+			if (!enemy->isAlive())
 				continue;
 
-			if (isColliding(animal->getPos(), pray->getPos()) && animal->getAttackRate() > pray->getDefenseRate()) {
-				pray->die();
+			if (isColliding(animal->getPos(), enemy->getPos()) && animal->getAttackRate() > enemy->getDefenseRate()) {
+				enemy->die();
 				animal->incrementScore();
 
-				entities[prayIndex].aliveAnimals--;
+				species[i].aliveAnimals--;
 
 				break;
 			}

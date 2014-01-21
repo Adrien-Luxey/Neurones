@@ -38,7 +38,7 @@ class Display {
 	void speciesColor(int index);
 	
 	void drawFruits(const std::vector<Entity*> &fruits);
-	void drawAnimals(const std::vector<Entity*> &animals);
+	void drawAnimals(const std::vector<Animal*> &animals);
 	
 	void drawVector(const Vect2i &pos, const float &angle, const sf::Color &color, const sf::Vector2f &size);
 };

@@ -30,23 +30,19 @@ void Display::update(EntityManager &manager) {
 	// window clear
 	window.clear();
 	
-	for (int i = 0; i < (int) manager.getEntities().size(); i++) {
-		
-		if (i == manager.getFruitsIndex()) {
-			drawFruits(manager.getEntities()[i].tab);
-			
-		} else if (i >= manager.getAnimalsIndex() &&
-		  i < manager.getAnimalsIndex() + manager.getSpeciesNumber()) {
-			speciesColor(i - manager.getAnimalsIndex());
-			drawAnimals(manager.getEntities()[i].tab);
-		}
+	drawFruits(manager.getFruits());
+	
+	std::vector<Species> species = manager.getSpecies();
+	for (int i = 0; i < (int) species.size(); i++) {
+		speciesColor(i);
+		drawAnimals(species[i].tab);
 	}
 	
 	std::stringstream ss;
 	ss << "Generation #" << game->getGeneration() << std::endl;
 	ss << "Timer : " << (int) game->getElapsedTime() << "/" << game->getEpocDuration() << std::endl;
 	ss << "GameSpeed : " << game->getGameSpeed() << std::endl;
-	ss << "FPS : " << game->getFps();
+	ss << "FPS : " << game->getFps() / game->getGameSpeed() << std::endl;
 	text.setString(ss.str());
 	text.setPosition(10, 10);
 	window.draw(text);
@@ -136,46 +132,40 @@ void Display::drawFruits(const std::vector<Entity*> &fruits) {
 	}
 }
 
-void Display::drawAnimals(const std::vector<Entity*> &animals) {
-	Animal *animal;
-	
+void Display::drawAnimals(const std::vector<Animal*> &animals) {
 	for (unsigned int i = 0; i < animals.size(); i++) {
-		animal = (Animal*) animals[i];
-		
-		if (!animal->isAlive())
+		if (!animals[i]->isAlive())
 			continue;
 		
 		// set la bonne position à l'animalShape
-		animalShape.setPosition(animal->getPos().x, animal->getPos().y);
-		animalShape.setRotation(animal->getAngle());
+		animalShape.setPosition(animals[i]->getPos().x, animals[i]->getPos().y);
+		animalShape.setRotation(animals[i]->getAngle());
 		
 		//animalShape.setFillColor(sf::Color(255, 0, 0, 255 * animal->getAttackRate()));
 		
 		// dessin de l'animalShape
 		window.draw(animalShape);
 		
-		// vecteur vers la plus proche proie
-		drawVector(animal->getPos(), animal->getClosestPrayAngle(), sf::Color::Green, sf::Vector2f(15, 1));
 		// vecteur vers le plus proche fruit
-		drawVector(animal->getPos(), animal->getClosestFruitAngle(), sf::Color::Green, sf::Vector2f(15, 1));
-		// vecteur vers le plus proche predateur
-		drawVector(animal->getPos(), animal->getClosestPredatorAngle(), sf::Color::Red, sf::Vector2f(15, 1));
+		drawVector(animals[i]->getPos(), animals[i]->getClosestFruitAngle(), sf::Color::Green, sf::Vector2f(15, 1));
+		// vecteur vers le plus proche ennemi
+		drawVector(animals[i]->getPos(), animals[i]->getClosestEnemyAngle(), sf::Color::Red, sf::Vector2f(15, 1));
 		
 		// dessin de la barre d'attaque
 		Vect2i barPosition;
-		barPosition.x = animal->getPos().x - statusBarWidth/2;
-		barPosition.y = animal->getPos().y + animalShape.getLocalBounds().height * 3 / 2;
-		drawVector(barPosition, 360.f, sf::Color(100, 0, 0), sf::Vector2f(animal->getAttackRate() * statusBarWidth, 2));
+		barPosition.x = animals[i]->getPos().x - statusBarWidth/2;
+		barPosition.y = animals[i]->getPos().y + animalShape.getLocalBounds().height * 3 / 2;
+		drawVector(barPosition, 360.f, sf::Color(100, 0, 0), sf::Vector2f(animals[i]->getAttackRate() * statusBarWidth, 2));
 		// dessin de la barre de defense
 		barPosition.y += 4;
-		drawVector(barPosition, 360.f, sf::Color(0, 0, 100), sf::Vector2f(animal->getDefenseRate() * statusBarWidth, 2));
+		drawVector(barPosition, 360.f, sf::Color(0, 0, 100), sf::Vector2f(animals[i]->getDefenseRate() * statusBarWidth, 2));
 		
 		// score
 		std::stringstream ss;
-		ss << animal->getScore();
+		ss << animals[i]->getScore();
 		text.setString(ss.str());
-		text.setPosition(animal->getPos().x - text.getLocalBounds().width / 2,
-						 animal->getPos().y - animalShape.getLocalBounds().height * 3 / 2 - text.getLocalBounds().height);
+		text.setPosition(animals[i]->getPos().x - text.getLocalBounds().width / 2,
+						 animals[i]->getPos().y - animalShape.getLocalBounds().height * 3 / 2 - text.getLocalBounds().height);
 		window.draw(text);
 	}
 }

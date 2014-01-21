@@ -25,16 +25,16 @@ class Animal : public Entity {
 	bool isAlive() const;
 	bool isAlive(const float dt);
 	int getScore() const { return score; }
-	int getClosestPrayAngle() const { return closestPrayAngle; }
-	int getClosestPredatorAngle() const { return closestPredatorAngle; }
+	int getClosestEnemyAngle() const { return closestEnemyAngle; }
 	int getClosestFruitAngle() const { return closestFruitAngle; }
 	float getAttackRate() const { return attackRate; }
 	float getDefenseRate() const { return defenseRate; }
+	float getCombatOutput() const { return combatOutput; }
 	std::vector<float> getDNA();
 
   protected :		
-	int score, closestPrayAngle, closestPredatorAngle, closestFruitAngle;
-	float life, attackRate, defenseRate; // attackRate : [0; 1]
+	int score, closestEnemyAngle, closestFruitAngle;
+	float life, attackRate, defenseRate, combatOutput; // attackRate : [0; 1]
 	
 	const int animalSpeed;
 	const int animalLife;

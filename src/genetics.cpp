@@ -5,14 +5,15 @@ Genetics::Genetics()
 
 void Genetics::evolve(EntityManager &manager) {
 	AnimalData tmp;
+	std::vector<Species> species = manager.getSpecies();
 	
 	animalsData.clear();
 	
-	for (int i = manager.getAnimalsIndex(); i < manager.getAnimalsIndex() + manager.getSpeciesNumber(); i++) {	
+	for (unsigned int i = 0; i < species.size(); i++) {	
 		parents.clear();
 		
-		for (unsigned int j = 0; j < manager.getEntities()[i].tab.size(); j++) {
-			Animal *animal = (Animal*) manager.getEntities()[i].tab[j];
+		for (unsigned int j = 0; j < species[i].tab.size(); j++) {
+			Animal *animal = species[i].tab[j];
 			
 			tmp.score = animal->getScore();
 			tmp.DNA = animal->getDNA();
@@ -29,7 +30,7 @@ void Genetics::evolve(EntityManager &manager) {
 	
 		// maj de l'ADN des animaux de l'espece
 		for (unsigned int j = 0; j < children.size(); j++) {
-			((Animal*) manager.getEntities()[i].tab[j])->init(children[j].DNA);
+			species[i].tab[j]->init(children[j].DNA);
 		}
 	}
 }
