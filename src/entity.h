@@ -15,6 +15,7 @@ class Entity {
 		const Vect2i getPos() { return pos; }
 		const Vect2i getSize() { return size; }
 		const float getAngle() { return angle; }
+		
 	protected :
 		Vect2i pos, size;
 		float angle; // [0°; 360°]

@@ -1,4 +1,5 @@
 #include "entityManager.h"
+#include "genetics.h"
 
 // AnimalsNumber = species[1].size() (idem pour les fruits)
 
@@ -11,15 +12,17 @@
 
 
 EntityManager::EntityManager()
-  : distanceSigmoid(CFG->readInt("DistanceSigmoid")), hitbox(CFG->readInt("Hitbox")), worldSize(CFG->readInt("WorldSize")) {
+  : distanceSigmoid(CFG->readInt("DistanceSigmoid")), hitbox(CFG->readInt("Hitbox")), worldSize(CFG->readInt("WorldSize")),
+	bushesNumber(CFG->readInt("BushesNumber")), bushesMinSize(CFG->readInt("BushesMinSize")),
+	bushesMaxSize(CFG->readInt("BushesMaxSize")) {
 	
 	Species tmp;
 	
 	// fruits
 	fruits.clear();
-	for (int j = 0; j < CFG->readInt("FruitsNumber"); j++)
+	for (int j = 0; j < CFG->readInt("FruitsNumber"); j++) {
 		fruits.push_back(new Fruit());
-	
+	}
 	
 	// animaux
 	for (int i = 0; i < CFG->readInt("SpeciesNumber"); i++) {
@@ -33,6 +36,12 @@ EntityManager::EntityManager()
 		
 		species.push_back(tmp);
 	}
+	
+	init();
+	
+	// fruits
+	for (unsigned int j = 0; j < fruits.size(); j++)
+		((Fruit*) fruits[j])->init(bushes[ rand() % bushes.size() ]);
 }
 
 EntityManager::~EntityManager() {
@@ -54,6 +63,25 @@ EntityManager::~EntityManager() {
 void EntityManager::init() {
 	for (unsigned int i = 0; i < species.size(); i++)
 		species[i].aliveAnimals = species[i].tab.size();
+	
+	// buissons !
+	bushes.clear();
+	for (int i = 0; i < bushesNumber; i++) {
+		Bush bush;
+		
+		float angle = (rand() % 360) * PI / 180.f;
+		std::normal_distribution<float> normalRandDist(0, worldSize/5);
+		int dist = abs(normalRandDist(generator));
+
+		bush.pos.x = std::min(worldSize, std::max(0, (int) (worldSize/2 + cosf(angle) * dist)));
+		bush.pos.y = std::min(worldSize, std::max(0, (int) (worldSize/2 + sinf(angle) * dist)));
+		bush.size = rand() % (bushesMaxSize - bushesMinSize) + bushesMinSize;
+		
+		std::cout << "bush #" << i << " : " << bush.pos.x << ", " << bush.pos.y << " ; " << bush.size << std::endl;
+		std::cout << bushesMinSize << ", " << bushesMaxSize << ", " << bushesNumber << std::endl;
+		
+		bushes.push_back(bush);
+	}
 }
 
 void EntityManager::update(const float dt) {
@@ -124,7 +152,7 @@ void EntityManager::addClosestEnemy(Animal *animal, const unsigned int index, st
 			continue;
 		
 		Animal *tmp = NULL;
-		tmp = (Animal*) getClosestAnimalFromTab(animal->getPos(), species[i].tab, closest);
+		tmp = getClosestAnimalFromTab(animal->getPos(), species[i].tab, closest);
 		
 		if (tmp != NULL)
 			enemy = tmp;
@@ -206,15 +234,10 @@ const void EntityManager::addNormalizedPosition(const Position &p, std::vector<f
 		inputs.push_back(1.f);
 	// Sinon
 	} else {
-		/*
-		inputs.push_back(p.pos.x / p.dist);
-		inputs.push_back(p.pos.y / p.dist);
-		//*/
 		// angle [0; 1[ ( [0; 360°[ ) relatif : angle du mobile - mon angle
 		inputs.push_back(atan2f(p.pos.y, p.pos.x) / (2 * PI) - angle / 360.f);
 		// distance as sigmoid so both [0; 1[
 		inputs.push_back(1.f / (1.f + expf(-p.dist / distanceSigmoid)) * 2.f - 1.f);
-		//*/
 	}
 }
 
@@ -223,9 +246,7 @@ void EntityManager::collisionCheck(Animal *animal, const unsigned int index) {
 	for (unsigned int i = 0; i < fruits.size(); i++) {
 		if (isColliding(animal->getPos(), fruits[i]->getPos())) {
 			animal->incrementScore();
-			fruits[i]->init();
-			
-			break;
+			((Fruit*) fruits[i])->init(bushes[ rand() % bushes.size() ]);
 		}
 	}
 	

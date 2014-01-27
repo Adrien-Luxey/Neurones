@@ -43,7 +43,7 @@ class Animal : public Entity {
 	NeuralNetwork network;
 
 	// Convertit le déplacement des roues gauche/droite pour modifier la position et l'angle
-	void updatePosition(const float left, const float right, const float dt);
+	void updatePosition(float da, float dp, const float dt);
 };
 
 #endif // ANIMAL_H
