@@ -14,7 +14,7 @@
 EntityManager::EntityManager()
   : distanceSigmoid(CFG->readInt("DistanceSigmoid")), hitbox(CFG->readInt("Hitbox")), worldSize(CFG->readInt("WorldSize")),
 	bushesNumber(CFG->readInt("BushesNumber")), bushesMinSize(CFG->readInt("BushesMinSize")),
-	bushesMaxSize(CFG->readInt("BushesMaxSize")) {
+	bushesMaxSize(CFG->readInt("BushesMaxSize")), combatDeviation(CFG->readFloat("CombatDeviation")) {
 	
 	Species tmp;
 	
@@ -77,9 +77,6 @@ void EntityManager::init() {
 		bush.pos.y = std::min(worldSize, std::max(0, (int) (worldSize/2 + sinf(angle) * dist)));
 		bush.size = rand() % (bushesMaxSize - bushesMinSize) + bushesMinSize;
 		
-		std::cout << "bush #" << i << " : " << bush.pos.x << ", " << bush.pos.y << " ; " << bush.size << std::endl;
-		std::cout << bushesMinSize << ", " << bushesMaxSize << ", " << bushesNumber << std::endl;
-		
 		bushes.push_back(bush);
 	}
 }
@@ -121,11 +118,6 @@ void EntityManager::update(Animal *animal, const unsigned int index, const float
 	
 	// Plus proche ennemi
 	addClosestEnemy(animal, index, inputs);
-//	// Ajout de la valeur att/def de l'animal en question aux inputs
-//	if (closest != NULL)
-//		inputs.push_back(closest->getCombatOutput());
-//	else
-//		inputs.push_back(0.f);
 	
 	// Plus proche allié
 	/*
@@ -164,6 +156,21 @@ void EntityManager::addClosestEnemy(Animal *animal, const unsigned int index, st
 	// variable de combat de l'ennemi
 	if (enemy != NULL)
 		inputs.push_back(enemy->getCombatOutput());
+	else
+		inputs.push_back(0.f);
+}
+
+void EntityManager::addClosestAlly(Animal *animal, const unsigned int index, std::vector<float> &inputs) {
+	Position closest(worldSize * worldSize);
+	Animal *ally = getClosestAnimalFromTab(animal->getPos(), species[index].tab, closest);
+
+	
+	// Give closest's angle/dist to network 
+	addNormalizedPosition(closest, inputs, animal->getAngle());
+	
+	// variable de combat de l'ennemi
+	if (ally != NULL)
+		inputs.push_back(ally->getCombatOutput());
 	else
 		inputs.push_back(0.f);
 }
@@ -263,8 +270,11 @@ void EntityManager::collisionCheck(Animal *animal, const unsigned int index) {
 
 			if (!enemy->isAlive())
 				continue;
+			
+			std::normal_distribution<float> attackRand(animal->getAttackRate(), combatDeviation);
+			std::normal_distribution<float> defenseRand(enemy->getDefenseRate(), combatDeviation);
 
-			if (isColliding(animal->getPos(), enemy->getPos()) && animal->getAttackRate() > enemy->getDefenseRate()) {
+			if (isColliding(animal->getPos(), enemy->getPos()) && attackRand(generator) > defenseRand(generator)) {
 				enemy->die();
 				animal->incrementScore();
 

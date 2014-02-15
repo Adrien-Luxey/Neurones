@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <vector>
+#include <chrono>
+#include <thread>
 
 #include "display.h"
 #include "entityManager.h"
@@ -21,24 +23,27 @@ class Game {
 		float getElapsedTime() const { return elapsedTime; }
 		int getEpocDuration() const { return epocDuration; }
 		const int getFps() { return fps; }
-		int getGameSpeed() const { return gameSpeed; }
+		float getGameSpeed() const { return gameSpeed; }
 		void togglePause();
 		void increaseGameSpeed();
 		void decreaseGameSpeed();
+		
+		// getters
+		void toggleDisplayed() { displayed = !displayed; }
 		
 	private :		
 		Display display;
 		EntityManager manager;
 		Genetics genetics;
 		
-		bool continuer, pause;
+		bool continuer, pause, displayed;
 		int generation;
 		
 		const int epocDuration;
 		
 		//fps
-		float dt, elapsedTime, dtSum, frames;
-		int fps, gameSpeed, loopsSinceLastDisplay;
+		float dt, elapsedTime, dtSum, frames, gameSpeed;
+		int fps, loopsSinceLastDisplay;
 		
 		void update();
 		

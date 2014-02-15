@@ -40,11 +40,12 @@ class EntityManager {
 	std::vector<Bush> bushes;
 	
 	const unsigned int distanceSigmoid;
-	const int hitbox, worldSize, bushesNumber, bushesMinSize, bushesMaxSize;
+	const int hitbox, worldSize, bushesNumber, bushesMinSize, bushesMaxSize, combatDeviation;
 	
 	void update(Animal *animal, const unsigned int index, const float dt);
 	
 	void addClosestEnemy(Animal *animal, const unsigned int index, std::vector<float> &inputs);
+	void addClosestAlly(Animal *animal, const unsigned int index, std::vector<float> &inputs);
 	
 	void addClosestFruit(Animal* animal, std::vector<float> &inputs);
 	

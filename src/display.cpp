@@ -67,6 +67,10 @@ void Display::events() {
 					case sf::Keyboard::M :
 						showMinimap = !showMinimap;
 						break;
+					
+					case sf::Keyboard::X :
+						game->toggleDisplayed();
+						break;
 						
 					default :
 						break;
