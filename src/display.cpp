@@ -4,7 +4,8 @@
 
 Display::Display(Game* _game)
   : game(_game), window(sf::VideoMode(CFG->readInt("WindowWidth"), CFG->readInt("WindowHeight")), CFG->readString("WindowTitle")),
-	statusBarWidth(CFG->readInt("StatusBarWidth")) {
+	statusBarWidth(CFG->readInt("StatusBarWidth")), worldSize(CFG->readInt("WorldSize")), viewMoveDelta(CFG->readInt("ViewMoveDelta")),
+	windowWidth(CFG->readInt("WindowWidth")), windowHeight(CFG->readInt("WindowHeight")), showMinimap(false), hasFocus(true) {
 	window.setVerticalSyncEnabled(true);
 	
 	animalShape.setSize(sf::Vector2f(CFG->readInt("AnimalWidth"), CFG->readInt("AnimalHeight")));
@@ -23,30 +24,24 @@ Display::Display(Game* _game)
 	text.setCharacterSize(16);
 	text.setStyle(sf::Text::Bold);
 	
+	// options des views
+	mainView.setCenter(worldSize/2, worldSize/2);
+	mainView.setSize(windowWidth, windowHeight);
+	minimapView.setCenter(worldSize/2, worldSize/2);
+	minimapView.setSize(worldSize, worldSize);
+	minimapView.setViewport(sf::FloatRect(0.75f, 0, 0.25f, 0.25f));
+	
 	clock.restart();
 }
 
 void Display::update(EntityManager &manager) {
-	// window clear
+	// evenements liés au déplacement de la caméra
+	cameraEvents();
+	
+	// display game elements
 	window.clear();
-	
-	drawFruits(manager.getFruits());
-	
-	std::vector<Species> species = manager.getSpecies();
-	for (int i = 0; i < (int) species.size(); i++) {
-		speciesColor(i);
-		drawAnimals(species[i].tab);
-	}
-	
-	std::stringstream ss;
-	ss << "Generation #" << game->getGeneration() << std::endl;
-	ss << "Timer : " << (int) game->getElapsedTime() << "/" << game->getEpocDuration() << std::endl;
-	ss << "GameSpeed : " << game->getGameSpeed() << std::endl;
-	ss << "FPS : " << game->getFps() / game->getGameSpeed() << std::endl;
-	text.setString(ss.str());
-	text.setPosition(10, 10);
-	window.draw(text);
-	
+	displayGame(manager, mainView);
+	displayUI(manager);
 	window.display();
 }
 
@@ -68,6 +63,14 @@ void Display::events() {
 					case sf::Keyboard::Space :
 						game->togglePause();
 						break;
+					
+					case sf::Keyboard::M :
+						showMinimap = !showMinimap;
+						break;
+					
+					case sf::Keyboard::X :
+						game->toggleDisplayed();
+						break;
 						
 					default :
 						break;
@@ -76,19 +79,35 @@ void Display::events() {
 			
 			case sf::Event::KeyPressed :
 				switch (event.key.code) {
-					case sf::Keyboard::Up :
+					// Accelerer/ralentir le temps
+					case sf::Keyboard::Right :
 						game->increaseGameSpeed();
 						break;
-					
-					case sf::Keyboard::Down :
+					case sf::Keyboard::Left :
 						game->decreaseGameSpeed();
 						break;
-					
+						
+					// Zoom/dezoom de la view
+					case sf::Keyboard::Up :
+						mainView.zoom(0.8);
+						break;
+					case sf::Keyboard::Down :
+						mainView.zoom(1.2);
+						break;
+						
 					default :
 						break;
 				}
 				break;
 			
+			case sf::Event::GainedFocus :
+				hasFocus = true;
+				break;
+			
+			case sf::Event::LostFocus :
+				hasFocus = false;
+				break;
+				
 			default :
 				break;
 		}
@@ -97,6 +116,118 @@ void Display::events() {
 
 float Display::getElapsedTime() {
 	return clock.restart().asSeconds();
+}
+
+void Display::displayGame(EntityManager &manager, const sf::View &view) {
+	// Vue des éléments du jeu
+	window.setView(view);
+	
+	drawFruits(manager.getFruits(), view);
+	
+	std::vector<Species> species = manager.getSpecies();
+	for (int i = 0; i < (int) species.size(); i++) {
+		speciesColor(i);
+		drawAnimals(species[i].tab, view);
+	}
+	
+	drawGameBorders(view);
+}
+
+void Display::displayUI(EntityManager &manager) {
+	// Vue des éléments de l'UI
+	window.setView(window.getDefaultView());
+	
+	// Texte info en haut à gauche
+	std::stringstream ss;
+	ss << "Generation #" << game->getGeneration() << std::endl;
+	ss << "Timer : " << (int) game->getElapsedTime() << "/" << game->getEpocDuration() << std::endl;
+	ss << "GameSpeed : " << game->getGameSpeed() << std::endl;
+	ss << "FPS : " << game->getFps() / game->getGameSpeed() << std::endl;
+	text.setString(ss.str());
+	text.setPosition(10, 10);
+	window.draw(text);
+	
+	// minimap !
+	if (showMinimap)
+		displayGame(manager, minimapView);
+}
+
+void Display::cameraEvents() {
+	// Evenements de déplacement de la caméra
+	if (hasFocus) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+			mainView.move(0, -viewMoveDelta);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+			mainView.move(-viewMoveDelta, 0);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+			mainView.move(0, viewMoveDelta);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+			mainView.move(viewMoveDelta, 0);
+	}
+}
+
+void Display::drawFruits(const std::vector<Entity*> &fruits, const sf::View &view) {
+	for (unsigned int i = 0; i < fruits.size(); i++) {
+		if (!isInsideView(fruits[i]->getPos(), view))
+			continue;
+		
+		fruitShape.setPosition(fruits[i]->getPos().x, fruits[i]->getPos().y);
+		window.draw(fruitShape);
+	}
+}
+
+void Display::drawAnimals(const std::vector<Animal*> &animals, const sf::View &view) {
+	for (unsigned int i = 0; i < animals.size(); i++) {
+		if (!animals[i]->isAlive() || !isInsideView(animals[i]->getPos(), view))
+			continue;
+		
+		// set la bonne position à l'animalShape
+		animalShape.setPosition(animals[i]->getPos().x, animals[i]->getPos().y);
+		animalShape.setRotation(animals[i]->getAngle());
+		
+		//animalShape.setFillColor(sf::Color(255, 0, 0, 255 * animal->getAttackRate()));
+		
+		// dessin de l'animalShape
+		window.draw(animalShape);
+		
+		// vecteur vers le plus proche fruit
+		if (animals[i]->getClosestFruitAngle() != 0.f)
+			drawVector(animals[i]->getPos(), animals[i]->getClosestFruitAngle(), sf::Color::Green, sf::Vector2f(15, 1));
+		// vecteur vers le plus proche ennemi
+		if (animals[i]->getClosestEnemyAngle() != 0.f)
+			drawVector(animals[i]->getPos(), animals[i]->getClosestEnemyAngle(), sf::Color::Red, sf::Vector2f(15, 1));
+		
+		// dessin de la barre d'attaque
+		Vect2i barPosition;
+		barPosition.x = animals[i]->getPos().x - statusBarWidth/2;
+		barPosition.y = animals[i]->getPos().y + animalShape.getLocalBounds().height * 3 / 2;
+		drawVector(barPosition, 0, sf::Color(100, 0, 0), sf::Vector2f(animals[i]->getAttackRate() * statusBarWidth, 2));
+		// dessin de la barre de defense
+		//barPosition.y += 4;
+		drawVector(barPosition, 0, sf::Color(0, 0, 100), sf::Vector2f(animals[i]->getDefenseRate() * statusBarWidth, 2));
+		
+		// score
+		std::stringstream ss;
+		ss << animals[i]->getScore();
+		text.setString(ss.str());
+		text.setPosition(animals[i]->getPos().x - text.getLocalBounds().width / 2,
+						 animals[i]->getPos().y - animalShape.getLocalBounds().height * 3 / 2 - text.getLocalBounds().height);
+		window.draw(text);
+	}
+}
+
+void Display::drawGameBorders(const sf::View &view) {
+	if (mainView.getCenter().x - mainView.getSize().x / 2 < 0)
+		drawVector(Vect2i(0, 0), 90, sf::Color::White, sf::Vector2f(worldSize, 2));
+	
+	if (mainView.getCenter().y - mainView.getSize().y / 2 < 0)
+		drawVector(Vect2i(0, 0), 0, sf::Color::White, sf::Vector2f(worldSize, 2));
+	
+	if (mainView.getCenter().x + mainView.getSize().x / 2 >= worldSize)
+		drawVector(Vect2i(worldSize, 0), 90, sf::Color::White, sf::Vector2f(worldSize, 2));
+	
+	if (mainView.getCenter().y + mainView.getSize().y / 2 >= worldSize)
+		drawVector(Vect2i(0, worldSize), 0, sf::Color::White, sf::Vector2f(worldSize, 2));
 }
 
 void Display::speciesColor(int index) {
@@ -125,57 +256,17 @@ void Display::speciesColor(int index) {
 	}
 }
 
-void Display::drawFruits(const std::vector<Entity*> &fruits) {
-	for (unsigned int i = 0; i < fruits.size(); i++) {
-		fruitShape.setPosition(fruits[i]->getPos().x, fruits[i]->getPos().y);
-		window.draw(fruitShape);
-	}
-}
-
-void Display::drawAnimals(const std::vector<Animal*> &animals) {
-	for (unsigned int i = 0; i < animals.size(); i++) {
-		if (!animals[i]->isAlive())
-			continue;
-		
-		// set la bonne position à l'animalShape
-		animalShape.setPosition(animals[i]->getPos().x, animals[i]->getPos().y);
-		animalShape.setRotation(animals[i]->getAngle());
-		
-		//animalShape.setFillColor(sf::Color(255, 0, 0, 255 * animal->getAttackRate()));
-		
-		// dessin de l'animalShape
-		window.draw(animalShape);
-		
-		// vecteur vers le plus proche fruit
-		drawVector(animals[i]->getPos(), animals[i]->getClosestFruitAngle(), sf::Color::Green, sf::Vector2f(15, 1));
-		// vecteur vers le plus proche ennemi
-		drawVector(animals[i]->getPos(), animals[i]->getClosestEnemyAngle(), sf::Color::Red, sf::Vector2f(15, 1));
-		
-		// dessin de la barre d'attaque
-		Vect2i barPosition;
-		barPosition.x = animals[i]->getPos().x - statusBarWidth/2;
-		barPosition.y = animals[i]->getPos().y + animalShape.getLocalBounds().height * 3 / 2;
-		drawVector(barPosition, 360.f, sf::Color(100, 0, 0), sf::Vector2f(animals[i]->getAttackRate() * statusBarWidth, 2));
-		// dessin de la barre de defense
-		barPosition.y += 4;
-		drawVector(barPosition, 360.f, sf::Color(0, 0, 100), sf::Vector2f(animals[i]->getDefenseRate() * statusBarWidth, 2));
-		
-		// score
-		std::stringstream ss;
-		ss << animals[i]->getScore();
-		text.setString(ss.str());
-		text.setPosition(animals[i]->getPos().x - text.getLocalBounds().width / 2,
-						 animals[i]->getPos().y - animalShape.getLocalBounds().height * 3 / 2 - text.getLocalBounds().height);
-		window.draw(text);
-	}
-}
-
 void Display::drawVector(const Vect2i &pos, const float &angle, const sf::Color &color, const sf::Vector2f &size) {
-	if (angle != 0.f) {
-		lineShape.setFillColor(color);
-		lineShape.setPosition(pos.x, pos.y);
-		lineShape.setRotation(angle);
-		lineShape.setSize(size);
-		window.draw(lineShape);
-	}
+	lineShape.setFillColor(color);
+	lineShape.setPosition(pos.x, pos.y);
+	lineShape.setRotation(angle);
+	lineShape.setSize(size);
+	window.draw(lineShape);
+}
+
+bool Display::isInsideView(const Vect2i &pos, const sf::View &view) {
+	return ((pos.x >= view.getCenter().x - view.getSize().x / 2) &&
+			(pos.x < view.getCenter().x + view.getSize().x / 2) &&
+			(pos.y >= view.getCenter().y - view.getSize().y / 2) &&
+			(pos.y < view.getCenter().y + view.getSize().y / 2));
 }

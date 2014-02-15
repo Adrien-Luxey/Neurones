@@ -48,10 +48,17 @@ void Genetics::roulette() {
 	// Si bien que le score du dernier parent = score total = cumulated à la fin de la boucle
 	unsigned int cumulated = 0;
 	for (unsigned int i = 0; i < parentsNumber; i++) {
-		cumulated += parents[i].score + 1;
+		cumulated += parents[i].score;
 		
 		parents[i].cumulatedScore = cumulated;
 	}
+	
+	std::cout << "------ RANDOM DNA ------" << std::endl;
+	for (unsigned int i = 0; i < parents[0].DNA.size(); i++)
+		std::cout << parents[0].DNA[i] << " ";
+	std::cout << std::endl;
+	
+	std::cout << "------ MUTATIONS ------" << std::endl;
 	
 	// Tant qu'on a pas créé autant d'enfants qu'il y avait de parents, on continue à en créer
 	while (children.size() < parentsNumber) {
@@ -78,6 +85,11 @@ void Genetics::roulette() {
 		
 		std::uniform_int_distribution<int> randRate(0, 100);
 		std::uniform_int_distribution<int> randomParent(0, 1);
+		
+		// Crossover avec point de séparation central
+		//std::uniform_int_distribution<int> randomCrossPoint(0, parents[0].DNA.size());
+		//unsigned int crossPoint = randomCrossPoint(generator);
+		
 		tmp1.DNA.clear();
 		tmp2.DNA.clear();
 		// On n'applique l'algorithme de dans crossoverRate% des cas, sinon on copie simplement l'ADN des parents dans les enfants
@@ -88,6 +100,7 @@ void Genetics::roulette() {
 			// On génère deux enfants si possible
 			if (parentsNumber - children.size() >= 2) {
 				for (unsigned int j = 0; j < parents[0].DNA.size(); j++) {
+					//if (j < crossPoint) {
 					if (randomParent(generator) == 0) {
 						tmp1.DNA.push_back(parents[p1].DNA[j]);
 						tmp2.DNA.push_back(parents[p2].DNA[j]);
@@ -108,6 +121,7 @@ void Genetics::roulette() {
 			} else {
 				for (unsigned int j = 0; j < parents[0].DNA.size(); j++) {
 					if (randomParent(generator) == 0) {
+					//if (j < crossPoint) {
 						tmp1.DNA.push_back(parents[p1].DNA[j]);
 					} else {
 						tmp1.DNA.push_back(parents[p2].DNA[j]);
@@ -119,6 +133,7 @@ void Genetics::roulette() {
 				
 				children.push_back(tmp1);
 			}
+		// Pas de crossover
 		} else {
 			if (parentsNumber - children.size() >= 2) {
 				tmp1.DNA = parents[p1].DNA;
@@ -144,6 +159,8 @@ void Genetics::roulette() {
 			}
 		}
 	}
+	
+	std::cout << std::endl << std::endl;
 }
 
 void Genetics::mutation(std::vector<float> &DNA) {
@@ -154,7 +171,6 @@ void Genetics::mutation(std::vector<float> &DNA) {
 			std::normal_distribution<float> gauss(DNA[i], mutationGaussDeviation);
 			
 			DNA[i] = gauss(generator);
-			
 			tmpf = fabs(tmpf - DNA[i]);
 		}
 	}

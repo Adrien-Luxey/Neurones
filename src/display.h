@@ -32,15 +32,26 @@ class Display {
 	sf::Text text;
 	sf::Font font;
 	sf::Clock clock;
+	sf::View mainView, minimapView;
 	
-	int statusBarWidth;
+	const int statusBarWidth, worldSize, viewMoveDelta;
+	int windowWidth, windowHeight;
+	bool showMinimap, hasFocus;
+	
+	void displayGame(EntityManager &manager, const sf::View &view);
+	void displayUI(EntityManager &manager);
+	
+	void cameraEvents();
+	
+	void drawFruits(const std::vector<Entity*> &fruits, const sf::View &view);
+	void drawAnimals(const std::vector<Animal*> &animals, const sf::View &view);
+	void drawGameBorders(const sf::View &view);
 	
 	void speciesColor(int index);
 	
-	void drawFruits(const std::vector<Entity*> &fruits);
-	void drawAnimals(const std::vector<Animal*> &animals);
-	
 	void drawVector(const Vect2i &pos, const float &angle, const sf::Color &color, const sf::Vector2f &size);
+	
+	bool isInsideView(const Vect2i &pos, const sf::View &view);
 };
 
 #endif // DISPLAY_H

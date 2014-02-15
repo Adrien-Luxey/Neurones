@@ -32,20 +32,20 @@ class EntityManager {
 		float dist;
 		Vect2i pos;
 
-		Position() {}
 		Position(float _dist = 0) : dist(_dist) {}
 	} Position;
 	
 	std::vector<Entity*> fruits;
 	std::vector<Species> species;
+	std::vector<Bush> bushes;
 	
 	const unsigned int distanceSigmoid;
-	const int hitbox;
-	const int worldSize;
+	const int hitbox, worldSize, bushesNumber, bushesMinSize, bushesMaxSize, combatDeviation;
 	
 	void update(Animal *animal, const unsigned int index, const float dt);
 	
 	void addClosestEnemy(Animal *animal, const unsigned int index, std::vector<float> &inputs);
+	void addClosestAlly(Animal *animal, const unsigned int index, std::vector<float> &inputs);
 	
 	void addClosestFruit(Animal* animal, std::vector<float> &inputs);
 	

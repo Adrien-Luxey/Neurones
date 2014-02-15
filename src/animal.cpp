@@ -40,7 +40,7 @@ void Animal::update(const std::vector<float> inputs, const float dt) {
 	else
 		closestFruitAngle = 0.f;
 	
-	// Plus proche enemi
+	// Plus proche ennemi
 	if (inputs[2] != 0.f)
 		closestEnemyAngle = inputs[2] * 360 + angle;
 	else
@@ -76,16 +76,16 @@ void Animal::die() {
 // Comme une différence sur la vitesse, stockée en Vect2f
 // qui pourrait parler de différence vitesse/angle séparément plutôt que des roues...
 // A voir.
-void Animal::updatePosition(const float left, const float right, const float dt) {
+void Animal::updatePosition(float da, float dp, const float dt) {
 	// facteur de ralentissement : inversement proportionnel à la moyenne d'attaque et de défense
 	//float slowdownRate = 1.f - (attackRate + defenseRate) / 2.f;
 	// Une autre solution serait de prendre le maximum et non la moyenne des deux actions
 	float slowdownRate = 1.f - ((attackRate > defenseRate) ? attackRate : defenseRate) / 2;
 	
 	// composante angulaire et linéaire du déplacement
-	float dp = (left + right) * animalSpeed * slowdownRate;
-	float da = (left - right) * animalSpeed * slowdownRate;
-
+	dp *= animalSpeed * slowdownRate;
+	da *= 360.f * slowdownRate;
+	
 	// Application aux données du mobile
 	angle = fmod(angle + da * dt, 360.f);
 	pos.x = (int) (pos.x + dp * cosf(angle/180.f*PI) * dt) % worldSize;
