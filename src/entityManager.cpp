@@ -82,17 +82,17 @@ void EntityManager::init() {
 	}
 }
 
-void EntityManager::update(const float dt) {
+void EntityManager::update() {
 	// Parcours de toutes les espèces
 	for (unsigned int i = 0; i < species.size(); i++) {		
 		// Parcours de tous les animaux de l'espece
 		for (unsigned int j = 0; j < species[i].tab.size(); j++) {
 			Animal *animal = species[i].tab[j];
 			
-			if (!animal->isAlive(dt))
+			if (!animal->isAlive())
 				continue;
 			
-			update(animal, i, dt);
+			update(animal, i);
 			
 			collisionCheck(animal, i);
 		}
@@ -111,7 +111,7 @@ bool EntityManager::gameover() const {
 		(species.size() > 1 && aliveSpecies < 2);
 }
 
-void EntityManager::update(Animal *animal, const unsigned int index, const float dt) {
+void EntityManager::update(Animal *animal, const unsigned int index) {
 	std::vector<float> inputs;
 	
 	// Plus proche fruit
@@ -123,7 +123,7 @@ void EntityManager::update(Animal *animal, const unsigned int index, const float
 	// Plus proche allié
 	addClosestAlly(animal, index, inputs);
 	
-	animal->update(inputs, dt);
+	animal->update(inputs);
 }
 
 void EntityManager::addClosestEnemy(Animal *animal, const unsigned int index, std::vector<float> &inputs) {

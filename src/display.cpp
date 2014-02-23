@@ -5,7 +5,7 @@
 Display::Display(Game* _game)
   : game(_game), window(sf::VideoMode(CFG->readInt("WindowWidth"), CFG->readInt("WindowHeight")), CFG->readString("WindowTitle")),
 	statusBarWidth(CFG->readInt("StatusBarWidth")), worldSize(CFG->readInt("WorldSize")), viewMoveDelta(CFG->readInt("ViewMoveDelta")),
-	windowWidth(CFG->readInt("WindowWidth")), windowHeight(CFG->readInt("WindowHeight")), showMinimap(false), hasFocus(true) {
+	windowWidth(CFG->readInt("WindowWidth")), windowHeight(CFG->readInt("WindowHeight")), hasFocus(true) {
 	window.setVerticalSyncEnabled(true);
 	
 	animalShape.setSize(sf::Vector2f(CFG->readInt("AnimalWidth"), CFG->readInt("AnimalHeight")));
@@ -27,11 +27,6 @@ Display::Display(Game* _game)
 	// options des views
 	mainView.setCenter(worldSize/2, worldSize/2);
 	mainView.setSize(windowWidth, windowHeight);
-	minimapView.setCenter(worldSize/2, worldSize/2);
-	minimapView.setSize(worldSize, worldSize);
-	minimapView.setViewport(sf::FloatRect(0.75f, 0, 0.25f, 0.25f));
-	
-	clock.restart();
 }
 
 void Display::update(EntityManager &manager) {
@@ -62,10 +57,6 @@ void Display::events() {
 						
 					case sf::Keyboard::Space :
 						game->togglePause();
-						break;
-					
-					case sf::Keyboard::M :
-						showMinimap = !showMinimap;
 						break;
 					
 					case sf::Keyboard::X :
@@ -114,10 +105,6 @@ void Display::events() {
 	}
 }
 
-float Display::getElapsedTime() {
-	return clock.restart().asSeconds();
-}
-
 void Display::displayGame(EntityManager &manager, const sf::View &view) {
 	// Vue des éléments du jeu
 	window.setView(view);
@@ -140,16 +127,12 @@ void Display::displayUI(EntityManager &manager) {
 	// Texte info en haut à gauche
 	std::stringstream ss;
 	ss << "Generation #" << game->getGeneration() << std::endl;
-	ss << "Timer : " << (int) game->getElapsedTime() << "/" << game->getEpocDuration() << std::endl;
+	ss << "Iterations : " << (int) game->getIteration() << "/" << game->getIterationsPerGeneration() << std::endl;
 	ss << "GameSpeed : " << game->getGameSpeed() << std::endl;
 	ss << "FPS : " << game->getFps() / game->getGameSpeed() << std::endl;
 	text.setString(ss.str());
 	text.setPosition(10, 10);
 	window.draw(text);
-	
-	// minimap !
-	if (showMinimap)
-		displayGame(manager, minimapView);
 }
 
 void Display::cameraEvents() {

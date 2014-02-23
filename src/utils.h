@@ -13,6 +13,8 @@
 #define NETWORK_INPUTS	8
 #define NETWORK_OUTPUTS	3
 
+#define DEFAULT_FPS		60
+
 #include <cmath>
 #include <random>
 #include <iostream>

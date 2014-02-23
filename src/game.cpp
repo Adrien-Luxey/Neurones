@@ -2,8 +2,8 @@
 
 
 Game::Game() 
-  : display(this), continuer(true), pause(false), displayed(true), generation(1), epocDuration(CFG->readInt("EpocDuration")),
-	dt(0), elapsedTime(0), dtSum(0), frames(0), gameSpeed(1), fps(0), loopsSinceLastDisplay(0) {	
+  : display(this), continuer(true), pause(false), displayed(true), generation(1), iterationsPerGeneration(CFG->readInt("IterationsPerGeneration")),
+	gameSpeed(1), fps(0), iteration(0) {	
 	
 }
 
@@ -11,20 +11,13 @@ Game::~Game() {}
 
 void Game::exec() {
 	while (continuer) {
-		dt = display.getElapsedTime();
 		display.events();
 		
 		if (!pause) {
-			loopsSinceLastDisplay++;
-			
 			update();
 			
-			if (gameSpeed < 1 || loopsSinceLastDisplay >=  gameSpeed) {
-				if (displayed)
-					display.update(manager);
-				
-				loopsSinceLastDisplay = 0;
-			}
+			if (displayed)
+				display.update(manager);
 		}
 	}
 }
@@ -37,21 +30,22 @@ void Game::update() {
 	
 	// dt * gameSpeed => le manager pense que le frameRate est toujours le même qu'à gamespeed = 1
 	// Sinon la vitesse des mobiles ne serait pas accélérée
-	manager.update(dt * gameSpeed);
+	manager.update();
 }
 
 void Game::newGeneration() {
 	genetics.evolve(manager);
 	manager.init();
-	elapsedTime = 0;
+	
+	iteration = 0;
 	
 	std::cout << "Génération #" << generation++ << std::endl;
 }
 
 bool Game::gameover() {
-	if (elapsedTime > epocDuration)
-		return true;
-	
+//	if (elapsedTime > epocDuration)
+//		return true;
+//	
 	if (manager.gameover())
 		return true;
 	
@@ -63,7 +57,8 @@ void Game::togglePause() {
 }
 
 void Game::updateFps() {
-	elapsedTime += dt * gameSpeed;	
+	/*
+	elapsedTime += dt;
 	dtSum += dt;
 	frames++;
 	
@@ -78,7 +73,7 @@ void Game::updateFps() {
 		
 		frames = 0;
 		dtSum = 0;
-	}
+	}//*/
 }
 
 void Game::increaseGameSpeed() {

@@ -20,8 +20,8 @@ class Game {
 		
 		void newGeneration();
 		int getGeneration() const { return generation; }
-		float getElapsedTime() const { return elapsedTime; }
-		int getEpocDuration() const { return epocDuration; }
+		int getIteration() const { return iteration; }
+		int getIterationsPerGeneration() const { return iterationsPerGeneration; }
 		const int getFps() { return fps; }
 		float getGameSpeed() const { return gameSpeed; }
 		void togglePause();
@@ -39,11 +39,11 @@ class Game {
 		bool continuer, pause, displayed;
 		int generation;
 		
-		const int epocDuration;
+		const int iterationsPerGeneration;
 		
 		//fps
-		float dt, elapsedTime, dtSum, frames, gameSpeed;
-		int fps, loopsSinceLastDisplay;
+		float gameSpeed;
+		int fps, iteration;
 		
 		void update();
 		

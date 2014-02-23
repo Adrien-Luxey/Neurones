@@ -22,7 +22,6 @@ class Display {
 	void update(EntityManager &manager);
 	void events();
 
-	float getElapsedTime();
   private:
 	Game *game;
 	sf::RenderWindow window;
@@ -31,12 +30,11 @@ class Display {
 	sf::RectangleShape lineShape;
 	sf::Text text;
 	sf::Font font;
-	sf::Clock clock;
-	sf::View mainView, minimapView;
+	sf::View mainView;
 	
 	const int statusBarWidth, worldSize, viewMoveDelta;
 	int windowWidth, windowHeight;
-	bool showMinimap, hasFocus;
+	bool hasFocus;
 	
 	void displayGame(EntityManager &manager, const sf::View &view);
 	void displayUI(EntityManager &manager);

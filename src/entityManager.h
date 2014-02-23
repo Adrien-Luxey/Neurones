@@ -20,7 +20,7 @@ class EntityManager {
 	
 	void init();
 
-	void update(const float dt);
+	void update();
 	
 	bool gameover() const;
 
@@ -42,7 +42,7 @@ class EntityManager {
 	const unsigned int distanceSigmoid;
 	const int hitbox, worldSize, bushesNumber, bushesMinSize, bushesMaxSize, combatDeviation, allowFriendlyFire;
 	
-	void update(Animal *animal, const unsigned int index, const float dt);
+	void update(Animal *animal, const unsigned int index);
 	
 	void addClosestEnemy(Animal *animal, const unsigned int index, std::vector<float> &inputs);
 	void addClosestAlly(Animal *animal, const unsigned int index, std::vector<float> &inputs);
