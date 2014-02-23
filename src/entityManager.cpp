@@ -14,7 +14,8 @@
 EntityManager::EntityManager()
   : distanceSigmoid(CFG->readInt("DistanceSigmoid")), hitbox(CFG->readInt("Hitbox")), worldSize(CFG->readInt("WorldSize")),
 	bushesNumber(CFG->readInt("BushesNumber")), bushesMinSize(CFG->readInt("BushesMinSize")),
-	bushesMaxSize(CFG->readInt("BushesMaxSize")), combatDeviation(CFG->readFloat("CombatDeviation")) {
+	bushesMaxSize(CFG->readInt("BushesMaxSize")), combatDeviation(CFG->readFloat("CombatDeviation")),
+	allowFriendlyFire(CFG->readInt("AllowFriendlyFire")) {
 	
 	Species tmp;
 	
@@ -120,16 +121,7 @@ void EntityManager::update(Animal *animal, const unsigned int index, const float
 	addClosestEnemy(animal, index, inputs);
 	
 	// Plus proche allié
-	/*
-	std::vector<int> vecAllies = { index };
-	closest = NULL;
-	closest = (Animal*) addClosest(animal, vecAllies, inputs, true);
-	// Ajout de la valeur att/def de l'animal en question aux inputs
-	if (closest != NULL)
-		inputs.push_back(closest->getCombatOutput());
-	else
-		inputs.push_back(0.f);
-	//*/
+	addClosestAlly(animal, index, inputs);
 	
 	animal->update(inputs, dt);
 }
@@ -144,7 +136,7 @@ void EntityManager::addClosestEnemy(Animal *animal, const unsigned int index, st
 			continue;
 		
 		Animal *tmp = NULL;
-		tmp = getClosestAnimalFromTab(animal->getPos(), species[i].tab, closest);
+		tmp = getClosestAnimalFromTab(animal->getPos(), species[i].tab, closest, false);
 		
 		if (tmp != NULL)
 			enemy = tmp;
@@ -162,7 +154,7 @@ void EntityManager::addClosestEnemy(Animal *animal, const unsigned int index, st
 
 void EntityManager::addClosestAlly(Animal *animal, const unsigned int index, std::vector<float> &inputs) {
 	Position closest(worldSize * worldSize);
-	Animal *ally = getClosestAnimalFromTab(animal->getPos(), species[index].tab, closest);
+	Animal *ally = getClosestAnimalFromTab(animal->getPos(), species[index].tab, closest, true);
 
 	
 	// Give closest's angle/dist to network 
@@ -202,12 +194,16 @@ Entity* EntityManager::getClosestEntityFromTab(const Vect2i pos, const std::vect
 	return entity;
 }
 
-Animal* EntityManager::getClosestAnimalFromTab(const Vect2i pos, const std::vector<Animal*> &tab, Position &closest) {
+Animal* EntityManager::getClosestAnimalFromTab(const Vect2i pos, const std::vector<Animal*> &tab, Position &closest, bool animalInTab) {
 	Position tmp(worldSize * worldSize);
 	Animal* entity = NULL;
 	
 	for (unsigned int i = 0; i < tab.size(); i++) {		
 		if (!tab[i]->isAlive())
+			continue;
+		
+		// Ne pas récupérer un animal dont la distance vaut 0 si l'animal étudié appartient à la liste
+		if (animalInTab && pos.x == tab[i]->getPos().x && pos.y == tab[i]->getPos().y)
 			continue;
 		
 		tmp.pos = wrapPositionDifference(pos, tab[i]->getPos());
@@ -261,26 +257,43 @@ void EntityManager::collisionCheck(Animal *animal, const unsigned int index) {
 	// Si l'animal attaque lorsqu'il est dans la hitbox d'une proie, il la mange et on break
 	// Parcours de toutes les proies
 	for (unsigned int i = 0; i < species.size(); i++) {
-		if (i == index)
+		// Ne pas checker notre propre espèce si on interdit le friendly fire
+		if (allowFriendlyFire == 0 && index == i)
 			continue;
 		
 		// Parcours de tous les animaux de l'espèce proie
 		for (unsigned int j = 0; j < species[i].tab.size(); j++) {
 			enemy = species[i].tab[j];
-
+			
+			// ne pas checker les ennemis morts
 			if (!enemy->isAlive())
 				continue;
 			
-			std::normal_distribution<float> attackRand(animal->getAttackRate(), combatDeviation);
-			std::normal_distribution<float> defenseRand(enemy->getDefenseRate(), combatDeviation);
+			// Ne pas checker l'animal étudié si on autorise le friendly fire
+			if (index == i && enemy->getPos().x == animal->getPos().x && enemy->getPos().y == animal->getPos().y)
+				continue;
 
-			if (isColliding(animal->getPos(), enemy->getPos()) && attackRand(generator) > defenseRand(generator)) {
-				enemy->die();
-				animal->incrementScore();
+			if (isColliding(animal->getPos(), enemy->getPos())) {
+				std::normal_distribution<float> animalAttackRand(animal->getAttackRate(), combatDeviation);
+				std::normal_distribution<float> enemyDefenseRand(enemy->getDefenseRate(), combatDeviation);
+				std::normal_distribution<float> enemyAttackRand(enemy->getAttackRate(), combatDeviation);
+				std::normal_distribution<float> animalDefenseRand(animal->getDefenseRate(), combatDeviation);
+				
+				if (animalAttackRand(generator) > enemyDefenseRand(generator)) {
+					enemy->die();
+					animal->incrementScore();
 
-				species[i].aliveAnimals--;
+					species[i].aliveAnimals--;
 
-				break;
+					break;
+				} else if (enemyAttackRand(generator) > animalDefenseRand(generator)) {
+					animal->die();
+					enemy->incrementScore();
+
+					species[index].aliveAnimals--;
+
+					break;
+				}
 			}
 		}
 	}

@@ -40,7 +40,7 @@ class EntityManager {
 	std::vector<Bush> bushes;
 	
 	const unsigned int distanceSigmoid;
-	const int hitbox, worldSize, bushesNumber, bushesMinSize, bushesMaxSize, combatDeviation;
+	const int hitbox, worldSize, bushesNumber, bushesMinSize, bushesMaxSize, combatDeviation, allowFriendlyFire;
 	
 	void update(Animal *animal, const unsigned int index, const float dt);
 	
@@ -50,7 +50,7 @@ class EntityManager {
 	void addClosestFruit(Animal* animal, std::vector<float> &inputs);
 	
 	Entity* getClosestEntityFromTab(const Vect2i pos, const std::vector<Entity*> &tab, Position &closest);
-	Animal* getClosestAnimalFromTab(const Vect2i pos, const std::vector<Animal*> &tab, Position &closest);
+	Animal* getClosestAnimalFromTab(const Vect2i pos, const std::vector<Animal*> &tab, Position &closest, bool animalInTab);
 	
 	const Vect2i wrapPositionDifference(const Vect2i a, const Vect2i b);
 	

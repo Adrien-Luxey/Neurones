@@ -3,7 +3,7 @@
 
 Game::Game() 
   : display(this), continuer(true), pause(false), displayed(true), generation(1), epocDuration(CFG->readInt("EpocDuration")),
-	dt(0), elapsedTime(0), dtSum(0), frames(0), fps(0), gameSpeed(1), loopsSinceLastDisplay(0) {	
+	dt(0), elapsedTime(0), dtSum(0), frames(0), gameSpeed(1), fps(0), loopsSinceLastDisplay(0) {	
 	
 }
 

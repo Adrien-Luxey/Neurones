@@ -191,11 +191,14 @@ void Display::drawAnimals(const std::vector<Animal*> &animals, const sf::View &v
 		window.draw(animalShape);
 		
 		// vecteur vers le plus proche fruit
-		if (animals[i]->getClosestFruitAngle() != 0.f)
+		if (animals[i]->getClosestFruitAngle() != 0)
 			drawVector(animals[i]->getPos(), animals[i]->getClosestFruitAngle(), sf::Color::Green, sf::Vector2f(15, 1));
 		// vecteur vers le plus proche ennemi
-		if (animals[i]->getClosestEnemyAngle() != 0.f)
+		if (animals[i]->getClosestEnemyAngle() != 0)
 			drawVector(animals[i]->getPos(), animals[i]->getClosestEnemyAngle(), sf::Color::Red, sf::Vector2f(15, 1));
+		// vecteur vers le plus proche ennemi
+		if (animals[i]->getClosestAllyAngle() != 0)
+			drawVector(animals[i]->getPos(), animals[i]->getClosestAllyAngle(), sf::Color::Blue, sf::Vector2f(15, 1));
 		
 		// dessin de la barre d'attaque
 		Vect2i barPosition;
