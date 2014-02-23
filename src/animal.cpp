@@ -17,6 +17,7 @@ void Animal::init() {
 	life = animalLife;
 	closestEnemyAngle = 0;
 	closestFruitAngle = 0;
+	closestAllyAngle = 0;
 	
 	pos.x = rand() % worldSize;
 	pos.y = rand() % worldSize;
@@ -45,18 +46,23 @@ void Animal::update(const std::vector<float> inputs, const float dt) {
 		closestEnemyAngle = inputs[2] * 360 + angle;
 	else
 		closestEnemyAngle = 0.f;
+	// Plus proche allié
+	if (inputs[5] != 0.f)
+		closestAllyAngle = inputs[5] * 360 + angle;
+	else
+		closestAllyAngle = 0.f;
 	
 	// Récupération des sorties du nn
 	outputs = network.run(inputs);
 	
 	// attackRate [0; 1] alors que ouputs[x] [-1; 1], donc on convertit
 	combatOutput = outputs[2];
-	if (outputs[2] > 0) {
-		attackRate = (outputs[2] + 1.f) / 2.f;
+	if (combatOutput > 0) {
+		attackRate = combatOutput;
 		defenseRate = 0.f;
 	} else {
 		attackRate = 0.f;
-		defenseRate = (-outputs[2] + 1.f) / 2.f;
+		defenseRate = -combatOutput;
 	}
 	
 	// Mise à jour de la position si on est pas en train d'attaquer

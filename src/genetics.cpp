@@ -53,12 +53,12 @@ void Genetics::roulette() {
 		parents[i].cumulatedScore = cumulated;
 	}
 	
-	std::cout << "------ RANDOM DNA ------" << std::endl;
-	for (unsigned int i = 0; i < parents[0].DNA.size(); i++)
-		std::cout << parents[0].DNA[i] << " ";
-	std::cout << std::endl;
-	
-	std::cout << "------ MUTATIONS ------" << std::endl;
+//	std::cout << "------ RANDOM DNA ------" << std::endl;
+//	for (unsigned int i = 0; i < parents[0].DNA.size(); i++)
+//		std::cout << parents[0].DNA[i] << " ";
+//	std::cout << std::endl;
+//	
+//	std::cout << "------ MUTATIONS ------" << std::endl;
 	
 	// Tant qu'on a pas créé autant d'enfants qu'il y avait de parents, on continue à en créer
 	while (children.size() < parentsNumber) {
@@ -159,8 +159,6 @@ void Genetics::roulette() {
 			}
 		}
 	}
-	
-	std::cout << std::endl << std::endl;
 }
 
 void Genetics::mutation(std::vector<float> &DNA) {
