@@ -4,7 +4,8 @@
 #include <iostream>
 #include <vector>
 #include <chrono>
-#include <thread>
+#include <ctime>
+#include <ratio>
 
 #include "display.h"
 #include "entityManager.h"
@@ -18,12 +19,11 @@ class Game {
 		void exec();
 		void quit() { continuer = false; }
 		
-		void newGeneration();
 		int getGeneration() const { return generation; }
-		int getIteration() const { return iteration; }
+		int getIterations() const { return iterations; }
 		int getIterationsPerGeneration() const { return iterationsPerGeneration; }
-		const int getFps() { return fps; }
 		float getGameSpeed() const { return gameSpeed; }
+		float getRealGameSpeed() const { return realGameSpeed; }
 		void togglePause();
 		void increaseGameSpeed();
 		void decreaseGameSpeed();
@@ -41,15 +41,14 @@ class Game {
 		
 		const int iterationsPerGeneration;
 		
-		//fps
-		float gameSpeed;
-		int fps, iteration;
+		// gestion du temps
+		float gameSpeed, dt, dtSum, realGameSpeed;
+		int iterations, loopIterations, iterationsSum;
 		
+		void newGeneration();
 		void update();
-		
 		bool gameover();
-		
-		void updateFps();
+		void updateGameSpeed();
 };
 
 #endif // GAME_H

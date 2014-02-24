@@ -27,6 +27,8 @@ Display::Display(Game* _game)
 	// options des views
 	mainView.setCenter(worldSize/2, worldSize/2);
 	mainView.setSize(windowWidth, windowHeight);
+	
+	clock.restart();
 }
 
 void Display::update(EntityManager &manager) {
@@ -105,6 +107,10 @@ void Display::events() {
 	}
 }
 
+float Display::getElapsedTime() {
+	return clock.restart().asSeconds();
+}
+
 void Display::displayGame(EntityManager &manager, const sf::View &view) {
 	// Vue des éléments du jeu
 	window.setView(view);
@@ -127,9 +133,14 @@ void Display::displayUI(EntityManager &manager) {
 	// Texte info en haut à gauche
 	std::stringstream ss;
 	ss << "Generation #" << game->getGeneration() << std::endl;
-	ss << "Iterations : " << (int) game->getIteration() << "/" << game->getIterationsPerGeneration() << std::endl;
-	ss << "GameSpeed : " << game->getGameSpeed() << std::endl;
-	ss << "FPS : " << game->getFps() / game->getGameSpeed() << std::endl;
+	ss << "Iterations : " << (int) game->getIterations() << "/" << game->getIterationsPerGeneration() << std::endl;
+	
+	if (game->getGameSpeed() >= 1.f)
+		ss << "GameSpeed : " << game->getGameSpeed() << std::endl;
+	else
+		ss << "GameSpeed : 1/" << (int) (1.f / game->getGameSpeed()) << std::endl;
+	
+	ss << "Real game speed : " << game->getRealGameSpeed() << std::endl;
 	text.setString(ss.str());
 	text.setPosition(10, 10);
 	window.draw(text);

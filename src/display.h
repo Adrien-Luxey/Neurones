@@ -21,6 +21,8 @@ class Display {
 
 	void update(EntityManager &manager);
 	void events();
+	
+	float getElapsedTime();
 
   private:
 	Game *game;
@@ -30,6 +32,7 @@ class Display {
 	sf::RectangleShape lineShape;
 	sf::Text text;
 	sf::Font font;
+	sf::Clock clock;
 	sf::View mainView;
 	
 	const int statusBarWidth, worldSize, viewMoveDelta;

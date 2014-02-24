@@ -29,11 +29,15 @@ class Animal : public Entity {
 	int getClosestAllyAngle() const { return closestAllyAngle; }
 	float getAttackRate() const { return attackRate; }
 	float getDefenseRate() const { return defenseRate; }
+	float getCombatOutput() const { return combatOutput; }
 	std::vector<float> getDNA();
 
   protected :		
 	int score, closestEnemyAngle, closestFruitAngle, closestAllyAngle;
-	float attackRate, defenseRate; // attack/defensekRate : [0; 1]
+	
+	// attack/defensekRate : [0; 1[
+	// On garde combatOutput pour pouvoir le transmettre aux autres animaux
+	float attackRate, defenseRate, combatOutput;
 	bool alive;
 	
 	const int animalLinearSpeed, animalAngularSpeed;
