@@ -2,27 +2,45 @@
 
 
 Game::Game() 
-  : display(this), continuer(true), pause(false), displayed(true), generation(1), iterationsPerGeneration(CFG->readInt("IterationsPerGeneration")),
-	gameSpeed(1), dtSum(0), realGameSpeed(0), iterations(0), loopIterations(0) {	
+  : display(this), continuer(true), pause(false), displayed(true), generation(1),
+	iterationsPerGeneration(CFG->readInt("IterationsPerGeneration")),
+	defaultGameSpeed(CFG->readInt("DefaultGameSpeed")), minimumFps(CFG->readInt("MinimumFps")),
+	gameSpeedRatio(1), fps(0), ups(0), iterations(0), updatesCount(0), displaysCount(0) {	
 	
 }
 
 Game::~Game() {}
 
+/* Game loop basée sur celle de DeWITTERS, à cette adresse :
+ * http://www.koonsolo.com/news/dewitters-gameloop/
+ * 
+ * Cela permet de controler la vitesse d'execution de l'update, de ne pas dépendre de l'affichage, et de le fluidifier
+ */
 void Game::exec() {
+	clock.restart();  
+	oneSecondClock.restart();
+	
 	while (continuer) {
 		display.events();
 		
+		sf::Time updateDeltaTime = sf::seconds(1) / (gameSpeedRatio * defaultGameSpeed);
+		
 		if (!pause) {
-			if (!displayed || (gameSpeed >= 1.f) || (loopIterations % (int) (1.f / gameSpeed) == 0))
+			maxDisplayTick = clock.getElapsedTime() + sf::seconds(1) / (float) minimumFps;
+			
+			while( clock.getElapsedTime() > nextUpdateTick && clock.getElapsedTime() < maxDisplayTick ) {
 				update();
+				
+				updatesCount++;
+				nextUpdateTick += updateDeltaTime;
+			}
 			
-			if (displayed && ((gameSpeed <= 1.f) || (loopIterations % (int) gameSpeed == 0)))
-				display.update(manager);
+			updateFps();
 			
-			updateGameSpeed();
+			sf::Time interpolation = clock.getElapsedTime() + updateDeltaTime - nextUpdateTick;
 			
-			loopIterations++;
+			display.update(manager, interpolation.asSeconds() / updateDeltaTime.asSeconds());
+			displaysCount++;
 		}
 	}
 }
@@ -32,10 +50,10 @@ void Game::togglePause() {
 }
 
 void Game::increaseGameSpeed() {
-	gameSpeed = (gameSpeed >= 1) ? gameSpeed + 1 : gameSpeed*2;
+	gameSpeedRatio = (gameSpeedRatio >= 1) ? gameSpeedRatio + 1 : gameSpeedRatio*2;
 }
 void Game::decreaseGameSpeed() {
-	gameSpeed = (gameSpeed > 1) ? gameSpeed - 1 : gameSpeed/2;
+	gameSpeedRatio = (gameSpeedRatio > 1) ? gameSpeedRatio - 1 : gameSpeedRatio/2;
 }
 
 void Game::newGeneration() {
@@ -43,43 +61,35 @@ void Game::newGeneration() {
 	manager.init();
 	
 	iterations = 0;
-	loopIterations = 0;
 	
-	display.getElapsedTime();
-	
-	std::cout << "Génération #" << generation++ << std::endl;
+	std::cout << "Génération #" << generation++ << " lasted " << clock.restart().asSeconds() << " seconds" << std::endl;
+	nextUpdateTick = sf::Time::Zero;
+	maxDisplayTick = sf::Time::Zero;
 }
 
 void Game::update() {
 	if (gameover())
 		newGeneration();
 	
-	// dt * gameSpeed => le manager pense que le frameRate est toujours le même qu'à gamespeed = 1
-	// Sinon la vitesse des mobiles ne serait pas accélérée
 	manager.update();
 	
 	iterations++;
-	//realGameSpeed =  1.f / (DEFAULT_FPS * display.getElapsedTime());
-	iterationsSum++;
 }
 
 bool Game::gameover() {	
-	if (iterations > iterationsPerGeneration || manager.gameover())
+	if (iterations >= iterationsPerGeneration || manager.gameover())
 		return true;
 	
 	return false;
 }
 
-void Game::updateGameSpeed() {
-	dtSum += display.getElapsedTime();
-	
-	if (dtSum >= 1.f) {
-		realGameSpeed = iterationsSum / DEFAULT_FPS;
+void Game::updateFps() {
+	if (oneSecondClock.getElapsedTime() >= sf::seconds(1)) {
+		float dt = oneSecondClock.restart().asSeconds();
+		fps = displaysCount / dt;
+		ups = updatesCount / dt;
 		
-		if (!displayed)
-				std::cout << "real game speed = " << realGameSpeed << std::endl;
-		
-		iterationsSum = 0;
-		dtSum = 0;
+		displaysCount = 0;
+		updatesCount = 0;
 	}
 }

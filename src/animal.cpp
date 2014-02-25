@@ -22,6 +22,8 @@ void Animal::init() {
 	pos.x = rand() % worldSize;
 	pos.y = rand() % worldSize;
 	angle = rand() % 360;
+	
+	speed = Vect2i();
 }
 
 void Animal::init(const std::vector<float> &DNA) {
@@ -77,10 +79,15 @@ void Animal::die() {
 	alive = false;
 }
 
-// TODO : essayer d'autres moyens
-// Comme une différence sur la vitesse, stockée en Vect2f
-// qui pourrait parler de différence vitesse/angle séparément plutôt que des roues...
-// A voir.
+/* Plus d'infos ici : 
+ * http://www.koonsolo.com/news/dewitters-gameloop/
+ * L'interpolation c'est la fluidité visuelle à bas prix
+ */
+Vect2i Animal::getDisplayPos(const float &interpolation) const {
+	return Vect2i(	lastPos.x + speed.x * interpolation,
+					lastPos.y + speed.y * interpolation );
+}
+
 void Animal::updatePosition(float da, float dp) {
 	// facteur de ralentissement : inversement proportionnel à la moyenne d'attaque et de défense
 	//float slowdownRate = 1.f - (attackRate + defenseRate) / 2.f;
@@ -91,10 +98,15 @@ void Animal::updatePosition(float da, float dp) {
 	dp *= animalLinearSpeed * slowdownRate;
 	da *= animalAngularSpeed * slowdownRate;
 	
+	// mise à jour de lastPos et speed pour l'interpolation (cf le lien dans game.cpp au sujet de la gameloop)
+	speed.x = dp * cosf(angle/180.f*PI);
+	speed.y = dp * sinf(angle/180.f*PI);
+	lastPos = pos;
+	
 	// Application aux données du mobile
 	angle = fmod(angle + da, 360.f);
-	pos.x = (int) (pos.x + dp * cosf(angle/180.f*PI)) % worldSize;
-	pos.y = (int) (pos.y + dp * sinf(angle/180.f*PI)) % worldSize;
+	pos.x = (int) (pos.x + speed.x) % worldSize;
+	pos.y = (int) (pos.y + speed.y) % worldSize;
 	
 	// Le modulo sort parfois des résultats négatifs, on doit corriger ca :
 	if (pos.x < 0)

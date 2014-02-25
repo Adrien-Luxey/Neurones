@@ -24,8 +24,8 @@ class EntityManager {
 	
 	bool gameover() const;
 
-	std::vector<Species> getSpecies() { return species; }
-	std::vector<Entity*> getFruits() { return fruits; }
+	std::vector<Species> getSpecies() const { return species; }
+	std::vector<Entity*> getFruits() const { return fruits; }
 	
   private:
 	typedef struct Position {

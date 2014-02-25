@@ -22,6 +22,7 @@ class Animal : public Entity {
 	void die();
 
 	// getters
+	Vect2i getDisplayPos(const float &interpolation) const;
 	bool isAlive() const { return alive; }
 	int getScore() const { return score; }
 	int getClosestEnemyAngle() const { return closestEnemyAngle; }
@@ -30,22 +31,27 @@ class Animal : public Entity {
 	float getAttackRate() const { return attackRate; }
 	float getDefenseRate() const { return defenseRate; }
 	float getCombatOutput() const { return combatOutput; }
+	
 	std::vector<float> getDNA();
 
-  protected :		
-	int score, closestEnemyAngle, closestFruitAngle, closestAllyAngle;
+  protected :
+	// Convertit le déplacement des roues gauche/droite pour modifier la position et l'angle
+	void updatePosition(float da, float dp);
+	
+	Vect2i lastPos, speed;
+	
+	int score;
+	int closestEnemyAngle, closestFruitAngle, closestAllyAngle;
 	
 	// attack/defensekRate : [0; 1[
 	// On garde combatOutput pour pouvoir le transmettre aux autres animaux
 	float attackRate, defenseRate, combatOutput;
+	
 	bool alive;
 	
 	const int animalLinearSpeed, animalAngularSpeed;
 
 	NeuralNetwork network;
-
-	// Convertit le déplacement des roues gauche/droite pour modifier la position et l'angle
-	void updatePosition(float da, float dp);
 };
 
 #endif // ANIMAL_H

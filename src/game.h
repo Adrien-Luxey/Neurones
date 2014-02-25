@@ -7,6 +7,8 @@
 #include <ctime>
 #include <ratio>
 
+#include <SFML/System.hpp>
+
 #include "display.h"
 #include "entityManager.h"
 #include "genetics.h"
@@ -19,36 +21,38 @@ class Game {
 		void exec();
 		void quit() { continuer = false; }
 		
+		// getters and stuff
 		int getGeneration() const { return generation; }
 		int getIterations() const { return iterations; }
 		int getIterationsPerGeneration() const { return iterationsPerGeneration; }
-		float getGameSpeed() const { return gameSpeed; }
-		float getRealGameSpeed() const { return realGameSpeed; }
+		float getGameSpeedRatio() const { return gameSpeedRatio; }
+		float getFps() const { return fps; }
+		float getUps() const { return ups; }
 		void togglePause();
 		void increaseGameSpeed();
 		void decreaseGameSpeed();
-		
-		// getters
-		void toggleDisplayed() { displayed = !displayed; }
 		
 	private :		
 		Display display;
 		EntityManager manager;
 		Genetics genetics;
 		
-		bool continuer, pause, displayed;
+		bool continuer, pause;
 		int generation;
 		
-		const int iterationsPerGeneration;
+		const int iterationsPerGeneration, defaultGameSpeed, minimumFps;
 		
 		// gestion du temps
-		float gameSpeed, dt, dtSum, realGameSpeed;
-		int iterations, loopIterations, iterationsSum;
+		sf::Clock clock, oneSecondClock;
+		sf::Time nextUpdateTick, maxDisplayTick;
+		float gameSpeedRatio;
+		float fps, ups /* updates per second */;
+		int iterations, updatesCount, displaysCount;
 		
 		void newGeneration();
 		void update();
 		bool gameover();
-		void updateGameSpeed();
+		void updateFps();
 };
 
 #endif // GAME_H
