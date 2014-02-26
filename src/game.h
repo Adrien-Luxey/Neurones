@@ -1,3 +1,10 @@
+/**
+ * /file game.h
+ * /author Adrien Luxey
+ * /brief Main class, containing the game loop, game variables, and calls to the other classes
+ * 
+ */
+
 #ifndef GAME_H
 #define GAME_H
 

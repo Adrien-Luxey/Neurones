@@ -10,9 +10,6 @@
 
 #define PI				3.14159f
 
-#define NETWORK_INPUTS	8
-#define NETWORK_OUTPUTS	3
-
 #include <cmath>
 #include <random>
 #include <iostream>

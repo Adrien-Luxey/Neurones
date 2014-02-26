@@ -4,9 +4,9 @@
 
 Animal::Animal()
 : Entity(), animalLinearSpeed(CFG->readInt("AnimalLinearSpeed")),
-  animalAngularSpeed(CFG->readInt("AnimalAngularSpeed")), network(NETWORK_INPUTS, NETWORK_OUTPUTS) {
-	 size = Vect2i(CFG->readInt("AnimalWidth"), CFG->readInt("AnimalHeight"));
-	 init();
+  animalAngularSpeed(CFG->readInt("AnimalAngularSpeed")), network(CFG->readInt("InputLayerSize"), CFG->readInt("OutputLayerSize")) {
+	size = Vect2i(CFG->readInt("AnimalWidth"), CFG->readInt("AnimalHeight"));
+	init();
 }
 
 void Animal::init() {
@@ -89,10 +89,7 @@ Vect2i Animal::getDisplayPos(const float &interpolation) const {
 }
 
 void Animal::updatePosition(float da, float dp) {
-	// facteur de ralentissement : inversement proportionnel à la moyenne d'attaque et de défense
-	//float slowdownRate = 1.f - (attackRate + defenseRate) / 2.f;
-	// Une autre solution serait de prendre le maximum et non la moyenne des deux actions
-	float slowdownRate = 1.f - ((attackRate > defenseRate) ? attackRate : defenseRate) / 2;
+	float slowdownRate = 1.f - fabs(combatOutput);
 	
 	// composante angulaire et linéaire du déplacement
 	dp *= animalLinearSpeed * slowdownRate;

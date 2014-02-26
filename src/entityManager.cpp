@@ -15,7 +15,7 @@ EntityManager::EntityManager()
   : distanceSigmoid(CFG->readInt("DistanceSigmoid")), hitbox(CFG->readInt("Hitbox")), worldSize(CFG->readInt("WorldSize")),
 	bushesNumber(CFG->readInt("BushesNumber")), bushesMinSize(CFG->readInt("BushesMinSize")),
 	bushesMaxSize(CFG->readInt("BushesMaxSize")), combatDeviation(CFG->readFloat("CombatDeviation")),
-	allowFriendlyFire(CFG->readInt("AllowFriendlyFire")) {
+	allowFriendlyFire(CFG->readInt("AllowFriendlyFire")), randomInCombats(CFG->readInt("RandomInCombats")) {
 	
 	Species tmp;
 	
@@ -274,25 +274,43 @@ void EntityManager::collisionCheck(Animal *animal, const unsigned int index) {
 				continue;
 
 			if (isColliding(animal->getPos(), enemy->getPos())) {
-				std::normal_distribution<float> animalAttackRand(animal->getAttackRate(), combatDeviation);
-				std::normal_distribution<float> enemyDefenseRand(enemy->getDefenseRate(), combatDeviation);
-				std::normal_distribution<float> enemyAttackRand(enemy->getAttackRate(), combatDeviation);
-				std::normal_distribution<float> animalDefenseRand(animal->getDefenseRate(), combatDeviation);
-				
-				if (animalAttackRand(generator) > enemyDefenseRand(generator)) {
-					enemy->die();
-					animal->incrementScore();
+				if (randomInCombats == 1) {
+					std::normal_distribution<float> animalAttackRand(animal->getAttackRate(), combatDeviation);
+					std::normal_distribution<float> enemyDefenseRand(enemy->getDefenseRate(), combatDeviation);
+					std::normal_distribution<float> enemyAttackRand(enemy->getAttackRate(), combatDeviation);
+					std::normal_distribution<float> animalDefenseRand(animal->getDefenseRate(), combatDeviation);
 
-					species[i].aliveAnimals--;
+					if (animalAttackRand(generator) > enemyDefenseRand(generator)) {
+						enemy->die();
+						animal->incrementScore();
 
-					break;
-				} else if (enemyAttackRand(generator) > animalDefenseRand(generator)) {
-					animal->die();
-					enemy->incrementScore();
+						species[i].aliveAnimals--;
 
-					species[index].aliveAnimals--;
+						break;
+					} else if (enemyAttackRand(generator) > animalDefenseRand(generator)) {
+						animal->die();
+						enemy->incrementScore();
 
-					break;
+						species[index].aliveAnimals--;
+
+						break;
+					}
+				} else {
+					if (animal->getAttackRate() > enemy->getDefenseRate()) {
+						enemy->die();
+						animal->incrementScore();
+
+						species[i].aliveAnimals--;
+
+						break;
+					} else if (enemy->getAttackRate() > animal->getDefenseRate()) {
+						animal->die();
+						enemy->incrementScore();
+
+						species[index].aliveAnimals--;
+
+						break;
+					}
 				}
 			}
 		}
@@ -301,5 +319,5 @@ void EntityManager::collisionCheck(Animal *animal, const unsigned int index) {
 
 // Test de collision des bois : hitbox prédéfinie, carrée : simple, rapide, efficace (ou presque)
 const bool EntityManager::isColliding(const Vect2i a, const Vect2i b) {
-	return (abs(a.x - b.x) < hitbox) && (abs(a.y - b.y) < hitbox);
+	return (((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)) < hitbox * hitbox);
 }

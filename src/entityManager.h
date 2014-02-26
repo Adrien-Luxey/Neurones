@@ -40,7 +40,7 @@ class EntityManager {
 	std::vector<Bush> bushes;
 	
 	const unsigned int distanceSigmoid;
-	const int hitbox, worldSize, bushesNumber, bushesMinSize, bushesMaxSize, combatDeviation, allowFriendlyFire;
+	const int hitbox, worldSize, bushesNumber, bushesMinSize, bushesMaxSize, combatDeviation, allowFriendlyFire, randomInCombats;
 	
 	void update(Animal *animal, const unsigned int index);
 	

@@ -2,7 +2,7 @@
 
 
 Game::Game() 
-  : display(this), continuer(true), pause(false), displayed(true), generation(1),
+  : display(this), continuer(true), pause(false), generation(1),
 	iterationsPerGeneration(CFG->readInt("IterationsPerGeneration")),
 	defaultGameSpeed(CFG->readInt("DefaultGameSpeed")), minimumFps(CFG->readInt("MinimumFps")),
 	gameSpeedRatio(1), fps(0), ups(0), iterations(0), updatesCount(0), displaysCount(0) {	
