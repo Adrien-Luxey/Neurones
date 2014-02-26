@@ -5,7 +5,7 @@
 Display::Display(Game* _game)
   : game(_game), window(sf::VideoMode(CFG->readInt("WindowWidth"), CFG->readInt("WindowHeight")), CFG->readString("WindowTitle")),
 	statusBarWidth(CFG->readInt("StatusBarWidth")), worldSize(CFG->readInt("WorldSize")), viewMoveDelta(CFG->readInt("ViewMoveDelta")),
-	windowWidth(CFG->readInt("WindowWidth")), windowHeight(CFG->readInt("WindowHeight")), showMinimap(false), hasFocus(true) {
+	windowWidth(CFG->readInt("WindowWidth")), windowHeight(CFG->readInt("WindowHeight")), hasFocus(true) {
 	window.setVerticalSyncEnabled(true);
 	
 	animalShape.setSize(sf::Vector2f(CFG->readInt("AnimalWidth"), CFG->readInt("AnimalHeight")));
@@ -27,14 +27,11 @@ Display::Display(Game* _game)
 	// options des views
 	mainView.setCenter(worldSize/2, worldSize/2);
 	mainView.setSize(windowWidth, windowHeight);
-	minimapView.setCenter(worldSize/2, worldSize/2);
-	minimapView.setSize(worldSize, worldSize);
-	minimapView.setViewport(sf::FloatRect(0.75f, 0, 0.25f, 0.25f));
-	
-	clock.restart();
 }
 
-void Display::update(EntityManager &manager) {
+void Display::update(const EntityManager &manager, const float &_interpolation) {
+	interpolation = _interpolation;
+	
 	// evenements liés au déplacement de la caméra
 	cameraEvents();
 	
@@ -62,14 +59,6 @@ void Display::events() {
 						
 					case sf::Keyboard::Space :
 						game->togglePause();
-						break;
-					
-					case sf::Keyboard::M :
-						showMinimap = !showMinimap;
-						break;
-					
-					case sf::Keyboard::X :
-						game->toggleDisplayed();
 						break;
 						
 					default :
@@ -114,11 +103,7 @@ void Display::events() {
 	}
 }
 
-float Display::getElapsedTime() {
-	return clock.restart().asSeconds();
-}
-
-void Display::displayGame(EntityManager &manager, const sf::View &view) {
+void Display::displayGame(const EntityManager &manager, const sf::View &view) {
 	// Vue des éléments du jeu
 	window.setView(view);
 	
@@ -133,23 +118,20 @@ void Display::displayGame(EntityManager &manager, const sf::View &view) {
 	drawGameBorders(view);
 }
 
-void Display::displayUI(EntityManager &manager) {
+void Display::displayUI(const EntityManager &manager) {
 	// Vue des éléments de l'UI
 	window.setView(window.getDefaultView());
 	
 	// Texte info en haut à gauche
 	std::stringstream ss;
 	ss << "Generation #" << game->getGeneration() << std::endl;
-	ss << "Timer : " << (int) game->getElapsedTime() << "/" << game->getEpocDuration() << std::endl;
-	ss << "GameSpeed : " << game->getGameSpeed() << std::endl;
-	ss << "FPS : " << game->getFps() / game->getGameSpeed() << std::endl;
+	ss << "Iterations : " << (int) game->getIterations() << "/" << game->getIterationsPerGeneration() << std::endl;
+	ss << "GameSpeed : " << game->getGameSpeedRatio() << std::endl;
+	ss << "FPS : " << game->getFps() << std::endl << "UPS : " << game->getUps() << std::endl;
+	
 	text.setString(ss.str());
 	text.setPosition(10, 10);
 	window.draw(text);
-	
-	// minimap !
-	if (showMinimap)
-		displayGame(manager, minimapView);
 }
 
 void Display::cameraEvents() {
@@ -178,32 +160,31 @@ void Display::drawFruits(const std::vector<Entity*> &fruits, const sf::View &vie
 
 void Display::drawAnimals(const std::vector<Animal*> &animals, const sf::View &view) {
 	for (unsigned int i = 0; i < animals.size(); i++) {
-		if (!animals[i]->isAlive() || !isInsideView(animals[i]->getPos(), view))
+		Vect2i animalDisplayPos = animals[i]->getDisplayPos(interpolation);
+		if (!animals[i]->isAlive() || !isInsideView(animalDisplayPos, view))
 			continue;
 		
 		// set la bonne position à l'animalShape
-		animalShape.setPosition(animals[i]->getPos().x, animals[i]->getPos().y);
+		animalShape.setPosition(animalDisplayPos.x, animalDisplayPos.y);
 		animalShape.setRotation(animals[i]->getAngle());
-		
-		//animalShape.setFillColor(sf::Color(255, 0, 0, 255 * animal->getAttackRate()));
 		
 		// dessin de l'animalShape
 		window.draw(animalShape);
 		
 		// vecteur vers le plus proche fruit
 		if (animals[i]->getClosestFruitAngle() != 0)
-			drawVector(animals[i]->getPos(), animals[i]->getClosestFruitAngle(), sf::Color::Green, sf::Vector2f(15, 1));
+			drawVector(animalDisplayPos, animals[i]->getClosestFruitAngle(), sf::Color::Green, sf::Vector2f(15, 1));
 		// vecteur vers le plus proche ennemi
 		if (animals[i]->getClosestEnemyAngle() != 0)
-			drawVector(animals[i]->getPos(), animals[i]->getClosestEnemyAngle(), sf::Color::Red, sf::Vector2f(15, 1));
+			drawVector(animalDisplayPos, animals[i]->getClosestEnemyAngle(), sf::Color::Red, sf::Vector2f(15, 1));
 		// vecteur vers le plus proche ennemi
 		if (animals[i]->getClosestAllyAngle() != 0)
-			drawVector(animals[i]->getPos(), animals[i]->getClosestAllyAngle(), sf::Color::Blue, sf::Vector2f(15, 1));
+			drawVector(animalDisplayPos, animals[i]->getClosestAllyAngle(), sf::Color::Blue, sf::Vector2f(15, 1));
 		
 		// dessin de la barre d'attaque
 		Vect2i barPosition;
-		barPosition.x = animals[i]->getPos().x - statusBarWidth/2;
-		barPosition.y = animals[i]->getPos().y + animalShape.getLocalBounds().height * 3 / 2;
+		barPosition.x = animalDisplayPos.x - statusBarWidth/2;
+		barPosition.y = animalDisplayPos.y + animalShape.getLocalBounds().height * 3 / 2;
 		drawVector(barPosition, 0, sf::Color(100, 0, 0), sf::Vector2f(animals[i]->getAttackRate() * statusBarWidth, 2));
 		// dessin de la barre de defense
 		//barPosition.y += 4;
@@ -213,8 +194,8 @@ void Display::drawAnimals(const std::vector<Animal*> &animals, const sf::View &v
 		std::stringstream ss;
 		ss << animals[i]->getScore();
 		text.setString(ss.str());
-		text.setPosition(animals[i]->getPos().x - text.getLocalBounds().width / 2,
-						 animals[i]->getPos().y - animalShape.getLocalBounds().height * 3 / 2 - text.getLocalBounds().height);
+		text.setPosition(animalDisplayPos.x - text.getLocalBounds().width / 2,
+						 animalDisplayPos.y - animalShape.getLocalBounds().height * 3 / 2 - text.getLocalBounds().height);
 		window.draw(text);
 	}
 }

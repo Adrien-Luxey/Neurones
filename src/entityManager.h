@@ -20,12 +20,12 @@ class EntityManager {
 	
 	void init();
 
-	void update(const float dt);
+	void update();
 	
 	bool gameover() const;
 
-	std::vector<Species> getSpecies() { return species; }
-	std::vector<Entity*> getFruits() { return fruits; }
+	std::vector<Species> getSpecies() const { return species; }
+	std::vector<Entity*> getFruits() const { return fruits; }
 	
   private:
 	typedef struct Position {
@@ -40,9 +40,9 @@ class EntityManager {
 	std::vector<Bush> bushes;
 	
 	const unsigned int distanceSigmoid;
-	const int hitbox, worldSize, bushesNumber, bushesMinSize, bushesMaxSize, combatDeviation, allowFriendlyFire;
+	const int hitbox, worldSize, bushesNumber, bushesMinSize, bushesMaxSize, combatDeviation, allowFriendlyFire, randomInCombats;
 	
-	void update(Animal *animal, const unsigned int index, const float dt);
+	void update(Animal *animal, const unsigned int index);
 	
 	void addClosestEnemy(Animal *animal, const unsigned int index, std::vector<float> &inputs);
 	void addClosestAlly(Animal *animal, const unsigned int index, std::vector<float> &inputs);

@@ -58,3 +58,17 @@ Et donc l'allié le plus proche.
 
 La question MAX VS MOY revient à se demander si on utilise qu'une variable (ce qui est pareil que de faire un MAX sur les 2), ou MOY. 
 Dommage que MOY fournisse des résultats aussi peu intéressants, la piste semblair plus sympa à explorer. A retenter.
+
+
+cette gestion du timing est vraiment emmerdante
+j'ai détaché la logique du jeu de la fréquence de fonctionnement, mais on se retrouve avec un ensemble archi lent (on peine à atteindre une vitesse de x3...)
+On pourrait arrêter de parler en gameSpeed pour simplement parler du nombre de MAJ des mobiles par seconde, ça aurait plus de sens (mais ça serait encore le merdier pour savoir quand afficher/updater)
+En vrai faudrait partir sur du multithreading, un thread affichage + un thread traitement, et tout le monde est content.
+
+De plus faudrait creuser le sujet de la prog parallèle pour la MAJ des espèces, passerait crême.
+
+Enfin, il faut revoir la boucle du manager :
+- Enregistrement de l'état du jeu à l'instant t
+- Demander aux réseaux leurs sorties pour tous les mobiles (penser à ne pas mettre à jour le combatOutput à ce moment là)
+- Appliquer les changements à tous les animaux en testant les collisions and co à ce moment là
+Ca marche pas non plus...

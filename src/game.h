@@ -1,10 +1,20 @@
+/**
+ * /file game.h
+ * /author Adrien Luxey
+ * /brief Main class, containing the game loop, game variables, and calls to the other classes
+ * 
+ */
+
 #ifndef GAME_H
 #define GAME_H
 
 #include <iostream>
 #include <vector>
 #include <chrono>
-#include <thread>
+#include <ctime>
+#include <ratio>
+
+#include <SFML/System.hpp>
 
 #include "display.h"
 #include "entityManager.h"
@@ -18,37 +28,37 @@ class Game {
 		void exec();
 		void quit() { continuer = false; }
 		
-		void newGeneration();
+		// getters and stuff
 		int getGeneration() const { return generation; }
-		float getElapsedTime() const { return elapsedTime; }
-		int getEpocDuration() const { return epocDuration; }
-		const int getFps() { return fps; }
-		float getGameSpeed() const { return gameSpeed; }
+		int getIterations() const { return iterations; }
+		int getIterationsPerGeneration() const { return iterationsPerGeneration; }
+		float getGameSpeedRatio() const { return gameSpeedRatio; }
+		float getFps() const { return fps; }
+		float getUps() const { return ups; }
 		void togglePause();
 		void increaseGameSpeed();
 		void decreaseGameSpeed();
-		
-		// getters
-		void toggleDisplayed() { displayed = !displayed; }
 		
 	private :		
 		Display display;
 		EntityManager manager;
 		Genetics genetics;
 		
-		bool continuer, pause, displayed;
+		bool continuer, pause;
 		int generation;
 		
-		const int epocDuration;
+		const int iterationsPerGeneration, defaultGameSpeed, minimumFps;
 		
-		//fps
-		float dt, elapsedTime, dtSum, frames, gameSpeed;
-		int fps, loopsSinceLastDisplay;
+		// gestion du temps
+		sf::Clock clock, oneSecondClock;
+		sf::Time nextUpdateTick, maxDisplayTick;
+		float gameSpeedRatio;
+		float fps, ups /* updates per second */;
+		int iterations, updatesCount, displaysCount;
 		
+		void newGeneration();
 		void update();
-		
 		bool gameover();
-		
 		void updateFps();
 };
 

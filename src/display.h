@@ -19,10 +19,9 @@ class Display {
 
 	~Display() {}
 
-	void update(EntityManager &manager);
+	void update(const EntityManager &manager, const float &_interpolation);
 	void events();
 
-	float getElapsedTime();
   private:
 	Game *game;
 	sf::RenderWindow window;
@@ -31,15 +30,15 @@ class Display {
 	sf::RectangleShape lineShape;
 	sf::Text text;
 	sf::Font font;
-	sf::Clock clock;
-	sf::View mainView, minimapView;
+	sf::View mainView;
 	
 	const int statusBarWidth, worldSize, viewMoveDelta;
 	int windowWidth, windowHeight;
-	bool showMinimap, hasFocus;
+	float interpolation;
+	bool hasFocus;
 	
-	void displayGame(EntityManager &manager, const sf::View &view);
-	void displayUI(EntityManager &manager);
+	void displayGame(const EntityManager &manager, const sf::View &view);
+	void displayUI(const EntityManager &manager);
 	
 	void cameraEvents();
 	

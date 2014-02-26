@@ -1,9 +1,6 @@
 #include "neural_network.h"
 
 NeuralNetwork::NeuralNetwork(unsigned int _inputsNumber, unsigned int _outputsNumber)
-// Outputs = inputs + outputs (backpropagation)
-//: inputsNumber(_inputsNumber + _outputsNumber), outputsNumber(_outputsNumber) {
-// sans backprop
 : inputsNumber(_inputsNumber), outputsNumber(_outputsNumber) {
 	initLayers();
 }

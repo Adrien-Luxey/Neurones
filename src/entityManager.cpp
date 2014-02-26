@@ -15,7 +15,7 @@ EntityManager::EntityManager()
   : distanceSigmoid(CFG->readInt("DistanceSigmoid")), hitbox(CFG->readInt("Hitbox")), worldSize(CFG->readInt("WorldSize")),
 	bushesNumber(CFG->readInt("BushesNumber")), bushesMinSize(CFG->readInt("BushesMinSize")),
 	bushesMaxSize(CFG->readInt("BushesMaxSize")), combatDeviation(CFG->readFloat("CombatDeviation")),
-	allowFriendlyFire(CFG->readInt("AllowFriendlyFire")) {
+	allowFriendlyFire(CFG->readInt("AllowFriendlyFire")), randomInCombats(CFG->readInt("RandomInCombats")) {
 	
 	Species tmp;
 	
@@ -82,17 +82,17 @@ void EntityManager::init() {
 	}
 }
 
-void EntityManager::update(const float dt) {
+void EntityManager::update() {
 	// Parcours de toutes les espèces
 	for (unsigned int i = 0; i < species.size(); i++) {		
 		// Parcours de tous les animaux de l'espece
 		for (unsigned int j = 0; j < species[i].tab.size(); j++) {
 			Animal *animal = species[i].tab[j];
 			
-			if (!animal->isAlive(dt))
+			if (!animal->isAlive())
 				continue;
 			
-			update(animal, i, dt);
+			update(animal, i);
 			
 			collisionCheck(animal, i);
 		}
@@ -111,7 +111,7 @@ bool EntityManager::gameover() const {
 		(species.size() > 1 && aliveSpecies < 2);
 }
 
-void EntityManager::update(Animal *animal, const unsigned int index, const float dt) {
+void EntityManager::update(Animal *animal, const unsigned int index) {
 	std::vector<float> inputs;
 	
 	// Plus proche fruit
@@ -123,7 +123,7 @@ void EntityManager::update(Animal *animal, const unsigned int index, const float
 	// Plus proche allié
 	addClosestAlly(animal, index, inputs);
 	
-	animal->update(inputs, dt);
+	animal->update(inputs);
 }
 
 void EntityManager::addClosestEnemy(Animal *animal, const unsigned int index, std::vector<float> &inputs) {
@@ -274,25 +274,43 @@ void EntityManager::collisionCheck(Animal *animal, const unsigned int index) {
 				continue;
 
 			if (isColliding(animal->getPos(), enemy->getPos())) {
-				std::normal_distribution<float> animalAttackRand(animal->getAttackRate(), combatDeviation);
-				std::normal_distribution<float> enemyDefenseRand(enemy->getDefenseRate(), combatDeviation);
-				std::normal_distribution<float> enemyAttackRand(enemy->getAttackRate(), combatDeviation);
-				std::normal_distribution<float> animalDefenseRand(animal->getDefenseRate(), combatDeviation);
-				
-				if (animalAttackRand(generator) > enemyDefenseRand(generator)) {
-					enemy->die();
-					animal->incrementScore();
+				if (randomInCombats == 1) {
+					std::normal_distribution<float> animalAttackRand(animal->getAttackRate(), combatDeviation);
+					std::normal_distribution<float> enemyDefenseRand(enemy->getDefenseRate(), combatDeviation);
+					std::normal_distribution<float> enemyAttackRand(enemy->getAttackRate(), combatDeviation);
+					std::normal_distribution<float> animalDefenseRand(animal->getDefenseRate(), combatDeviation);
 
-					species[i].aliveAnimals--;
+					if (animalAttackRand(generator) > enemyDefenseRand(generator)) {
+						enemy->die();
+						animal->incrementScore();
 
-					break;
-				} else if (enemyAttackRand(generator) > animalDefenseRand(generator)) {
-					animal->die();
-					enemy->incrementScore();
+						species[i].aliveAnimals--;
 
-					species[index].aliveAnimals--;
+						break;
+					} else if (enemyAttackRand(generator) > animalDefenseRand(generator)) {
+						animal->die();
+						enemy->incrementScore();
 
-					break;
+						species[index].aliveAnimals--;
+
+						break;
+					}
+				} else {
+					if (animal->getAttackRate() > enemy->getDefenseRate()) {
+						enemy->die();
+						animal->incrementScore();
+
+						species[i].aliveAnimals--;
+
+						break;
+					} else if (enemy->getAttackRate() > animal->getDefenseRate()) {
+						animal->die();
+						enemy->incrementScore();
+
+						species[index].aliveAnimals--;
+
+						break;
+					}
 				}
 			}
 		}
@@ -301,5 +319,5 @@ void EntityManager::collisionCheck(Animal *animal, const unsigned int index) {
 
 // Test de collision des bois : hitbox prédéfinie, carrée : simple, rapide, efficace (ou presque)
 const bool EntityManager::isColliding(const Vect2i a, const Vect2i b) {
-	return (abs(a.x - b.x) < hitbox) && (abs(a.y - b.y) < hitbox);
+	return (((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)) < hitbox * hitbox);
 }
