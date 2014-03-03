@@ -2,7 +2,7 @@
 
 Fruit::Fruit()
   : Entity() {
-	size = Vect2i(CFG->readInt("FruitRadius"), CFG->readInt("FruitRadius"));
+	radius = CFG->readInt("FruitRadius");
 	init();
 }
 

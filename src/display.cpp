@@ -8,13 +8,22 @@ Display::Display(Game* _game)
 	windowWidth(CFG->readInt("WindowWidth")), windowHeight(CFG->readInt("WindowHeight")), hasFocus(true) {
 	window.setVerticalSyncEnabled(true);
 	
-	animalShape.setSize(sf::Vector2f(CFG->readInt("AnimalWidth"), CFG->readInt("AnimalHeight")));
-	animalShape.setOrigin(CFG->readInt("AnimalWidth")/2, CFG->readInt("AnimalHeight")/2);
+	// circle defining the animal
+	int animalRadius = CFG->readInt("AnimalRadius");
+	animalShape.setRadius(animalRadius);
+	animalShape.setOrigin(animalRadius, animalRadius);
 	animalShape.setOutlineThickness(-2);
 	animalShape.setFillColor(sf::Color(0, 0, 0));
+	// animal's head, represented by a triangle at the front of the animal
+	animalHeadShape.setPointCount(3);
+	animalHeadShape.setPoint(0, sf::Vector2f(animalRadius, -animalRadius/2));
+	animalHeadShape.setPoint(1, sf::Vector2f(animalRadius + sqrt(3 * animalRadius*animalRadius / 4), 0));
+	animalHeadShape.setPoint(2, sf::Vector2f(animalRadius, animalRadius/2));
+	animalHeadShape.setFillColor(sf::Color(0, 0, 0));
 	
-	fruitShape.setRadius(CFG->readInt("FruitRadius"));
-	fruitShape.setOrigin(CFG->readInt("FruitRadius"), CFG->readInt("FruitRadius"));
+	int fruitRadius = CFG->readInt("FruitRadius");
+	fruitShape.setRadius(fruitRadius);
+	fruitShape.setOrigin(fruitRadius, fruitRadius);
 	fruitShape.setFillColor(sf::Color::Green);
 	
 	lineShape.setSize(sf::Vector2f(15, 1));
@@ -122,7 +131,7 @@ void Display::displayUI(const EntityManager &manager) {
 	// Vue des éléments de l'UI
 	window.setView(window.getDefaultView());
 	
-	// Texte info en haut à gauche
+	// Texte info en haut à gauchean
 	std::stringstream ss;
 	ss << "Generation #" << game->getGeneration() << std::endl;
 	ss << "Iterations : " << (int) game->getIterations() << "/" << game->getIterationsPerGeneration() << std::endl;
@@ -148,7 +157,7 @@ void Display::cameraEvents() {
 	}
 }
 
-void Display::drawFruits(const std::vector<Entity*> &fruits, const sf::View &view) {
+void Display::drawFruits(const std::vector<Fruit*> &fruits, const sf::View &view) {
 	for (unsigned int i = 0; i < fruits.size(); i++) {
 		if (!isInsideView(fruits[i]->getPos(), view))
 			continue;
@@ -164,12 +173,12 @@ void Display::drawAnimals(const std::vector<Animal*> &animals, const sf::View &v
 		if (!animals[i]->isAlive() || !isInsideView(animalDisplayPos, view))
 			continue;
 		
-		// set la bonne position à l'animalShape
 		animalShape.setPosition(animalDisplayPos.x, animalDisplayPos.y);
 		animalShape.setRotation(animals[i]->getAngle());
-		
-		// dessin de l'animalShape
 		window.draw(animalShape);
+		animalHeadShape.setPosition(animalDisplayPos.x, animalDisplayPos.y);
+		animalHeadShape.setRotation(animals[i]->getAngle());
+		window.draw(animalHeadShape);
 		
 		// vecteur vers le plus proche fruit
 		if (animals[i]->getClosestFruitAngle() != 0)
@@ -218,24 +227,31 @@ void Display::speciesColor(int index) {
 	switch(index) {
 		case FOX :
 			animalShape.setOutlineColor(sf::Color(245, 150, 0));
+			animalHeadShape.setFillColor(sf::Color(245, 150, 0));
 			break;
 		case SNAKE :
 			animalShape.setOutlineColor(sf::Color(12, 216, 49));
+			animalHeadShape.setFillColor(sf::Color(12, 216, 49));
 			break;
 		case CHICKEN :
 			animalShape.setOutlineColor(sf::Color(150, 150, 150));
+			animalHeadShape.setFillColor(sf::Color(150, 150, 150));
 			break;
 		case LYNX :
 			animalShape.setOutlineColor(sf::Color(255, 245, 169));
+			animalHeadShape.setFillColor(sf::Color(255, 245, 169));
 			break;
 		case MONKEY :
 			animalShape.setOutlineColor(sf::Color(160, 90, 69));
+			animalHeadShape.setFillColor(sf::Color(160, 90, 69));
 			break;
 		case FISH :
 			animalShape.setOutlineColor(sf::Color(177, 175, 249));
+			animalHeadShape.setFillColor(sf::Color(177, 175, 249));
 			break;
 		default :
 			animalShape.setOutlineColor(sf::Color(150, 150, 150));
+			animalHeadShape.setFillColor(sf::Color(150, 150, 150));
 			break;
 	}
 }

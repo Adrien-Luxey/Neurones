@@ -25,8 +25,8 @@ class Display {
   private:
 	Game *game;
 	sf::RenderWindow window;
-	sf::RectangleShape animalShape;
-	sf::CircleShape fruitShape;
+	sf::CircleShape fruitShape, animalShape;
+	sf::ConvexShape animalHeadShape;
 	sf::RectangleShape lineShape;
 	sf::Text text;
 	sf::Font font;
@@ -42,7 +42,7 @@ class Display {
 	
 	void cameraEvents();
 	
-	void drawFruits(const std::vector<Entity*> &fruits, const sf::View &view);
+	void drawFruits(const std::vector<Fruit*> &fruits, const sf::View &view);
 	void drawAnimals(const std::vector<Animal*> &animals, const sf::View &view);
 	void drawGameBorders(const sf::View &view);
 	

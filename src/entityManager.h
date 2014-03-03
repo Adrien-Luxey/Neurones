@@ -25,7 +25,7 @@ class EntityManager {
 	bool gameover() const;
 
 	std::vector<Species> getSpecies() const { return species; }
-	std::vector<Entity*> getFruits() const { return fruits; }
+	std::vector<Fruit*> getFruits() const { return fruits; }
 	
   private:
 	typedef struct Position {
@@ -35,12 +35,12 @@ class EntityManager {
 		Position(float _dist = 0) : dist(_dist) {}
 	} Position;
 	
-	std::vector<Entity*> fruits;
+	std::vector<Fruit*> fruits;
 	std::vector<Species> species;
 	std::vector<Bush> bushes;
 	
 	const unsigned int distanceSigmoid;
-	const int hitbox, worldSize, bushesNumber, bushesMinSize, bushesMaxSize, combatDeviation, allowFriendlyFire, randomInCombats;
+	const int worldSize, bushesNumber, bushesMinSize, bushesMaxSize, combatDeviation, allowFriendlyFire, randomInCombats;
 	
 	void update(Animal *animal, const unsigned int index);
 	
@@ -49,16 +49,19 @@ class EntityManager {
 	
 	void addClosestFruit(Animal* animal, std::vector<float> &inputs);
 	
-	Entity* getClosestEntityFromTab(const Vect2i pos, const std::vector<Entity*> &tab, Position &closest);
-	Animal* getClosestAnimalFromTab(const Vect2i pos, const std::vector<Animal*> &tab, Position &closest, bool animalInTab);
+	Animal* getClosestAnimalFromTab(const Animal *animal, const std::vector<Animal*> &tab, Position &closestPos, bool animalInTab);
 	
-	const Vect2i wrapPositionDifference(const Vect2i a, const Vect2i b);
+	Vect2i wrapPositionDifference(const Vect2i a, const Vect2i b) const;
 	
-	const void addNormalizedPosition(const Position &p, std::vector<float> &inputs, const float &angle);
+	void addNormalizedPosition(const Position &p, std::vector<float> &inputs, const float &angle);
 	
-	void collisionCheck(Animal *animal, const unsigned int index);
+	void handleCollisionsWithPointers(Animal *animal);
+	void handleCollisions(Animal *animal, const unsigned int index);
+	// returns true if animal died
+	bool battle(Animal *animal, Animal *enemy);
 	
-	const bool isColliding(const Vect2i a, const Vect2i b);
+	bool isColliding(const Entity *a, const Entity *b) const;
+	
 };
 
 #endif // ENTITY_MANAGER_H

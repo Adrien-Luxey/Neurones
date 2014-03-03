@@ -5,6 +5,7 @@
 #include <cmath>
 
 #include "entity.h"
+#include "fruit.h"
 #include "neural_network.h"
 
 class Animal : public Entity {
@@ -30,9 +31,12 @@ class Animal : public Entity {
 	int getClosestAllyAngle() const { return closestAllyAngle; }
 	float getAttackRate() const { return attackRate; }
 	float getDefenseRate() const { return defenseRate; }
-	float getCombatOutput() const { return combatOutput; }
+	float getBattleOutput() const { return battleOutput; }
 	
 	std::vector<float> getDNA();
+	
+	Animal *closestEnemy, *closestAlly;
+	Fruit *closestFruit;
 
   protected :
 	// Convertit le déplacement des roues gauche/droite pour modifier la position et l'angle
@@ -45,7 +49,7 @@ class Animal : public Entity {
 	
 	// attack/defensekRate : [0; 1[
 	// On garde combatOutput pour pouvoir le transmettre aux autres animaux
-	float attackRate, defenseRate, combatOutput;
+	float attackRate, defenseRate, battleOutput;
 	
 	bool alive;
 	

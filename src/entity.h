@@ -12,13 +12,14 @@ class Entity {
 		virtual void init() = 0;
 
 		// getters
-		const Vect2i getPos() { return pos; }
-		const Vect2i getSize() { return size; }
-		const float getAngle() { return angle; }
+		Vect2i getPos() const { return pos; }
+		int getRadius() const { return radius; }
+		float getAngle() const { return angle; }
 		
 	protected :
-		Vect2i pos, size;
+		Vect2i pos;
 		float angle; // [0°; 360°]
+		int radius;
 		
 		const int worldSize;
 };
