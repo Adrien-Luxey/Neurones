@@ -1,3 +1,13 @@
+
+/**
+ * \file Congig_parser.h
+ * \author	Adrien Luxey
+ * 
+ * Utility singleton class parsing a config file (default 'files/config.cfg')
+ * that contains constants used by a project, organized by type (int, float, string),
+ * referenced by their name and stored in maps
+ */
+
 #ifndef CONFIG_PARSER_H
 #define CONFIG_PARSER_H
 
@@ -28,6 +38,8 @@ class ConfigParser {
 	private :
 		ConfigParser(const std::string &fileName);
 
+		void initMaps();
+		
 		static ConfigParser *singleton;
 
 		enum typeEnum { INT, FLOAT, STRING, NONE };
@@ -36,7 +48,6 @@ class ConfigParser {
 		const std::string extensionString;
 		const char assignChar;
 		const std::string defaultFile;
-		void initMaps();
 
 		std::string mFileName;
 

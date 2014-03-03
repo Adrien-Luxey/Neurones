@@ -1,4 +1,4 @@
-#include "configParser.h"
+#include "config_parser.h"
 
 using namespace std;
 

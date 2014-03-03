@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "utils.h"
-#include "configParser.h"
+#include "config_parser.h"
 #include "neuron.h"
 
 class Layer {

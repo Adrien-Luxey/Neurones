@@ -3,8 +3,8 @@
 #define SEUIL_ATTACKING	0.9f
 
 Animal::Animal()
-: Entity(), animalLinearSpeed(CFG->readInt("AnimalLinearSpeed")),
-  animalAngularSpeed(CFG->readInt("AnimalAngularSpeed")), network(CFG->readInt("InputLayerSize"), CFG->readInt("OutputLayerSize")) {
+: Entity(), ANIMAL_LINEAR_SPEED(CFG->readInt("AnimalLinearSpeed")),
+  ANIMAL_ANGULAR_SPEED(CFG->readInt("AnimalAngularSpeed")), network(CFG->readInt("InputLayerSize"), CFG->readInt("OutputLayerSize")) {
 	radius = CFG->readInt("AnimalRadius");
 	init();
 }
@@ -93,8 +93,8 @@ void Animal::updatePosition(float da, float dp) {
 	float slowdownRate = 1.f - fabs(battleOutput);
 	
 	// composante angulaire et linéaire du déplacement
-	dp *= animalLinearSpeed * slowdownRate;
-	da *= animalAngularSpeed * slowdownRate;
+	dp *= ANIMAL_LINEAR_SPEED * slowdownRate;
+	da *= ANIMAL_ANGULAR_SPEED * slowdownRate;
 	
 	// mise à jour de lastPos et speed pour l'interpolation (cf le lien dans game.cpp au sujet de la gameloop)
 	speed.x = dp * cosf(angle/180.f*PI);

@@ -5,7 +5,7 @@
 #include <iostream>
 
 #include "utils.h"
-#include "entityManager.h"
+#include "entity_manager.h"
 #include "entity.h"
 
 class Game;
@@ -34,8 +34,8 @@ class Genetics {
 
 	std::vector<AnimalData> children, parents, animalsData;
 	
-	const int crossoverRate;
-	const float mutationGaussDeviation;
+	const int CROSSOVER_RATE;
+	const float MUTATION_GAUSS_DEVIATION;
 };
 
 #endif // GENETICS_H

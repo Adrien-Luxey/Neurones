@@ -1,3 +1,3 @@
 #include "entity.h"
 
-Entity::Entity() : angle(0), worldSize(CFG->readInt("WorldSize")) {}
+Entity::Entity() : angle(0), WORLD_SIZE(CFG->readInt("WorldSize")) {}

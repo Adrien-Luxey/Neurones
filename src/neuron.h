@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "utils.h"
-#include "configParser.h"
+#include "config_parser.h"
 
 // Si UseNeuronSigmoid = 0, output du neuron donne : (sum > SEUIL) ? OUT_1, OUT_0;
 #define SEUIL	0
@@ -35,8 +35,8 @@ class Neuron {
 	unsigned int inputsNumber;
 	std::vector<float> weights;
 
-	const float neuronSigmoid;
-	const bool useNeuronSigmoid;
+	const float NEURON_SIGMOID;
+	const bool USE_NEURON_SIGMOID;
 };
 
 #endif // NEURON_H

@@ -1,7 +1,7 @@
 #include "neuron.h"
 
 Neuron::Neuron(unsigned int _inputsNumber)
-: inputsNumber(_inputsNumber), neuronSigmoid(CFG->readFloat("NeuronSigmoid")), useNeuronSigmoid(CFG->readInt("UseNeuronSigmoid")) {
+: inputsNumber(_inputsNumber), NEURON_SIGMOID(CFG->readFloat("NeuronSigmoid")), USE_NEURON_SIGMOID(CFG->readInt("UseNeuronSigmoid")) {
 	initWeights();
 }
 
@@ -27,9 +27,9 @@ const float Neuron::run(const std::vector<float> inputs) {
 	for (unsigned int i = 0; i < inputsNumber && i < inputs.size(); i++)
 		sum += weights[i+1]*inputs[i];
 	
-	if (useNeuronSigmoid) {
+	if (USE_NEURON_SIGMOID) {
 		// La sigmoide de sum renvoie un float ]-1;1[
-		return 1/(1 + expf(-sum/neuronSigmoid)) * 2.f - 1.f;
+		return 1/(1 + expf(-sum/NEURON_SIGMOID)) * 2.f - 1.f;
 	} else {
 		// Sinon on effectue une fonction scale
 		return (sum > SEUIL) ? OUT_1 : OUT_0;

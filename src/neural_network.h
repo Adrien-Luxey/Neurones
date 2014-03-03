@@ -19,7 +19,7 @@ class NeuralNetwork {
 		void initLayers();
 		
 		// Run : execute le calcul de tout le NN en fonction d'inputs
-		const std::vector<float> run(const std::vector<float> inputs);
+		std::vector<float> run(const std::vector<float> inputs) const;
 		
 		// Fonction servant à collecter l'ADN pour l'algo génétique
 		std::vector<float> getDNA();

@@ -4,7 +4,7 @@
 
 Display::Display(Game* _game)
   : game(_game), window(sf::VideoMode(CFG->readInt("WindowWidth"), CFG->readInt("WindowHeight")), CFG->readString("WindowTitle")),
-	statusBarWidth(CFG->readInt("StatusBarWidth")), worldSize(CFG->readInt("WorldSize")), viewMoveDelta(CFG->readInt("ViewMoveDelta")),
+	STATUS_BAR_WIDTH(CFG->readInt("StatusBarWidth")), WORLD_SIZE(CFG->readInt("WorldSize")), VIEW_MOVE_DELTA(CFG->readInt("ViewMoveDelta")),
 	windowWidth(CFG->readInt("WindowWidth")), windowHeight(CFG->readInt("WindowHeight")), hasFocus(true) {
 	window.setVerticalSyncEnabled(true);
 	
@@ -34,7 +34,7 @@ Display::Display(Game* _game)
 	text.setStyle(sf::Text::Bold);
 	
 	// options des views
-	mainView.setCenter(worldSize/2, worldSize/2);
+	mainView.setCenter(WORLD_SIZE/2, WORLD_SIZE/2);
 	mainView.setSize(windowWidth, windowHeight);
 }
 
@@ -64,10 +64,6 @@ void Display::events() {
 				switch (event.key.code) {
 					case sf::Keyboard::Escape :
 						game->quit();
-						break;
-						
-					case sf::Keyboard::Space :
-						game->togglePause();
 						break;
 						
 					default :
@@ -147,13 +143,13 @@ void Display::cameraEvents() {
 	// Evenements de déplacement de la caméra
 	if (hasFocus) {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-			mainView.move(0, -viewMoveDelta);
+			mainView.move(0, -VIEW_MOVE_DELTA);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-			mainView.move(-viewMoveDelta, 0);
+			mainView.move(-VIEW_MOVE_DELTA, 0);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-			mainView.move(0, viewMoveDelta);
+			mainView.move(0, VIEW_MOVE_DELTA);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			mainView.move(viewMoveDelta, 0);
+			mainView.move(VIEW_MOVE_DELTA, 0);
 	}
 }
 
@@ -192,12 +188,12 @@ void Display::drawAnimals(const std::vector<Animal*> &animals, const sf::View &v
 		
 		// dessin de la barre d'attaque
 		Vect2i barPosition;
-		barPosition.x = animalDisplayPos.x - statusBarWidth/2;
+		barPosition.x = animalDisplayPos.x - STATUS_BAR_WIDTH/2;
 		barPosition.y = animalDisplayPos.y + animalShape.getLocalBounds().height * 3 / 2;
-		drawVector(barPosition, 0, sf::Color(100, 0, 0), sf::Vector2f(animals[i]->getAttackRate() * statusBarWidth, 2));
+		drawVector(barPosition, 0, sf::Color(100, 0, 0), sf::Vector2f(animals[i]->getAttackRate() * STATUS_BAR_WIDTH, 2));
 		// dessin de la barre de defense
 		//barPosition.y += 4;
-		drawVector(barPosition, 0, sf::Color(0, 0, 100), sf::Vector2f(animals[i]->getDefenseRate() * statusBarWidth, 2));
+		drawVector(barPosition, 0, sf::Color(0, 0, 100), sf::Vector2f(animals[i]->getDefenseRate() * STATUS_BAR_WIDTH, 2));
 		
 		// score
 		std::stringstream ss;
@@ -211,16 +207,16 @@ void Display::drawAnimals(const std::vector<Animal*> &animals, const sf::View &v
 
 void Display::drawGameBorders(const sf::View &view) {
 	if (mainView.getCenter().x - mainView.getSize().x / 2 < 0)
-		drawVector(Vect2i(0, 0), 90, sf::Color::White, sf::Vector2f(worldSize, 2));
+		drawVector(Vect2i(0, 0), 90, sf::Color::White, sf::Vector2f(WORLD_SIZE, 2));
 	
 	if (mainView.getCenter().y - mainView.getSize().y / 2 < 0)
-		drawVector(Vect2i(0, 0), 0, sf::Color::White, sf::Vector2f(worldSize, 2));
+		drawVector(Vect2i(0, 0), 0, sf::Color::White, sf::Vector2f(WORLD_SIZE, 2));
 	
-	if (mainView.getCenter().x + mainView.getSize().x / 2 >= worldSize)
-		drawVector(Vect2i(worldSize, 0), 90, sf::Color::White, sf::Vector2f(worldSize, 2));
+	if (mainView.getCenter().x + mainView.getSize().x / 2 >= WORLD_SIZE)
+		drawVector(Vect2i(WORLD_SIZE, 0), 90, sf::Color::White, sf::Vector2f(WORLD_SIZE, 2));
 	
-	if (mainView.getCenter().y + mainView.getSize().y / 2 >= worldSize)
-		drawVector(Vect2i(0, worldSize), 0, sf::Color::White, sf::Vector2f(worldSize, 2));
+	if (mainView.getCenter().y + mainView.getSize().y / 2 >= WORLD_SIZE)
+		drawVector(Vect2i(0, WORLD_SIZE), 0, sf::Color::White, sf::Vector2f(WORLD_SIZE, 2));
 }
 
 void Display::speciesColor(int index) {

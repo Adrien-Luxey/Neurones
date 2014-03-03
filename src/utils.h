@@ -15,7 +15,7 @@
 #include <iostream>
 static std::default_random_engine generator;
 
-#include "configParser.h"
+#include "config_parser.h"
 #define CFG		ConfigParser::get()
 
 enum { CHICKEN, FOX, SNAKE, LYNX, MONKEY, FISH, TYPES_CNT };

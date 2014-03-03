@@ -81,3 +81,11 @@ et "handleCOllisionsWithPointers", qui utilise 3 pteurs des closest fruit/ally/e
 Probleme : on e peut manger qu'un fruit, qu'un ennemi, qu'un allié.
 Bref, à revoir.
 De toute façon l'EntityManager est bien trop gros, et bien trop compliqué, il faut le REECRIRE
+UPDATE : C'était pas si terrible, on va pouvoir utiliser mes cleanups pour sortir la 0.3
+
+QU'EN EST-IL DE LA DOC ?
+Bien entamé le Doxygen du projet. Viable ou pas, au moins il est informatif quand on lit le code.
+Par ordre alphabétique des classes, je me suis arrêté à Genetics (non compris)
+Pitiiié, Adrien, finis ça, sors une release, et passe à la suite
+Le plus important reste les statistiques, puis les saves
+Ouiiii, ça demande Qt pour être multiplateforme, mais bon, au moins les stats, sur un csv bidon, ca serait tellement bien !

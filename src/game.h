@@ -2,9 +2,8 @@
 #define GAME_H
 
 /**
- * /file game.h
- * /author Adrien Luxey
- * /brief File containing
+ * \file game.h
+ * \author Adrien Luxey
  * 
  */
 
@@ -17,49 +16,64 @@
 #include <SFML/System.hpp>
 
 #include "display.h"
-#include "entityManager.h"
+#include "entity_manager.h"
 #include "genetics.h"
 
+/**
+ * \brief General class dispatching the game jobs to other objects. Only SFML user with Display
+ * 
+ */
 class Game {
 	public :
 		Game();
 		~Game();
+	
+		/**
+		 * \brief Game loop
+         */
+		void loop();
 		
-		void exec();
 		void quit() { continuer = false; }
-		
-		// getters and stuff
-		int getGeneration() const { return generation; }
-		int getIterations() const { return iterations; }
-		int getIterationsPerGeneration() const { return iterationsPerGeneration; }
-		float getGameSpeedRatio() const { return gameSpeedRatio; }
-		float getFps() const { return fps; }
-		float getUps() const { return ups; }
-		void togglePause();
 		void increaseGameSpeed();
 		void decreaseGameSpeed();
 		
-	private :		
+		// getters
+		int getGeneration() const { return generation; }
+		int getIterations() const { return iterations; }
+		int getIterationsPerGeneration() const { return ITERATIONS_PER_GENERATION; }
+		float getGameSpeedRatio() const { return gameSpeedRatio; }
+		float getFps() const { return fps; }
+		float getUps() const { return ups; }
+		
+	private :
+		/**
+		 * \brief calls the genetic algorithm and resets everything for the next generation
+         */
+		void newGeneration();
+		/**
+		 * \brief Game update : calls the manager and checks for the end of the generation
+         */
+		void update();
+		/**
+		 * \brief Updates fps & ups every second for user information
+         */
+		void updateFps();
+		
 		Display display;
 		EntityManager manager;
 		Genetics genetics;
 		
-		bool continuer, pause;
+		bool continuer;
 		int generation;
 		
-		const int iterationsPerGeneration, defaultGameSpeed, minimumFps;
+		const int ITERATIONS_PER_GENERATION, DEFAULT_GAME_SPEED, MINIMUM_FPS;
 		
-		// gestion du temps
+		// time handling attributes
 		sf::Clock clock, oneSecondClock;
 		sf::Time nextUpdateTick, maxDisplayTick;
 		float gameSpeedRatio;
 		float fps, ups /* updates per second */;
 		int iterations, updatesCount, displaysCount;
-		
-		void newGeneration();
-		void update();
-		bool gameover();
-		void updateFps();
 };
 
 #endif // GAME_H

@@ -17,7 +17,7 @@ int main(void) {
 	
 	srand(time(NULL));
 	
-	game.exec();
+	game.loop();
 	
 	return EXIT_SUCCESS;
 }

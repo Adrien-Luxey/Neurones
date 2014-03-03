@@ -1,7 +1,7 @@
 #include "genetics.h"
 
 Genetics::Genetics()
-  : crossoverRate(CFG->readInt("CrossoverRate")), mutationGaussDeviation(CFG->readFloat("MutationGaussDeviation")) {}
+  : CROSSOVER_RATE(CFG->readInt("CrossoverRate")), MUTATION_GAUSS_DEVIATION(CFG->readFloat("MutationGaussDeviation")) {}
 
 void Genetics::evolve(EntityManager &manager) {
 	AnimalData tmp;
@@ -92,8 +92,8 @@ void Genetics::roulette() {
 		
 		tmp1.DNA.clear();
 		tmp2.DNA.clear();
-		// On n'applique l'algorithme de dans crossoverRate% des cas, sinon on copie simplement l'ADN des parents dans les enfants
-		if (randRate(generator) >= crossoverRate) {
+		// On n'applique l'algorithme de dans CROSSOVER_RATE% des cas, sinon on copie simplement l'ADN des parents dans les enfants
+		if (randRate(generator) >= CROSSOVER_RATE) {
 			// Création de l'ADN de l'enfant en piochant aléatoirement dans l'ADN de l'un ou l'autre des parents
 			// On utilise un random uniforme, donc normalement on devrait avoir 50% d'ADN de chaque
 			
@@ -166,7 +166,7 @@ void Genetics::mutation(std::vector<float> &DNA) {
 	for (unsigned int i = 0; i < DNA.size(); i++) {
 		if (prob(generator) == 0) {
 			float tmpf = DNA[i];
-			std::normal_distribution<float> gauss(DNA[i], mutationGaussDeviation);
+			std::normal_distribution<float> gauss(DNA[i], MUTATION_GAUSS_DEVIATION);
 			
 			DNA[i] = gauss(generator);
 			tmpf = fabs(tmpf - DNA[i]);

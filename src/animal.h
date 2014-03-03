@@ -5,7 +5,6 @@
 #include <cmath>
 
 #include "entity.h"
-#include "fruit.h"
 #include "neural_network.h"
 
 class Animal : public Entity {
@@ -34,9 +33,6 @@ class Animal : public Entity {
 	float getBattleOutput() const { return battleOutput; }
 	
 	std::vector<float> getDNA();
-	
-	Animal *closestEnemy, *closestAlly;
-	Fruit *closestFruit;
 
   protected :
 	// Convertit le déplacement des roues gauche/droite pour modifier la position et l'angle
@@ -53,7 +49,7 @@ class Animal : public Entity {
 	
 	bool alive;
 	
-	const int animalLinearSpeed, animalAngularSpeed;
+	const int ANIMAL_LINEAR_SPEED, ANIMAL_ANGULAR_SPEED;
 
 	NeuralNetwork network;
 };

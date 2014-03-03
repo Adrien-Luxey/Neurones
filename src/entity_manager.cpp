@@ -1,4 +1,4 @@
-#include "entityManager.h"
+#include "entity_manager.h"
 #include "genetics.h"
 
 // AnimalsNumber = species[1].size() (idem pour les fruits)
@@ -12,10 +12,10 @@
 
 
 EntityManager::EntityManager()
-  : distanceSigmoid(CFG->readInt("DistanceSigmoid")), worldSize(CFG->readInt("WorldSize")),
-	bushesNumber(CFG->readInt("BushesNumber")), bushesMinSize(CFG->readInt("BushesMinSize")),
-	bushesMaxSize(CFG->readInt("BushesMaxSize")), combatDeviation(CFG->readFloat("CombatDeviation")),
-	allowFriendlyFire(CFG->readInt("AllowFriendlyFire")), randomInCombats(CFG->readInt("RandomInCombats")) {
+  : DISTANCE_SIGMOID(CFG->readInt("DistanceSigmoid")), WORLD_SIZE(CFG->readInt("WorldSize")),
+	BUSHES_NUMBER(CFG->readInt("BushesNumber")), BUSHES_MIN_SIZE(CFG->readInt("BushesMinSize")),
+	BUSHES_MAX_SIZE(CFG->readInt("BushesMaxSize")), BATTLE_DEVIATION(CFG->readFloat("BattleDeviation")),
+	ALLOW_FRIENDLY_FIRE(CFG->readInt("AllowFriendlyFire")), RANDOM_IN_BATTLES(CFG->readInt("RandomInBattles")) {
 	
 	Species tmp;
 	
@@ -32,8 +32,6 @@ EntityManager::EntityManager()
 		// Ajout des animaux
 		for (int j = 0; j < CFG->readInt("AnimalsNumber"); j++)
 			tmp.tab.push_back(new Animal());
-		
-		tmp.aliveAnimals = tmp.tab.size();
 		
 		species.push_back(tmp);
 	}
@@ -61,22 +59,19 @@ EntityManager::~EntityManager() {
 	fruits.clear();
 }
 
-void EntityManager::init() {
-	for (unsigned int i = 0; i < species.size(); i++)
-		species[i].aliveAnimals = species[i].tab.size();
-	
+void EntityManager::init() {	
 	// buissons !
 	bushes.clear();
-	for (int i = 0; i < bushesNumber; i++) {
+	for (int i = 0; i < BUSHES_NUMBER; i++) {
 		Bush bush;
 		
 		float angle = (rand() % 360) * PI / 180.f;
-		std::normal_distribution<float> normalRandDist(0, worldSize/5);
+		std::normal_distribution<float> normalRandDist(0, WORLD_SIZE/5);
 		int dist = abs(normalRandDist(generator));
 
-		bush.pos.x = std::min(worldSize, std::max(0, (int) (worldSize/2 + cosf(angle) * dist)));
-		bush.pos.y = std::min(worldSize, std::max(0, (int) (worldSize/2 + sinf(angle) * dist)));
-		bush.size = rand() % (bushesMaxSize - bushesMinSize) + bushesMinSize;
+		bush.pos.x = std::min(WORLD_SIZE, std::max(0, (int) (WORLD_SIZE/2 + cosf(angle) * dist)));
+		bush.pos.y = std::min(WORLD_SIZE, std::max(0, (int) (WORLD_SIZE/2 + sinf(angle) * dist)));
+		bush.size = rand() % (BUSHES_MAX_SIZE - BUSHES_MIN_SIZE) + BUSHES_MIN_SIZE;
 		
 		bushes.push_back(bush);
 	}
@@ -94,21 +89,9 @@ void EntityManager::update() {
 			
 			update(animal, i);
 			
-			handleCollisionsWithPointers(animal);
+			handleCollisions(animal, i);
 		}
 	}
-}
-
-bool EntityManager::gameover() const {
-	unsigned int aliveSpecies = 0;
-	
-	for (unsigned int i = 0; i < species.size(); i++) {
-		if (species[i].aliveAnimals > 0)
-			aliveSpecies++;
-	}
-	
-	return (species.size() == 1 && aliveSpecies == 0) ||
-		(species.size() > 1 && aliveSpecies < 2);
 }
 
 void EntityManager::update(Animal *animal, const unsigned int index) {
@@ -126,8 +109,8 @@ void EntityManager::update(Animal *animal, const unsigned int index) {
 	animal->update(inputs);
 }
 
-void EntityManager::addClosestEnemy(Animal *animal, const unsigned int index, std::vector<float> &inputs) {
-	Position closest(worldSize * worldSize);
+void EntityManager::addClosestEnemy(const Animal *animal, const unsigned int index, std::vector<float> &inputs) {
+	Position closest(WORLD_SIZE * WORLD_SIZE);
 	Animal *enemy = NULL;
 	
 	// find closest in all tabs
@@ -148,15 +131,13 @@ void EntityManager::addClosestEnemy(Animal *animal, const unsigned int index, st
 	// variable de combat de l'ennemi
 	if (enemy != NULL) {
 		inputs.push_back(enemy->getBattleOutput());
-		animal->closestEnemy = enemy;
 	} else {
 		inputs.push_back(0.f);
-		animal->closestEnemy = NULL;
 	}
 }
 
-void EntityManager::addClosestAlly(Animal *animal, const unsigned int index, std::vector<float> &inputs) {
-	Position closest(worldSize * worldSize);
+void EntityManager::addClosestAlly(const Animal *animal, const unsigned int index, std::vector<float> &inputs) {
+	Position closest(WORLD_SIZE * WORLD_SIZE);
 	Animal *ally = getClosestAnimalFromTab(animal, species[index].tab, closest, true);
 
 	
@@ -166,16 +147,13 @@ void EntityManager::addClosestAlly(Animal *animal, const unsigned int index, std
 	// variable de combat de l'ennemi
 	if (ally != NULL) {
 		inputs.push_back(ally->getBattleOutput());
-		animal->closestAlly = ally;
 	} else {
 		inputs.push_back(0.f);
-		animal->closestAlly = NULL;
 	}
 }
 
-void EntityManager::addClosestFruit(Animal* animal, std::vector<float> &inputs) {
-	Position closest(worldSize * worldSize), tmp;
-	Fruit *fruit = NULL;
+void EntityManager::addClosestFruit(const Animal* animal, std::vector<float> &inputs) {
+	Position closest(WORLD_SIZE * WORLD_SIZE), tmp;
 	
 	// find closest fruit	
 	for (unsigned int i = 0; i < fruits.size(); i++) {		
@@ -184,18 +162,15 @@ void EntityManager::addClosestFruit(Animal* animal, std::vector<float> &inputs) 
 		
 		if (tmp.dist < closest.dist) {
 			closest = tmp;
-			fruit = fruits[i];
 		}
 	}
 	
 	// Give closest's angle/dist to network 
 	addNormalizedPosition(closest, inputs, animal->getAngle());
-	
-	animal->closestFruit = fruit;
 }
 
 Animal* EntityManager::getClosestAnimalFromTab(const Animal *animal, const std::vector<Animal*> &tab, Position &closestPos, bool animalInTab) {
-	Position tmp(worldSize * worldSize);
+	Position tmp(WORLD_SIZE * WORLD_SIZE);
 	Animal* closestAnimal = NULL;
 	
 	for (unsigned int i = 0; i < tab.size(); i++) {		
@@ -221,10 +196,10 @@ Animal* EntityManager::getClosestAnimalFromTab(const Animal *animal, const std::
 Vect2i EntityManager::wrapPositionDifference(const Vect2i a, const Vect2i b) const {
 	Vect2i tmp(b.x - a.x, b.y - a.y);
 	
-	if (abs(tmp.x) > worldSize / 2)
-		tmp.x = -1 * sgn(tmp.x) * (worldSize - abs(tmp.x));
-	if (abs(tmp.y) > worldSize / 2)
-		tmp.y = -1 * sgn(tmp.y) * (worldSize - abs(tmp.y));
+	if (abs(tmp.x) > WORLD_SIZE / 2)
+		tmp.x = -1 * sgn(tmp.x) * (WORLD_SIZE - abs(tmp.x));
+	if (abs(tmp.y) > WORLD_SIZE / 2)
+		tmp.y = -1 * sgn(tmp.y) * (WORLD_SIZE - abs(tmp.y));
 	
 	return tmp;
 }
@@ -232,7 +207,7 @@ Vect2i EntityManager::wrapPositionDifference(const Vect2i a, const Vect2i b) con
 void EntityManager::addNormalizedPosition(const Position &p, std::vector<float> &inputs, const float &angle) {
 	// Si p.dist = worldsize², cette position ne représente rien de réel (aucun closest n'a été trouvé par les autres fonctions)
 	// Si p est invalide, on donne à l'animal des valeurs limites
-	if (p.dist == worldSize * worldSize) {
+	if (p.dist == WORLD_SIZE * WORLD_SIZE) {
 		inputs.push_back(0.f);
 		inputs.push_back(1.f);
 	// Sinon
@@ -240,24 +215,7 @@ void EntityManager::addNormalizedPosition(const Position &p, std::vector<float> 
 		// angle [0; 1[ ( [0; 360°[ ) relatif : angle du mobile - mon angle
 		inputs.push_back(atan2f(p.pos.y, p.pos.x) / (2 * PI) - angle / 360.f);
 		// distance as sigmoid so both [0; 1[
-		inputs.push_back(1.f / (1.f + expf(-p.dist / distanceSigmoid)) * 2.f - 1.f);
-	}
-}
-
-void EntityManager::handleCollisionsWithPointers(Animal *animal) {
-	if (isColliding(animal, animal->closestFruit)) {
-		animal->incrementScore();
-		animal->closestFruit->init(bushes[ rand() % bushes.size() ]);
-	}
-	
-	if (isColliding(animal, animal->closestEnemy)) {
-		if (battle(animal, animal->closestEnemy))
-			return;
-	}
-	
-	if (allowFriendlyFire == 1 && isColliding(animal, animal->closestAlly)) {
-		if (battle(animal, animal->closestAlly))
-			return;
+		inputs.push_back(1.f / (1.f + expf(-p.dist / DISTANCE_SIGMOID)) * 2.f - 1.f);
 	}
 }
 
@@ -274,7 +232,7 @@ void EntityManager::handleCollisions(Animal *animal, const unsigned int index) {
 	Animal *enemy;
 	for (unsigned int i = 0; i < species.size(); i++) {
 		// do not check your own species if no friendly fire
-		if (allowFriendlyFire == 0 && index == i)
+		if (!ALLOW_FRIENDLY_FIRE && index == i)
 			continue;
 		
 		for (unsigned int j = 0; j < species[i].tab.size(); j++) {
@@ -297,11 +255,11 @@ void EntityManager::handleCollisions(Animal *animal, const unsigned int index) {
 }
 
 bool EntityManager::battle(Animal *animal, Animal *enemy) {
-	if (randomInCombats == 1) {
-		std::normal_distribution<float> animalAttackRand(animal->getAttackRate(), combatDeviation);
-		std::normal_distribution<float> enemyDefenseRand(enemy->getDefenseRate(), combatDeviation);
-		std::normal_distribution<float> enemyAttackRand(enemy->getAttackRate(), combatDeviation);
-		std::normal_distribution<float> animalDefenseRand(animal->getDefenseRate(), combatDeviation);
+	if (RANDOM_IN_BATTLES) {
+		std::normal_distribution<float> animalAttackRand(animal->getAttackRate(), BATTLE_DEVIATION);
+		std::normal_distribution<float> enemyDefenseRand(enemy->getDefenseRate(), BATTLE_DEVIATION);
+		std::normal_distribution<float> enemyAttackRand(enemy->getAttackRate(), BATTLE_DEVIATION);
+		std::normal_distribution<float> animalDefenseRand(animal->getDefenseRate(), BATTLE_DEVIATION);
 
 		if (animalAttackRand(generator) > enemyDefenseRand(generator)) {
 			enemy->die();

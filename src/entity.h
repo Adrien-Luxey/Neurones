@@ -3,12 +3,18 @@
 
 #include "utils.h"
 
-// Classe abstraite représentant tout type d'entité à afficher
+/**
+ * \brief Abstract class represtenting any displayable physical object of the game
+ */
+
 class Entity {
 	public :
 		Entity();
 		virtual ~Entity() {}
 		
+		/**
+		 * \brief Abstract method for object initialisation
+         */
 		virtual void init() = 0;
 
 		// getters
@@ -18,10 +24,10 @@ class Entity {
 		
 	protected :
 		Vect2i pos;
-		float angle; // [0°; 360°]
+		float angle; // degrees
 		int radius;
 		
-		const int worldSize;
+		const int WORLD_SIZE;
 };
 
 
