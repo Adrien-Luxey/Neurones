@@ -58,8 +58,8 @@ void Game::newGeneration() {
 	
 	sf::Time generationDuration = clock.restart();
 	std::cout << "Génération #" << generation++ << " lasted " << generationDuration.asSeconds() << " seconds" << std::endl;
-	nextUpdateTick -= generationDuration;
-	maxDisplayTick -= generationDuration;
+	nextUpdateTick = sf::Time::Zero;
+	maxDisplayTick = sf::seconds(1) / (float) MINIMUM_FPS;
 }
 
 void Game::update() {

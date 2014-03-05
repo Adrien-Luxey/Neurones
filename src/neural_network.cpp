@@ -27,7 +27,7 @@ void NeuralNetwork::initLayers() {
 }
 
 // Run : execute le calcul de tout le NN en fonction d'inputs
-std::vector<float> NeuralNetwork::run(const std::vector<float> inputs) const {
+std::vector<float> NeuralNetwork::run(const std::vector<float> inputs) {
 	// on ajoute les sorties du tour précédent en entrée du nn (pour voir))
 	//outputs.insert(outputs.end(), inputs.begin(), inputs.end());
 	outputs = inputs;

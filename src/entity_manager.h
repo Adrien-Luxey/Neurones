@@ -41,6 +41,14 @@ class EntityManager {
 	std::vector<Fruit*> getFruits() const { return fruits; }
 	
   private:	
+	/// \brief Structure representing a position with its cartesian size
+	typedef struct Position {
+		float dist; ///< The size of the vector
+		Vect2i pos; ///< The vector position
+
+		Position(float _dist = 0) : dist(_dist) {} ///< A constructor, to be able to define the size
+	} Position;
+	
 	/**
 	 * \brief Update one animal : give him inputs, call the NN, handle collisions
      * @param animal	Pointer to the animal
@@ -124,15 +132,6 @@ class EntityManager {
 	 * \brief tells wether a and b collide, considreing both are Entities (ie circles), using their radiuses
      */
 	bool isColliding(const Entity *a, const Entity *b) const;
-	
-	
-	/// \brief Structure representing a position with its cartesian size
-	typedef struct Position {
-		float dist; ///< The size of the vector
-		Vect2i pos; ///< The vector position
-
-		Position(float _dist = 0) : dist(_dist) {} ///< A constructor, to be able to define the size
-	} Position;
 	
 	std::vector<Fruit*> fruits;
 	std::vector<Species> species;

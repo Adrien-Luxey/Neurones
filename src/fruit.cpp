@@ -7,8 +7,8 @@ Fruit::Fruit()
 }
 
 void Fruit::init() {
-	pos.x = rand() % worldSize;
-	pos.y = rand() % worldSize;
+	pos.x = rand() % WORLD_SIZE;
+	pos.y = rand() % WORLD_SIZE;
 }
 
 void Fruit::init(const Bush &bush) {
@@ -20,11 +20,11 @@ void Fruit::init(const Bush &bush) {
 	pos.y = bush.pos.y + sinf(angle) * dist;
 	
 	if (pos.x < 0)
-		pos.x += worldSize;
-	else if (pos.x >= worldSize)
-		pos.x -= worldSize;
+		pos.x += WORLD_SIZE;
+	else if (pos.x >= WORLD_SIZE)
+		pos.x -= WORLD_SIZE;
 	if (pos.y < 0)
-		pos.y += worldSize;
-	else if (pos.y >= worldSize)
-		pos.y -= worldSize;
+		pos.y += WORLD_SIZE;
+	else if (pos.y >= WORLD_SIZE)
+		pos.y -= WORLD_SIZE;
 }
