@@ -256,10 +256,10 @@ void EntityManager::handleCollisions(Animal *animal, const unsigned int index) {
 
 bool EntityManager::battle(Animal *animal, Animal *enemy) {
 	if (RANDOM_IN_BATTLES) {
-		std::normal_distribution<float> animalAttackRand(animal->getAttackRate(), BATTLE_DEVIATION);
-		std::normal_distribution<float> enemyDefenseRand(enemy->getDefenseRate(), BATTLE_DEVIATION);
-		std::normal_distribution<float> enemyAttackRand(enemy->getAttackRate(), BATTLE_DEVIATION);
-		std::normal_distribution<float> animalDefenseRand(animal->getDefenseRate(), BATTLE_DEVIATION);
+		std::normal_distribution<float> animalAttackRand(animal->getAttackValue(), BATTLE_DEVIATION);
+		std::normal_distribution<float> enemyDefenseRand(enemy->getDefenseValue(), BATTLE_DEVIATION);
+		std::normal_distribution<float> enemyAttackRand(enemy->getAttackValue(), BATTLE_DEVIATION);
+		std::normal_distribution<float> animalDefenseRand(animal->getDefenseValue(), BATTLE_DEVIATION);
 
 		if (animalAttackRand(generator) > enemyDefenseRand(generator)) {
 			enemy->die();
@@ -273,12 +273,12 @@ bool EntityManager::battle(Animal *animal, Animal *enemy) {
 			return true;
 		}
 	} else {
-		if (animal->getAttackRate() > enemy->getDefenseRate()) {
+		if (animal->getAttackValue() > enemy->getDefenseValue()) {
 			enemy->die();
 			animal->incrementScore();
 
 			return false;
-		} else if (enemy->getAttackRate() > animal->getDefenseRate()) {
+		} else if (enemy->getAttackValue() > animal->getDefenseValue()) {
 			animal->die();
 			enemy->incrementScore();
 			

@@ -85,7 +85,7 @@ UPDATE : C'était pas si terrible, on va pouvoir utiliser mes cleanups pour sort
 
 QU'EN EST-IL DE LA DOC ?
 Bien entamé le Doxygen du projet. Viable ou pas, au moins il est informatif quand on lit le code.
-Par ordre alphabétique des classes, je me suis arrêté à Genetics (non compris)
+Par ordre alphabétique des classes, je me suis arrêté à Genetics (non compris), manque aussi Animal
 Pitiiié, Adrien, finis ça, sors une release, et passe à la suite
 Le plus important reste les statistiques, puis les saves
 Ouiiii, ça demande Qt pour être multiplateforme, mais bon, au moins les stats, sur un csv bidon, ca serait tellement bien !

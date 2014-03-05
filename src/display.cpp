@@ -190,10 +190,10 @@ void Display::drawAnimals(const std::vector<Animal*> &animals, const sf::View &v
 		Vect2i barPosition;
 		barPosition.x = animalDisplayPos.x - STATUS_BAR_WIDTH/2;
 		barPosition.y = animalDisplayPos.y + animalShape.getLocalBounds().height * 3 / 2;
-		drawVector(barPosition, 0, sf::Color(100, 0, 0), sf::Vector2f(animals[i]->getAttackRate() * STATUS_BAR_WIDTH, 2));
+		drawVector(barPosition, 0, sf::Color(100, 0, 0), sf::Vector2f(animals[i]->getAttackValue() * STATUS_BAR_WIDTH, 2));
 		// dessin de la barre de defense
 		//barPosition.y += 4;
-		drawVector(barPosition, 0, sf::Color(0, 0, 100), sf::Vector2f(animals[i]->getDefenseRate() * STATUS_BAR_WIDTH, 2));
+		drawVector(barPosition, 0, sf::Color(0, 0, 100), sf::Vector2f(animals[i]->getDefenseValue() * STATUS_BAR_WIDTH, 2));
 		
 		// score
 		std::stringstream ss;

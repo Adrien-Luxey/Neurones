@@ -10,8 +10,6 @@ Animal::Animal()
 }
 
 void Animal::init() {
-	attackRate = 0.f;
-	defenseRate = 0.f;
 	battleOutput = 0.f;
 	score = 0;
 	alive = true;
@@ -19,8 +17,8 @@ void Animal::init() {
 	closestFruitAngle = 0;
 	closestAllyAngle = 0;
 	
-	pos.x = rand() % worldSize;
-	pos.y = rand() % worldSize;
+	pos.x = rand() % WORLD_SIZE;
+	pos.y = rand() % WORLD_SIZE;
 	angle = rand() % 360;
 	
 	speed = Vect2i();
@@ -57,15 +55,7 @@ void Animal::update(const std::vector<float> inputs) {
 	// Récupération des sorties du nn
 	outputs = network.run(inputs);
 	
-	// attackRate [0; 1] alors que ouputs[x] [-1; 1], donc on convertit
 	battleOutput = outputs[2];
-	if (outputs[2] > 0) {
-		attackRate = outputs[2];
-		defenseRate = 0.f;
-	} else {
-		attackRate = 0.f;
-		defenseRate = -outputs[2];
-	}
 	
 	// Mise à jour de la position si on est pas en train d'attaquer
 	updatePosition(outputs[0], outputs[1]);
@@ -77,6 +67,19 @@ void Animal::incrementScore() {
 
 void Animal::die() {
 	alive = false;
+}
+
+float Animal::getAttackValue() const {
+	if (battleOutput <= 0.f)
+		return 0.f;
+	else
+		return battleOutput;
+}
+float Animal::getDefenseValue() const {
+	if (battleOutput >= 0.f)
+		return 0.f;
+	else
+		return -battleOutput;
 }
 
 /* Plus d'infos ici : 
@@ -103,14 +106,14 @@ void Animal::updatePosition(float da, float dp) {
 	
 	// Application aux données du mobile
 	angle = fmod(angle + da, 360.f);
-	pos.x = (int) (pos.x + speed.x) % worldSize;
-	pos.y = (int) (pos.y + speed.y) % worldSize;
+	pos.x = (int) (pos.x + speed.x) % WORLD_SIZE;
+	pos.y = (int) (pos.y + speed.y) % WORLD_SIZE;
 	
 	// Le modulo sort parfois des résultats négatifs, on doit corriger ca :
 	if (pos.x < 0)
-		pos.x += worldSize;
+		pos.x += WORLD_SIZE;
 	if (pos.y < 0)
-		pos.y += worldSize;
+		pos.y += WORLD_SIZE;
 }
 
 std::vector<float> Animal::getDNA() {

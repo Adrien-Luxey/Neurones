@@ -53,13 +53,6 @@ void Genetics::roulette() {
 		parents[i].cumulatedScore = cumulated;
 	}
 	
-//	std::cout << "------ RANDOM DNA ------" << std::endl;
-//	for (unsigned int i = 0; i < parents[0].DNA.size(); i++)
-//		std::cout << parents[0].DNA[i] << " ";
-//	std::cout << std::endl;
-//	
-//	std::cout << "------ MUTATIONS ------" << std::endl;
-	
 	// Tant qu'on a pas créé autant d'enfants qu'il y avait de parents, on continue à en créer
 	while (children.size() < parentsNumber) {
 		unsigned int r1, r2, p1, p2;
@@ -100,7 +93,6 @@ void Genetics::roulette() {
 			// On génère deux enfants si possible
 			if (parentsNumber - children.size() >= 2) {
 				for (unsigned int j = 0; j < parents[0].DNA.size(); j++) {
-					//if (j < crossPoint) {
 					if (randomParent(generator) == 0) {
 						tmp1.DNA.push_back(parents[p1].DNA[j]);
 						tmp2.DNA.push_back(parents[p2].DNA[j]);
@@ -121,7 +113,6 @@ void Genetics::roulette() {
 			} else {
 				for (unsigned int j = 0; j < parents[0].DNA.size(); j++) {
 					if (randomParent(generator) == 0) {
-					//if (j < crossPoint) {
 						tmp1.DNA.push_back(parents[p1].DNA[j]);
 					} else {
 						tmp1.DNA.push_back(parents[p2].DNA[j]);
