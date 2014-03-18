@@ -8,23 +8,44 @@
 #include "config_parser.h"
 #include "neuron.h"
 
+/**
+ * @brief Class representing a layer of neurons inside the nn
+ * @param _inputsNumber		Number of inputs for each neuron
+ * @param _neuronsNumber	Number of outputs for each neuron
+ */
 class Layer {
 	public :
 		Layer(unsigned int _inputsNumber, unsigned int _neuronsNumber);
 		~Layer();
 		
-		// Initialisation des neurones de la couche
+		/**
+		 * @brief initialize the neurones of the layer with the inputs/outputs numbers
+         */
 		void initNeurons();
 		
-		// Execution de tous les neurones en fonction de inputs
+		/**
+		 * @brief Execution of all the neurons of the layer according to the inputs array
+         * @param inputs	The inputs array
+         * @return A float array representing the outputs
+         */
 		std::vector<float> run(const std::vector<float> inputs);
 		
-		// Fonctions servant à reconstituer l'ADN complet du NN
+		/**
+		 * 
+         * @return the DNA of all the neurons as a float vector
+         */
 		std::vector<float> getDNA();
 		
+		/**
+		 * 
+         * @return The DNA of all the nuerons size
+         */
 		unsigned int getDNASize() const;
 		
-		// MaJ de l'ADN du NN après passage de l'algo génétique
+		/**
+		 * @brief Update the neurons' DNA with the news value
+         * @param DNA	The new DNA to set
+         */
 		void setDNA(const std::vector<float> &DNA);
 		
 	private :

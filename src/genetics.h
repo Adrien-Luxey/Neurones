@@ -111,8 +111,6 @@ class Genetics {
 	 * 
      */
 	static int compareAnimalData(const void *a, const void *b);
-
-	std::vector<AnimalData> children, parents, animalsData;
 	
 	const int CROSSOVER_PROBABILITY, MUTATION_PROBABILITY;
 	const float MUTATION_GAUSS_DEVIATION;

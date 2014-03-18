@@ -8,23 +8,37 @@
 #include "utils.h"
 #include "layer.h"
 
-// Ajout de la backpropagation : on rajoute les précédentes sorties en entrées
-
-// Réseau de neurones, comprenant les diverses couches de neurones, elles meme constituées de neurones
+/**
+ * @brief The NN class, containing LayersNumber (form config.cfg) layers of neurons, the layers size depending on inputs/ouptus/config
+ * @param _inputsNumber		The inputs number of the NN
+ * @param _outputsNumber	The outputs number
+ */
 class NeuralNetwork {
 	public :
 		NeuralNetwork(unsigned int _inputsNumber, unsigned int _outputsNumber);
 		
-		// Création des couches en fonction des inputs, outputs et des données de config
+		/**
+		 * @brief	Initialisation of the different layers depending on inputs/outputs/config (for the hidden layer)
+         */
 		void initLayers();
 		
 		// Run : execute le calcul de tout le NN en fonction d'inputs
+		/**
+		 * @brief Runs the calculation of the outputs array depending on the inputs
+         * @param inputs	The inputs array
+         * @return	The outpus array
+         */
 		std::vector<float> run(const std::vector<float> inputs);
 		
-		// Fonction servant à collecter l'ADN pour l'algo génétique
+		/**
+         * @return The complete DNA of the NN, as an array of float
+         */
 		std::vector<float> getDNA();
 		
-		// Et mise à jour de l'ADN après passage de l'algo génétique
+		/**
+		 * @brief	Updates the DNA of all neurons with the new one, given by the genetics algorithm
+         * @param DNA	The DNA to set
+         */
 		void setDNA(const std::vector<float> &DNA);
 		
 	private :
