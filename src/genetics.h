@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <iostream>
+#include <stdlib.h>
 
 #include "utils.h"
 #include "entity_manager.h"
@@ -23,12 +24,11 @@ class Game;
  * My software doesn't provide any at the time, and every conclusion I might have made is only a result of a subjective observation. 
  * 
  * Likewise, I won't here explain the internal working of the algorithms I used. You have the code right here, and the web is full of documentation.
- * Googling "fitness-based selection", "uniform crossover" and such will teach you everything you need to know.
+ * Googling "rank-based selection", "uniform crossover" and such will teach you everything you need to know.
  * Again, I might right something about all this someday.
  * However, if you have interesting data on the different mutation operators that work fine on real values, I'm interested !
  * 
  * Sidenotes of the day :
- * - Fitness selection sucks, go rank-based ! (still need to code it, but later)
  * - Mutation deviation should be variable, but how ?
  * 
  */
@@ -49,18 +49,17 @@ class Genetics {
 	typedef struct AnimalData {
 		std::vector<float> DNA;			///< The animal DNA
 		unsigned int score;				///< The animal score
-		unsigned int cumulatedScore;	///< The cumulated socre of the animal (to be used by the roulette wheel))
+		unsigned int selectionScore;	///< The cumulated socre of the animal (to be used by the roulette wheel)
 	} AnimalData;
 	
 	
 	/**
-	 * @brief Creation of the parents array using a fitness based selection.
+	 * @brief Creation of the parents array using a rank based selection.
      * @param animals	The input animals array
      * @param parents	The output parents array
 	 * 
-	 * Using a cumulative value of the score value, we perform a fitness based roulette wheel selection.
-	 * To avoid animals with score 0 to be forbiden to reproduce, we add 1 to the cumulative score, which breaks the linearity of the selection.
-	 * A cleaner way could be using a rank based roulette for selection. Will probably go for it later.
+	 * We here create the parents array using the animals array.
+	 * We perform a rank based selection, filling selectionScore with the right input for the roulette function
      */
 	void selection(const std::vector<Animal*> &animals, std::vector<AnimalData> &parents);
 	
@@ -69,7 +68,7 @@ class Genetics {
      * @param array	The AnimalData input array
      * @return An individual randomly choosen by the roulette
 	 * 
-	 * The algorithm uses the cumulatedScore value calculated by selection to randomly choose one individual from the input array.
+	 * The algorithm uses the selectionScore value calculated by selection to randomly choose one individual from the input array.
 	 * Please note we don't check the first parent's index value. ie both parents could be the same, resulting in no crossover.
      */
 	unsigned int roulette(const std::vector<AnimalData> &array) const;
@@ -103,6 +102,15 @@ class Genetics {
 	 * Because a high mutation breaks potentially good solutions, it would be nice to see the deviation reduce after some generations.
      */
 	void mutation(std::vector<float> &DNA);
+	
+	/**
+	 * @brief Static ascending score compare function to be used by stdlib's qsort
+     * @param a	First Animal
+     * @param b	Second Animal
+     * @return a.score - b.score
+	 * 
+     */
+	static int compareAnimalData(const void *a, const void *b);
 
 	std::vector<AnimalData> children, parents, animalsData;
 	

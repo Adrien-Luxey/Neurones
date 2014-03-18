@@ -27,27 +27,40 @@ void Genetics::evolve(EntityManager &manager) {
 }
 
 void Genetics::selection(const std::vector<Animal*> &animals, std::vector<AnimalData> &parents) {
-	unsigned int cumulated = 0;
+	unsigned int cumulatedScore = 0, rankScore = 1, lastScore = 0;
 	
+	// creation of the parents array, unsorted
 	for (unsigned int i = 0; i < animals.size(); i++) {
 		AnimalData tmp;
 
 		tmp.score = animals[i]->getScore();
 		tmp.DNA = animals[i]->getDNA();
 
-		cumulated += tmp.score + 1;
-		tmp.cumulatedScore = cumulated;
-
 		parents.push_back(tmp);
+	}
+	
+	// sorting of the parents array by score
+	// I love you stl to allow casting vector to array seemlessly
+	qsort(&parents[0], parents.size(), sizeof(AnimalData), compareAnimalData);
+	
+	// filling selectioScore for each AnimalData
+	for (unsigned int i = 0; i < parents.size(); i++) {
+		if (parents[i].score != lastScore) {
+			rankScore++;
+			lastScore = parents[i].score;
+		}
+		
+		cumulatedScore += rankScore;
+		parents[i].selectionScore = cumulatedScore;
 	}
 }
 
 
 unsigned int Genetics::roulette(const std::vector<AnimalData> &array) const {
-	std::uniform_int_distribution<int> random(0, array[array.size() - 1].cumulatedScore);
+	std::uniform_int_distribution<int> random(1, array[array.size() - 1].selectionScore);
 	unsigned int randomValue = random(generator), index = 0;
 	
-	while (index < array.size() && randomValue > array[index].cumulatedScore)
+	while (index != array.size() - 1 && randomValue > array[index].selectionScore)
 		index++;
 	
 	return index;
@@ -141,4 +154,8 @@ void Genetics::mutation(std::vector<float> &DNA) {
 		std::normal_distribution<float> gauss(DNA[geneIndex], MUTATION_GAUSS_DEVIATION);
 		DNA[geneIndex] = gauss(generator);
 	}
+}
+
+int Genetics::compareAnimalData(const void *a, const void *b) {
+	return ((AnimalData*) a)->score - ((AnimalData*) b)->score;
 }
