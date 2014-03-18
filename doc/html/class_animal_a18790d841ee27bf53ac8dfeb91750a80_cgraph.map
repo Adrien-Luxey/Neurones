@@ -1,0 +1,4 @@
+<map id="Animal::update" name="Animal::update">
+<area shape="rect" id="node3" href="$class_neural_network.html#a2daf940807763cd3d81661f93d99e6ba" title="Runs the calculation of the outputs array depending on the inputs." alt="" coords="175,5,308,35"/>
+<area shape="rect" id="node5" href="$class_animal.html#a0b6103b76a223ce2eaad73877ff85c73" title="Update the animal&#39;s position given 2 network outputs." alt="" coords="164,59,319,88"/>
+</map>

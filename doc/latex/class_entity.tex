@@ -1,0 +1,177 @@
+\hypertarget{class_entity}{\section{Entity Class Reference}
+\label{class_entity}\index{Entity@{Entity}}
+}
+
+
+Abstract class represtenting any displayable physical object of the game.  
+
+
+
+
+{\ttfamily \#include $<$entity.\-h$>$}
+
+
+
+Inheritance diagram for Entity\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=180pt]{class_entity__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Entity\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=124pt]{class_entity__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_entity_a980f368aa07ce358583982821533a54a}{Entity} ()
+\item 
+virtual \hyperlink{class_entity_a588098978eea6a3486b7361605ff3f0f}{$\sim$\-Entity} ()
+\item 
+virtual void \hyperlink{class_entity_a31e6183ea44922d54a43be48b8fd4bc0}{init} ()=0
+\begin{DoxyCompactList}\small\item\em Abstract method for object initialisation. \end{DoxyCompactList}\item 
+\hyperlink{struct_vect2i}{Vect2i} \hyperlink{class_entity_ac010fabbecbd86e008c69560bd216b86}{get\-Pos} () const 
+\item 
+int \hyperlink{class_entity_ac2f290a20927f548e8742976b222a556}{get\-Radius} () const 
+\item 
+float \hyperlink{class_entity_a9cecc58b1b2f0c124701ff7add1b8224}{get\-Angle} () const 
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_vect2i}{Vect2i} \hyperlink{class_entity_a885ee23e7a2132f0d890bb2e312e6d77}{pos}
+\item 
+float \hyperlink{class_entity_abb6791bd923767cdf42a7e3101a6f76d}{angle}
+\item 
+int \hyperlink{class_entity_acd7af12063926ab8cd654539328e5532}{radius}
+\item 
+const int \hyperlink{class_entity_a2b870ef127d06e3f98109695817a1798}{W\-O\-R\-L\-D\-\_\-\-S\-I\-Z\-E}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract class represtenting any displayable physical object of the game. 
+
+Definition at line 10 of file entity.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_entity_a980f368aa07ce358583982821533a54a}{\index{Entity@{Entity}!Entity@{Entity}}
+\index{Entity@{Entity}!Entity@{Entity}}
+\subsubsection[{Entity}]{\setlength{\rightskip}{0pt plus 5cm}Entity\-::\-Entity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_entity_a980f368aa07ce358583982821533a54a}
+
+
+Definition at line 3 of file entity.\-cpp.
+
+\hypertarget{class_entity_a588098978eea6a3486b7361605ff3f0f}{\index{Entity@{Entity}!$\sim$\-Entity@{$\sim$\-Entity}}
+\index{$\sim$\-Entity@{$\sim$\-Entity}!Entity@{Entity}}
+\subsubsection[{$\sim$\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}virtual Entity\-::$\sim$\-Entity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_entity_a588098978eea6a3486b7361605ff3f0f}
+
+
+Definition at line 13 of file entity.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_entity_a9cecc58b1b2f0c124701ff7add1b8224}{\index{Entity@{Entity}!get\-Angle@{get\-Angle}}
+\index{get\-Angle@{get\-Angle}!Entity@{Entity}}
+\subsubsection[{get\-Angle}]{\setlength{\rightskip}{0pt plus 5cm}float Entity\-::get\-Angle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_entity_a9cecc58b1b2f0c124701ff7add1b8224}
+
+
+Definition at line 23 of file entity.\-h.
+
+\hypertarget{class_entity_ac010fabbecbd86e008c69560bd216b86}{\index{Entity@{Entity}!get\-Pos@{get\-Pos}}
+\index{get\-Pos@{get\-Pos}!Entity@{Entity}}
+\subsubsection[{get\-Pos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vect2i} Entity\-::get\-Pos (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_entity_ac010fabbecbd86e008c69560bd216b86}
+
+
+Definition at line 21 of file entity.\-h.
+
+\hypertarget{class_entity_ac2f290a20927f548e8742976b222a556}{\index{Entity@{Entity}!get\-Radius@{get\-Radius}}
+\index{get\-Radius@{get\-Radius}!Entity@{Entity}}
+\subsubsection[{get\-Radius}]{\setlength{\rightskip}{0pt plus 5cm}int Entity\-::get\-Radius (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_entity_ac2f290a20927f548e8742976b222a556}
+
+
+Definition at line 22 of file entity.\-h.
+
+\hypertarget{class_entity_a31e6183ea44922d54a43be48b8fd4bc0}{\index{Entity@{Entity}!init@{init}}
+\index{init@{init}!Entity@{Entity}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Entity\-::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_entity_a31e6183ea44922d54a43be48b8fd4bc0}
+
+
+Abstract method for object initialisation. 
+
+
+
+Implemented in \hyperlink{class_fruit_a6a7c7d5b678582f6e941e7f78e5fba2e}{Fruit}, and \hyperlink{class_animal_acd693bbac16d2f7dec930124887a9095}{Animal}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_entity_abb6791bd923767cdf42a7e3101a6f76d}{\index{Entity@{Entity}!angle@{angle}}
+\index{angle@{angle}!Entity@{Entity}}
+\subsubsection[{angle}]{\setlength{\rightskip}{0pt plus 5cm}float Entity\-::angle\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_entity_abb6791bd923767cdf42a7e3101a6f76d}
+
+
+Definition at line 27 of file entity.\-h.
+
+\hypertarget{class_entity_a885ee23e7a2132f0d890bb2e312e6d77}{\index{Entity@{Entity}!pos@{pos}}
+\index{pos@{pos}!Entity@{Entity}}
+\subsubsection[{pos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vect2i} Entity\-::pos\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_entity_a885ee23e7a2132f0d890bb2e312e6d77}
+
+
+Definition at line 26 of file entity.\-h.
+
+\hypertarget{class_entity_acd7af12063926ab8cd654539328e5532}{\index{Entity@{Entity}!radius@{radius}}
+\index{radius@{radius}!Entity@{Entity}}
+\subsubsection[{radius}]{\setlength{\rightskip}{0pt plus 5cm}int Entity\-::radius\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_entity_acd7af12063926ab8cd654539328e5532}
+
+
+Definition at line 28 of file entity.\-h.
+
+\hypertarget{class_entity_a2b870ef127d06e3f98109695817a1798}{\index{Entity@{Entity}!W\-O\-R\-L\-D\-\_\-\-S\-I\-Z\-E@{W\-O\-R\-L\-D\-\_\-\-S\-I\-Z\-E}}
+\index{W\-O\-R\-L\-D\-\_\-\-S\-I\-Z\-E@{W\-O\-R\-L\-D\-\_\-\-S\-I\-Z\-E}!Entity@{Entity}}
+\subsubsection[{W\-O\-R\-L\-D\-\_\-\-S\-I\-Z\-E}]{\setlength{\rightskip}{0pt plus 5cm}const int Entity\-::\-W\-O\-R\-L\-D\-\_\-\-S\-I\-Z\-E\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_entity_a2b870ef127d06e3f98109695817a1798}
+
+
+Definition at line 30 of file entity.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{entity_8h}{entity.\-h}\item 
+src/\hyperlink{entity_8cpp}{entity.\-cpp}\end{DoxyCompactItemize}

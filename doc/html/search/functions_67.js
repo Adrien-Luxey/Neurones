@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['game',['Game',['../class_game.html#ad59df6562a58a614fda24622d3715b65',1,'Game']]],
+  ['genetics',['Genetics',['../class_genetics.html#a7c9a65ee1c7da6bbb4b35d46d1dcf4fa',1,'Genetics']]],
+  ['get',['get',['../class_config_parser.html#a3d3cbdae938afd36cffd28561830d1af',1,'ConfigParser']]],
+  ['getangle',['getAngle',['../class_entity.html#a9cecc58b1b2f0c124701ff7add1b8224',1,'Entity']]],
+  ['getattackvalue',['getAttackValue',['../class_animal.html#a757b167f05eafa17816598d4fcd2f184',1,'Animal']]],
+  ['getbattleoutput',['getBattleOutput',['../class_animal.html#a49148f18eaebc09edf2bac4d3e44c7ea',1,'Animal']]],
+  ['getclosestallyangle',['getClosestAllyAngle',['../class_animal.html#a45483c0d3e22a02ca60aa83f4b1b0b23',1,'Animal']]],
+  ['getclosestenemyangle',['getClosestEnemyAngle',['../class_animal.html#adabb251a3c5513ebbc62582a5a68055b',1,'Animal']]],
+  ['getclosestfruitangle',['getClosestFruitAngle',['../class_animal.html#aac4b5d159b02fcae1dc6f427049c8485',1,'Animal']]],
+  ['getdefensevalue',['getDefenseValue',['../class_animal.html#a00ec5bc73a90c26bfcf889fa5b85e688',1,'Animal']]],
+  ['getdisplaypos',['getDisplayPos',['../class_animal.html#a83a2929c3385a82aefaa689b3330c445',1,'Animal']]],
+  ['getdna',['getDNA',['../class_animal.html#a0dcf09dfc831663b028a58a2c841dc06',1,'Animal::getDNA()'],['../class_layer.html#a18d9fa45eb9ff61f5d5bb9c74179bf30',1,'Layer::getDNA()'],['../class_neural_network.html#abd6e6ec0a4500527150c127f0f8d7c23',1,'NeuralNetwork::getDNA()'],['../class_neuron.html#a2626c0a0fa4dbca17dc7fd9b3b390c07',1,'Neuron::getDNA()']]],
+  ['getdnasize',['getDNASize',['../class_layer.html#a01093e904ef7331b99fccc9abe1174aa',1,'Layer::getDNASize()'],['../class_neuron.html#a40d81d3ea3f2af3e2f3297533132fd31',1,'Neuron::getDNASize()']]],
+  ['getfps',['getFps',['../class_game.html#a90335116dc7ad193f6476a0c2a502662',1,'Game']]],
+  ['getfruits',['getFruits',['../class_entity_manager.html#aa54e413de0914b0f7e048627b7dc07f4',1,'EntityManager']]],
+  ['getgamespeedratio',['getGameSpeedRatio',['../class_game.html#a16dc509013f9a07a905656830bfa674d',1,'Game']]],
+  ['getgeneration',['getGeneration',['../class_game.html#a3949b192e3277375cd07c98d3360bc44',1,'Game']]],
+  ['getiterations',['getIterations',['../class_game.html#adc07928f26c664cefc2c6abee7846d5e',1,'Game']]],
+  ['getiterationspergeneration',['getIterationsPerGeneration',['../class_game.html#abcda9001eb350576bae25bc51b567422',1,'Game']]],
+  ['getpos',['getPos',['../class_entity.html#ac010fabbecbd86e008c69560bd216b86',1,'Entity']]],
+  ['getradius',['getRadius',['../class_entity.html#ac2f290a20927f548e8742976b222a556',1,'Entity']]],
+  ['getscore',['getScore',['../class_animal.html#a9aedb2b6650341f976371a362d21ecfa',1,'Animal']]],
+  ['getspecies',['getSpecies',['../class_entity_manager.html#ac6f76079b0963ac7386a79b6bd346bd8',1,'EntityManager']]],
+  ['getups',['getUps',['../class_game.html#aa555c6e4a6d743384a99c55d75a37bd2',1,'Game']]]
+];

@@ -1,0 +1,5 @@
+<map id="Display::events" name="Display::events">
+<area shape="rect" id="node3" href="$class_game.html#a8272be134d16c277bb014ad6a22fc357" title="Game::quit" alt="" coords="221,5,307,35"/>
+<area shape="rect" id="node5" href="$class_game.html#a7c89563d299f25881c8c8a42c1e3219e" title="Game::increaseGameSpeed" alt="" coords="171,59,357,88"/>
+<area shape="rect" id="node7" href="$class_game.html#adcf5df2f7a3f5209f974741667b1236f" title="Game::decreaseGameSpeed" alt="" coords="169,112,359,141"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="Fruit" name="Fruit">
+<area shape="rect" id="node2" href="$class_entity.html" title="Abstract class represtenting any displayable physical object of the game." alt="" coords="7,101,63,131"/>
+<area shape="rect" id="node4" href="$struct_vect2i.html" title="A structure reprensenting standard 2D vectors of int, with constructor." alt="" coords="5,5,64,35"/>
+</map>

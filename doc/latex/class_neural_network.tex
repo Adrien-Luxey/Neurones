@@ -1,0 +1,196 @@
+\hypertarget{class_neural_network}{\section{Neural\-Network Class Reference}
+\label{class_neural_network}\index{Neural\-Network@{Neural\-Network}}
+}
+
+
+The N\-N class, containing Layers\-Number (form config.\-cfg) layers of neurons, the layers size depending on inputs/ouptus/config.  
+
+
+
+
+{\ttfamily \#include $<$neural\-\_\-network.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_neural_network_a3af96ee26597b200166e3a2523d56ad9}{Neural\-Network} (unsigned int \-\_\-inputs\-Number, unsigned int \-\_\-outputs\-Number)
+\item 
+void \hyperlink{class_neural_network_ace5b58e0174ef1f318db06f0b19f694b}{init\-Layers} ()
+\begin{DoxyCompactList}\small\item\em Initialisation of the different layers depending on inputs/outputs/config (for the hidden layer) \end{DoxyCompactList}\item 
+std\-::vector$<$ float $>$ \hyperlink{class_neural_network_a2daf940807763cd3d81661f93d99e6ba}{run} (const std\-::vector$<$ float $>$ inputs)
+\begin{DoxyCompactList}\small\item\em Runs the calculation of the outputs array depending on the inputs. \end{DoxyCompactList}\item 
+std\-::vector$<$ float $>$ \hyperlink{class_neural_network_abd6e6ec0a4500527150c127f0f8d7c23}{get\-D\-N\-A} ()
+\item 
+void \hyperlink{class_neural_network_a38e8afa4eb8651b80c48b577ecdc6c4a}{set\-D\-N\-A} (const std\-::vector$<$ float $>$ \&D\-N\-A)
+\begin{DoxyCompactList}\small\item\em Updates the D\-N\-A of all neurons with the new one, given by the genetics algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The N\-N class, containing Layers\-Number (form config.\-cfg) layers of neurons, the layers size depending on inputs/ouptus/config. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-inputs\-Number} & The inputs number of the N\-N \\
+\hline
+{\em \-\_\-outputs\-Number} & The outputs number\\
+\hline
+\end{DoxyParams}
+This class describes the brain of every animal. It is a very simple Neural Network, containing at least an input layer of inputs\-Number neurons, and an output layer of outputs\-Number neurons. You can configure as much hidden layers you want (one is enough, it has been proven for non linear activation functions) of as many neurons you want (this factor makes quite interesting changes to the animals' behavior).
+
+It's most interesting feature is that, it is a blackbox combinatory machine (same inputs give same outputs). We can synthetise all the behavior of this machine by extracting its D\-N\-A \-: an organized float array that represents every weight of every neuron, even though the values don't mean anything to us. After this extraction is made, we can mix up the D\-N\-A using the \hyperlink{class_genetics}{Genetics} class, and see evolution occur !
+
+On the other hand, it sadly means that our animals only act instinctly, strictly following what their D\-N\-A tell them to do. This could be improved if we used some kind of heavier Neural Network, like a sequential one for start (sequential means that the machine remembers its previous state). 
+
+Definition at line 24 of file neural\-\_\-network.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_neural_network_a3af96ee26597b200166e3a2523d56ad9}{\index{Neural\-Network@{Neural\-Network}!Neural\-Network@{Neural\-Network}}
+\index{Neural\-Network@{Neural\-Network}!NeuralNetwork@{Neural\-Network}}
+\subsubsection[{Neural\-Network}]{\setlength{\rightskip}{0pt plus 5cm}Neural\-Network\-::\-Neural\-Network (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{\-\_\-inputs\-Number, }
+\item[{unsigned int}]{\-\_\-outputs\-Number}
+\end{DoxyParamCaption}
+)}}\label{class_neural_network_a3af96ee26597b200166e3a2523d56ad9}
+
+
+Definition at line 3 of file neural\-\_\-network.\-cpp.
+
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_neural_network_a3af96ee26597b200166e3a2523d56ad9_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_neural_network_abd6e6ec0a4500527150c127f0f8d7c23}{\index{Neural\-Network@{Neural\-Network}!get\-D\-N\-A@{get\-D\-N\-A}}
+\index{get\-D\-N\-A@{get\-D\-N\-A}!NeuralNetwork@{Neural\-Network}}
+\subsubsection[{get\-D\-N\-A}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ float $>$ Neural\-Network\-::get\-D\-N\-A (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_neural_network_abd6e6ec0a4500527150c127f0f8d7c23}
+\begin{DoxyReturn}{Returns}
+The complete D\-N\-A of the N\-N, as an array of float 
+\end{DoxyReturn}
+
+
+Definition at line 43 of file neural\-\_\-network.\-cpp.
+
+
+
+Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=328pt]{class_neural_network_abd6e6ec0a4500527150c127f0f8d7c23_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_neural_network_ace5b58e0174ef1f318db06f0b19f694b}{\index{Neural\-Network@{Neural\-Network}!init\-Layers@{init\-Layers}}
+\index{init\-Layers@{init\-Layers}!NeuralNetwork@{Neural\-Network}}
+\subsubsection[{init\-Layers}]{\setlength{\rightskip}{0pt plus 5cm}void Neural\-Network\-::init\-Layers (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_neural_network_ace5b58e0174ef1f318db06f0b19f694b}
+
+
+Initialisation of the different layers depending on inputs/outputs/config (for the hidden layer) 
+
+
+
+Definition at line 9 of file neural\-\_\-network.\-cpp.
+
+
+
+Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_neural_network_ace5b58e0174ef1f318db06f0b19f694b_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_neural_network_a2daf940807763cd3d81661f93d99e6ba}{\index{Neural\-Network@{Neural\-Network}!run@{run}}
+\index{run@{run}!NeuralNetwork@{Neural\-Network}}
+\subsubsection[{run}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ float $>$ Neural\-Network\-::run (
+\begin{DoxyParamCaption}
+\item[{const std\-::vector$<$ float $>$}]{inputs}
+\end{DoxyParamCaption}
+)}}\label{class_neural_network_a2daf940807763cd3d81661f93d99e6ba}
+
+
+Runs the calculation of the outputs array depending on the inputs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The inputs array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The outpus array 
+\end{DoxyReturn}
+
+
+Definition at line 30 of file neural\-\_\-network.\-cpp.
+
+
+
+Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=300pt]{class_neural_network_a2daf940807763cd3d81661f93d99e6ba_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_neural_network_a38e8afa4eb8651b80c48b577ecdc6c4a}{\index{Neural\-Network@{Neural\-Network}!set\-D\-N\-A@{set\-D\-N\-A}}
+\index{set\-D\-N\-A@{set\-D\-N\-A}!NeuralNetwork@{Neural\-Network}}
+\subsubsection[{set\-D\-N\-A}]{\setlength{\rightskip}{0pt plus 5cm}void Neural\-Network\-::set\-D\-N\-A (
+\begin{DoxyParamCaption}
+\item[{const std\-::vector$<$ float $>$ \&}]{D\-N\-A}
+\end{DoxyParamCaption}
+)}}\label{class_neural_network_a38e8afa4eb8651b80c48b577ecdc6c4a}
+
+
+Updates the D\-N\-A of all neurons with the new one, given by the genetics algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em D\-N\-A} & The D\-N\-A to set \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 55 of file neural\-\_\-network.\-cpp.
+
+
+
+Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{class_neural_network_a38e8afa4eb8651b80c48b577ecdc6c4a_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{neural__network_8h}{neural\-\_\-network.\-h}\item 
+src/\hyperlink{neural__network_8cpp}{neural\-\_\-network.\-cpp}\end{DoxyCompactItemize}

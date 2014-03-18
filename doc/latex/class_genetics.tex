@@ -1,0 +1,89 @@
+\hypertarget{class_genetics}{\section{Genetics Class Reference}
+\label{class_genetics}\index{Genetics@{Genetics}}
+}
+
+
+More or less static class operating the genetic algorithm on all the animal species of the \hyperlink{class_entity_manager}{Entity\-Manager}.  
+
+
+
+
+{\ttfamily \#include $<$genetics.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_genetics_a7c9a65ee1c7da6bbb4b35d46d1dcf4fa}{Genetics} ()
+\item 
+void \hyperlink{class_genetics_a63e33bd3725feb511e19d86e2d07ca3b}{evolve} (\hyperlink{class_entity_manager}{Entity\-Manager} \&manager)
+\begin{DoxyCompactList}\small\item\em Entry point of the G\-A. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+More or less static class operating the genetic algorithm on all the animal species of the \hyperlink{class_entity_manager}{Entity\-Manager}. 
+
+I am not here to discuss the pros and cons of the different implementations of selection, rossover and mutation, however I have quite a lot to say about it. Fear not, I might (someday) right some things about these (very interesting) subjects. But for that I need D\-A\-T\-A ! My software doesn't provide any at the time, and every conclusion I might have made is only a result of a subjective observation.
+
+Likewise, I won't here explain the internal working of the algorithms I used. You have the code right here, and the web is full of documentation. Googling \char`\"{}rank-\/based selection\char`\"{}, \char`\"{}uniform crossover\char`\"{} and such will teach you everything you need to know. Again, I might right something about all this someday. However, if you have interesting data on the different mutation operators that work fine on real values, I'm interested !
+
+Sidenotes of the day \-:
+\begin{DoxyItemize}
+\item Mutation deviation should be variable, but how ? 
+\end{DoxyItemize}
+
+Definition at line 30 of file genetics.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_genetics_a7c9a65ee1c7da6bbb4b35d46d1dcf4fa}{\index{Genetics@{Genetics}!Genetics@{Genetics}}
+\index{Genetics@{Genetics}!Genetics@{Genetics}}
+\subsubsection[{Genetics}]{\setlength{\rightskip}{0pt plus 5cm}Genetics\-::\-Genetics (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_genetics_a7c9a65ee1c7da6bbb4b35d46d1dcf4fa}
+
+
+Definition at line 3 of file genetics.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_genetics_a63e33bd3725feb511e19d86e2d07ca3b}{\index{Genetics@{Genetics}!evolve@{evolve}}
+\index{evolve@{evolve}!Genetics@{Genetics}}
+\subsubsection[{evolve}]{\setlength{\rightskip}{0pt plus 5cm}void Genetics\-::evolve (
+\begin{DoxyParamCaption}
+\item[{{\bf Entity\-Manager} \&}]{manager}
+\end{DoxyParamCaption}
+)}}\label{class_genetics_a63e33bd3725feb511e19d86e2d07ca3b}
+
+
+Entry point of the G\-A. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em manager} & the \hyperlink{class_entity_manager}{Entity\-Manager} where to find the species to evolve\\
+\hline
+\end{DoxyParams}
+Performs the genetic algorithm on every species of the manager 
+
+Definition at line 7 of file genetics.\-cpp.
+
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=340pt]{class_genetics_a63e33bd3725feb511e19d86e2d07ca3b_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{genetics_8h}{genetics.\-h}\item 
+src/\hyperlink{genetics_8cpp}{genetics.\-cpp}\end{DoxyCompactItemize}

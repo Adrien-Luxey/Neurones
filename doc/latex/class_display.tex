@@ -1,0 +1,142 @@
+\hypertarget{class_display}{\section{Display Class Reference}
+\label{class_display}\index{Display@{Display}}
+}
+
+
+Class handling every display aspect of the game.  
+
+
+
+
+{\ttfamily \#include $<$display.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_display_a21052a50c5e922272d697aaf5cfb14cc}{Display} (\hyperlink{class_game}{Game} $\ast$\-\_\-game)
+\item 
+\hyperlink{class_display_ac2607a6bb236c55547a4223d40d85d1f}{$\sim$\-Display} ()
+\item 
+void \hyperlink{class_display_a713ee81045f32895c2b063037c81c388}{update} (const \hyperlink{class_entity_manager}{Entity\-Manager} \&manager, const float \&\-\_\-interpolation)
+\begin{DoxyCompactList}\small\item\em Displays all the game elements and the U\-I. \end{DoxyCompactList}\item 
+void \hyperlink{class_display_a05ee6cd33afcc51a5856148677a71c82}{events} ()
+\begin{DoxyCompactList}\small\item\em Handles all the user events. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class handling every display aspect of the game. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-game} & Ptr to its parent game object \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 20 of file display.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_display_a21052a50c5e922272d697aaf5cfb14cc}{\index{Display@{Display}!Display@{Display}}
+\index{Display@{Display}!Display@{Display}}
+\subsubsection[{Display}]{\setlength{\rightskip}{0pt plus 5cm}Display\-::\-Display (
+\begin{DoxyParamCaption}
+\item[{{\bf Game} $\ast$}]{\-\_\-game}
+\end{DoxyParamCaption}
+)}}\label{class_display_a21052a50c5e922272d697aaf5cfb14cc}
+
+
+Definition at line 5 of file display.\-cpp.
+
+\hypertarget{class_display_ac2607a6bb236c55547a4223d40d85d1f}{\index{Display@{Display}!$\sim$\-Display@{$\sim$\-Display}}
+\index{$\sim$\-Display@{$\sim$\-Display}!Display@{Display}}
+\subsubsection[{$\sim$\-Display}]{\setlength{\rightskip}{0pt plus 5cm}Display\-::$\sim$\-Display (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_display_ac2607a6bb236c55547a4223d40d85d1f}
+
+
+Definition at line 24 of file display.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_display_a05ee6cd33afcc51a5856148677a71c82}{\index{Display@{Display}!events@{events}}
+\index{events@{events}!Display@{Display}}
+\subsubsection[{events}]{\setlength{\rightskip}{0pt plus 5cm}void Display\-::events (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_display_a05ee6cd33afcc51a5856148677a71c82}
+
+
+Handles all the user events. 
+
+
+
+Definition at line 54 of file display.\-cpp.
+
+
+
+Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{class_display_a05ee6cd33afcc51a5856148677a71c82_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=344pt]{class_display_a05ee6cd33afcc51a5856148677a71c82_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_display_a713ee81045f32895c2b063037c81c388}{\index{Display@{Display}!update@{update}}
+\index{update@{update}!Display@{Display}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void Display\-::update (
+\begin{DoxyParamCaption}
+\item[{const {\bf Entity\-Manager} \&}]{manager, }
+\item[{const float \&}]{\-\_\-interpolation}
+\end{DoxyParamCaption}
+)}}\label{class_display_a713ee81045f32895c2b063037c81c388}
+
+
+Displays all the game elements and the U\-I. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em manager} & Reference to the manager containing all entities to be displayed \\
+\hline
+{\em \-\_\-interpolation} & Rate describing the interval of time between 2 game updates \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 41 of file display.\-cpp.
+
+
+
+Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=344pt]{class_display_a713ee81045f32895c2b063037c81c388_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{display_8h}{display.\-h}\item 
+src/\hyperlink{display_8cpp}{display.\-cpp}\end{DoxyCompactItemize}
