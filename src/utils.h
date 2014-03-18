@@ -8,17 +8,24 @@
 #ifndef UTILS_H
 #define	UTILS_H
 
-#define PI				3.14159f
-
 #include <cmath>
 #include <random>
 #include <iostream>
-static std::default_random_engine generator;
 
 #include "config_parser.h"
+
+// Generator used by every c++11 random function (normal, uniform)
+static std::default_random_engine generator;
+
+// shortcut for calling the configParser singleton
 #define CFG		ConfigParser::get()
 
-// enumeration to give sense to all the species (used for colouring))
+// PI definition in stl depends on installation, so let's define my own
+#define PI				3.14159f
+
+/**
+ * @brief enumeration to give sense to all the species (used for colouring)
+ */
 enum { CHICKEN, FOX, SNAKE, LYNX, MONKEY, FISH, TYPES_CNT };
 
 // A structure reprensenting standard 2D vectors of int, with constructor
