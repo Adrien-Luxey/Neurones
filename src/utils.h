@@ -1,10 +1,3 @@
-/* 
- * File:   utils.h
- * Author: adrien
- *
- * Created on 5 décembre 2013, 01:07
- */
-
 #ifndef UTILS_H
 #define	UTILS_H
 

@@ -1,19 +1,18 @@
 #include "neuron.h"
 
 Neuron::Neuron(unsigned int _inputsNumber)
-: inputsNumber(_inputsNumber), NEURON_SIGMOID(CFG->readFloat("NeuronSigmoid")), USE_NEURON_SIGMOID(CFG->readInt("UseNeuronSigmoid")) {
+: inputsNumber(_inputsNumber), NEURON_SIGMOID(CFG->readFloat("NeuronSigmoid")) {
 	initWeights();
 }
 
 Neuron::~Neuron() {}
 
-// Initialisation des poids random [-1; 1] en fonction de inputsNumber
 void Neuron::initWeights() {
 	std::uniform_real_distribution<float> random(-1, 1);
 	
 	weights.clear();
 	
-	// !!! i <= inputs !!! (le premier weight est le bias)
+	// i <= inputs : the first weight is for the bias
 	for (unsigned int i = 0; i <= inputsNumber; i++)
 		weights.push_back(random(generator));
 }
@@ -27,13 +26,8 @@ const float Neuron::run(const std::vector<float> inputs) {
 	for (unsigned int i = 0; i < inputsNumber && i < inputs.size(); i++)
 		sum += weights[i+1]*inputs[i];
 	
-	if (USE_NEURON_SIGMOID) {
-		// La sigmoide de sum renvoie un float ]-1;1[
-		return 1/(1 + expf(-sum/NEURON_SIGMOID)) * 2.f - 1.f;
-	} else {
-		// Sinon on effectue une fonction scale
-		return (sum > SEUIL) ? OUT_1 : OUT_0;
-	}
+	// La sigmoide de sum renvoie un float ]-1;1[
+	return 1/(1 + expf(-sum/NEURON_SIGMOID)) * 2.f - 1.f;
 }
 
 // Changement de l'ADN après passage de l'algo génétique

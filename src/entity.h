@@ -4,7 +4,7 @@
 #include "utils.h"
 
 /**
- * \brief Abstract class represtenting any displayable physical object of the game
+ * @brief Abstract class represtenting any displayable physical object of the game
  */
 
 class Entity {
@@ -13,7 +13,7 @@ class Entity {
 		virtual ~Entity() {}
 		
 		/**
-		 * \brief Abstract method for object initialisation
+		 * @brief Abstract method for object initialisation
          */
 		virtual void init() = 0;
 

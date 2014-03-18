@@ -1,12 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-/**
- * \file game.h
- * \author Adrien Luxey
- * 
- */
-
 #include <iostream>
 #include <vector>
 #include <chrono>
@@ -20,7 +14,7 @@
 #include "genetics.h"
 
 /**
- * \brief General class dispatching the game jobs to other objects. Only SFML user with Display
+ * @brief General class dispatching the game jobs to other objects. Only SFML user with Display
  * 
  */
 class Game {
@@ -29,7 +23,7 @@ class Game {
 		~Game();
 	
 		/**
-		 * \brief Game loop
+		 * @brief Game loop
          */
 		void loop();
 		
@@ -47,15 +41,15 @@ class Game {
 		
 	private :
 		/**
-		 * \brief calls the genetic algorithm and resets everything for the next generation
+		 * @brief calls the genetic algorithm and resets everything for the next generation
          */
 		void newGeneration();
 		/**
-		 * \brief Game update : calls the manager and checks for the end of the generation
+		 * @brief Game update : calls the manager and checks for the end of the generation
          */
 		void update();
 		/**
-		 * \brief Updates fps & ups every second for user information
+		 * @brief Updates fps & ups every second for user information
          */
 		void updateFps();
 		
