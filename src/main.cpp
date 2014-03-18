@@ -1,31 +1,23 @@
+/**
+ * \file main.cpp
+ * \author Adrien Luxey
+ * \brief This is the entry point of the Neurones program.
+ * 
+ * Neurones is a Neural Network / Genetic Algorithm simulation, intended to play around
+ * with this awesome subject that is AI learning, in the hope to find new and better
+ * ways to use it, and explore its capabilities.
+ */
+
 #include <stdlib.h>
-#include <vector>
 
 #include "game.h"
 
-int main(void) {
+int main(void) {	
 	Game game;
-	
-	/*Layer layer(4, 4);
-	std::vector<float> inputs;
-	inputs.push_back(0);
-	inputs.push_back(1);
-	inputs.push_back(0);
-	inputs.push_back(1);
-	
-	layer.description();
-	layer.run(inputs);
-	layer.description();
-	
-	std::vector<float> dna = layer.getDNA();
-	
-	for (int i = 0; i < dna.size(); i++)
-		std::cout << dna[i] << " ";
-	std::cout << std::endl;*/
 	
 	srand(time(NULL));
 	
-	game.exec();
+	game.loop();
 	
 	return EXIT_SUCCESS;
 }

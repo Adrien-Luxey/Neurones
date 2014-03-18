@@ -1,3 +1,13 @@
+
+/**
+ * \file Congig_parser.h
+ * \author	Adrien Luxey
+ * 
+ * Utility singleton class parsing a config file (default 'files/config.cfg')
+ * that contains constants used by a project, organized by type (int, float, string),
+ * referenced by their name and stored in maps
+ */
+
 #ifndef CONFIG_PARSER_H
 #define CONFIG_PARSER_H
 
@@ -9,14 +19,14 @@
 
 class ConfigParser {
 	public :
-		static void create(const std::string &fileName = defaultFile);
+		static void create(const std::string &fileName = "");
 		static void kill();
 
 		static ConfigParser* get();
 
-		const int readInt(const std::string &key, const int &defaultValue = 0);
-		const float readFloat(const std::string &key, const float &defaultValue = 0.f);
-		const std::string readString(const std::string &key, const std::string &defaultValue = "");
+		int readInt(const std::string &key, const int &defaultValue = 0) const;
+		float readFloat(const std::string &key, const float &defaultValue = 0.f) const;
+		std::string readString(const std::string &key, const std::string &defaultValue = "") const;
 
 		void setInt(const std::string &key, const int &value);
 		void setFloat(const std::string &key, const float &value);
@@ -28,15 +38,16 @@ class ConfigParser {
 	private :
 		ConfigParser(const std::string &fileName);
 
+		void initMaps();
+		
 		static ConfigParser *singleton;
 
 		enum typeEnum { INT, FLOAT, STRING, NONE };
-		static std::string typeString[];
-		static std::string commentString;
-		static std::string extensionString;
-		static char assignChar;
-		static std::string defaultFile;
-		void initMaps();
+		const std::string typeString[3];
+		const std::string commentString;
+		const std::string extensionString;
+		const char assignChar;
+		const std::string defaultFile;
 
 		std::string mFileName;
 

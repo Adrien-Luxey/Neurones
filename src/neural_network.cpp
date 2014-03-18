@@ -1,8 +1,7 @@
 #include "neural_network.h"
 
 NeuralNetwork::NeuralNetwork(unsigned int _inputsNumber, unsigned int _outputsNumber)
-// Outputs = inputs + outputs (backpropagation)
-: inputsNumber(_inputsNumber + _outputsNumber), outputsNumber(_outputsNumber) {
+: inputsNumber(_inputsNumber), outputsNumber(_outputsNumber) {
 	initLayers();
 }
 
@@ -13,6 +12,7 @@ void NeuralNetwork::initLayers() {
 	
 	// Couche input : inputsNumber neurones à inputsNumber entrées
 	// (utiliser le même nombre de neurones que d'entrées pour cette couche est une convention reconnue)
+	// On rajoute les sorties du tour précédent en entrée du nn - ou pas
 	layers.push_back(Layer(inputsNumber, inputsNumber));
 	
 	// Création des couches cachées suivant les données de config
@@ -27,8 +27,10 @@ void NeuralNetwork::initLayers() {
 }
 
 // Run : execute le calcul de tout le NN en fonction d'inputs
-const std::vector<float> NeuralNetwork::run(const std::vector<float> inputs) {
-	outputs.insert(outputs.end(), inputs.begin(), inputs.end());
+std::vector<float> NeuralNetwork::run(const std::vector<float> inputs) {
+	// on ajoute les sorties du tour précédent en entrée du nn (pour voir))
+	//outputs.insert(outputs.end(), inputs.begin(), inputs.end());
+	outputs = inputs;
 	
 	for (unsigned int i = 0; i < layers.size(); i++) {
 		outputs = layers[i].run(outputs);
@@ -38,7 +40,7 @@ const std::vector<float> NeuralNetwork::run(const std::vector<float> inputs) {
 }
 
 // Fonction servant à collecter l'ADN pour l'algo génétique
-const std::vector<float> NeuralNetwork::getDNA() {
+std::vector<float> NeuralNetwork::getDNA() {
 	std::vector<float> DNA, layerDNA;
 	
 	for (unsigned int i = 0; i < layers.size(); i++) {

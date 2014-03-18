@@ -5,33 +5,57 @@
 #include <vector>
 
 #include "utils.h"
-#include "configParser.h"
+#include "config_parser.h"
 
-// Si UseNeuronSigmoid = 0, output du neuron donne : (sum > SEUIL) ? OUT_1, OUT_0;
+// Quite outdated, used to serve if you don't set "UseNeuronSigmoid", but it would break most functionnality
 #define SEUIL	0
 #define	OUT_0	0
 #define OUT_1	1
 
+
+/**
+ * @brief	The Neuron class, with represents a singleton, without backprop or anything
+ * @param _inputsNumber	The inputs number of the neuron
+ */
 class Neuron {
-	public :
-		Neuron(unsigned int _inputsNumber);
-		
-		// Initialisation des poids random [-1; 1] en fonction de inputsNumber
-		void initWeights();
-		
-		// Execution du calcul du neurone en fonction de inputs
-		const float run(const std::vector<float> inputs);
-		
-		// Changement de l'ADN après passage de l'algo génétique
-		void setDNA(const std::vector<float> &DNA);
-		
-		// Fonctions servant à récupérer tout l'ADN du NN
-		const std::vector<float> getDNA() { return weights; }
-		const unsigned int getDNASize() { return weights.size(); }
-		
-	private :
-		unsigned int inputsNumber;
-		std::vector<float> weights;
+  public:	
+	Neuron(unsigned int _inputsNumber);
+	~Neuron();
+
+	/**
+	 * @brief Initializes all the weights with uniform rand values [-1; 1]
+     */
+	void initWeights();
+
+	/**
+	 * @brief	Runs the calculation of the output value depending on the inputs
+     * @param inputs	The inputs array
+     * @return A float representing the output
+     */
+	const float run(const std::vector<float> inputs);
+
+	/**
+	 * @brief	Updates the DNA of the neuron with the new one given by the GA
+     * @param DNA	The new piece of ADN
+     */
+	void setDNA(const std::vector<float> &DNA);
+
+	/**
+     * @return the ADN of the neuron
+     */
+	std::vector<float> getDNA();
+
+	/**
+     * @return The size of the DNA of the neuron
+     */
+	unsigned int getDNASize() const { return weights.size(); }
+
+  private:
+	unsigned int inputsNumber;
+	std::vector<float> weights;
+
+	const float NEURON_SIGMOID;
+	const bool USE_NEURON_SIGMOID;
 };
 
 #endif // NEURON_H

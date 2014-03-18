@@ -1,207 +1,161 @@
 #include "genetics.h"
 
-void Genetics::evolve(std::vector<Entity*> entities) {
-	int type = CHICKEN;
-	AnimalData tmp;
+Genetics::Genetics()
+  : CROSSOVER_PROBABILITY(CFG->readInt("CrossoverProbability")), MUTATION_PROBABILITY(CFG->readInt("MutationProbability")),
+	MUTATION_GAUSS_DEVIATION(CFG->readFloat("MutationGaussDeviation")) {}
+
+void Genetics::evolve(EntityManager &manager) {
+	std::vector<Species> species = manager.getSpecies();
 	
-	animalsData.clear();
-	
-	while (type < TYPES_CNT) {
-		// Selection de tous les parents du même type
-		parents.clear();
-		for (unsigned int i = 0; i < entities.size(); i++) {
-			if (entities[i]->type() == type) {
-				/*
-				// On rajoute des points si on a survécu
-				if (!((Animal *) entities[i])->isDead())
-					tmp.score = ((Animal*) entities[i])->getScore() + 1;
-				else//*/
-					tmp.score = ((Animal*) entities[i])->getScore();
-				
-				tmp.DNA = ((Animal*) entities[i])->getDNA();
-				tmp.cumulatedScore = 0;
-				tmp.type = type;					
+	// for each species
+	for (unsigned int i = 0; i < species.size(); i++) {	
+		std::vector<AnimalData> children, parents;
+		
+		selection(species[i].tab, parents);
+		
+		while (children.size() < parents.size()) {
+			unsigned int fatherIndex = roulette(parents), motherIndex = roulette(parents);
 			
-				parents.push_back(tmp);
-			}
+			crossover(parents, fatherIndex, motherIndex, children);
 		}
-		
-		// tri descendant du tableau parents par score
-		sortData(parents, 0);
-		
-		// Roulette pour les parents sélectionnés
-		roulette(type);
-		
-		// Remplissage de la liste totale des enfants
-		animalsData.insert(animalsData.end(), children.begin(), children.end());
-		
-		type++;
-	}
 	
-	if (animalsData.size() != entities.size()) 
-		std::cout << "On a un problème de taille négro !\n";
-	else {
-		// Attribution des nouveau ADN aux animaux
-		for (unsigned int i = 0; i < animalsData.size(); i++) {
-			((Animal*) entities[i])->reinit(animalsData[i].DNA, animalsData[i].type);
+		// initialise the animals with all these new DNAs
+		for (unsigned int j = 0; j < children.size(); j++) {
+			species[i].tab[j]->init(children[j].DNA);
 		}
 	}
 }
 
-// Algorithme génétique utilisant roulette wheel, crossover et mutation
-// TODO : Une fonction de 160 lignes c'est mal
-void Genetics::roulette(const int type) {
-	children.clear();
+void Genetics::selection(const std::vector<Animal*> &animals, std::vector<AnimalData> &parents) {
+	unsigned int cumulatedScore = 0, rankScore = 1, lastScore = 0;
 	
-	// Récupération du nombre d'animaux
-	unsigned int parentsNumber = parents.size();
-	
-	// Calcul du score cumulé de chaque animal :
-	// parents[i].cumulatedScore = somme(k = 0 to i)(parents[k].score)
-	// Si bien que le score du dernier parent = score total = cumulated à la fin de la boucle
-	unsigned int cumulated = 0;
-	for (unsigned int i = 0; i < parentsNumber; i++) {
-		cumulated += parents[i].score + 1;
-		
-		parents[i].cumulatedScore = cumulated;
+	// creation of the parents array, unsorted
+	for (unsigned int i = 0; i < animals.size(); i++) {
+		AnimalData tmp;
+
+		tmp.score = animals[i]->getScore();
+		tmp.DNA = animals[i]->getDNA();
+
+		parents.push_back(tmp);
 	}
 	
-	// Tant qu'on a pas créé autant d'enfants qu'il y avait de parents, on continue à en créer
-	while (children.size() < parentsNumber) {
-		unsigned int r1, r2, p1, p2;
-		AnimalData tmp1, tmp2;
-		tmp1.type = type;
-		tmp2.type = type;
-		
-		// A moins que tous nos animaux soient VRAIMENT mauvais, on peut faire une roulette wheel
-		if (cumulated != 0) {
-			std::uniform_int_distribution<int> prob(0, cumulated);
-			
-			// Selection d'un premier parent (d'indice p1)
-			// Le système roulette wheel permet de favoriser la selection de parents ayant un bon score tout en laissant une grande part d'aléatoire
-			r1 = prob(generator);
-			p1 = 0;
-			while (p1 != (parentsNumber - 1) && r1 > parents[p1].cumulatedScore)
-				p1++;
-			
-			// On fait la même sélection pour le 2e parent en s'assurant qu'on ne tombe pas 2x sur le même
-			do {	
-				r2 = prob(generator);
-				p2 = 0;
-			
-				while (p2 != (parentsNumber - 1) && r2 > parents[p2].cumulatedScore)
-					p2++;
-			} while (p1 == p2);
-		} else {
-			// Sinon, selection random des parents
-			std::uniform_int_distribution<int> prob(0, parentsNumber - 1);
-			p1 = prob(generator);
-			while ((p2 = prob(generator)) == p1);
+	// sorting of the parents array by score
+	// I love you stl to allow casting vector to array seemlessly
+	qsort(&parents[0], parents.size(), sizeof(AnimalData), compareAnimalData);
+	
+	// filling selectioScore for each AnimalData
+	for (unsigned int i = 0; i < parents.size(); i++) {
+		if (parents[i].score != lastScore) {
+			rankScore++;
+			lastScore = parents[i].score;
 		}
 		
-		std::uniform_int_distribution<int> crossoverRate(0, 100);
-		std::uniform_int_distribution<int> randomParent(0, 1);
-		tmp1.DNA.clear();
-		tmp2.DNA.clear();
-		// On n'applique l'algorithme de dans crossoverRate% des cas, sinon on copie simplement l'ADN des parents dans les enfants
-		if (crossoverRate(generator) >= CFG->readInt("CrossoverRate")) {
-			// Création de l'ADN de l'enfant en piochant aléatoirement dans l'ADN de l'un ou l'autre des parents
-			// On utilise un random uniforme, donc normalement on devrait avoir 50% d'ADN de chaque
-			
-			// On génère deux enfants si possible
-			if (parentsNumber - children.size() >= 2) {
-				for (unsigned int j = 0; j < parents[0].DNA.size(); j++) {
-					if (randomParent(generator) == 0) {
-						tmp1.DNA.push_back(parents[p1].DNA[j]);
-						tmp2.DNA.push_back(parents[p2].DNA[j]);
-					} else {
-						tmp1.DNA.push_back(parents[p2].DNA[j]);
-						tmp2.DNA.push_back(parents[p1].DNA[j]);
-					}
-				}
-				
-				// On mute ensuite l'ADN des nouveaux nés
-				mutation(tmp1.DNA);
-				mutation(tmp2.DNA);
-				
-				children.push_back(tmp1);
-				children.push_back(tmp2);
-				
-			// Sinon on en crée qu'un seul
+		cumulatedScore += rankScore;
+		parents[i].selectionScore = cumulatedScore;
+	}
+}
+
+
+unsigned int Genetics::roulette(const std::vector<AnimalData> &array) const {
+	std::uniform_int_distribution<int> random(1, array[array.size() - 1].selectionScore);
+	unsigned int randomValue = random(generator), index = 0;
+	
+	while (index != array.size() - 1 && randomValue > array[index].selectionScore)
+		index++;
+	
+	return index;
+}
+
+void Genetics::crossover(const std::vector<AnimalData> &parents, const unsigned int fatherIndex,
+						 const unsigned int motherIndex, std::vector<AnimalData> &children) {
+	
+	std::uniform_int_distribution<int> randomParent(0, 1);
+	std::uniform_int_distribution<int> crossoverProbability(0, 100);
+	
+	// We generate 2 children if possible
+	if (parents.size() - children.size() >= 2) {
+		AnimalData child1, child2;
+		
+		// CROSSOVER_PROBABILITY % chances that we apply crossover
+		if (crossoverProbability(generator) <= CROSSOVER_PROBABILITY) {
+			// In selection, we do not verify that the 2 parents are different
+			// Let's avoid doing a expensive crossover if we are only copying one DNA
+			if (fatherIndex == motherIndex) {
+				child1.DNA = parents[fatherIndex].DNA;
+				child2.DNA = parents[fatherIndex].DNA;
 			} else {
+				// uniform crossover of the 2 parents' DNA
 				for (unsigned int j = 0; j < parents[0].DNA.size(); j++) {
 					if (randomParent(generator) == 0) {
-						tmp1.DNA.push_back(parents[p1].DNA[j]);
+						child1.DNA.push_back(parents[fatherIndex].DNA[j]);
+						child2.DNA.push_back(parents[motherIndex].DNA[j]);
 					} else {
-						tmp1.DNA.push_back(parents[p2].DNA[j]);
+						child1.DNA.push_back(parents[motherIndex].DNA[j]);
+						child2.DNA.push_back(parents[fatherIndex].DNA[j]);
 					}
 				}
-				
-				// On mute ensuite l'ADN du nouveau né
-				mutation(tmp1.DNA);
-				
-				children.push_back(tmp1);
 			}
 		} else {
-			if (parentsNumber - children.size() >= 2) {
-				tmp1.DNA = parents[p1].DNA;
-				tmp2.DNA = parents[p2].DNA;
-				
-				// On mute ensuite l'ADN des nouveaux nés
-				mutation(tmp1.DNA);
-				mutation(tmp2.DNA);
-				
-				children.push_back(tmp1);
-				children.push_back(tmp2);
-			} else {
-				if (randomParent(generator) == 0) {
-					tmp1.DNA = parents[p1].DNA;
-				} else {
-					tmp1.DNA = parents[p2].DNA;
-				}
-				
-				// On mute ensuite l'ADN du nouveau né
-				mutation(tmp1.DNA);
-				
-				children.push_back(tmp1);
-			}
+			// no crossover
+			child1.DNA = parents[fatherIndex].DNA;
+			child2.DNA = parents[motherIndex].DNA;
 		}
+
+		// Mutation of the newborns
+		mutation(child1.DNA);
+		mutation(child2.DNA);
+
+		children.push_back(child1);
+		children.push_back(child2);
+
+	// Otherwise we only create one child
+	} else {
+		AnimalData child;
+		
+		// CROSSOVER_PROBABILITY % chances that we apply crossover
+		if (crossoverProbability(generator) <= CROSSOVER_PROBABILITY) {
+			// In selection, we do not verify that the 2 parents are different
+			// Let's avoid doing a expensive crossover if we are only copying one DNA
+			if (fatherIndex == motherIndex) 
+				child.DNA = parents[fatherIndex].DNA;
+			else {
+				// uniform crossover
+				for (unsigned int j = 0; j < parents[0].DNA.size(); j++) {
+					if (randomParent(generator) == 0) {
+						child.DNA.push_back(parents[fatherIndex].DNA[j]);
+					} else {
+						child.DNA.push_back(parents[motherIndex].DNA[j]);
+					}
+				}
+			}
+		} else {
+			// no crossover, we choose one random parent and copy his DNA
+			if (randomParent(generator) == 0)
+				child.DNA = parents[fatherIndex].DNA;
+			else
+				child.DNA = parents[motherIndex].DNA;
+		}
+
+		mutation(child.DNA);
+
+		children.push_back(child);
 	}
 }
 
 void Genetics::mutation(std::vector<float> &DNA) {
-	std::uniform_int_distribution<int> prob(0, DNA.size());
-	for (unsigned int i = 0; i < DNA.size(); i++) {
-		if (prob(generator) == 0) {
-			float tmpf = DNA[i];
-			std::normal_distribution<float> gauss(DNA[i], CFG->readFloat("MutationGaussDeviation"));
-			
-			DNA[i] = gauss(generator);
-			
-			tmpf = fabs(tmpf - DNA[i]);
-		}
-	}
-}
-
-void Genetics::sortData(std::vector<AnimalData> &data, const int asc) {
-	AnimalData tmp;
-	bool sorted = false;
-	int k = 1;
+	std::uniform_int_distribution<int> mutationProbability(0, 100);
 	
-	while (!sorted) {
-		sorted = true;
+	// MUTATION_PROBABILITY % chances that we apply mutation
+	if (mutationProbability(generator) <= MUTATION_PROBABILITY) {
+		// we mutate exactly one gene from the DNA
+		std::uniform_int_distribution<int> randGene(0, DNA.size() - 1);
+		int geneIndex = randGene(generator);
 		
-		for (unsigned int i = 0; i < data.size() - k; i++) {
-			if ((asc && (data[i].score > data[i+1].score)) ||
-				(!asc && (data[i].score < data[i+1].score))) {	
-				tmp = data[i];
-				data[i] = data[i+1];
-				data[i+1] = tmp;
-				
-				sorted = false;
-			}
-		}
-		k++;
+		std::normal_distribution<float> gauss(DNA[geneIndex], MUTATION_GAUSS_DEVIATION);
+		DNA[geneIndex] = gauss(generator);
 	}
 }
 
+int Genetics::compareAnimalData(const void *a, const void *b) {
+	return ((AnimalData*) a)->score - ((AnimalData*) b)->score;
+}

@@ -1,68 +1,83 @@
 #include "game.h"
 
+
 Game::Game() 
-: display(this), continuer(true), pause(false), generation(1), dt(0), elapsedTime(0), dtSum(0), frames(0), fps(0) {	
-	for (int i = 0; i < CFG->readInt("AnimalsNumber"); i++) {
-		for (int j = CHICKEN; j < TYPES_CNT; j++)
-			entities.push_back(new Animal(j));
-	}
+  : display(this), continuer(true), generation(1),
+	ITERATIONS_PER_GENERATION(CFG->readInt("IterationsPerGeneration")),
+	DEFAULT_GAME_SPEED(CFG->readInt("DefaultGameSpeed")), MINIMUM_FPS(CFG->readInt("MinimumFps")),
+	gameSpeedRatio(1), fps(0), ups(0), iterations(0), updatesCount(0), displaysCount(0) {	
+	
 }
 
-Game::~Game() {
-	for (unsigned int i = 0; i < entities.size(); i++)
-		delete entities[i];
-}
+Game::~Game() {}
 
-void Game::exec() {
+/* Game loop basée sur celle de DeWITTERS, à cette adresse :
+ * http://www.koonsolo.com/news/dewitters-gameloop/
+ * 
+ * Cela permet de controler la vitesse d'execution de l'update, de ne pas dépendre de l'affichage, et de le fluidifier
+ */
+void Game::loop() {
+	clock.restart();  
+	oneSecondClock.restart();
+	
 	while (continuer) {
-		dt = display.getElapsedTime();
 		display.events();
 		
-		if (!pause) {
+		sf::Time updateDeltaTime = sf::seconds(1) / (gameSpeedRatio * DEFAULT_GAME_SPEED);
+		
+		maxDisplayTick = clock.getElapsedTime() + sf::seconds(1) / (float) MINIMUM_FPS;
+
+		while( clock.getElapsedTime() > nextUpdateTick && clock.getElapsedTime() < maxDisplayTick ) {
 			update();
-			display.update(entities);
+
+			updatesCount++;
+			nextUpdateTick += updateDeltaTime;
 		}
+
+		updateFps();
+
+		sf::Time interpolation = clock.getElapsedTime() + updateDeltaTime - nextUpdateTick;
+
+		display.update(manager, interpolation.asSeconds() / updateDeltaTime.asSeconds());
+		displaysCount++;
 	}
 }
 
-void Game::update() {
-	elapsedTime += dt;	
-	dtSum += dt;
-	frames += 1;
-	
-	if (dtSum > 1) {
-		fps = frames/dtSum;
-		frames = 0;
-		dtSum = 0;
-	}
-	
-	if (gameover()) {
-		newGeneration();
-		genetics.evolve(entities);
-		elapsedTime = 0;
-		std::cout << "Nouvelle génération calculée en " << display.getElapsedTime() << " secondes\n";
-	}
-	
-	for (unsigned int i = 0; i < entities.size(); i++) {
-		entities[i]->update(entities, dt);
-	}
+void Game::increaseGameSpeed() {
+	gameSpeedRatio = (gameSpeedRatio >= 1) ? gameSpeedRatio + 1 : gameSpeedRatio*2;
+}
+void Game::decreaseGameSpeed() {
+	gameSpeedRatio = (gameSpeedRatio > 1) ? gameSpeedRatio - 1 : gameSpeedRatio/2;
 }
 
 void Game::newGeneration() {
-	std::cout << "Génération #" << generation++ << " : " << Stats::highScore(entities) << ", " << Stats::averageScore(entities) << ", " << Stats::totalScore(entities) << std::endl << Stats::printDetailledScore(entities) << std::endl;
+	genetics.evolve(manager);
+	manager.init();
+	
+	iterations = 0;
+	
+	sf::Time generationDuration = clock.restart();
+	std::cout << "Génération #" << generation++ << " lasted " << generationDuration.asSeconds() << " seconds" << std::endl;
+	nextUpdateTick = sf::Time::Zero;
+	maxDisplayTick = sf::seconds(1) / (float) MINIMUM_FPS;
 }
 
-bool Game::gameover() {
-	if (elapsedTime > CFG->readInt("EpocDuration"))
-		return true;
+void Game::update() {
+	if (iterations >= ITERATIONS_PER_GENERATION)
+		newGeneration();
 	
-	bool allDead = true;
-	for (unsigned int i = 0; i < entities.size(); i++)
-		allDead &= ((Animal*) entities[i])->isDead();
+	manager.update();
 	
-	return allDead;
+	iterations++;
 }
 
-void Game::togglePause() {
-	pause = !pause;
+void Game::updateFps() {
+	if (oneSecondClock.getElapsedTime() >= sf::seconds(1)) {
+		float dt = oneSecondClock.restart().asSeconds();
+		fps = displaysCount / dt;
+		ups = updatesCount / dt;
+		
+		displaysCount = 0;
+		updatesCount = 0;
+	}
 }
