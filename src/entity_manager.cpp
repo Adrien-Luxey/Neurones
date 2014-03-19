@@ -1,16 +1,6 @@
 #include "entity_manager.h"
 #include "genetics.h"
 
-// AnimalsNumber = species[1].size() (idem pour les fruits)
-
-
-// TODO : la couleuuur des animaux
-/* TODO : cette histoire de Species c'est stupide : considérer que tout le monde est un animal 
- *		  alors qu'on s'est emmerdé à faire une classe Entity and co.
- *		  Il faut un vector contenant prays et predators dont les indices correspondent à ceux des animaux.
- */
-
-
 EntityManager::EntityManager()
   : DISTANCE_SIGMOID(CFG->readInt("DistanceSigmoid")), WORLD_SIZE(CFG->readInt("WorldSize")),
 	BUSHES_NUMBER(CFG->readInt("BushesNumber")), BUSHES_MIN_SIZE(CFG->readInt("BushesMinSize")),
