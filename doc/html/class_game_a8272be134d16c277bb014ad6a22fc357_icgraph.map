@@ -1,0 +1,5 @@
+<map id="Game::quit" name="Game::quit">
+<area shape="rect" id="node3" href="$class_display.html#a05ee6cd33afcc51a5856148677a71c82" title="Handles all the user events." alt="" coords="143,5,255,35"/>
+<area shape="rect" id="node5" href="$class_game.html#a7ad92b77b596d7882a7ae76eb18b5e6c" title="Game loop." alt="" coords="305,5,393,35"/>
+<area shape="rect" id="node7" href="$main_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="443,5,493,35"/>
+</map>

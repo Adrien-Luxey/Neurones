@@ -1,0 +1,7 @@
+<map id="Game::loop" name="Game::loop">
+<area shape="rect" id="node3" href="$class_display.html#a05ee6cd33afcc51a5856148677a71c82" title="Handles all the user events." alt="" coords="145,59,257,88"/>
+<area shape="rect" id="node11" href="$class_display.html#a713ee81045f32895c2b063037c81c388" title="Displays all the game elements and the UI." alt="" coords="145,112,257,141"/>
+<area shape="rect" id="node5" href="$class_game.html#a8272be134d16c277bb014ad6a22fc357" title="Game::quit" alt="" coords="360,5,445,35"/>
+<area shape="rect" id="node7" href="$class_game.html#a7c89563d299f25881c8c8a42c1e3219e" title="Game::increaseGameSpeed" alt="" coords="309,59,496,88"/>
+<area shape="rect" id="node9" href="$class_game.html#adcf5df2f7a3f5209f974741667b1236f" title="Game::decreaseGameSpeed" alt="" coords="308,112,497,141"/>
+</map>

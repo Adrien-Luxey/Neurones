@@ -1,0 +1,4 @@
+<map id="Animal::init" name="Animal::init">
+<area shape="rect" id="node3" href="$class_animal.html#acd693bbac16d2f7dec930124887a9095" title="Abstract method for object initialisation." alt="" coords="181,5,267,35"/>
+<area shape="rect" id="node5" href="$class_neural_network.html#a38e8afa4eb8651b80c48b577ecdc6c4a" title="Updates the DNA of all neurons with the new one, given by the genetics algorithm." alt="" coords="143,59,305,88"/>
+</map>

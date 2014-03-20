@@ -1,0 +1,4 @@
+<map id="Entity" name="Entity">
+<area shape="rect" id="node3" href="$class_animal.html" title="Class representing an animal, containing a brain (NeuralNetwork), that changes the animal&#39;s state giv..." alt="" coords="5,83,67,112"/>
+<area shape="rect" id="node5" href="$class_fruit.html" title="class representing a fruit : static element that can be eaten by an animal" alt="" coords="91,83,139,112"/>
+</map>

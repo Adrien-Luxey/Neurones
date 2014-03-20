@@ -1,0 +1,5 @@
+<map id="Animal" name="Animal">
+<area shape="rect" id="node2" href="$class_entity.html" title="Abstract class represtenting any displayable physical object of the game." alt="" coords="69,104,125,133"/>
+<area shape="rect" id="node4" href="$struct_vect2i.html" title="Vect2i" alt="" coords="5,5,64,35"/>
+<area shape="rect" id="node7" href="$class_neural_network.html" title="The NN class, containing LayersNumber (form config.cfg) layers of neurons, the layers size depending ..." alt="" coords="149,104,259,133"/>
+</map>

@@ -1,0 +1,187 @@
+\hypertarget{class_neuron}{\section{Neuron Class Reference}
+\label{class_neuron}\index{Neuron@{Neuron}}
+}
+
+
+The \hyperlink{class_neuron}{Neuron} class, with represents a singleton, without backprop or anything.  
+
+
+
+
+{\ttfamily \#include $<$neuron.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_neuron_aac37e4753166ab39e0f4f6d90fdeda57}{Neuron} (unsigned int \-\_\-inputs\-Number)
+\item 
+\hyperlink{class_neuron_a94a250ce7e167760e593979b899745b1}{$\sim$\-Neuron} ()
+\item 
+void \hyperlink{class_neuron_abb3a85d2adf4a9c5a5b646c83086a2ae}{init\-Weights} ()
+\begin{DoxyCompactList}\small\item\em Initializes all the weights with uniform rand values \mbox{[}-\/1; 1\mbox{]}. \end{DoxyCompactList}\item 
+const float \hyperlink{class_neuron_a1d1bedb17ff3d87afcc282421579ad5f}{run} (const std\-::vector$<$ float $>$ inputs)
+\begin{DoxyCompactList}\small\item\em Runs the calculation of the output value depending on the inputs. \end{DoxyCompactList}\item 
+void \hyperlink{class_neuron_a873e07fce168dfde42961ea151593c9f}{set\-D\-N\-A} (const std\-::vector$<$ float $>$ \&D\-N\-A)
+\begin{DoxyCompactList}\small\item\em Updates the D\-N\-A of the neuron with the new one given by the G\-A. \end{DoxyCompactList}\item 
+std\-::vector$<$ float $>$ \hyperlink{class_neuron_a2626c0a0fa4dbca17dc7fd9b3b390c07}{get\-D\-N\-A} ()
+\item 
+unsigned int \hyperlink{class_neuron_a40d81d3ea3f2af3e2f3297533132fd31}{get\-D\-N\-A\-Size} () const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_neuron}{Neuron} class, with represents a singleton, without backprop or anything. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-inputs\-Number} & The inputs number of the neuron \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 20 of file neuron.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_neuron_aac37e4753166ab39e0f4f6d90fdeda57}{\index{Neuron@{Neuron}!Neuron@{Neuron}}
+\index{Neuron@{Neuron}!Neuron@{Neuron}}
+\subsubsection[{Neuron}]{\setlength{\rightskip}{0pt plus 5cm}Neuron\-::\-Neuron (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{\-\_\-inputs\-Number}
+\end{DoxyParamCaption}
+)}}\label{class_neuron_aac37e4753166ab39e0f4f6d90fdeda57}
+
+
+Definition at line 3 of file neuron.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{class_neuron_aac37e4753166ab39e0f4f6d90fdeda57_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_neuron_a94a250ce7e167760e593979b899745b1}{\index{Neuron@{Neuron}!$\sim$\-Neuron@{$\sim$\-Neuron}}
+\index{$\sim$\-Neuron@{$\sim$\-Neuron}!Neuron@{Neuron}}
+\subsubsection[{$\sim$\-Neuron}]{\setlength{\rightskip}{0pt plus 5cm}Neuron\-::$\sim$\-Neuron (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_neuron_a94a250ce7e167760e593979b899745b1}
+
+
+Definition at line 8 of file neuron.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_neuron_a2626c0a0fa4dbca17dc7fd9b3b390c07}{\index{Neuron@{Neuron}!get\-D\-N\-A@{get\-D\-N\-A}}
+\index{get\-D\-N\-A@{get\-D\-N\-A}!Neuron@{Neuron}}
+\subsubsection[{get\-D\-N\-A}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ float $>$ Neuron\-::get\-D\-N\-A (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_neuron_a2626c0a0fa4dbca17dc7fd9b3b390c07}
+\begin{DoxyReturn}{Returns}
+the A\-D\-N of the neuron 
+\end{DoxyReturn}
+
+
+Definition at line 45 of file neuron.\-cpp.
+
+\hypertarget{class_neuron_a40d81d3ea3f2af3e2f3297533132fd31}{\index{Neuron@{Neuron}!get\-D\-N\-A\-Size@{get\-D\-N\-A\-Size}}
+\index{get\-D\-N\-A\-Size@{get\-D\-N\-A\-Size}!Neuron@{Neuron}}
+\subsubsection[{get\-D\-N\-A\-Size}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Neuron\-::get\-D\-N\-A\-Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_neuron_a40d81d3ea3f2af3e2f3297533132fd31}
+\begin{DoxyReturn}{Returns}
+The size of the D\-N\-A of the neuron 
+\end{DoxyReturn}
+
+
+Definition at line 51 of file neuron.\-h.
+
+\hypertarget{class_neuron_abb3a85d2adf4a9c5a5b646c83086a2ae}{\index{Neuron@{Neuron}!init\-Weights@{init\-Weights}}
+\index{init\-Weights@{init\-Weights}!Neuron@{Neuron}}
+\subsubsection[{init\-Weights}]{\setlength{\rightskip}{0pt plus 5cm}void Neuron\-::init\-Weights (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_neuron_abb3a85d2adf4a9c5a5b646c83086a2ae}
+
+
+Initializes all the weights with uniform rand values \mbox{[}-\/1; 1\mbox{]}. 
+
+
+
+Definition at line 11 of file neuron.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{class_neuron_abb3a85d2adf4a9c5a5b646c83086a2ae_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_neuron_a1d1bedb17ff3d87afcc282421579ad5f}{\index{Neuron@{Neuron}!run@{run}}
+\index{run@{run}!Neuron@{Neuron}}
+\subsubsection[{run}]{\setlength{\rightskip}{0pt plus 5cm}const float Neuron\-::run (
+\begin{DoxyParamCaption}
+\item[{const std\-::vector$<$ float $>$}]{inputs}
+\end{DoxyParamCaption}
+)}}\label{class_neuron_a1d1bedb17ff3d87afcc282421579ad5f}
+
+
+Runs the calculation of the output value depending on the inputs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The inputs array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A float representing the output 
+\end{DoxyReturn}
+
+
+Definition at line 22 of file neuron.\-cpp.
+
+\hypertarget{class_neuron_a873e07fce168dfde42961ea151593c9f}{\index{Neuron@{Neuron}!set\-D\-N\-A@{set\-D\-N\-A}}
+\index{set\-D\-N\-A@{set\-D\-N\-A}!Neuron@{Neuron}}
+\subsubsection[{set\-D\-N\-A}]{\setlength{\rightskip}{0pt plus 5cm}void Neuron\-::set\-D\-N\-A (
+\begin{DoxyParamCaption}
+\item[{const std\-::vector$<$ float $>$ \&}]{D\-N\-A}
+\end{DoxyParamCaption}
+)}}\label{class_neuron_a873e07fce168dfde42961ea151593c9f}
+
+
+Updates the D\-N\-A of the neuron with the new one given by the G\-A. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em D\-N\-A} & The new piece of A\-D\-N \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 40 of file neuron.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{neuron_8h}{neuron.\-h}\item 
+src/\hyperlink{neuron_8cpp}{neuron.\-cpp}\end{DoxyCompactItemize}

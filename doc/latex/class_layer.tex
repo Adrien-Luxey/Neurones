@@ -1,0 +1,190 @@
+\hypertarget{class_layer}{\section{Layer Class Reference}
+\label{class_layer}\index{Layer@{Layer}}
+}
+
+
+Class representing a layer of neurons inside the nn.  
+
+
+
+
+{\ttfamily \#include $<$layer.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_layer_a16d6a7a3cff2e9e489186400a9d0f4f2}{Layer} (unsigned int \-\_\-inputs\-Number, unsigned int \-\_\-neurons\-Number)
+\item 
+\hyperlink{class_layer_a1b1ba4804451dfe6cc357194e42762ae}{$\sim$\-Layer} ()
+\item 
+void \hyperlink{class_layer_a08ee50fd54abe23d9fc94551c7b4be3f}{init\-Neurons} ()
+\begin{DoxyCompactList}\small\item\em initialize the neurones of the layer with the inputs/outputs numbers \end{DoxyCompactList}\item 
+std\-::vector$<$ float $>$ \hyperlink{class_layer_a33387425a6f32b455bdca87496a891c9}{run} (const std\-::vector$<$ float $>$ inputs)
+\begin{DoxyCompactList}\small\item\em Execution of all the neurons of the layer according to the inputs array. \end{DoxyCompactList}\item 
+std\-::vector$<$ float $>$ \hyperlink{class_layer_a18d9fa45eb9ff61f5d5bb9c74179bf30}{get\-D\-N\-A} ()
+\item 
+unsigned int \hyperlink{class_layer_a01093e904ef7331b99fccc9abe1174aa}{get\-D\-N\-A\-Size} () const 
+\item 
+void \hyperlink{class_layer_acd14a68865522c3e63a0dab87dd3a100}{set\-D\-N\-A} (const std\-::vector$<$ float $>$ \&D\-N\-A)
+\begin{DoxyCompactList}\small\item\em Update the neurons' D\-N\-A with the news value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class representing a layer of neurons inside the nn. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \-\_\-inputs\-Number} & Number of inputs for each neuron \\
+\hline
+{\em \-\_\-neurons\-Number} & Number of outputs for each neuron \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 16 of file layer.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_layer_a16d6a7a3cff2e9e489186400a9d0f4f2}{\index{Layer@{Layer}!Layer@{Layer}}
+\index{Layer@{Layer}!Layer@{Layer}}
+\subsubsection[{Layer}]{\setlength{\rightskip}{0pt plus 5cm}Layer\-::\-Layer (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{\-\_\-inputs\-Number, }
+\item[{unsigned int}]{\-\_\-neurons\-Number}
+\end{DoxyParamCaption}
+)}}\label{class_layer_a16d6a7a3cff2e9e489186400a9d0f4f2}
+
+
+Definition at line 3 of file layer.\-cpp.
+
+
+
+Here is the call graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=284pt]{class_layer_a16d6a7a3cff2e9e489186400a9d0f4f2_cgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_layer_a1b1ba4804451dfe6cc357194e42762ae}{\index{Layer@{Layer}!$\sim$\-Layer@{$\sim$\-Layer}}
+\index{$\sim$\-Layer@{$\sim$\-Layer}!Layer@{Layer}}
+\subsubsection[{$\sim$\-Layer}]{\setlength{\rightskip}{0pt plus 5cm}Layer\-::$\sim$\-Layer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_layer_a1b1ba4804451dfe6cc357194e42762ae}
+
+
+Definition at line 9 of file layer.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_layer_a18d9fa45eb9ff61f5d5bb9c74179bf30}{\index{Layer@{Layer}!get\-D\-N\-A@{get\-D\-N\-A}}
+\index{get\-D\-N\-A@{get\-D\-N\-A}!Layer@{Layer}}
+\subsubsection[{get\-D\-N\-A}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ float $>$ Layer\-::get\-D\-N\-A (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_layer_a18d9fa45eb9ff61f5d5bb9c74179bf30}
+\begin{DoxyReturn}{Returns}
+the D\-N\-A of all the neurons as a float vector 
+\end{DoxyReturn}
+
+
+Definition at line 32 of file layer.\-cpp.
+
+\hypertarget{class_layer_a01093e904ef7331b99fccc9abe1174aa}{\index{Layer@{Layer}!get\-D\-N\-A\-Size@{get\-D\-N\-A\-Size}}
+\index{get\-D\-N\-A\-Size@{get\-D\-N\-A\-Size}!Layer@{Layer}}
+\subsubsection[{get\-D\-N\-A\-Size}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Layer\-::get\-D\-N\-A\-Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_layer_a01093e904ef7331b99fccc9abe1174aa}
+\begin{DoxyReturn}{Returns}
+The D\-N\-A of all the nuerons size 
+\end{DoxyReturn}
+
+
+Definition at line 42 of file layer.\-cpp.
+
+\hypertarget{class_layer_a08ee50fd54abe23d9fc94551c7b4be3f}{\index{Layer@{Layer}!init\-Neurons@{init\-Neurons}}
+\index{init\-Neurons@{init\-Neurons}!Layer@{Layer}}
+\subsubsection[{init\-Neurons}]{\setlength{\rightskip}{0pt plus 5cm}void Layer\-::init\-Neurons (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_layer_a08ee50fd54abe23d9fc94551c7b4be3f}
+
+
+initialize the neurones of the layer with the inputs/outputs numbers 
+
+
+
+Definition at line 12 of file layer.\-cpp.
+
+
+
+Here is the caller graph for this function\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=284pt]{class_layer_a08ee50fd54abe23d9fc94551c7b4be3f_icgraph}
+\end{center}
+\end{figure}
+
+
+\hypertarget{class_layer_a33387425a6f32b455bdca87496a891c9}{\index{Layer@{Layer}!run@{run}}
+\index{run@{run}!Layer@{Layer}}
+\subsubsection[{run}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ float $>$ Layer\-::run (
+\begin{DoxyParamCaption}
+\item[{const std\-::vector$<$ float $>$}]{inputs}
+\end{DoxyParamCaption}
+)}}\label{class_layer_a33387425a6f32b455bdca87496a891c9}
+
+
+Execution of all the neurons of the layer according to the inputs array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The inputs array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A float array representing the outputs 
+\end{DoxyReturn}
+
+
+Definition at line 23 of file layer.\-cpp.
+
+\hypertarget{class_layer_acd14a68865522c3e63a0dab87dd3a100}{\index{Layer@{Layer}!set\-D\-N\-A@{set\-D\-N\-A}}
+\index{set\-D\-N\-A@{set\-D\-N\-A}!Layer@{Layer}}
+\subsubsection[{set\-D\-N\-A}]{\setlength{\rightskip}{0pt plus 5cm}void Layer\-::set\-D\-N\-A (
+\begin{DoxyParamCaption}
+\item[{const std\-::vector$<$ float $>$ \&}]{D\-N\-A}
+\end{DoxyParamCaption}
+)}}\label{class_layer_acd14a68865522c3e63a0dab87dd3a100}
+
+
+Update the neurons' D\-N\-A with the news value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em D\-N\-A} & The new D\-N\-A to set \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 52 of file layer.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{layer_8h}{layer.\-h}\item 
+src/\hyperlink{layer_8cpp}{layer.\-cpp}\end{DoxyCompactItemize}
