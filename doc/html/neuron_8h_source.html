@@ -23,10 +23,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-<<<<<<< HEAD
-=======
   <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
->>>>>>> master
   <td style="padding-left: 0.5em;">
    <div id="projectname">Neurones
    &#160;<span id="projectnumber">0.3</span>
@@ -81,15 +78,6 @@ $(document).ready(function(){initNavTree('neuron_8h_source.html','');});
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="utils_8h.html">utils.h</a>&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="config__parser_8h.html">config_parser.h</a>&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<<<<<<< HEAD
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// Quite outdated, used to serve if you don&#39;t set &quot;UseNeuronSigmoid&quot;, but it would break most functionnality</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="code" href="neuron_8h.html#a4e0d582a51849920d886a5380b470434">   11</a></span>&#160;<span class="preprocessor">#define SEUIL   0</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="code" href="neuron_8h.html#a3506e2878e0f36c5dffd515e6b386c5e">   12</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define OUT_0   0</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="code" href="neuron_8h.html#a69935f16da7c62437bf70a37e61c3be4">   13</a></span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define OUT_1   1</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-=======
->>>>>>> master
 <div class="line"><a name="l00020"></a><span class="lineno"><a class="code" href="class_neuron.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_neuron.html" title="The Neuron class, with represents a singleton, without backprop or anything.">Neuron</a> {</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keyword">public</span>:   </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_neuron.html#aac37e4753166ab39e0f4f6d90fdeda57">Neuron</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> _inputsNumber);</div>
@@ -97,25 +85,6 @@ $(document).ready(function(){initNavTree('neuron_8h_source.html','');});
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_neuron.html#abb3a85d2adf4a9c5a5b646c83086a2ae" title="Initializes all the weights with uniform rand values [-1; 1].">initWeights</a>();</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<<<<<<< HEAD
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">float</span> <a class="code" href="class_neuron.html#a1d1bedb17ff3d87afcc282421579ad5f" title="Runs the calculation of the output value depending on the inputs.">run</a>(<span class="keyword">const</span> std::vector&lt;float&gt; inputs);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_neuron.html#a873e07fce168dfde42961ea151593c9f" title="Updates the DNA of the neuron with the new one given by the GA.">setDNA</a>(<span class="keyword">const</span> std::vector&lt;float&gt; &amp;DNA);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    std::vector&lt;float&gt; <a class="code" href="class_neuron.html#a2626c0a0fa4dbca17dc7fd9b3b390c07">getDNA</a>();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="code" href="class_neuron.html#a40d81d3ea3f2af3e2f3297533132fd31">   51</a></span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_neuron.html#a40d81d3ea3f2af3e2f3297533132fd31">getDNASize</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> weights.size(); }</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> inputsNumber;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    std::vector&lt;float&gt; weights;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">float</span> NEURON_SIGMOID;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">bool</span> USE_NEURON_SIGMOID;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif // NEURON_H</span></div>
-=======
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">float</span> <a class="code" href="class_neuron.html#a1d1bedb17ff3d87afcc282421579ad5f" title="Runs the calculation of the output value depending on the inputs.">run</a>(<span class="keyword">const</span> std::vector&lt;float&gt; inputs);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_neuron.html#a873e07fce168dfde42961ea151593c9f" title="Updates the DNA of the neuron with the new one given by the GA.">setDNA</a>(<span class="keyword">const</span> std::vector&lt;float&gt; &amp;DNA);</div>
@@ -132,18 +101,13 @@ $(document).ready(function(){initNavTree('neuron_8h_source.html','');});
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;};</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#endif // NEURON_H</span></div>
->>>>>>> master
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="neuron_8h.html">neuron.h</a></li>
-<<<<<<< HEAD
-    <li class="footer">Generated on Thu Mar 20 2014 10:25:16 for Neurones by
-=======
-    <li class="footer">Generated on Wed Mar 19 2014 00:36:06 for Neurones by
->>>>>>> master
+    <li class="footer">Generated on Fri Mar 21 2014 09:49:09 for Neurones by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

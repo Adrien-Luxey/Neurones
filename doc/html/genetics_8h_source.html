@@ -23,10 +23,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-<<<<<<< HEAD
-=======
   <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
->>>>>>> master
   <td style="padding-left: 0.5em;">
    <div id="projectname">Neurones
    &#160;<span id="projectnumber">0.3</span>
@@ -75,48 +72,6 @@ $(document).ready(function(){initNavTree('genetics_8h_source.html','');});
 <a href="genetics_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef GENETICS_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define GENETICS_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
-<<<<<<< HEAD
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="utils_8h.html">utils.h</a>&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="entity__manager_8h.html">entity_manager.h</a>&quot;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="entity_8h.html">entity.h</a>&quot;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">class </span><a class="code" href="class_game.html" title="General class dispatching the game jobs to other objects. Only SFML user with Display.">Game</a>;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="code" href="class_genetics.html">   35</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_genetics.html" title="More or less static class operating the genetic algorithm on all the animal species of the EntityMana...">Genetics</a> {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="class_genetics.html#a7c9a65ee1c7da6bbb4b35d46d1dcf4fa">Genetics</a>();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_genetics.html#a63e33bd3725feb511e19d86e2d07ca3b" title="Entry point of the GA.">evolve</a>(<a class="code" href="class_entity_manager.html" title="Handles the entities, their relations, updates, and all the game mecanics.">EntityManager</a> &amp;manager);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">typedef</span> <span class="keyword">struct </span>AnimalData {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        std::vector&lt;float&gt; DNA;         </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> score;             </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> selectionScore;    </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    } AnimalData;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> selection(<span class="keyword">const</span> std::vector&lt;Animal*&gt; &amp;animals, std::vector&lt;AnimalData&gt; &amp;parents);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> roulette(<span class="keyword">const</span> std::vector&lt;AnimalData&gt; &amp;array) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">void</span> crossover( <span class="keyword">const</span> std::vector&lt;AnimalData&gt; &amp;parents, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> fatherIndex,</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> motherIndex, std::vector&lt;AnimalData&gt; &amp;children);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">void</span> mutation(std::vector&lt;float&gt; &amp;DNA);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> compareAnimalData(<span class="keyword">const</span> <span class="keywordtype">void</span> *a, <span class="keyword">const</span> <span class="keywordtype">void</span> *b);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">int</span> CROSSOVER_PROBABILITY, MUTATION_PROBABILITY;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">float</span> MUTATION_GAUSS_DEVIATION;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;};</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">#endif // GENETICS_H</span></div>
-=======
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
@@ -157,18 +112,13 @@ $(document).ready(function(){initNavTree('genetics_8h_source.html','');});
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;};</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#endif // GENETICS_H</span></div>
->>>>>>> master
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="genetics_8h.html">genetics.h</a></li>
-<<<<<<< HEAD
-    <li class="footer">Generated on Thu Mar 20 2014 10:25:16 for Neurones by
-=======
-    <li class="footer">Generated on Wed Mar 19 2014 00:36:06 for Neurones by
->>>>>>> master
+    <li class="footer">Generated on Fri Mar 21 2014 09:49:09 for Neurones by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

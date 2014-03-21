@@ -4,9 +4,5 @@
 <area shape="rect" id="node13" href="$genetics_8cpp.html" title="src/genetics.cpp" alt="" coords="437,83,555,112"/>
 <area shape="rect" id="node5" href="$display_8cpp.html" title="src/display.cpp" alt="" coords="5,160,115,189"/>
 <area shape="rect" id="node7" href="$game_8cpp.html" title="src/game.cpp" alt="" coords="139,160,240,189"/>
-<<<<<<< HEAD
-<area shape="rect" id="node9" href="$main_8cpp.html" title="This is the entry point of the Neurones program." alt="" coords="264,160,360,189"/>
-=======
 <area shape="rect" id="node9" href="$main_8cpp.html" title="src/main.cpp" alt="" coords="264,160,360,189"/>
->>>>>>> master
 </map>

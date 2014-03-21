@@ -23,10 +23,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-<<<<<<< HEAD
-=======
   <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
->>>>>>> master
   <td style="padding-left: 0.5em;">
    <div id="projectname">Neurones
    &#160;<span id="projectnumber">0.3</span>
@@ -75,56 +72,12 @@ $(document).ready(function(){initNavTree('neuron_8cpp_source.html','');});
 <a href="neuron_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="neuron_8h.html">neuron.h</a>&quot;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
 <div class="line"><a name="l00003"></a><span class="lineno"><a class="code" href="class_neuron.html#aac37e4753166ab39e0f4f6d90fdeda57">    3</a></span>&#160;<a class="code" href="class_neuron.html#aac37e4753166ab39e0f4f6d90fdeda57">Neuron::Neuron</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> _inputsNumber)</div>
-<<<<<<< HEAD
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;: inputsNumber(_inputsNumber), NEURON_SIGMOID(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3">CFG</a>-&gt;readFloat(<span class="stringliteral">&quot;NeuronSigmoid&quot;</span>)), USE_NEURON_SIGMOID(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;UseNeuronSigmoid&quot;</span>)) {</div>
-=======
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;: inputsNumber(_inputsNumber), NEURON_SIGMOID(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3" title="shortcut for calling the configParser singleton">CFG</a>-&gt;readFloat(<span class="stringliteral">&quot;NeuronSigmoid&quot;</span>)) {</div>
->>>>>>> master
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <a class="code" href="class_neuron.html#abb3a85d2adf4a9c5a5b646c83086a2ae" title="Initializes all the weights with uniform rand values [-1; 1].">initWeights</a>();</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;}</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
 <div class="line"><a name="l00008"></a><span class="lineno"><a class="code" href="class_neuron.html#a94a250ce7e167760e593979b899745b1">    8</a></span>&#160;<a class="code" href="class_neuron.html#a94a250ce7e167760e593979b899745b1">Neuron::~Neuron</a>() {}</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<<<<<<< HEAD
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// Initialisation des poids random [-1; 1] en fonction de inputsNumber</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="code" href="class_neuron.html#abb3a85d2adf4a9c5a5b646c83086a2ae">   11</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_neuron.html#abb3a85d2adf4a9c5a5b646c83086a2ae" title="Initializes all the weights with uniform rand values [-1; 1].">Neuron::initWeights</a>() {</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    std::uniform_real_distribution&lt;float&gt; random(-1, 1);</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    weights.clear();</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="comment">// !!! i &lt;= inputs !!! (le premier weight est le bias)</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt;= inputsNumber; i++)</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        weights.push_back(random(generator));</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;}</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// Execution du calcul du neurone en fonction de inputs</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="code" href="class_neuron.html#a1d1bedb17ff3d87afcc282421579ad5f">   22</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">float</span> <a class="code" href="class_neuron.html#a1d1bedb17ff3d87afcc282421579ad5f" title="Runs the calculation of the output value depending on the inputs.">Neuron::run</a>(<span class="keyword">const</span> std::vector&lt;float&gt; inputs) {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">// weights[0] = bias</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">float</span> sum = weights[0];</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">// calcul de la combinaison linéraire weights * inputs</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; inputsNumber &amp;&amp; i &lt; inputs.size(); i++)</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        sum += weights[i+1]*inputs[i];</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">if</span> (USE_NEURON_SIGMOID) {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="comment">// La sigmoide de sum renvoie un float ]-1;1[</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">return</span> 1/(1 + expf(-sum/NEURON_SIGMOID)) * 2.f - 1.f;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="comment">// Sinon on effectue une fonction scale</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordflow">return</span> (sum &gt; <a class="code" href="neuron_8h.html#a4e0d582a51849920d886a5380b470434">SEUIL</a>) ? <a class="code" href="neuron_8h.html#a69935f16da7c62437bf70a37e61c3be4">OUT_1</a> : <a class="code" href="neuron_8h.html#a3506e2878e0f36c5dffd515e6b386c5e">OUT_0</a>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">// Changement de l&#39;ADN après passage de l&#39;algo génétique</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="code" href="class_neuron.html#a873e07fce168dfde42961ea151593c9f">   40</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_neuron.html#a873e07fce168dfde42961ea151593c9f" title="Updates the DNA of the neuron with the new one given by the GA.">Neuron::setDNA</a>(<span class="keyword">const</span> std::vector&lt;float&gt; &amp;DNA) {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; DNA.size() &amp;&amp; i &lt; weights.size(); i++)</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        weights[i] = DNA[i];</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="code" href="class_neuron.html#a2626c0a0fa4dbca17dc7fd9b3b390c07">   45</a></span>&#160;std::vector&lt;float&gt; <a class="code" href="class_neuron.html#a2626c0a0fa4dbca17dc7fd9b3b390c07">Neuron::getDNA</a>() {</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> weights;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
-=======
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="code" href="class_neuron.html#abb3a85d2adf4a9c5a5b646c83086a2ae">   10</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_neuron.html#abb3a85d2adf4a9c5a5b646c83086a2ae" title="Initializes all the weights with uniform rand values [-1; 1].">Neuron::initWeights</a>() {</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    std::uniform_real_distribution&lt;float&gt; random(-1, 1);</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    </div>
@@ -157,18 +110,13 @@ $(document).ready(function(){initNavTree('neuron_8cpp_source.html','');});
 <div class="line"><a name="l00039"></a><span class="lineno"><a class="code" href="class_neuron.html#a2626c0a0fa4dbca17dc7fd9b3b390c07">   39</a></span>&#160;std::vector&lt;float&gt; <a class="code" href="class_neuron.html#a2626c0a0fa4dbca17dc7fd9b3b390c07">Neuron::getDNA</a>() {</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">return</span> weights;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
->>>>>>> master
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="neuron_8cpp.html">neuron.cpp</a></li>
-<<<<<<< HEAD
-    <li class="footer">Generated on Thu Mar 20 2014 10:25:16 for Neurones by
-=======
-    <li class="footer">Generated on Wed Mar 19 2014 00:36:06 for Neurones by
->>>>>>> master
+    <li class="footer">Generated on Fri Mar 21 2014 09:49:09 for Neurones by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

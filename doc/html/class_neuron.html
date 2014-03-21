@@ -23,10 +23,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-<<<<<<< HEAD
-=======
   <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
->>>>>>> master
   <td style="padding-left: 0.5em;">
    <div id="projectname">Neurones
    &#160;<span id="projectnumber">0.3</span>
@@ -107,12 +104,6 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>The <a class="el" href="class_neuron.html" title="The Neuron class, with represents a singleton, without backprop or anything.">Neuron</a> class, with represents a singleton, without backprop or anything. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-<<<<<<< HEAD
-    <tr><td class="paramname">_inputsNumber</td><td>The inputs number of the neuron </td></tr>
-  </table>
-  </dd>
-</dl>
-=======
     <tr><td class="paramname">_inputsNumber</td><td>The inputs number of the neuron</td></tr>
   </table>
   </dd>
@@ -120,7 +111,6 @@ Public Member Functions</h2></td></tr>
 <p>The Neurons used in the projects are ultra simple percpetrons, without back-propagation or anything like it.</p>
 <p>It uses sigmoids as an activation function, because floats are so cooler than bools (and much more CPU-intensive).</p>
 <p>I'll let you check out Wikipedia if you need more info about how a perceptron work, or let you check out the <a class="el" href="class_neural_network.html" title="The NN class, containing LayersNumber (form config.cfg) layers of neurons, the layers size depending ...">NeuralNetwork</a> class, where I described a bit more how my Neural Networks worked. </p>
->>>>>>> master
 
 <p>Definition at line <a class="el" href="neuron_8h_source.html#l00020">20</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -181,15 +171,9 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<<<<<<< HEAD
-<dl class="section return"><dt>Returns</dt><dd>the ADN of the neuron </dd></dl>
-
-<p>Definition at line <a class="el" href="neuron_8cpp_source.html#l00045">45</a> of file <a class="el" href="neuron_8cpp_source.html">neuron.cpp</a>.</p>
-=======
 <dl class="section return"><dt>Returns</dt><dd>the DNA of the neuron, which is the array of its weights </dd></dl>
 
 <p>Definition at line <a class="el" href="neuron_8cpp_source.html#l00039">39</a> of file <a class="el" href="neuron_8cpp_source.html">neuron.cpp</a>.</p>
->>>>>>> master
 
 </div>
 </div>
@@ -215,11 +199,7 @@ Here is the call graph for this function:</div>
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>The size of the DNA of the neuron </dd></dl>
 
-<<<<<<< HEAD
-<p>Definition at line <a class="el" href="neuron_8h_source.html#l00051">51</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
-=======
 <p>Definition at line <a class="el" href="neuron_8h_source.html#l00057">57</a> of file <a class="el" href="neuron_8h_source.html">neuron.h</a>.</p>
->>>>>>> master
 
 </div>
 </div>
@@ -238,11 +218,7 @@ Here is the call graph for this function:</div>
 
 <p>Initializes all the weights with uniform rand values [-1; 1]. </p>
 
-<<<<<<< HEAD
-<p>Definition at line <a class="el" href="neuron_8cpp_source.html#l00011">11</a> of file <a class="el" href="neuron_8cpp_source.html">neuron.cpp</a>.</p>
-=======
 <p>Definition at line <a class="el" href="neuron_8cpp_source.html#l00010">10</a> of file <a class="el" href="neuron_8cpp_source.html">neuron.cpp</a>.</p>
->>>>>>> master
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -276,16 +252,10 @@ Here is the caller graph for this function:</div>
   </table>
   </dd>
 </dl>
-<<<<<<< HEAD
-<dl class="section return"><dt>Returns</dt><dd>A float representing the output </dd></dl>
-
-<p>Definition at line <a class="el" href="neuron_8cpp_source.html#l00022">22</a> of file <a class="el" href="neuron_8cpp_source.html">neuron.cpp</a>.</p>
-=======
 <dl class="section return"><dt>Returns</dt><dd>The output value</dd></dl>
 <p>To compute the output, we make the linear combination of weights and inputs : sum = weights * inputs Then, we apply an activation function to sum, so that it stays within the interval [-1; 1] In our case, we use a sigmoid, which inclination is determined by NeuronSigmoid in config.cfg </p>
 
 <p>Definition at line <a class="el" href="neuron_8cpp_source.html#l00021">21</a> of file <a class="el" href="neuron_8cpp_source.html">neuron.cpp</a>.</p>
->>>>>>> master
 
 </div>
 </div>
@@ -306,14 +276,6 @@ Here is the caller graph for this function:</div>
 <p>Updates the DNA of the neuron with the new one given by the GA. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-<<<<<<< HEAD
-    <tr><td class="paramname">DNA</td><td>The new piece of ADN </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Definition at line <a class="el" href="neuron_8cpp_source.html#l00040">40</a> of file <a class="el" href="neuron_8cpp_source.html">neuron.cpp</a>.</p>
-=======
     <tr><td class="paramname">DNA</td><td>The new piece of ADN</td></tr>
   </table>
   </dd>
@@ -321,7 +283,6 @@ Here is the caller graph for this function:</div>
 <p>We simply replace the actual weights by the ones given by the DNA </p>
 
 <p>Definition at line <a class="el" href="neuron_8cpp_source.html#l00034">34</a> of file <a class="el" href="neuron_8cpp_source.html">neuron.cpp</a>.</p>
->>>>>>> master
 
 </div>
 </div>
@@ -335,11 +296,7 @@ Here is the caller graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_neuron.html">Neuron</a></li>
-<<<<<<< HEAD
-    <li class="footer">Generated on Thu Mar 20 2014 10:25:16 for Neurones by
-=======
-    <li class="footer">Generated on Wed Mar 19 2014 00:36:06 for Neurones by
->>>>>>> master
+    <li class="footer">Generated on Fri Mar 21 2014 09:49:10 for Neurones by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

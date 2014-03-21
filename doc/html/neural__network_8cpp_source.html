@@ -23,10 +23,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-<<<<<<< HEAD
-=======
   <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
->>>>>>> master
   <td style="padding-left: 0.5em;">
    <div id="projectname">Neurones
    &#160;<span id="projectnumber">0.3</span>
@@ -87,19 +84,6 @@ $(document).ready(function(){initNavTree('neural__network_8cpp_source.html','');
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="comment">// Couche input : inputsNumber neurones à inputsNumber entrées</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="comment">// (utiliser le même nombre de neurones que d&#39;entrées pour cette couche est une convention reconnue)</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="comment">// On rajoute les sorties du tour précédent en entrée du nn - ou pas</span></div>
-<<<<<<< HEAD
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    layers.push_back(<a class="code" href="class_layer.html" title="Class representing a layer of neurons inside the nn.">Layer</a>(inputsNumber, inputsNumber));</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment">// Création des couches cachées suivant les données de config</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> inputs = inputsNumber;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;HiddenLayersNumber&quot;</span>); i++) {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        layers.push_back(<a class="code" href="class_layer.html" title="Class representing a layer of neurons inside the nn.">Layer</a>(inputs, <a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;HiddenLayerSize&quot;</span>)));</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        inputs = <a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;HiddenLayerSize&quot;</span>);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    }</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">// Enfin, création de la dernière couche qui a autant de neurones que d&#39;outputs (encore une fois c&#39;est une convention)</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    layers.push_back(<a class="code" href="class_layer.html" title="Class representing a layer of neurons inside the nn.">Layer</a>(inputs, outputsNumber));</div>
-=======
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    layers.push_back(<a class="code" href="class_layer.html" title="Class representing a layer of neurons inside the neural network.">Layer</a>(inputsNumber, inputsNumber));</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment">// Création des couches cachées suivant les données de config</span></div>
@@ -111,7 +95,6 @@ $(document).ready(function(){initNavTree('neural__network_8cpp_source.html','');
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">// Enfin, création de la dernière couche qui a autant de neurones que d&#39;outputs (encore une fois c&#39;est une convention)</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    layers.push_back(<a class="code" href="class_layer.html" title="Class representing a layer of neurons inside the neural network.">Layer</a>(inputs, outputsNumber));</div>
->>>>>>> master
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">// Run : execute le calcul de tout le NN en fonction d&#39;inputs</span></div>
@@ -157,11 +140,7 @@ $(document).ready(function(){initNavTree('neural__network_8cpp_source.html','');
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="neural__network_8cpp.html">neural_network.cpp</a></li>
-<<<<<<< HEAD
-    <li class="footer">Generated on Thu Mar 20 2014 10:25:16 for Neurones by
-=======
-    <li class="footer">Generated on Wed Mar 19 2014 00:36:06 for Neurones by
->>>>>>> master
+    <li class="footer">Generated on Fri Mar 21 2014 09:49:09 for Neurones by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

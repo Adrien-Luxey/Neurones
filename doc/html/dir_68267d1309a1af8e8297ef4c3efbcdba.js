@@ -38,12 +38,8 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
       [ "NeuralNetwork", "class_neural_network.html", "class_neural_network" ]
     ] ],
     [ "neuron.cpp", "neuron_8cpp.html", null ],
-<<<<<<< HEAD
-    [ "neuron.h", "neuron_8h.html", "neuron_8h" ],
-=======
     [ "neuron.h", "neuron_8h.html", [
       [ "Neuron", "class_neuron.html", "class_neuron" ]
     ] ],
->>>>>>> master
     [ "utils.h", "utils_8h.html", "utils_8h" ]
 ];
