@@ -9,9 +9,12 @@
 #include "neuron.h"
 
 /**
- * @brief Class representing a layer of neurons inside the nn
+ * @brief Class representing a layer of neurons inside the neural network
  * @param _inputsNumber		Number of inputs for each neuron
  * @param _neuronsNumber	Number of outputs for each neuron
+ * 
+ * The wikipedia page of Neural Networks will explain you better what a layer is, so go check out if you have any doubt.
+ * Neuron and NeuralNetwork are more interesting classes to investigates, Layer is only an intermediate.
  */
 class Layer {
 	public :
@@ -38,7 +41,7 @@ class Layer {
 		
 		/**
 		 * 
-         * @return The DNA of all the nuerons size
+         * @return The DNA of all the neurons size
          */
 		unsigned int getDNASize() const;
 		

@@ -23,6 +23,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+<<<<<<< HEAD
+=======
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+>>>>>>> master
   <td style="padding-left: 0.5em;">
    <div id="projectname">Neurones
    &#160;<span id="projectnumber">0.3</span>
@@ -73,9 +77,15 @@ $(document).ready(function(){initNavTree('animal_8cpp_source.html','');});
 <div class="line"><a name="l00003"></a><span class="lineno"><a class="code" href="animal_8cpp.html#af66075a058e499320a380abe3bea31f4">    3</a></span>&#160;<span class="preprocessor">#define SEUIL_ATTACKING 0.9f</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00005"></a><span class="lineno"><a class="code" href="class_animal.html#a1e726a49ec952443190ac62dad22353c">    5</a></span>&#160;<a class="code" href="class_animal.html#a1e726a49ec952443190ac62dad22353c">Animal::Animal</a>()</div>
+<<<<<<< HEAD
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;: <a class="code" href="class_entity.html" title="Abstract class represtenting any displayable physical object of the game.">Entity</a>(), ANIMAL_LINEAR_SPEED(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;AnimalLinearSpeed&quot;</span>)),</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;  ANIMAL_ANGULAR_SPEED(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;AnimalAngularSpeed&quot;</span>)), network(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;InputLayerSize&quot;</span>), <a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;OutputLayerSize&quot;</span>)) {</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <a class="code" href="class_entity.html#acd7af12063926ab8cd654539328e5532">radius</a> = <a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;AnimalRadius&quot;</span>);</div>
+=======
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;: <a class="code" href="class_entity.html" title="Abstract class represtenting any displayable physical object of the game.">Entity</a>(), ANIMAL_LINEAR_SPEED(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3" title="shortcut for calling the configParser singleton">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;AnimalLinearSpeed&quot;</span>)),</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;  ANIMAL_ANGULAR_SPEED(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3" title="shortcut for calling the configParser singleton">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;AnimalAngularSpeed&quot;</span>)), network(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3" title="shortcut for calling the configParser singleton">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;InputLayerSize&quot;</span>), <a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3" title="shortcut for calling the configParser singleton">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;OutputLayerSize&quot;</span>)) {</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <a class="code" href="class_entity.html#acd7af12063926ab8cd654539328e5532">radius</a> = <a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3" title="shortcut for calling the configParser singleton">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;AnimalRadius&quot;</span>);</div>
+>>>>>>> master
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <a class="code" href="class_animal.html#acd693bbac16d2f7dec930124887a9095" title="Abstract method for object initialisation.">init</a>();</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;}</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
@@ -91,7 +101,11 @@ $(document).ready(function(){initNavTree('animal_8cpp_source.html','');});
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_entity.html#a885ee23e7a2132f0d890bb2e312e6d77">pos</a>.<a class="code" href="struct_vect2i.html#a32d99812cd2cccca2b9751259783b699">y</a> = rand() % <a class="code" href="class_entity.html#a2b870ef127d06e3f98109695817a1798">WORLD_SIZE</a>;</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_entity.html#abb6791bd923767cdf42a7e3101a6f76d">angle</a> = rand() % 360;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    </div>
+<<<<<<< HEAD
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_animal.html#a280335c5deaf3402c85ab95a7653a483">speed</a> = <a class="code" href="utils_8h.html#adfec4d83ed4c3c15bd0a4dbfb978102e">Vect2i</a>();</div>
+=======
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_animal.html#a280335c5deaf3402c85ab95a7653a483">speed</a> = <a class="code" href="utils_8h.html#adfec4d83ed4c3c15bd0a4dbfb978102e" title="A structure reprensenting standard 2D vectors of int, with constructor.">Vect2i</a>();</div>
+>>>>>>> master
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
 <div class="line"><a name="l00027"></a><span class="lineno"><a class="code" href="class_animal.html#a75461b99c111f22dbb0231bcc397a1c9">   27</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_animal.html#acd693bbac16d2f7dec930124887a9095" title="Abstract method for object initialisation.">Animal::init</a>(<span class="keyword">const</span> std::vector&lt;float&gt; &amp;DNA) {</div>
@@ -156,8 +170,13 @@ $(document).ready(function(){initNavTree('animal_8cpp_source.html','');});
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"> * http://www.koonsolo.com/news/dewitters-gameloop/</span></div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"> * L&#39;interpolation c&#39;est la fluidité visuelle à bas prix</span></div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment"> */</span></div>
+<<<<<<< HEAD
 <div class="line"><a name="l00089"></a><span class="lineno"><a class="code" href="class_animal.html#a83a2929c3385a82aefaa689b3330c445">   89</a></span>&#160;<a class="code" href="struct_vect2i.html">Vect2i</a> <a class="code" href="class_animal.html#a83a2929c3385a82aefaa689b3330c445" title="Return a intermediate position between old and new pos given the interpolation rate.">Animal::getDisplayPos</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> &amp;interpolation)<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="utils_8h.html#adfec4d83ed4c3c15bd0a4dbfb978102e">Vect2i</a>(  <a class="code" href="class_animal.html#a803f0b218477a5e365c1dde6128fb53e">lastPos</a>.<a class="code" href="struct_vect2i.html#ae76ced0cba575b16f9de72e78828122b">x</a> + <a class="code" href="class_animal.html#a280335c5deaf3402c85ab95a7653a483">speed</a>.<a class="code" href="struct_vect2i.html#ae76ced0cba575b16f9de72e78828122b">x</a> * interpolation,</div>
+=======
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="code" href="class_animal.html#a83a2929c3385a82aefaa689b3330c445">   89</a></span>&#160;<a class="code" href="struct_vect2i.html" title="A structure reprensenting standard 2D vectors of int, with constructor.">Vect2i</a> <a class="code" href="class_animal.html#a83a2929c3385a82aefaa689b3330c445" title="Return a intermediate position between old and new pos given the interpolation rate.">Animal::getDisplayPos</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> &amp;interpolation)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="utils_8h.html#adfec4d83ed4c3c15bd0a4dbfb978102e" title="A structure reprensenting standard 2D vectors of int, with constructor.">Vect2i</a>(  <a class="code" href="class_animal.html#a803f0b218477a5e365c1dde6128fb53e">lastPos</a>.<a class="code" href="struct_vect2i.html#ae76ced0cba575b16f9de72e78828122b">x</a> + <a class="code" href="class_animal.html#a280335c5deaf3402c85ab95a7653a483">speed</a>.<a class="code" href="struct_vect2i.html#ae76ced0cba575b16f9de72e78828122b">x</a> * interpolation,</div>
+>>>>>>> master
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    <a class="code" href="class_animal.html#a803f0b218477a5e365c1dde6128fb53e">lastPos</a>.<a class="code" href="struct_vect2i.html#a32d99812cd2cccca2b9751259783b699">y</a> + <a class="code" href="class_animal.html#a280335c5deaf3402c85ab95a7653a483">speed</a>.<a class="code" href="struct_vect2i.html#a32d99812cd2cccca2b9751259783b699">y</a> * interpolation );</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
@@ -170,7 +189,11 @@ $(document).ready(function(){initNavTree('animal_8cpp_source.html','');});
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    da *= <a class="code" href="class_animal.html#a4004efb93813a375712ad5d82a404659">ANIMAL_ANGULAR_SPEED</a> * slowdownRate;</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    </div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="comment">// mise à jour de lastPos et speed pour l&#39;interpolation (cf le lien dans game.cpp au sujet de la gameloop)</span></div>
+<<<<<<< HEAD
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <a class="code" href="class_animal.html#a280335c5deaf3402c85ab95a7653a483">speed</a>.<a class="code" href="struct_vect2i.html#ae76ced0cba575b16f9de72e78828122b">x</a> = dp * cosf(<a class="code" href="class_entity.html#abb6791bd923767cdf42a7e3101a6f76d">angle</a>/180.f*<a class="code" href="utils_8h.html#a598a3330b3c21701223ee0ca14316eca">PI</a>);</div>
+=======
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <a class="code" href="class_animal.html#a280335c5deaf3402c85ab95a7653a483">speed</a>.<a class="code" href="struct_vect2i.html#ae76ced0cba575b16f9de72e78828122b">x</a> = dp * cosf(<a class="code" href="class_entity.html#abb6791bd923767cdf42a7e3101a6f76d">angle</a>/180.f*<a class="code" href="utils_8h.html#a598a3330b3c21701223ee0ca14316eca" title="PI definition in stl depends on installation, so let&#39;s define my own.">PI</a>);</div>
+>>>>>>> master
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <a class="code" href="class_animal.html#a280335c5deaf3402c85ab95a7653a483">speed</a>.<a class="code" href="struct_vect2i.html#a32d99812cd2cccca2b9751259783b699">y</a> = dp * sinf(<a class="code" href="class_entity.html#abb6791bd923767cdf42a7e3101a6f76d">angle</a>/180.f*PI);</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <a class="code" href="class_animal.html#a803f0b218477a5e365c1dde6128fb53e">lastPos</a> = <a class="code" href="class_entity.html#a885ee23e7a2132f0d890bb2e312e6d77">pos</a>;</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    </div>
@@ -195,7 +218,11 @@ $(document).ready(function(){initNavTree('animal_8cpp_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="animal_8cpp.html">animal.cpp</a></li>
+<<<<<<< HEAD
     <li class="footer">Generated on Thu Mar 20 2014 10:25:16 for Neurones by
+=======
+    <li class="footer">Generated on Wed Mar 19 2014 00:36:06 for Neurones by
+>>>>>>> master
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

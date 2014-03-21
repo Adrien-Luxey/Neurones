@@ -23,6 +23,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+<<<<<<< HEAD
+=======
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+>>>>>>> master
   <td style="padding-left: 0.5em;">
    <div id="projectname">Neurones
    &#160;<span id="projectnumber">0.3</span>
@@ -100,12 +104,24 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">_inputsNumber</td><td>The inputs number of the NN </td></tr>
+<<<<<<< HEAD
     <tr><td class="paramname">_outputsNumber</td><td>The outputs number </td></tr>
   </table>
   </dd>
 </dl>
 
 <p>Definition at line <a class="el" href="neural__network_8h_source.html#l00016">16</a> of file <a class="el" href="neural__network_8h_source.html">neural_network.h</a>.</p>
+=======
+    <tr><td class="paramname">_outputsNumber</td><td>The outputs number</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This class describes the brain of every animal. It is a very simple Neural Network, containing at least an input layer of inputsNumber neurons, and an output layer of outputsNumber neurons. You can configure as much hidden layers you want (one is enough, it has been proven for non linear activation functions) of as many neurons you want (this factor makes quite interesting changes to the animals' behavior).</p>
+<p>It's most interesting feature is that, it is a blackbox combinatory machine (same inputs give same outputs). We can synthetise all the behavior of this machine by extracting its DNA : an organized float array that represents every weight of every neuron, even though the values don't mean anything to us. After this extraction is made, we can mix up the DNA using the <a class="el" href="class_genetics.html" title="More or less static class operating the genetic algorithm on all the animal species of the EntityMana...">Genetics</a> class, and see evolution occur !</p>
+<p>On the other hand, it sadly means that our animals only act instinctly, strictly following what their DNA tell them to do. This could be improved if we used some kind of heavier Neural Network, like a sequential one for start (sequential means that the machine remembers its previous state). </p>
+
+<p>Definition at line <a class="el" href="neural__network_8h_source.html#l00024">24</a> of file <a class="el" href="neural__network_8h_source.html">neural_network.h</a>.</p>
+>>>>>>> master
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a3af96ee26597b200166e3a2523d56ad9"></a>
 <div class="memitem">
@@ -281,7 +297,11 @@ Here is the caller graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_neural_network.html">NeuralNetwork</a></li>
+<<<<<<< HEAD
     <li class="footer">Generated on Thu Mar 20 2014 10:25:16 for Neurones by
+=======
+    <li class="footer">Generated on Wed Mar 19 2014 00:36:06 for Neurones by
+>>>>>>> master
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

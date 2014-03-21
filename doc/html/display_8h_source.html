@@ -23,6 +23,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+<<<<<<< HEAD
+=======
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+>>>>>>> master
   <td style="padding-left: 0.5em;">
    <div id="projectname">Neurones
    &#160;<span id="projectnumber">0.3</span>
@@ -71,6 +75,7 @@ $(document).ready(function(){initNavTree('display_8h_source.html','');});
 <a href="display_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef DISPLAY_H</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define DISPLAY_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
+<<<<<<< HEAD
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;SFML/Graphics.hpp&gt;</span></div>
@@ -125,13 +130,73 @@ $(document).ready(function(){initNavTree('display_8h_source.html','');});
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;};</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">#endif // DISPLAY_H</span></div>
+=======
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;SFML/Graphics.hpp&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="entity__manager_8h.html">entity_manager.h</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="utils_8h.html">utils.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="animal_8h.html">animal.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="fruit_8h.html">fruit.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">class </span><a class="code" href="class_game.html" title="General class dispatching the game jobs to other objects. Only SFML user with Display.">Game</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="code" href="class_display.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_display.html" title="Class handling every display aspect of the game.">Display</a> {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_display.html#a21052a50c5e922272d697aaf5cfb14cc">Display</a>(<a class="code" href="class_game.html" title="General class dispatching the game jobs to other objects. Only SFML user with Display.">Game</a>* _game);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="code" href="class_display.html#ac2607a6bb236c55547a4223d40d85d1f">   24</a></span>&#160;    <a class="code" href="class_display.html#ac2607a6bb236c55547a4223d40d85d1f">~Display</a>() {}</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_display.html#a713ee81045f32895c2b063037c81c388" title="Displays all the game elements and the UI.">update</a>(<span class="keyword">const</span> <a class="code" href="class_entity_manager.html" title="Handles the entities, their relations, updates, and all the game mecanics.">EntityManager</a> &amp;manager, <span class="keyword">const</span> <span class="keywordtype">float</span> &amp;_interpolation);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_display.html#a05ee6cd33afcc51a5856148677a71c82" title="Handles all the user events.">events</a>();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> displayGame(<span class="keyword">const</span> <a class="code" href="class_entity_manager.html" title="Handles the entities, their relations, updates, and all the game mecanics.">EntityManager</a> &amp;manager, <span class="keyword">const</span> sf::View &amp;view);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> displayUI(<span class="keyword">const</span> <a class="code" href="class_entity_manager.html" title="Handles the entities, their relations, updates, and all the game mecanics.">EntityManager</a> &amp;manager);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> cameraEvents();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> drawFruits(<span class="keyword">const</span> std::vector&lt;Fruit*&gt; &amp;fruits, <span class="keyword">const</span> sf::View &amp;view);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">void</span> drawAnimals(<span class="keyword">const</span> std::vector&lt;Animal*&gt; &amp;animals, <span class="keyword">const</span> sf::View &amp;view);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">void</span> drawGameBorders(<span class="keyword">const</span> sf::View &amp;view);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> speciesColor(<span class="keywordtype">int</span> index);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">void</span> drawVector(<span class="keyword">const</span> <a class="code" href="struct_vect2i.html" title="A structure reprensenting standard 2D vectors of int, with constructor.">Vect2i</a> &amp;pos, <span class="keyword">const</span> <span class="keywordtype">float</span> &amp;angle, <span class="keyword">const</span> sf::Color &amp;color, <span class="keyword">const</span> sf::Vector2f &amp;size);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">bool</span> isInsideView(<span class="keyword">const</span> <a class="code" href="struct_vect2i.html" title="A structure reprensenting standard 2D vectors of int, with constructor.">Vect2i</a> &amp;pos, <span class="keyword">const</span> sf::View &amp;view);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <a class="code" href="class_game.html" title="General class dispatching the game jobs to other objects. Only SFML user with Display.">Game</a> *game;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    sf::RenderWindow window;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    sf::CircleShape fruitShape, animalShape;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    sf::ConvexShape animalHeadShape;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    sf::RectangleShape lineShape;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    sf::Text text;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    sf::Font font;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    sf::View mainView;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">int</span> STATUS_BAR_WIDTH, WORLD_SIZE, VIEW_MOVE_DELTA;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">int</span> windowWidth, windowHeight;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keywordtype">float</span> interpolation;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">bool</span> hasFocus;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;};</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">#endif // DISPLAY_H</span></div>
+>>>>>>> master
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="display_8h.html">display.h</a></li>
+<<<<<<< HEAD
     <li class="footer">Generated on Thu Mar 20 2014 10:25:16 for Neurones by
+=======
+    <li class="footer">Generated on Wed Mar 19 2014 00:36:06 for Neurones by
+>>>>>>> master
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

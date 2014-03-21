@@ -23,6 +23,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+<<<<<<< HEAD
+=======
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+>>>>>>> master
   <td style="padding-left: 0.5em;">
    <div id="projectname">Neurones
    &#160;<span id="projectnumber">0.3</span>
@@ -76,6 +80,7 @@ $(document).ready(function(){initNavTree('fruit_8h_source.html','');});
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="utils_8h.html">utils.h</a>&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="entity_8h.html">entity.h</a>&quot;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<<<<<<< HEAD
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="code" href="struct_bush.html">   10</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_bush.html" title="Structure representig a bush : point and size where fruits have high probabylity to appear...">Bush</a> {</div>
 <div class="line"><a name="l00011"></a><span class="lineno"><a class="code" href="struct_bush.html#ab3135be5ff260f0e223cb9c64f4aedc3">   11</a></span>&#160;    <a class="code" href="struct_vect2i.html">Vect2i</a> <a class="code" href="struct_bush.html#ab3135be5ff260f0e223cb9c64f4aedc3" title="Center of the bush.">pos</a>; </div>
 <div class="line"><a name="l00012"></a><span class="lineno"><a class="code" href="struct_bush.html#a3b40c2cda3c709539246d302e74b8168">   12</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_bush.html#a3b40c2cda3c709539246d302e74b8168" title="size of the bush (to be used in a gaussian probability function)">size</a>;   </div>
@@ -91,13 +96,34 @@ $(document).ready(function(){initNavTree('fruit_8h_source.html','');});
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif // FRUIT_H</span></div>
+=======
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="code" href="struct_bush.html">   15</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_bush.html" title="Structure representig a bush : point and size where fruits have high probabylity to appear...">Bush</a> {</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="code" href="struct_bush.html#ab3135be5ff260f0e223cb9c64f4aedc3">   16</a></span>&#160;    <a class="code" href="struct_vect2i.html" title="A structure reprensenting standard 2D vectors of int, with constructor.">Vect2i</a> <a class="code" href="struct_bush.html#ab3135be5ff260f0e223cb9c64f4aedc3" title="Center of the bush.">pos</a>; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="code" href="struct_bush.html#a3b40c2cda3c709539246d302e74b8168">   17</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="struct_bush.html#a3b40c2cda3c709539246d302e74b8168" title="size of the bush (to be used in a gaussian probability function)">size</a>;   </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;} <a class="code" href="fruit_8h.html#a821849b8b231998fc0b5e7b2d20c483d" title="Structure representig a bush : point and size where fruits have high probabylity to appear...">Bush</a>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="code" href="class_fruit.html">   23</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_fruit.html" title="class representing a fruit : static element that can be eaten by an animal">Fruit</a> : <span class="keyword">public</span> <a class="code" href="class_entity.html" title="Abstract class represtenting any displayable physical object of the game.">Entity</a> {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">public</span> :</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <a class="code" href="class_fruit.html#aa40ce1fdb1b361880d27171f05a2ab5a">Fruit</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="code" href="class_fruit.html#abd3325dd4faef5b64785aa61cd4046fa">   26</a></span>&#160;        <span class="keyword">virtual</span> <a class="code" href="class_fruit.html#abd3325dd4faef5b64785aa61cd4046fa">~Fruit</a>() {}</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_fruit.html#a6a7c7d5b678582f6e941e7f78e5fba2e" title="Abstract method for object initialisation.">init</a>();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordtype">void</span> <a class="code" href="class_fruit.html#a6a7c7d5b678582f6e941e7f78e5fba2e" title="Abstract method for object initialisation.">init</a>(<span class="keyword">const</span> <a class="code" href="struct_bush.html" title="Structure representig a bush : point and size where fruits have high probabylity to appear...">Bush</a> &amp;bush);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;};</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#endif // FRUIT_H</span></div>
+>>>>>>> master
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="fruit_8h.html">fruit.h</a></li>
+<<<<<<< HEAD
     <li class="footer">Generated on Thu Mar 20 2014 10:25:16 for Neurones by
+=======
+    <li class="footer">Generated on Wed Mar 19 2014 00:36:06 for Neurones by
+>>>>>>> master
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

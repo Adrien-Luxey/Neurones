@@ -10,7 +10,11 @@
 <area shape="rect" id="node24" href="$entity__manager_8cpp.html" title="src/entity_manager.cpp" alt="" coords="363,315,520,344"/>
 <area shape="rect" id="node11" href="$display_8cpp.html" title="src/display.cpp" alt="" coords="121,392,231,421"/>
 <area shape="rect" id="node16" href="$game_8cpp.html" title="src/game.cpp" alt="" coords="255,392,356,421"/>
+<<<<<<< HEAD
 <area shape="rect" id="node18" href="$main_8cpp.html" title="This is the entry point of the Neurones program." alt="" coords="380,392,476,421"/>
+=======
+<area shape="rect" id="node18" href="$main_8cpp.html" title="src/main.cpp" alt="" coords="380,392,476,421"/>
+>>>>>>> master
 <area shape="rect" id="node26" href="$genetics_8cpp.html" title="src/genetics.cpp" alt="" coords="544,315,661,344"/>
 <area shape="rect" id="node34" href="$fruit_8cpp.html" title="src/fruit.cpp" alt="" coords="405,160,496,189"/>
 </map>

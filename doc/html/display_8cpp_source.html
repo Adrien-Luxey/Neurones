@@ -23,6 +23,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+<<<<<<< HEAD
+=======
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+>>>>>>> master
   <td style="padding-left: 0.5em;">
    <div id="projectname">Neurones
    &#160;<span id="projectnumber">0.3</span>
@@ -72,6 +76,7 @@ $(document).ready(function(){initNavTree('display_8cpp_source.html','');});
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="game_8h.html">game.h</a>&quot;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
+<<<<<<< HEAD
 <div class="line"><a name="l00005"></a><span class="lineno"><a class="code" href="class_display.html#a21052a50c5e922272d697aaf5cfb14cc">    5</a></span>&#160;<a class="code" href="class_display.html#a21052a50c5e922272d697aaf5cfb14cc" title="Constructor.">Display::Display</a>(<a class="code" href="class_game.html" title="General class dispatching the game jobs to other objects. Only SFML user with Display.">Game</a>* _game)</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  : game(_game), window(sf::VideoMode(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;WindowWidth&quot;</span>), <a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;WindowHeight&quot;</span>)), <a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3">CFG</a>-&gt;readString(<span class="stringliteral">&quot;WindowTitle&quot;</span>)),</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    STATUS_BAR_WIDTH(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;StatusBarWidth&quot;</span>)), WORLD_SIZE(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;WorldSize&quot;</span>)), VIEW_MOVE_DELTA(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;ViewMoveDelta&quot;</span>)),</div>
@@ -80,6 +85,16 @@ $(document).ready(function(){initNavTree('display_8cpp_source.html','');});
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="comment">// circle defining the animal</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordtype">int</span> animalRadius = <a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;AnimalRadius&quot;</span>);</div>
+=======
+<div class="line"><a name="l00005"></a><span class="lineno"><a class="code" href="class_display.html#a21052a50c5e922272d697aaf5cfb14cc">    5</a></span>&#160;<a class="code" href="class_display.html#a21052a50c5e922272d697aaf5cfb14cc">Display::Display</a>(<a class="code" href="class_game.html" title="General class dispatching the game jobs to other objects. Only SFML user with Display.">Game</a>* _game)</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;  : game(_game), window(sf::VideoMode(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3" title="shortcut for calling the configParser singleton">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;WindowWidth&quot;</span>), <a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3" title="shortcut for calling the configParser singleton">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;WindowHeight&quot;</span>)), <a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3" title="shortcut for calling the configParser singleton">CFG</a>-&gt;readString(<span class="stringliteral">&quot;WindowTitle&quot;</span>)),</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    STATUS_BAR_WIDTH(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3" title="shortcut for calling the configParser singleton">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;StatusBarWidth&quot;</span>)), WORLD_SIZE(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3" title="shortcut for calling the configParser singleton">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;WorldSize&quot;</span>)), VIEW_MOVE_DELTA(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3" title="shortcut for calling the configParser singleton">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;ViewMoveDelta&quot;</span>)),</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    windowWidth(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3" title="shortcut for calling the configParser singleton">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;WindowWidth&quot;</span>)), windowHeight(<a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3" title="shortcut for calling the configParser singleton">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;WindowHeight&quot;</span>)), hasFocus(true) {</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    window.setVerticalSyncEnabled(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="comment">// circle defining the animal</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordtype">int</span> animalRadius = <a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3" title="shortcut for calling the configParser singleton">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;AnimalRadius&quot;</span>);</div>
+>>>>>>> master
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    animalShape.setRadius(animalRadius);</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    animalShape.setOrigin(animalRadius, animalRadius);</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    animalShape.setOutlineThickness(-2);</div>
@@ -91,7 +106,11 @@ $(document).ready(function(){initNavTree('display_8cpp_source.html','');});
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    animalHeadShape.setPoint(2, sf::Vector2f(animalRadius, animalRadius/2));</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    animalHeadShape.setFillColor(sf::Color(0, 0, 0));</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    </div>
+<<<<<<< HEAD
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">int</span> fruitRadius = <a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;FruitRadius&quot;</span>);</div>
+=======
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordtype">int</span> fruitRadius = <a class="code" href="utils_8h.html#ac78c5725422c0d27681a678fd24251c3" title="shortcut for calling the configParser singleton">CFG</a>-&gt;readInt(<span class="stringliteral">&quot;FruitRadius&quot;</span>);</div>
+>>>>>>> master
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    fruitShape.setRadius(fruitRadius);</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    fruitShape.setOrigin(fruitRadius, fruitRadius);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    fruitShape.setFillColor(sf::Color::Green);</div>
@@ -235,7 +254,11 @@ $(document).ready(function(){initNavTree('display_8cpp_source.html','');});
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="keywordtype">void</span> Display::drawAnimals(<span class="keyword">const</span> std::vector&lt;Animal*&gt; &amp;animals, <span class="keyword">const</span> sf::View &amp;view) {</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; animals.size(); i++) {</div>
+<<<<<<< HEAD
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <a class="code" href="struct_vect2i.html">Vect2i</a> animalDisplayPos = animals[i]-&gt;getDisplayPos(interpolation);</div>
+=======
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <a class="code" href="struct_vect2i.html" title="A structure reprensenting standard 2D vectors of int, with constructor.">Vect2i</a> animalDisplayPos = animals[i]-&gt;getDisplayPos(interpolation);</div>
+>>>>>>> master
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <span class="keywordflow">if</span> (!animals[i]-&gt;isAlive() || !isInsideView(animalDisplayPos, view))</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;            <span class="keywordflow">continue</span>;</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        </div>
@@ -257,7 +280,11 @@ $(document).ready(function(){initNavTree('display_8cpp_source.html','');});
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;            drawVector(animalDisplayPos, animals[i]-&gt;getClosestAllyAngle(), sf::Color::Blue, sf::Vector2f(15, 1));</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        </div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <span class="comment">// dessin de la barre d&#39;attaque</span></div>
+<<<<<<< HEAD
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        <a class="code" href="struct_vect2i.html">Vect2i</a> barPosition;</div>
+=======
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        <a class="code" href="struct_vect2i.html" title="A structure reprensenting standard 2D vectors of int, with constructor.">Vect2i</a> barPosition;</div>
+>>>>>>> master
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        barPosition.<a class="code" href="struct_vect2i.html#ae76ced0cba575b16f9de72e78828122b">x</a> = animalDisplayPos.<a class="code" href="struct_vect2i.html#ae76ced0cba575b16f9de72e78828122b">x</a> - STATUS_BAR_WIDTH/2;</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        barPosition.<a class="code" href="struct_vect2i.html#a32d99812cd2cccca2b9751259783b699">y</a> = animalDisplayPos.<a class="code" href="struct_vect2i.html#a32d99812cd2cccca2b9751259783b699">y</a> + animalShape.getLocalBounds().height * 3 / 2;</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        drawVector(barPosition, 0, sf::Color(100, 0, 0), sf::Vector2f(animals[i]-&gt;getAttackValue() * STATUS_BAR_WIDTH, 2));</div>
@@ -277,6 +304,7 @@ $(document).ready(function(){initNavTree('display_8cpp_source.html','');});
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="keywordtype">void</span> Display::drawGameBorders(<span class="keyword">const</span> sf::View &amp;view) {</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordflow">if</span> (mainView.getCenter().x - mainView.getSize().x / 2 &lt; 0)</div>
+<<<<<<< HEAD
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        drawVector(<a class="code" href="utils_8h.html#adfec4d83ed4c3c15bd0a4dbfb978102e">Vect2i</a>(0, 0), 90, sf::Color::White, sf::Vector2f(WORLD_SIZE, 2));</div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    </div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keywordflow">if</span> (mainView.getCenter().y - mainView.getSize().y / 2 &lt; 0)</div>
@@ -287,6 +315,18 @@ $(document).ready(function(){initNavTree('display_8cpp_source.html','');});
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    </div>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordflow">if</span> (mainView.getCenter().y + mainView.getSize().y / 2 &gt;= WORLD_SIZE)</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        drawVector(<a class="code" href="utils_8h.html#adfec4d83ed4c3c15bd0a4dbfb978102e">Vect2i</a>(0, WORLD_SIZE), 0, sf::Color::White, sf::Vector2f(WORLD_SIZE, 2));</div>
+=======
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        drawVector(<a class="code" href="utils_8h.html#adfec4d83ed4c3c15bd0a4dbfb978102e" title="A structure reprensenting standard 2D vectors of int, with constructor.">Vect2i</a>(0, 0), 90, sf::Color::White, sf::Vector2f(WORLD_SIZE, 2));</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    </div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keywordflow">if</span> (mainView.getCenter().y - mainView.getSize().y / 2 &lt; 0)</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        drawVector(<a class="code" href="utils_8h.html#adfec4d83ed4c3c15bd0a4dbfb978102e" title="A structure reprensenting standard 2D vectors of int, with constructor.">Vect2i</a>(0, 0), 0, sf::Color::White, sf::Vector2f(WORLD_SIZE, 2));</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    </div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <span class="keywordflow">if</span> (mainView.getCenter().x + mainView.getSize().x / 2 &gt;= WORLD_SIZE)</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        drawVector(<a class="code" href="utils_8h.html#adfec4d83ed4c3c15bd0a4dbfb978102e" title="A structure reprensenting standard 2D vectors of int, with constructor.">Vect2i</a>(WORLD_SIZE, 0), 90, sf::Color::White, sf::Vector2f(WORLD_SIZE, 2));</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordflow">if</span> (mainView.getCenter().y + mainView.getSize().y / 2 &gt;= WORLD_SIZE)</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        drawVector(<a class="code" href="utils_8h.html#adfec4d83ed4c3c15bd0a4dbfb978102e" title="A structure reprensenting standard 2D vectors of int, with constructor.">Vect2i</a>(0, WORLD_SIZE), 0, sf::Color::White, sf::Vector2f(WORLD_SIZE, 2));</div>
+>>>>>>> master
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;}</div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;</div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="keywordtype">void</span> Display::speciesColor(<span class="keywordtype">int</span> index) {</div>
@@ -322,7 +362,11 @@ $(document).ready(function(){initNavTree('display_8cpp_source.html','');});
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    }</div>
 <div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;}</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;</div>
+<<<<<<< HEAD
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="keywordtype">void</span> Display::drawVector(<span class="keyword">const</span> <a class="code" href="struct_vect2i.html">Vect2i</a> &amp;pos, <span class="keyword">const</span> <span class="keywordtype">float</span> &amp;angle, <span class="keyword">const</span> sf::Color &amp;color, <span class="keyword">const</span> sf::Vector2f &amp;size) {</div>
+=======
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="keywordtype">void</span> Display::drawVector(<span class="keyword">const</span> <a class="code" href="struct_vect2i.html" title="A structure reprensenting standard 2D vectors of int, with constructor.">Vect2i</a> &amp;pos, <span class="keyword">const</span> <span class="keywordtype">float</span> &amp;angle, <span class="keyword">const</span> sf::Color &amp;color, <span class="keyword">const</span> sf::Vector2f &amp;size) {</div>
+>>>>>>> master
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    lineShape.setFillColor(color);</div>
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    lineShape.setPosition(pos.<a class="code" href="struct_vect2i.html#ae76ced0cba575b16f9de72e78828122b">x</a>, pos.<a class="code" href="struct_vect2i.html#a32d99812cd2cccca2b9751259783b699">y</a>);</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    lineShape.setRotation(angle);</div>
@@ -330,7 +374,11 @@ $(document).ready(function(){initNavTree('display_8cpp_source.html','');});
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    window.draw(lineShape);</div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;}</div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;</div>
+<<<<<<< HEAD
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="keywordtype">bool</span> Display::isInsideView(<span class="keyword">const</span> <a class="code" href="struct_vect2i.html">Vect2i</a> &amp;pos, <span class="keyword">const</span> sf::View &amp;view) {</div>
+=======
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="keywordtype">bool</span> Display::isInsideView(<span class="keyword">const</span> <a class="code" href="struct_vect2i.html" title="A structure reprensenting standard 2D vectors of int, with constructor.">Vect2i</a> &amp;pos, <span class="keyword">const</span> sf::View &amp;view) {</div>
+>>>>>>> master
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keywordflow">return</span> ((pos.<a class="code" href="struct_vect2i.html#ae76ced0cba575b16f9de72e78828122b">x</a> &gt;= view.getCenter().x - view.getSize().x / 2) &amp;&amp;</div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;            (pos.<a class="code" href="struct_vect2i.html#ae76ced0cba575b16f9de72e78828122b">x</a> &lt; view.getCenter().x + view.getSize().x / 2) &amp;&amp;</div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            (pos.<a class="code" href="struct_vect2i.html#a32d99812cd2cccca2b9751259783b699">y</a> &gt;= view.getCenter().y - view.getSize().y / 2) &amp;&amp;</div>
@@ -342,7 +390,11 @@ $(document).ready(function(){initNavTree('display_8cpp_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="display_8cpp.html">display.cpp</a></li>
+<<<<<<< HEAD
     <li class="footer">Generated on Thu Mar 20 2014 10:25:16 for Neurones by
+=======
+    <li class="footer">Generated on Wed Mar 19 2014 00:36:06 for Neurones by
+>>>>>>> master
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

@@ -23,6 +23,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+<<<<<<< HEAD
+=======
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+>>>>>>> master
   <td style="padding-left: 0.5em;">
    <div id="projectname">Neurones
    &#160;<span id="projectnumber">0.3</span>
@@ -101,7 +105,11 @@ $(document).ready(function(){initNavTree('animal_8h_source.html','');});
 <div class="line"><a name="l00042"></a><span class="lineno"><a class="code" href="class_animal.html#a49148f18eaebc09edf2bac4d3e44c7ea">   42</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="class_animal.html#a49148f18eaebc09edf2bac4d3e44c7ea">getBattleOutput</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="class_animal.html#a3db09e6629852d9a54dc5b6648d3fb28">battleOutput</a>; }</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="class_animal.html#a757b167f05eafa17816598d4fcd2f184">getAttackValue</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">float</span> <a class="code" href="class_animal.html#a00ec5bc73a90c26bfcf889fa5b85e688">getDefenseValue</a>() <span class="keyword">const</span>;</div>
+<<<<<<< HEAD
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="struct_vect2i.html">Vect2i</a> <a class="code" href="class_animal.html#a83a2929c3385a82aefaa689b3330c445" title="Return a intermediate position between old and new pos given the interpolation rate.">getDisplayPos</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> &amp;interpolation) <span class="keyword">const</span>;</div>
+=======
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="struct_vect2i.html" title="A structure reprensenting standard 2D vectors of int, with constructor.">Vect2i</a> <a class="code" href="class_animal.html#a83a2929c3385a82aefaa689b3330c445" title="Return a intermediate position between old and new pos given the interpolation rate.">getDisplayPos</a>(<span class="keyword">const</span> <span class="keywordtype">float</span> &amp;interpolation) <span class="keyword">const</span>;</div>
+>>>>>>> master
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    </div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    </div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    std::vector&lt;float&gt; <a class="code" href="class_animal.html#a0dcf09dfc831663b028a58a2c841dc06" title="Give the current network&#39;s DNA.">getDNA</a>();</div>
@@ -109,7 +117,11 @@ $(document).ready(function(){initNavTree('animal_8h_source.html','');});
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;  <span class="keyword">protected</span> :</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_animal.html#a0b6103b76a223ce2eaad73877ff85c73" title="Update the animal&#39;s position given 2 network outputs.">updatePosition</a>(<span class="keywordtype">float</span> da, <span class="keywordtype">float</span> dp);</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    </div>
+<<<<<<< HEAD
 <div class="line"><a name="l00073"></a><span class="lineno"><a class="code" href="class_animal.html#a280335c5deaf3402c85ab95a7653a483">   73</a></span>&#160;    <a class="code" href="struct_vect2i.html">Vect2i</a> <a class="code" href="class_animal.html#a803f0b218477a5e365c1dde6128fb53e">lastPos</a>, <a class="code" href="class_animal.html#a280335c5deaf3402c85ab95a7653a483">speed</a>;</div>
+=======
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="code" href="class_animal.html#a280335c5deaf3402c85ab95a7653a483">   73</a></span>&#160;    <a class="code" href="struct_vect2i.html" title="A structure reprensenting standard 2D vectors of int, with constructor.">Vect2i</a> <a class="code" href="class_animal.html#a803f0b218477a5e365c1dde6128fb53e">lastPos</a>, <a class="code" href="class_animal.html#a280335c5deaf3402c85ab95a7653a483">speed</a>;</div>
+>>>>>>> master
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    </div>
 <div class="line"><a name="l00075"></a><span class="lineno"><a class="code" href="class_animal.html#ab5ab9a2e34464e0415b6588e820b0ad7">   75</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_animal.html#ab5ab9a2e34464e0415b6588e820b0ad7">score</a>;</div>
 <div class="line"><a name="l00076"></a><span class="lineno"><a class="code" href="class_animal.html#a587480ed32eadd3b7590e880f05d5e4d">   76</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_animal.html#a38e826603b1d70a75c89c59964d7e34e">closestEnemyAngle</a>, <a class="code" href="class_animal.html#a587480ed32eadd3b7590e880f05d5e4d">closestFruitAngle</a>, <a class="code" href="class_animal.html#a53819180fe828fe2b68c7bbd7932ec9d">closestAllyAngle</a>;</div>
@@ -131,7 +143,11 @@ $(document).ready(function(){initNavTree('animal_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="animal_8h.html">animal.h</a></li>
+<<<<<<< HEAD
     <li class="footer">Generated on Thu Mar 20 2014 10:25:16 for Neurones by
+=======
+    <li class="footer">Generated on Wed Mar 19 2014 00:36:06 for Neurones by
+>>>>>>> master
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>

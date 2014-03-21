@@ -1,10 +1,3 @@
-/* 
- * File:   utils.h
- * Author: adrien
- *
- * Created on 5 décembre 2013, 01:07
- */
-
 #ifndef UTILS_H
 #define	UTILS_H
 
@@ -14,21 +7,19 @@
 
 #include "config_parser.h"
 
-// Generator used by every c++11 random function (normal, uniform)
+/// Generator used by every c++11 random function (normal, uniform)
 static std::default_random_engine generator;
 
-// shortcut for calling the configParser singleton
+/// shortcut for calling the configParser singleton
 #define CFG		ConfigParser::get()
 
-// PI definition in stl depends on installation, so let's define my own
+/// @brief PI definition in stl depends on installation, so let's define my own
 #define PI				3.14159f
 
-/**
- * @brief enumeration to give sense to all the species (used for colouring)
- */
+/// @brief enumeration to give sense to all the species (used for colouring)
 enum { CHICKEN, FOX, SNAKE, LYNX, MONKEY, FISH, TYPES_CNT };
 
-// A structure reprensenting standard 2D vectors of int, with constructor
+/// @brief A structure reprensenting standard 2D vectors of int, with constructor
 typedef struct Vect2i {
 	int x;
 	int y;

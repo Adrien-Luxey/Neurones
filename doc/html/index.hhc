@@ -1,0 +1,414 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML><HEAD></HEAD><BODY>
+<OBJECT type="text/site properties">
+<param name="FrameName" value="right">
+</OBJECT>
+<UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Classes"><param name="ImageNumber" value="1"></OBJECT>
+  <UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Class List"><param name="Local" value="annotated.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Animal"><param name="Local" value="class_animal.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Animal"><param name="Local" value="class_animal.html#a1e726a49ec952443190ac62dad22353c"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="~Animal"><param name="Local" value="class_animal.html#a16d8b7f94611cc65f5cdb58cc105527b"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="die"><param name="Local" value="class_animal.html#a557fe0d71dda75be2f8459ce0d7c2275"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getAttackValue"><param name="Local" value="class_animal.html#a757b167f05eafa17816598d4fcd2f184"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getBattleOutput"><param name="Local" value="class_animal.html#a49148f18eaebc09edf2bac4d3e44c7ea"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getClosestAllyAngle"><param name="Local" value="class_animal.html#a45483c0d3e22a02ca60aa83f4b1b0b23"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getClosestEnemyAngle"><param name="Local" value="class_animal.html#adabb251a3c5513ebbc62582a5a68055b"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getClosestFruitAngle"><param name="Local" value="class_animal.html#aac4b5d159b02fcae1dc6f427049c8485"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getDefenseValue"><param name="Local" value="class_animal.html#a00ec5bc73a90c26bfcf889fa5b85e688"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getDisplayPos"><param name="Local" value="class_animal.html#a83a2929c3385a82aefaa689b3330c445"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getDNA"><param name="Local" value="class_animal.html#a0dcf09dfc831663b028a58a2c841dc06"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getScore"><param name="Local" value="class_animal.html#a9aedb2b6650341f976371a362d21ecfa"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="incrementScore"><param name="Local" value="class_animal.html#a31a4619f7b33b8b3ad6c0b1f43898cac"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="class_animal.html#acd693bbac16d2f7dec930124887a9095"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="class_animal.html#a75461b99c111f22dbb0231bcc397a1c9"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="isAlive"><param name="Local" value="class_animal.html#a5857d66a5303516578af7fc52ffc1107"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="update"><param name="Local" value="class_animal.html#a18790d841ee27bf53ac8dfeb91750a80"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="updatePosition"><param name="Local" value="class_animal.html#a0b6103b76a223ce2eaad73877ff85c73"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="alive"><param name="Local" value="class_animal.html#a38d08d48cf5b16863bb40fa731b06629"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="ANIMAL_ANGULAR_SPEED"><param name="Local" value="class_animal.html#a4004efb93813a375712ad5d82a404659"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="ANIMAL_LINEAR_SPEED"><param name="Local" value="class_animal.html#a4468a9e53e199e90deccd07d2315f13a"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="battleOutput"><param name="Local" value="class_animal.html#a3db09e6629852d9a54dc5b6648d3fb28"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="closestAllyAngle"><param name="Local" value="class_animal.html#a53819180fe828fe2b68c7bbd7932ec9d"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="closestEnemyAngle"><param name="Local" value="class_animal.html#a38e826603b1d70a75c89c59964d7e34e"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="closestFruitAngle"><param name="Local" value="class_animal.html#a587480ed32eadd3b7590e880f05d5e4d"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="lastPos"><param name="Local" value="class_animal.html#a803f0b218477a5e365c1dde6128fb53e"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="network"><param name="Local" value="class_animal.html#a61e897a85af66b3b8315e313ed86a307"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="score"><param name="Local" value="class_animal.html#ab5ab9a2e34464e0415b6588e820b0ad7"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="speed"><param name="Local" value="class_animal.html#a280335c5deaf3402c85ab95a7653a483"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Bush"><param name="Local" value="struct_bush.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="pos"><param name="Local" value="struct_bush.html#ab3135be5ff260f0e223cb9c64f4aedc3"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="size"><param name="Local" value="struct_bush.html#a3b40c2cda3c709539246d302e74b8168"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="ConfigParser"><param name="Local" value="class_config_parser.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="readFile"><param name="Local" value="class_config_parser.html#adcaa724f20085403bb1beb7918903fdd"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="readFloat"><param name="Local" value="class_config_parser.html#a7a4b723bc0f88e966f4b67347b5264cd"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="readInt"><param name="Local" value="class_config_parser.html#a9eb8031a0252a34fcb808dba2b9780e5"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="readString"><param name="Local" value="class_config_parser.html#abcdb07fdc295e07adefbd338c552c493"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="saveFile"><param name="Local" value="class_config_parser.html#a98928657410a8c91f9d68c5d5235ace1"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="setFloat"><param name="Local" value="class_config_parser.html#a18ad19fa692a557be50d868fd3f83ca3"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="setInt"><param name="Local" value="class_config_parser.html#a49ddd20e2f9ea0ea864c3006d2177323"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="setString"><param name="Local" value="class_config_parser.html#a6eba995aa9d58ad843d05e3f0a003d3e"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Display"><param name="Local" value="class_display.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Display"><param name="Local" value="class_display.html#a21052a50c5e922272d697aaf5cfb14cc"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="~Display"><param name="Local" value="class_display.html#ac2607a6bb236c55547a4223d40d85d1f"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="events"><param name="Local" value="class_display.html#a05ee6cd33afcc51a5856148677a71c82"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="update"><param name="Local" value="class_display.html#a713ee81045f32895c2b063037c81c388"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Entity"><param name="Local" value="class_entity.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Entity"><param name="Local" value="class_entity.html#a980f368aa07ce358583982821533a54a"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="~Entity"><param name="Local" value="class_entity.html#a588098978eea6a3486b7361605ff3f0f"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getAngle"><param name="Local" value="class_entity.html#a9cecc58b1b2f0c124701ff7add1b8224"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getPos"><param name="Local" value="class_entity.html#ac010fabbecbd86e008c69560bd216b86"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getRadius"><param name="Local" value="class_entity.html#ac2f290a20927f548e8742976b222a556"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="class_entity.html#a31e6183ea44922d54a43be48b8fd4bc0"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="angle"><param name="Local" value="class_entity.html#abb6791bd923767cdf42a7e3101a6f76d"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="pos"><param name="Local" value="class_entity.html#a885ee23e7a2132f0d890bb2e312e6d77"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="radius"><param name="Local" value="class_entity.html#acd7af12063926ab8cd654539328e5532"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="WORLD_SIZE"><param name="Local" value="class_entity.html#a2b870ef127d06e3f98109695817a1798"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="EntityManager"><param name="Local" value="class_entity_manager.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="EntityManager"><param name="Local" value="class_entity_manager.html#a7555637657d090171be6ceee8451de0a"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="~EntityManager"><param name="Local" value="class_entity_manager.html#a71a36c9fb8d579a1a1ec108e0fccf175"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getFruits"><param name="Local" value="class_entity_manager.html#aa54e413de0914b0f7e048627b7dc07f4"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getSpecies"><param name="Local" value="class_entity_manager.html#ac6f76079b0963ac7386a79b6bd346bd8"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="class_entity_manager.html#ae0abecb1a8037d6af51d950491115bfb"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="update"><param name="Local" value="class_entity_manager.html#abc6a2cc5077501f4b06d88f4ed3e7e31"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Fruit"><param name="Local" value="class_fruit.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Fruit"><param name="Local" value="class_fruit.html#aa40ce1fdb1b361880d27171f05a2ab5a"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="~Fruit"><param name="Local" value="class_fruit.html#abd3325dd4faef5b64785aa61cd4046fa"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="class_fruit.html#a6a7c7d5b678582f6e941e7f78e5fba2e"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="class_fruit.html#a231aadb8a3dbf6fe68fc36a0435ff15b"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Game"><param name="Local" value="class_game.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Game"><param name="Local" value="class_game.html#ad59df6562a58a614fda24622d3715b65"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="~Game"><param name="Local" value="class_game.html#ae3d112ca6e0e55150d2fdbc704474530"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="decreaseGameSpeed"><param name="Local" value="class_game.html#adcf5df2f7a3f5209f974741667b1236f"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getFps"><param name="Local" value="class_game.html#a90335116dc7ad193f6476a0c2a502662"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getGameSpeedRatio"><param name="Local" value="class_game.html#a16dc509013f9a07a905656830bfa674d"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getGeneration"><param name="Local" value="class_game.html#a3949b192e3277375cd07c98d3360bc44"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getIterations"><param name="Local" value="class_game.html#adc07928f26c664cefc2c6abee7846d5e"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getIterationsPerGeneration"><param name="Local" value="class_game.html#abcda9001eb350576bae25bc51b567422"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getUps"><param name="Local" value="class_game.html#aa555c6e4a6d743384a99c55d75a37bd2"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="increaseGameSpeed"><param name="Local" value="class_game.html#a7c89563d299f25881c8c8a42c1e3219e"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="loop"><param name="Local" value="class_game.html#a7ad92b77b596d7882a7ae76eb18b5e6c"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="quit"><param name="Local" value="class_game.html#a8272be134d16c277bb014ad6a22fc357"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Genetics"><param name="Local" value="class_genetics.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Genetics"><param name="Local" value="class_genetics.html#a7c9a65ee1c7da6bbb4b35d46d1dcf4fa"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="evolve"><param name="Local" value="class_genetics.html#a63e33bd3725feb511e19d86e2d07ca3b"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Layer"><param name="Local" value="class_layer.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Layer"><param name="Local" value="class_layer.html#a16d6a7a3cff2e9e489186400a9d0f4f2"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="~Layer"><param name="Local" value="class_layer.html#a1b1ba4804451dfe6cc357194e42762ae"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getDNA"><param name="Local" value="class_layer.html#a18d9fa45eb9ff61f5d5bb9c74179bf30"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getDNASize"><param name="Local" value="class_layer.html#a01093e904ef7331b99fccc9abe1174aa"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="initNeurons"><param name="Local" value="class_layer.html#a08ee50fd54abe23d9fc94551c7b4be3f"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="run"><param name="Local" value="class_layer.html#a33387425a6f32b455bdca87496a891c9"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="setDNA"><param name="Local" value="class_layer.html#acd14a68865522c3e63a0dab87dd3a100"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="NeuralNetwork"><param name="Local" value="class_neural_network.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="NeuralNetwork"><param name="Local" value="class_neural_network.html#a3af96ee26597b200166e3a2523d56ad9"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getDNA"><param name="Local" value="class_neural_network.html#abd6e6ec0a4500527150c127f0f8d7c23"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="initLayers"><param name="Local" value="class_neural_network.html#ace5b58e0174ef1f318db06f0b19f694b"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="run"><param name="Local" value="class_neural_network.html#a2daf940807763cd3d81661f93d99e6ba"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="setDNA"><param name="Local" value="class_neural_network.html#a38e8afa4eb8651b80c48b577ecdc6c4a"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Neuron"><param name="Local" value="class_neuron.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Neuron"><param name="Local" value="class_neuron.html#aac37e4753166ab39e0f4f6d90fdeda57"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="~Neuron"><param name="Local" value="class_neuron.html#a94a250ce7e167760e593979b899745b1"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getDNA"><param name="Local" value="class_neuron.html#a2626c0a0fa4dbca17dc7fd9b3b390c07"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="getDNASize"><param name="Local" value="class_neuron.html#a40d81d3ea3f2af3e2f3297533132fd31"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="initWeights"><param name="Local" value="class_neuron.html#abb3a85d2adf4a9c5a5b646c83086a2ae"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="run"><param name="Local" value="class_neuron.html#a1d1bedb17ff3d87afcc282421579ad5f"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="setDNA"><param name="Local" value="class_neuron.html#a873e07fce168dfde42961ea151593c9f"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Species"><param name="Local" value="struct_species.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="tab"><param name="Local" value="struct_species.html#ad608dc238745c2120e642fe5222d0afb"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Vect2i"><param name="Local" value="struct_vect2i.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Vect2i"><param name="Local" value="struct_vect2i.html#a141de752973cb8b63e70e16f84653f03"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="x"><param name="Local" value="struct_vect2i.html#ae76ced0cba575b16f9de72e78828122b"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="y"><param name="Local" value="struct_vect2i.html#a32d99812cd2cccca2b9751259783b699"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Class Index"><param name="Local" value="classes.html"><param name="ImageNumber" value="11"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Class Hierarchy"><param name="Local" value="hierarchy.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Bush"><param name="Local" value="struct_bush.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="ConfigParser"><param name="Local" value="class_config_parser.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Display"><param name="Local" value="class_display.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Entity"><param name="Local" value="class_entity.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Animal"><param name="Local" value="class_animal.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="Fruit"><param name="Local" value="class_fruit.html"><param name="ImageNumber" value="11"></OBJECT>
+      </UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="EntityManager"><param name="Local" value="class_entity_manager.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Game"><param name="Local" value="class_game.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Genetics"><param name="Local" value="class_genetics.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Layer"><param name="Local" value="class_layer.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="NeuralNetwork"><param name="Local" value="class_neural_network.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Neuron"><param name="Local" value="class_neuron.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Species"><param name="Local" value="struct_species.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Vect2i"><param name="Local" value="struct_vect2i.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="Class Members"><param name="Local" value="functions.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="All"><param name="Local" value="functions.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Functions"><param name="Local" value="functions_func.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Variables"><param name="Local" value="functions_vars.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  </UL>
+<LI><OBJECT type="text/sitemap"><param name="Name" value="Files"><param name="ImageNumber" value="1"></OBJECT>
+  <UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="File List"><param name="Local" value="files.html"><param name="ImageNumber" value="1"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="src"><param name="Local" value="dir_68267d1309a1af8e8297ef4c3efbcdba.html"><param name="ImageNumber" value="1"></OBJECT>
+      <UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="animal.cpp"><param name="Local" value="animal_8cpp.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="SEUIL_ATTACKING"><param name="Local" value="animal_8cpp.html#af66075a058e499320a380abe3bea31f4"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="animal.h"><param name="Local" value="animal_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Animal"><param name="Local" value="class_animal.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Animal"><param name="Local" value="class_animal.html#a1e726a49ec952443190ac62dad22353c"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="~Animal"><param name="Local" value="class_animal.html#a16d8b7f94611cc65f5cdb58cc105527b"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="die"><param name="Local" value="class_animal.html#a557fe0d71dda75be2f8459ce0d7c2275"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getAttackValue"><param name="Local" value="class_animal.html#a757b167f05eafa17816598d4fcd2f184"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getBattleOutput"><param name="Local" value="class_animal.html#a49148f18eaebc09edf2bac4d3e44c7ea"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getClosestAllyAngle"><param name="Local" value="class_animal.html#a45483c0d3e22a02ca60aa83f4b1b0b23"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getClosestEnemyAngle"><param name="Local" value="class_animal.html#adabb251a3c5513ebbc62582a5a68055b"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getClosestFruitAngle"><param name="Local" value="class_animal.html#aac4b5d159b02fcae1dc6f427049c8485"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getDefenseValue"><param name="Local" value="class_animal.html#a00ec5bc73a90c26bfcf889fa5b85e688"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getDisplayPos"><param name="Local" value="class_animal.html#a83a2929c3385a82aefaa689b3330c445"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getDNA"><param name="Local" value="class_animal.html#a0dcf09dfc831663b028a58a2c841dc06"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getScore"><param name="Local" value="class_animal.html#a9aedb2b6650341f976371a362d21ecfa"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="incrementScore"><param name="Local" value="class_animal.html#a31a4619f7b33b8b3ad6c0b1f43898cac"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="class_animal.html#acd693bbac16d2f7dec930124887a9095"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="class_animal.html#a75461b99c111f22dbb0231bcc397a1c9"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="isAlive"><param name="Local" value="class_animal.html#a5857d66a5303516578af7fc52ffc1107"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="update"><param name="Local" value="class_animal.html#a18790d841ee27bf53ac8dfeb91750a80"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="updatePosition"><param name="Local" value="class_animal.html#a0b6103b76a223ce2eaad73877ff85c73"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="alive"><param name="Local" value="class_animal.html#a38d08d48cf5b16863bb40fa731b06629"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="ANIMAL_ANGULAR_SPEED"><param name="Local" value="class_animal.html#a4004efb93813a375712ad5d82a404659"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="ANIMAL_LINEAR_SPEED"><param name="Local" value="class_animal.html#a4468a9e53e199e90deccd07d2315f13a"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="battleOutput"><param name="Local" value="class_animal.html#a3db09e6629852d9a54dc5b6648d3fb28"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="closestAllyAngle"><param name="Local" value="class_animal.html#a53819180fe828fe2b68c7bbd7932ec9d"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="closestEnemyAngle"><param name="Local" value="class_animal.html#a38e826603b1d70a75c89c59964d7e34e"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="closestFruitAngle"><param name="Local" value="class_animal.html#a587480ed32eadd3b7590e880f05d5e4d"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="lastPos"><param name="Local" value="class_animal.html#a803f0b218477a5e365c1dde6128fb53e"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="network"><param name="Local" value="class_animal.html#a61e897a85af66b3b8315e313ed86a307"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="score"><param name="Local" value="class_animal.html#ab5ab9a2e34464e0415b6588e820b0ad7"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="speed"><param name="Local" value="class_animal.html#a280335c5deaf3402c85ab95a7653a483"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="config_parser.cpp"><param name="Local" value="config__parser_8cpp.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="DEBUG"><param name="Local" value="config__parser_8cpp.html#ad72dbcf6d0153db1b8d8a58001feed83"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="config_parser.h"><param name="Local" value="config__parser_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="ConfigParser"><param name="Local" value="class_config_parser.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="readFile"><param name="Local" value="class_config_parser.html#adcaa724f20085403bb1beb7918903fdd"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="readFloat"><param name="Local" value="class_config_parser.html#a7a4b723bc0f88e966f4b67347b5264cd"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="readInt"><param name="Local" value="class_config_parser.html#a9eb8031a0252a34fcb808dba2b9780e5"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="readString"><param name="Local" value="class_config_parser.html#abcdb07fdc295e07adefbd338c552c493"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="saveFile"><param name="Local" value="class_config_parser.html#a98928657410a8c91f9d68c5d5235ace1"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="setFloat"><param name="Local" value="class_config_parser.html#a18ad19fa692a557be50d868fd3f83ca3"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="setInt"><param name="Local" value="class_config_parser.html#a49ddd20e2f9ea0ea864c3006d2177323"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="setString"><param name="Local" value="class_config_parser.html#a6eba995aa9d58ad843d05e3f0a003d3e"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="display.cpp"><param name="Local" value="display_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="display.h"><param name="Local" value="display_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Display"><param name="Local" value="class_display.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Display"><param name="Local" value="class_display.html#a21052a50c5e922272d697aaf5cfb14cc"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="~Display"><param name="Local" value="class_display.html#ac2607a6bb236c55547a4223d40d85d1f"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="events"><param name="Local" value="class_display.html#a05ee6cd33afcc51a5856148677a71c82"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="update"><param name="Local" value="class_display.html#a713ee81045f32895c2b063037c81c388"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="entity.cpp"><param name="Local" value="entity_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="entity.h"><param name="Local" value="entity_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Entity"><param name="Local" value="class_entity.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Entity"><param name="Local" value="class_entity.html#a980f368aa07ce358583982821533a54a"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="~Entity"><param name="Local" value="class_entity.html#a588098978eea6a3486b7361605ff3f0f"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getAngle"><param name="Local" value="class_entity.html#a9cecc58b1b2f0c124701ff7add1b8224"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getPos"><param name="Local" value="class_entity.html#ac010fabbecbd86e008c69560bd216b86"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getRadius"><param name="Local" value="class_entity.html#ac2f290a20927f548e8742976b222a556"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="class_entity.html#a31e6183ea44922d54a43be48b8fd4bc0"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="angle"><param name="Local" value="class_entity.html#abb6791bd923767cdf42a7e3101a6f76d"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="pos"><param name="Local" value="class_entity.html#a885ee23e7a2132f0d890bb2e312e6d77"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="radius"><param name="Local" value="class_entity.html#acd7af12063926ab8cd654539328e5532"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="WORLD_SIZE"><param name="Local" value="class_entity.html#a2b870ef127d06e3f98109695817a1798"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="entity_manager.cpp"><param name="Local" value="entity__manager_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="entity_manager.h"><param name="Local" value="entity__manager_8h.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Species"><param name="Local" value="struct_species.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="tab"><param name="Local" value="struct_species.html#ad608dc238745c2120e642fe5222d0afb"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="EntityManager"><param name="Local" value="class_entity_manager.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="EntityManager"><param name="Local" value="class_entity_manager.html#a7555637657d090171be6ceee8451de0a"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="~EntityManager"><param name="Local" value="class_entity_manager.html#a71a36c9fb8d579a1a1ec108e0fccf175"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getFruits"><param name="Local" value="class_entity_manager.html#aa54e413de0914b0f7e048627b7dc07f4"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getSpecies"><param name="Local" value="class_entity_manager.html#ac6f76079b0963ac7386a79b6bd346bd8"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="class_entity_manager.html#ae0abecb1a8037d6af51d950491115bfb"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="update"><param name="Local" value="class_entity_manager.html#abc6a2cc5077501f4b06d88f4ed3e7e31"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Species"><param name="Local" value="entity__manager_8h.html#a0832728b7db46fc23415523bebbb91d8"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="fruit.cpp"><param name="Local" value="fruit_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="fruit.h"><param name="Local" value="fruit_8h.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Bush"><param name="Local" value="struct_bush.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="pos"><param name="Local" value="struct_bush.html#ab3135be5ff260f0e223cb9c64f4aedc3"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="size"><param name="Local" value="struct_bush.html#a3b40c2cda3c709539246d302e74b8168"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Fruit"><param name="Local" value="class_fruit.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Fruit"><param name="Local" value="class_fruit.html#aa40ce1fdb1b361880d27171f05a2ab5a"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="~Fruit"><param name="Local" value="class_fruit.html#abd3325dd4faef5b64785aa61cd4046fa"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="class_fruit.html#a6a7c7d5b678582f6e941e7f78e5fba2e"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="init"><param name="Local" value="class_fruit.html#a231aadb8a3dbf6fe68fc36a0435ff15b"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Bush"><param name="Local" value="fruit_8h.html#a821849b8b231998fc0b5e7b2d20c483d"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="game.cpp"><param name="Local" value="game_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="game.h"><param name="Local" value="game_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Game"><param name="Local" value="class_game.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Game"><param name="Local" value="class_game.html#ad59df6562a58a614fda24622d3715b65"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="~Game"><param name="Local" value="class_game.html#ae3d112ca6e0e55150d2fdbc704474530"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="decreaseGameSpeed"><param name="Local" value="class_game.html#adcf5df2f7a3f5209f974741667b1236f"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getFps"><param name="Local" value="class_game.html#a90335116dc7ad193f6476a0c2a502662"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getGameSpeedRatio"><param name="Local" value="class_game.html#a16dc509013f9a07a905656830bfa674d"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getGeneration"><param name="Local" value="class_game.html#a3949b192e3277375cd07c98d3360bc44"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getIterations"><param name="Local" value="class_game.html#adc07928f26c664cefc2c6abee7846d5e"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getIterationsPerGeneration"><param name="Local" value="class_game.html#abcda9001eb350576bae25bc51b567422"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getUps"><param name="Local" value="class_game.html#aa555c6e4a6d743384a99c55d75a37bd2"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="increaseGameSpeed"><param name="Local" value="class_game.html#a7c89563d299f25881c8c8a42c1e3219e"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="loop"><param name="Local" value="class_game.html#a7ad92b77b596d7882a7ae76eb18b5e6c"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="quit"><param name="Local" value="class_game.html#a8272be134d16c277bb014ad6a22fc357"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="genetics.cpp"><param name="Local" value="genetics_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="genetics.h"><param name="Local" value="genetics_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Genetics"><param name="Local" value="class_genetics.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Genetics"><param name="Local" value="class_genetics.html#a7c9a65ee1c7da6bbb4b35d46d1dcf4fa"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="evolve"><param name="Local" value="class_genetics.html#a63e33bd3725feb511e19d86e2d07ca3b"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="layer.cpp"><param name="Local" value="layer_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="layer.h"><param name="Local" value="layer_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Layer"><param name="Local" value="class_layer.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Layer"><param name="Local" value="class_layer.html#a16d6a7a3cff2e9e489186400a9d0f4f2"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="~Layer"><param name="Local" value="class_layer.html#a1b1ba4804451dfe6cc357194e42762ae"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getDNA"><param name="Local" value="class_layer.html#a18d9fa45eb9ff61f5d5bb9c74179bf30"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getDNASize"><param name="Local" value="class_layer.html#a01093e904ef7331b99fccc9abe1174aa"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="initNeurons"><param name="Local" value="class_layer.html#a08ee50fd54abe23d9fc94551c7b4be3f"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="run"><param name="Local" value="class_layer.html#a33387425a6f32b455bdca87496a891c9"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="setDNA"><param name="Local" value="class_layer.html#acd14a68865522c3e63a0dab87dd3a100"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="main.cpp"><param name="Local" value="main_8cpp.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="main"><param name="Local" value="main_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="neural_network.cpp"><param name="Local" value="neural__network_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="neural_network.h"><param name="Local" value="neural__network_8h.html"><param name="ImageNumber" value="11"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="NeuralNetwork"><param name="Local" value="class_neural_network.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="NeuralNetwork"><param name="Local" value="class_neural_network.html#a3af96ee26597b200166e3a2523d56ad9"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getDNA"><param name="Local" value="class_neural_network.html#abd6e6ec0a4500527150c127f0f8d7c23"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="initLayers"><param name="Local" value="class_neural_network.html#ace5b58e0174ef1f318db06f0b19f694b"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="run"><param name="Local" value="class_neural_network.html#a2daf940807763cd3d81661f93d99e6ba"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="setDNA"><param name="Local" value="class_neural_network.html#a38e8afa4eb8651b80c48b577ecdc6c4a"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="neuron.cpp"><param name="Local" value="neuron_8cpp.html"><param name="ImageNumber" value="11"></OBJECT>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="neuron.h"><param name="Local" value="neuron_8h.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Neuron"><param name="Local" value="class_neuron.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Neuron"><param name="Local" value="class_neuron.html#aac37e4753166ab39e0f4f6d90fdeda57"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="~Neuron"><param name="Local" value="class_neuron.html#a94a250ce7e167760e593979b899745b1"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getDNA"><param name="Local" value="class_neuron.html#a2626c0a0fa4dbca17dc7fd9b3b390c07"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="getDNASize"><param name="Local" value="class_neuron.html#a40d81d3ea3f2af3e2f3297533132fd31"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="initWeights"><param name="Local" value="class_neuron.html#abb3a85d2adf4a9c5a5b646c83086a2ae"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="run"><param name="Local" value="class_neuron.html#a1d1bedb17ff3d87afcc282421579ad5f"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="setDNA"><param name="Local" value="class_neuron.html#a873e07fce168dfde42961ea151593c9f"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="OUT_0"><param name="Local" value="neuron_8h.html#a3506e2878e0f36c5dffd515e6b386c5e"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="OUT_1"><param name="Local" value="neuron_8h.html#a69935f16da7c62437bf70a37e61c3be4"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="SEUIL"><param name="Local" value="neuron_8h.html#a4e0d582a51849920d886a5380b470434"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      <LI><OBJECT type="text/sitemap"><param name="Name" value="utils.h"><param name="Local" value="utils_8h.html"><param name="ImageNumber" value="1"></OBJECT>
+        <UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Vect2i"><param name="Local" value="struct_vect2i.html"><param name="ImageNumber" value="1"></OBJECT>
+          <UL>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="Vect2i"><param name="Local" value="struct_vect2i.html#a141de752973cb8b63e70e16f84653f03"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="x"><param name="Local" value="struct_vect2i.html#ae76ced0cba575b16f9de72e78828122b"><param name="ImageNumber" value="11"></OBJECT>
+          <LI><OBJECT type="text/sitemap"><param name="Name" value="y"><param name="Local" value="struct_vect2i.html#a32d99812cd2cccca2b9751259783b699"><param name="ImageNumber" value="11"></OBJECT>
+          </UL>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="CFG"><param name="Local" value="utils_8h.html#ac78c5725422c0d27681a678fd24251c3"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="PI"><param name="Local" value="utils_8h.html#a598a3330b3c21701223ee0ca14316eca"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="Vect2i"><param name="Local" value="utils_8h.html#adfec4d83ed4c3c15bd0a4dbfb978102e"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="CHICKEN"><param name="Local" value="utils_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba7b83bba0067a592898404136ead1f3e6"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="FOX"><param name="Local" value="utils_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba1b56ce6b979242ea0223334ed2438a8d"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="SNAKE"><param name="Local" value="utils_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba7d71275d46953bd71d2c6b11e219ee24"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="LYNX"><param name="Local" value="utils_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba2c9e081066c09f8b4709fe0cb618500f"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="MONKEY"><param name="Local" value="utils_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba49dfe965c16e3b6e89dc275b3707f692"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="FISH"><param name="Local" value="utils_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba4d32e9d38eff7badd2435c3e87ae78a5"><param name="ImageNumber" value="11"></OBJECT>
+        <LI><OBJECT type="text/sitemap"><param name="Name" value="TYPES_CNT"><param name="Local" value="utils_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba5be6859802c9a30fa29e56608914e667"><param name="ImageNumber" value="11"></OBJECT>
+        </UL>
+      </UL>
+    </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Name" value="File Members"><param name="Local" value="globals.html"><param name="ImageNumber" value="11"></OBJECT>
+    <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="All"><param name="Local" value="globals.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Functions"><param name="Local" value="globals_func.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Typedefs"><param name="Local" value="globals_type.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Enumerator"><param name="Local" value="globals_eval.html"><param name="ImageNumber" value="11"></OBJECT>
+    <LI><OBJECT type="text/sitemap"><param name="Name" value="Macros"><param name="Local" value="globals_defs.html"><param name="ImageNumber" value="11"></OBJECT>
+    </UL>
+  </UL>
+</UL>
+</BODY>
+</HTML>

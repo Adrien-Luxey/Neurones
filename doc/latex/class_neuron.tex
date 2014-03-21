@@ -34,10 +34,21 @@ The \hyperlink{class_neuron}{Neuron} class, with represents a singleton, without
 
 
 \begin{DoxyParams}{Parameters}
+<<<<<<< HEAD
 {\em \-\_\-inputs\-Number} & The inputs number of the neuron \\
 \hline
 \end{DoxyParams}
 
+=======
+{\em \-\_\-inputs\-Number} & The inputs number of the neuron\\
+\hline
+\end{DoxyParams}
+The Neurons used in the projects are ultra simple percpetrons, without back-\/propagation or anything like it.
+
+It uses sigmoids as an activation function, because floats are so cooler than bools (and much more C\-P\-U-\/intensive).
+
+I'll let you check out Wikipedia if you need more info about how a perceptron work, or let you check out the \hyperlink{class_neural_network}{Neural\-Network} class, where I described a bit more how my Neural Networks worked. 
+>>>>>>> master
 
 Definition at line 20 of file neuron.\-h.
 
@@ -57,8 +68,12 @@ Definition at line 3 of file neuron.\-cpp.
 
 
 
+<<<<<<< HEAD
 Here is the call graph for this function\-:
 \nopagebreak
+=======
+Here is the call graph for this function\-:\nopagebreak
+>>>>>>> master
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -89,11 +104,19 @@ Definition at line 8 of file neuron.\-cpp.
 \end{DoxyParamCaption}
 )}}\label{class_neuron_a2626c0a0fa4dbca17dc7fd9b3b390c07}
 \begin{DoxyReturn}{Returns}
+<<<<<<< HEAD
 the A\-D\-N of the neuron 
 \end{DoxyReturn}
 
 
 Definition at line 45 of file neuron.\-cpp.
+=======
+the D\-N\-A of the neuron, which is the array of its weights 
+\end{DoxyReturn}
+
+
+Definition at line 39 of file neuron.\-cpp.
+>>>>>>> master
 
 \hypertarget{class_neuron_a40d81d3ea3f2af3e2f3297533132fd31}{\index{Neuron@{Neuron}!get\-D\-N\-A\-Size@{get\-D\-N\-A\-Size}}
 \index{get\-D\-N\-A\-Size@{get\-D\-N\-A\-Size}!Neuron@{Neuron}}
@@ -107,7 +130,11 @@ The size of the D\-N\-A of the neuron
 \end{DoxyReturn}
 
 
+<<<<<<< HEAD
 Definition at line 51 of file neuron.\-h.
+=======
+Definition at line 57 of file neuron.\-h.
+>>>>>>> master
 
 \hypertarget{class_neuron_abb3a85d2adf4a9c5a5b646c83086a2ae}{\index{Neuron@{Neuron}!init\-Weights@{init\-Weights}}
 \index{init\-Weights@{init\-Weights}!Neuron@{Neuron}}
@@ -122,12 +149,20 @@ Initializes all the weights with uniform rand values \mbox{[}-\/1; 1\mbox{]}.
 
 
 
+<<<<<<< HEAD
 Definition at line 11 of file neuron.\-cpp.
 
 
 
 Here is the caller graph for this function\-:
 \nopagebreak
+=======
+Definition at line 10 of file neuron.\-cpp.
+
+
+
+Here is the caller graph for this function\-:\nopagebreak
+>>>>>>> master
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -153,11 +188,19 @@ Runs the calculation of the output value depending on the inputs.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
+<<<<<<< HEAD
 A float representing the output 
 \end{DoxyReturn}
 
 
 Definition at line 22 of file neuron.\-cpp.
+=======
+The output value
+\end{DoxyReturn}
+To compute the output, we make the linear combination of weights and inputs \-: sum = weights $\ast$ inputs Then, we apply an activation function to sum, so that it stays within the interval \mbox{[}-\/1; 1\mbox{]} In our case, we use a sigmoid, which inclination is determined by Neuron\-Sigmoid in config.\-cfg 
+
+Definition at line 21 of file neuron.\-cpp.
+>>>>>>> master
 
 \hypertarget{class_neuron_a873e07fce168dfde42961ea151593c9f}{\index{Neuron@{Neuron}!set\-D\-N\-A@{set\-D\-N\-A}}
 \index{set\-D\-N\-A@{set\-D\-N\-A}!Neuron@{Neuron}}
@@ -172,12 +215,21 @@ Updates the D\-N\-A of the neuron with the new one given by the G\-A.
 
 
 \begin{DoxyParams}{Parameters}
+<<<<<<< HEAD
 {\em D\-N\-A} & The new piece of A\-D\-N \\
 \hline
 \end{DoxyParams}
 
 
 Definition at line 40 of file neuron.\-cpp.
+=======
+{\em D\-N\-A} & The new piece of A\-D\-N\\
+\hline
+\end{DoxyParams}
+We simply replace the actual weights by the ones given by the D\-N\-A 
+
+Definition at line 34 of file neuron.\-cpp.
+>>>>>>> master
 
 
 

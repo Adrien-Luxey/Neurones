@@ -169,9 +169,12 @@ var NAVTREEINDEX0 =
 "neuron_8cpp.html":[1,0,0,21],
 "neuron_8cpp_source.html":[1,0,0,21],
 "neuron_8h.html":[1,0,0,22],
+<<<<<<< HEAD
 "neuron_8h.html#a3506e2878e0f36c5dffd515e6b386c5e":[1,0,0,22,1],
 "neuron_8h.html#a4e0d582a51849920d886a5380b470434":[1,0,0,22,3],
 "neuron_8h.html#a69935f16da7c62437bf70a37e61c3be4":[1,0,0,22,2],
+=======
+>>>>>>> master
 "neuron_8h_source.html":[1,0,0,22],
 "pages.html":[],
 "struct_bush.html":[0,0,1],

@@ -7,15 +7,15 @@
 #include "utils.h"
 #include "config_parser.h"
 
-// Quite outdated, used to serve if you don't set "UseNeuronSigmoid", but it would break most functionnality
-#define SEUIL	0
-#define	OUT_0	0
-#define OUT_1	1
-
-
 /**
  * @brief	The Neuron class, with represents a singleton, without backprop or anything
  * @param _inputsNumber	The inputs number of the neuron
+ * 
+ * The Neurons used in the projects are ultra simple percpetrons, without back-propagation or anything like it.
+ * 
+ * It uses sigmoids as an activation function, because floats are so cooler than bools (and much more CPU-intensive).
+ * 
+ * I'll let you check out Wikipedia if you need more info about how a perceptron work, or let you check out the NeuralNetwork class, where I described a bit more how my Neural Networks worked.
  */
 class Neuron {
   public:	
@@ -30,18 +30,24 @@ class Neuron {
 	/**
 	 * @brief	Runs the calculation of the output value depending on the inputs
      * @param inputs	The inputs array
-     * @return A float representing the output
+     * @return The output value 
+	 * 
+	 * To compute the output, we make the linear combination of weights and inputs : sum = weights * inputs
+	 * Then, we apply an activation function to sum, so that it stays within the interval [-1; 1]
+	 * In our case, we use a sigmoid, which inclination is determined by NeuronSigmoid in config.cfg
      */
 	const float run(const std::vector<float> inputs);
 
 	/**
 	 * @brief	Updates the DNA of the neuron with the new one given by the GA
      * @param DNA	The new piece of ADN
+	 * 
+	 * We simply replace the actual weights by the ones given by the DNA
      */
 	void setDNA(const std::vector<float> &DNA);
 
 	/**
-     * @return the ADN of the neuron
+     * @return the DNA of the neuron, which is the array of its weights
      */
 	std::vector<float> getDNA();
 
@@ -55,7 +61,6 @@ class Neuron {
 	std::vector<float> weights;
 
 	const float NEURON_SIGMOID;
-	const bool USE_NEURON_SIGMOID;
 };
 
 #endif // NEURON_H

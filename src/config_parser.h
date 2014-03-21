@@ -1,13 +1,3 @@
-
-/**
- * \file Congig_parser.h
- * \author	Adrien Luxey
- * 
- * Utility singleton class parsing a config file (default 'files/config.cfg')
- * that contains constants used by a project, organized by type (int, float, string),
- * referenced by their name and stored in maps
- */
-
 #ifndef CONFIG_PARSER_H
 #define CONFIG_PARSER_H
 
@@ -17,6 +7,18 @@
 #include <sstream>
 #include <map>
 
+/**
+ * 
+ * @param fileName
+ * 
+ * Utility singleton class parsing a config file (default 'files/config.cfg')
+ * that contains constants used by a project, organized by type (int, float, string),
+ * referenced by their name and stored in maps.
+ * 
+ * I wrote this class a long time ago, to allow me to quickly change any constant int/float/string without recompiling every time.
+ * Using maps, it can be quite long to process when called a lot. This is why I save all constants in private const in every class I use them.
+ * I won't discuss its inner working, as it is oooooold.
+ */
 class ConfigParser {
 	public :
 		static void create(const std::string &fileName = "");

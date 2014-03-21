@@ -1,11 +1,6 @@
 #ifndef GENETICS_H
 #define GENETICS_H
 
-/**
- * @file genetics.h
- * @author	Adrien Luxey
- */
-
 #include <vector>
 #include <iostream>
 #include <stdlib.h>

@@ -12,6 +12,14 @@
  * @brief The NN class, containing LayersNumber (form config.cfg) layers of neurons, the layers size depending on inputs/ouptus/config
  * @param _inputsNumber		The inputs number of the NN
  * @param _outputsNumber	The outputs number
+ * 
+ * This class describes the brain of every animal.
+ * It is a very simple Neural Network, containing at least an input layer of inputsNumber neurons, and an output layer of outputsNumber neurons. You can configure as much hidden layers you want (one is enough, it has been proven for non linear activation functions) of as many neurons you want (this factor makes quite interesting changes to the animals' behavior).
+ * 
+ * It's most interesting feature is that, it is a blackbox combinatory machine (same inputs give same outputs).
+ * We can synthetise all the behavior of this machine by extracting its DNA : an organized float array that represents every weight of every neuron, even though the values don't mean anything to us. After this extraction is made, we can mix up the DNA using the Genetics class, and see evolution occur !
+ * 
+ * On the other hand, it sadly means that our animals only act instinctly, strictly following what their DNA tell them to do. This could be improved if we used some kind of heavier Neural Network, like a sequential one for start (sequential means that the machine remembers its previous state).
  */
 class NeuralNetwork {
 	public :
