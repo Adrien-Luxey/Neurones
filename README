@@ -5,7 +5,7 @@ The software shows animals, generated with a random brain, that live in a world 
 At the end of every generation, the GA is called, and reproduces the animals based on their fitness to their world, mixing their DNA, mutating it, and hopefully creating more fit individuals.
 And it does ! Darwin was right (no way ?) !
 
-Of course, it is a work in progress, this subject being way to vast for a single person too cover it even slightly.
+Of course, it is a work in progress, this subject being way to vast for a single person to cover it even slightly.
 
 Hope you enjoy !
 
