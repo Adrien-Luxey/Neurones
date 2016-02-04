@@ -29,7 +29,7 @@ PRE_OBJ 	=	$(notdir $(SOURCES))
 OBJECTS		=	$(addprefix $(OBJ_DIR), $(PRE_OBJ:.cpp=.o))
 
 # default perspective is debug (should be changed before release)
-all: debug
+all: release
 
 # release configuration
 release: CXXFLAGS+=$(CXXFLAGS_R)
