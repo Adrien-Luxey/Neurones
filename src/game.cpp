@@ -47,7 +47,8 @@ void Game::increaseGameSpeed() {
 	gameSpeedRatio = (gameSpeedRatio >= 1) ? gameSpeedRatio + 1 : gameSpeedRatio*2;
 }
 void Game::decreaseGameSpeed() {
-	gameSpeedRatio = (gameSpeedRatio > 1) ? gameSpeedRatio - 1 : gameSpeedRatio/2;
+	gameSpeedRatio = (gameSpeedRatio > 1) ? gameSpeedRatio - 1 : 
+		(gameSpeedRatio < .001) ? gameSpeedRatio : gameSpeedRatio/2;
 }
 
 void Game::newGeneration() {

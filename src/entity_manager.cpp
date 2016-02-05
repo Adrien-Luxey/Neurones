@@ -1,11 +1,16 @@
 #include "entity_manager.h"
 #include "genetics.h"
 
+using namespace std;
+
 EntityManager::EntityManager()
-  : DISTANCE_SIGMOID(CFG->readInt("DistanceSigmoid")), WORLD_SIZE(CFG->readInt("WorldSize")),
-	BUSHES_NUMBER(CFG->readInt("BushesNumber")), BUSHES_MIN_SIZE(CFG->readInt("BushesMinSize")),
-	BUSHES_MAX_SIZE(CFG->readInt("BushesMaxSize")), BATTLE_DEVIATION(CFG->readFloat("BattleDeviation")),
-	ALLOW_FRIENDLY_FIRE(CFG->readInt("AllowFriendlyFire")), RANDOM_IN_BATTLES(CFG->readInt("RandomInBattles")) {
+  : DISTANCE_SIGMOID(CFG->readInt("DistanceSigmoid")),
+	WORLD_SIZE(CFG->readInt("WorldSize")),
+	BUSHES_NUMBER(CFG->readInt("BushesNumber")),
+	BUSHES_MIN_SIZE(CFG->readInt("BushesMinSize")),
+	BUSHES_MAX_SIZE(CFG->readInt("BushesMaxSize")),
+	BATTLE_MAX_ANGLE(CFG->readInt("BattleMaxAngle")), 
+	ALLOW_FRIENDLY_FIRE(CFG->readInt("AllowFriendlyFire")) {
 	
 	Species tmp;
 	
@@ -44,7 +49,7 @@ EntityManager::~EntityManager() {
 	
 	species.clear();
 	
-	for (unsigned int i; i < fruits.size(); i++)
+	for (unsigned int i = 0; i < fruits.size(); i++)
 		delete fruits[i];
 	fruits.clear();
 }
@@ -79,6 +84,17 @@ void EntityManager::update() {
 			
 			update(animal, i);
 			
+		}
+	}
+	// Parcours de toutes les espèces
+	for (unsigned int i = 0; i < species.size(); i++) {		
+		// Parcours de tous les animaux de l'espece
+		for (unsigned int j = 0; j < species[i].tab.size(); j++) {
+			Animal *animal = species[i].tab[j];
+
+			if (!animal->isAlive())
+				continue;
+			
 			handleCollisions(animal, i);
 		}
 	}
@@ -107,7 +123,7 @@ void EntityManager::addClosestEnemy(const Animal *animal, const unsigned int ind
 	for (unsigned int i = 0; i < species.size(); i++) {
 		if (i == index)
 			continue;
-		
+	
 		Animal *tmp = NULL;
 		tmp = getClosestAnimalFromTab(animal, species[i].tab, closest, false);
 		
@@ -118,11 +134,16 @@ void EntityManager::addClosestEnemy(const Animal *animal, const unsigned int ind
 	// Give closest's angle/dist to network 
 	addNormalizedPosition(closest, inputs, animal->getAngle());
 	
-	// variable de combat de l'ennemi
 	if (enemy != NULL) {
-		inputs.push_back(enemy->getBattleOutput());
+		float angle = animal->getAngle() - enemy->getAngle();
+		while( angle < -180.f )
+			angle += 360.f;
+		while( angle >= 180.f )
+			angle -= 360.f;
+		angle /= 360.f;
+		inputs.push_back(angle);
 	} else {
-		inputs.push_back(0.f);
+		inputs.push_back(1.f);
 	}
 }
 
@@ -134,11 +155,16 @@ void EntityManager::addClosestAlly(const Animal *animal, const unsigned int inde
 	// Give closest's angle/dist to network 
 	addNormalizedPosition(closest, inputs, animal->getAngle());
 	
-	// variable de combat de l'ennemi
 	if (ally != NULL) {
-		inputs.push_back(ally->getBattleOutput());
+		float angle = animal->getAngle() - ally->getAngle();
+		while( angle < -180.f )
+			angle += 360.f;
+		while( angle >= 180.f )
+			angle -= 360.f;
+		angle /= 360.f;
+		inputs.push_back(angle);
 	} else {
-		inputs.push_back(0.f);
+		inputs.push_back(1.f);
 	}
 }
 
@@ -148,7 +174,7 @@ void EntityManager::addClosestFruit(const Animal* animal, std::vector<float> &in
 	// find closest fruit	
 	for (unsigned int i = 0; i < fruits.size(); i++) {		
 		tmp.pos = wrapPositionDifference(animal->getPos(), fruits[i]->getPos());
-		tmp.dist = sqrt(tmp.pos.x * tmp.pos.x + tmp.pos.y * tmp.pos.y) - animal->getRadius() - fruits[i]->getRadius();
+		tmp.dist = tmp.pos.x * tmp.pos.x + tmp.pos.y * tmp.pos.y;
 		
 		if (tmp.dist < closest.dist) {
 			closest = tmp;
@@ -172,14 +198,14 @@ Animal* EntityManager::getClosestAnimalFromTab(const Animal *animal, const std::
 			continue;
 		
 		tmp.pos = wrapPositionDifference(animal->getPos(), tab[i]->getPos());
-		tmp.dist = sqrt(tmp.pos.x * tmp.pos.x + tmp.pos.y * tmp.pos.y) - animal->getRadius() - tab[i]->getRadius();
+		tmp.dist = tmp.pos.x * tmp.pos.x + tmp.pos.y * tmp.pos.y;
 		
 		if (tmp.dist < closestPos.dist) {
 			closestPos = tmp;
 			closestAnimal = tab[i];
 		}
 	}
-	
+
 	return closestAnimal;
 }
 
@@ -202,19 +228,24 @@ void EntityManager::addNormalizedPosition(const Position &p, std::vector<float> 
 		inputs.push_back(1.f);
 	// Sinon
 	} else {
+		// we kept squared distance until then, we want real distance
+		float dist = sqrt(p.dist);
 		// angle [0; 1[ ( [0; 360°[ ) relatif : angle du mobile - mon angle
 		inputs.push_back(atan2f(p.pos.y, p.pos.x) / (2 * PI) - angle / 360.f);
 		// distance as sigmoid so both [0; 1[
-		inputs.push_back(1.f / (1.f + expf(-p.dist / DISTANCE_SIGMOID)) * 2.f - 1.f);
+		inputs.push_back(1.f / (1.f + expf(-dist / DISTANCE_SIGMOID)) * 2.f - 1.f);
 	}
 }
 
 void EntityManager::handleCollisions(Animal *animal, const unsigned int index) {
+	// index = species of the current animal
+	
 	// collisions with fruits
 	for (unsigned int i = 0; i < fruits.size(); i++) {
 		if (isColliding(animal, fruits[i])) {
 			animal->incrementScore();
 			fruits[i]->init(bushes[ rand() % bushes.size() ]);
+			//cout << "Score " << animal->getScore() << " ate a fruit" << endl;
 		}
 	}
 	
@@ -232,56 +263,56 @@ void EntityManager::handleCollisions(Animal *animal, const unsigned int index) {
 				continue;
 			
 			// do not check yourself if friendly fire is on
-			if (index == i && enemy->getPos().x == animal->getPos().x && enemy->getPos().y == animal->getPos().y)
+			if (ALLOW_FRIENDLY_FIRE && index == i && enemy->getPos().x == animal->getPos().x && enemy->getPos().y == animal->getPos().y)
 				continue;
 
-			if (isColliding(animal, enemy)) {
-				// exit if our animal died
-				if (battle(animal, enemy))
-					return;
-			}
+			// exit if our animal died
+			// battle handles collision testing
+			if (battle(animal, enemy))
+				return;
 		}
 	}
 }
 
 bool EntityManager::battle(Animal *animal, Animal *enemy) {
-	if (RANDOM_IN_BATTLES) {
-		std::normal_distribution<float> animalAttackRand(animal->getAttackValue(), BATTLE_DEVIATION);
-		std::normal_distribution<float> enemyDefenseRand(enemy->getDefenseValue(), BATTLE_DEVIATION);
-		std::normal_distribution<float> enemyAttackRand(enemy->getAttackValue(), BATTLE_DEVIATION);
-		std::normal_distribution<float> animalDefenseRand(animal->getDefenseValue(), BATTLE_DEVIATION);
+	// Difference vector between the two guys
+	Vect2i diff = wrapPositionDifference( animal->getPos(), enemy->getPos() );
 
-		if (animalAttackRand(generator) > enemyDefenseRand(generator)) {
-			enemy->die();
-			animal->incrementScore();
-			
-			return false;
-		} else if (enemyAttackRand(generator) > animalDefenseRand(generator)) {
-			animal->die();
-			enemy->incrementScore();
+	// test collision, 3* radius for the spike
+	if( (diff.x * diff.x + diff.y * diff.y) >=
+			 2.5 * 2.5 * animal->getRadius() * animal->getRadius())
+		return false;	
 
-			return true;
-		}
-	} else {
-		if (animal->getAttackValue() > enemy->getDefenseValue()) {
-			enemy->die();
-			animal->incrementScore();
+	// delate angle between 2 guys from PoV of animal
+	float deltaAngle = atan2f( diff.y, diff.x) * 360.f / (2*PI);
+	while( deltaAngle < -180.f )
+		deltaAngle += 360.f;
+	while( deltaAngle >= 180.f )
+		deltaAngle -= 360.f;
 
-			return false;
-		} else if (enemy->getAttackValue() > animal->getDefenseValue()) {
-			animal->die();
-			enemy->incrementScore();
-			
-			return true;
-		}
+	float animalToEnemy = fmod( fabs( deltaAngle - animal->getAngle() ), 360.f );
+	float enemyToAnimal = fmod( fabs( deltaAngle + 180.f - enemy->getAngle() ), 360.f );
+
+	if( animalToEnemy < BATTLE_MAX_ANGLE ){
+		enemy->die();
+		animal->incrementScore();
+		//cout << "Score " << animal->getScore() << " just killed score " << enemy->getScore() << endl;
 	}
-	
+	if( enemyToAnimal < BATTLE_MAX_ANGLE ){
+		animal->die();
+		enemy->incrementScore();
+		//cout << "Score " << enemy->getScore() << " just killed score " << animal->getScore() << endl;
+
+		return true;
+	}
+
 	return false;
 }
 
-bool EntityManager::isColliding(const Entity *a, const Entity *b) const {
+bool EntityManager::isColliding(const Entity *ea, const Entity *eb) const {
+	Vect2i diff = wrapPositionDifference( ea->getPos(), eb->getPos() );
 	// return dist(a <-> b) < a.radius + b.radius
-	return (((a->getPos().x - b->getPos().x) * (a->getPos().x - b->getPos().x) +
-			 (a->getPos().y - b->getPos().y) * (a->getPos().y - b->getPos().y)) <
-			(a->getRadius() + b->getRadius()) * (a->getRadius() + b->getRadius()));
+	return ((diff.x * diff.x +
+			 diff.y * diff.y) <
+			(ea->getRadius() + eb->getRadius()) * (ea->getRadius() + eb->getRadius()));
 }

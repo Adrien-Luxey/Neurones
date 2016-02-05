@@ -13,7 +13,8 @@ void NeuralNetwork::initLayers() {
 	// Couche input : inputsNumber neurones à inputsNumber entrées
 	// (utiliser le même nombre de neurones que d'entrées pour cette couche est une convention reconnue)
 	// On rajoute les sorties du tour précédent en entrée du nn - ou pas
-	layers.push_back(Layer(inputsNumber, inputsNumber));
+	// A neural network has 2 layers of neurons, the 3rd is the input one
+	//layers.push_back(Layer(inputsNumber, inputsNumber));
 	
 	// Création des couches cachées suivant les données de config
 	unsigned int inputs = inputsNumber;

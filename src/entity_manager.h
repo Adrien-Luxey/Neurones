@@ -43,8 +43,8 @@ class EntityManager {
   private:	
 	/// \brief Structure representing a position with its cartesian size
 	typedef struct Position {
-		float dist; ///< The size of the vector
-		Vect2i pos; ///< The vector position
+		float dist; ///< The squared size of the vector
+		Vect2i pos; ///< The unit vector
 
 		Position(float _dist = 0) : dist(_dist) {} ///< A constructor, to be able to define the size
 	} Position;
@@ -103,6 +103,7 @@ class EntityManager {
 	 * 
 	 * (If we didn't do so, an animal oscillating between an edge would see his world change everytime he crosses it
 	 * Which is BAAAAD)
+	 * I think this is wrong, it shows the difference, not the second according to the first
      */
 	Vect2i wrapPositionDifference(const Vect2i a, const Vect2i b) const;
 	
@@ -130,16 +131,17 @@ class EntityManager {
 	
 	/**
 	 * \brief tells wether a and b collide, considreing both are Entities (ie circles), using their radiuses
+	 	return dist(a <-> b) < a.radius + b.radius
      */
-	bool isColliding(const Entity *a, const Entity *b) const;
+	bool isColliding(const Entity *ea, const Entity *eb) const;
 	
 	std::vector<Fruit*> fruits;
 	std::vector<Species> species;
 	std::vector<Bush> bushes;
 	
 	const unsigned int DISTANCE_SIGMOID;
-	const int WORLD_SIZE, BUSHES_NUMBER, BUSHES_MIN_SIZE, BUSHES_MAX_SIZE, BATTLE_DEVIATION;
-	const bool ALLOW_FRIENDLY_FIRE, RANDOM_IN_BATTLES;
+	const int WORLD_SIZE, BUSHES_NUMBER, BUSHES_MIN_SIZE, BUSHES_MAX_SIZE, BATTLE_MAX_ANGLE;
+	const bool ALLOW_FRIENDLY_FIRE;
 };
 
 #endif // ENTITY_MANAGER_H

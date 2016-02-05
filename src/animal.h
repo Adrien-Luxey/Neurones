@@ -39,15 +39,9 @@ class Animal : public Entity {
 	int getClosestEnemyAngle() const { return closestEnemyAngle; }
 	int getClosestFruitAngle() const { return closestFruitAngle; }
 	int getClosestAllyAngle() const { return closestAllyAngle; }
-	float getBattleOutput() const { return battleOutput; }
-	/**
-     * @return If battleOutput > 0, attackValue = battleOutput
-     */
-	float getAttackValue() const;
-	/**
-     * @return If battleOutput < 0, defenseFalue = -battleOutput
-     */
-	float getDefenseValue() const;
+	int getEnemyRelativeAngle() const { return enemyRelativeAngle; }
+	int getAllyRelativeAngle() const { return allyRelativeAngle; }
+
 	/**
 	 * @brief Return a intermediate position between old and new pos given the interpolation rate
      * @param interpolation	The interpolation rate
@@ -73,10 +67,7 @@ class Animal : public Entity {
 	Vect2i lastPos, speed;
 	
 	int score;
-	int closestEnemyAngle, closestFruitAngle, closestAllyAngle;
-	
-	// NN output representing the att/def value of the animal
-	float battleOutput;
+	int closestEnemyAngle, closestFruitAngle, closestAllyAngle, enemyRelativeAngle, allyRelativeAngle;
 	
 	bool alive;
 	

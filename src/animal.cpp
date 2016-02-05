@@ -10,12 +10,13 @@ Animal::Animal()
 }
 
 void Animal::init() {
-	battleOutput = 0.f;
 	score = 0;
 	alive = true;
 	closestEnemyAngle = 0;
 	closestFruitAngle = 0;
 	closestAllyAngle = 0;
+	enemyRelativeAngle = 0;
+	allyRelativeAngle = 0;
 	
 	pos.x = rand() % WORLD_SIZE;
 	pos.y = rand() % WORLD_SIZE;
@@ -46,16 +47,16 @@ void Animal::update(const std::vector<float> inputs) {
 		closestEnemyAngle = inputs[2] * 360 + angle;
 	else
 		closestEnemyAngle = 0.f;
+	enemyRelativeAngle = inputs[4] * 360;
 	// Plus proche allié
 	if (inputs[5] != 0.f)
 		closestAllyAngle = inputs[5] * 360 + angle;
 	else
 		closestAllyAngle = 0.f;
+	allyRelativeAngle = inputs[7] * 360;
 	
 	// Récupération des sorties du nn
 	outputs = network.run(inputs);
-	
-	battleOutput = outputs[2];
 	
 	// Mise à jour de la position si on est pas en train d'attaquer
 	updatePosition(outputs[0], outputs[1]);
@@ -69,19 +70,6 @@ void Animal::die() {
 	alive = false;
 }
 
-float Animal::getAttackValue() const {
-	if (battleOutput <= 0.f)
-		return 0.f;
-	else
-		return battleOutput;
-}
-float Animal::getDefenseValue() const {
-	if (battleOutput >= 0.f)
-		return 0.f;
-	else
-		return -battleOutput;
-}
-
 /* Plus d'infos ici : 
  * http://www.koonsolo.com/news/dewitters-gameloop/
  * L'interpolation c'est la fluidité visuelle à bas prix
@@ -93,11 +81,11 @@ Vect2i Animal::getDisplayPos(const float &interpolation) const {
 
 void Animal::updatePosition(float da, float dp) {
 	// slowdown factor : when attacking or defending, animals go slower
-	float slowdownRate = 1.f - fabs(battleOutput);
+	//float slowdownRate = 1.f - fabs(battleOutput);
 	
 	// composante angulaire et linéaire du déplacement
-	dp *= ANIMAL_LINEAR_SPEED * slowdownRate;
-	da *= ANIMAL_ANGULAR_SPEED * slowdownRate;
+	dp *= ANIMAL_LINEAR_SPEED;
+	da *= ANIMAL_ANGULAR_SPEED;
 	
 	// mise à jour de lastPos et speed pour l'interpolation (cf le lien dans game.cpp au sujet de la gameloop)
 	speed.x = dp * cosf(angle/180.f*PI);
@@ -105,7 +93,11 @@ void Animal::updatePosition(float da, float dp) {
 	lastPos = pos;
 	
 	// Application aux données du mobile
-	angle = fmod(angle + da, 360.f);
+	angle += da;
+	while( angle < -180.f )
+		angle += 360.f;
+	while( angle >= 180.f )
+		angle -= 360.f;
 	pos.x = (int) (pos.x + speed.x) % WORLD_SIZE;
 	pos.y = (int) (pos.y + speed.y) % WORLD_SIZE;
 	

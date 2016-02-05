@@ -186,15 +186,16 @@ void Display::drawAnimals(const std::vector<Animal*> &animals, const sf::View &v
 		if (animals[i]->getClosestAllyAngle() != 0)
 			drawVector(animalDisplayPos, animals[i]->getClosestAllyAngle(), sf::Color::Blue, sf::Vector2f(15, 1));
 		
-		// dessin de la barre d'attaque
+		// dessin de l'angle relatif de l'ennemi
+		/*
 		Vect2i barPosition;
 		barPosition.x = animalDisplayPos.x - STATUS_BAR_WIDTH/2;
 		barPosition.y = animalDisplayPos.y + animalShape.getLocalBounds().height * 3 / 2;
-		drawVector(barPosition, 0, sf::Color(100, 0, 0), sf::Vector2f(animals[i]->getAttackValue() * STATUS_BAR_WIDTH, 2));
+		drawVector(barPosition, 0, sf::Color(100, 0, 0), sf::Vector2f(animals[i]->getEnemyRelativeAngle() * STATUS_BAR_WIDTH / 360, 2));
 		// dessin de la barre de defense
-		//barPosition.y += 4;
-		drawVector(barPosition, 0, sf::Color(0, 0, 100), sf::Vector2f(animals[i]->getDefenseValue() * STATUS_BAR_WIDTH, 2));
-		
+		barPosition.y += 4;
+		drawVector(barPosition, 0, sf::Color(0, 0, 100), sf::Vector2f(animals[i]->getAllyRelativeAngle() * STATUS_BAR_WIDTH / 360, 2));
+		//*/
 		// score
 		std::stringstream ss;
 		ss << animals[i]->getScore();
